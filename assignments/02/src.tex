@@ -1,0 +1,124 @@
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Druhá samostatná práce}}%replace X with the appropriate number
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+ 
+\maketitle
+
+\textbf{Příklad 3.6.} Navrhněte deterministický konečný automat (DFA), který přijímá jazyk \textit{L} 
+abecedou $\{a, b\}$, kde \textit{L} obsahuje právě všechna slova $w$ taková, že
+    \begin{itemize}
+        \item $w$ začíná $a$
+        \item $w$ obsahuje jako podslovo $abb$
+        \item $w$ končí $a$.
+    \end{itemize}
+Automat redukujte.
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+}
+
+
+\begin{tikzpicture}
+    \node[state, initial] (q1) {$q_1$};
+    \node[state, right of=q1] (q2) {$q_2$};
+    \node[state, right of=q2] (q3) {$q_3$};
+    \node[state, right of=q3] (q4) {$q_4$};
+    \node[state, accepting, right of=q4] (q5) {$q_5$};
+    \node[state, below of=q1] (q6) {chyba};
+    \draw 
+          (q1) edge[bend left, above] node{a} (q2)
+          (q1) edge[left] node{b} (q6)
+          (q2) edge[loop above] node{a} (q2)
+          (q2) edge[bend left, above] node{b} (q3)
+          (q3) edge[bend left, below] node{a} (q2)
+          (q3) edge[bend left, above] node{b} (q4)
+          (q4) edge[loop above] node{b} (q4)
+          (q4) edge[bend left, above] node{a} (q5)
+          (q5) edge[bend left, below] node{b} (q4)
+          (q5) edge[loop above] node{a} (q5)
+          (q6) edge[loop right] node{a, b} (q6)
+          ;
+\end{tikzpicture}
+
+\pagebreak 
+
+\textbf{Příklad 3.7.} Pomocí Nerodovy věty a pomocí pumping lemmatu dokažte, že jazyk $L \subseteq \{a, b\}^*$, kde $L=\{u; |u|_a = |u|_b\}$ není regulární.
+
+\section{Důkaz Nerodovou větou} 
+L je regulární $\iff$ existují ekvivalence $T$ na $\sum^*$ taková, že:
+\begin{enumerate}
+    \item L je sjednocení některých tříd $T$.
+    \item pokud $uTv$, tak $uwTvw$ pro každé $w \in \sum^*$.
+    \item $T$ má konečný počet tříd.
+\end{enumerate}
+Kdyby existovala $T$ na $\{a, b\}^*.$\\
+Mějme $a^n b^{n-1} = u_1 \not\in L$ a $a^n b^{n-10}= u_2 \not\in L$.\\
+A protože předpokládáme regulérnost $L$, tak musí platit 2. bod Nerodovy věty.\\
+Zvolme $w=b^1$, a tedy $u_1 w T u_2 w$ musí platit. Po dosazení vyjde $a^n b^n$ $T$ $a^n b^{n-9}$, kde $a^n b^n \in L$, ale $a^n b^{n-9} \not\in L$.\\
+Což je ve sporu s 2. bodem Nerodovy věty, protože platí $u_1Tu_2$, ale $u_1 w T u_2 w$ již ne. A tedy $L$ není regulární.
+
+
+\section{Důkaz Pumping lemmatem}
+Je-li $L$ regulární, existuje $n \geq 1$ tak, že každé $u \in L$, $|u|>n$, lze rozdělit $u=xwy$ tak, že:
+\begin{enumerate}
+    \item $|xw| \leq n$.
+    \item $w \neq \varepsilon$.
+    \item $xw^iy \in L$, $i=0, 1, ...$
+\end{enumerate}
+Kdyby $L$ byl regulární, tak existuje $n$ z Pumping lemma.\\
+Zvolíme konkrétní slovo $u = a^n b^n$, $u \in L$.\\
+Podle Pumping lemmatu lze toto slovo $u$ rozdělit na $u=xwy$ tak, že $|xw| \leq n$. Z toho plyne, že:
+    \begin{itemize}
+        \item $xw$ se skládá pouze z písmen $a$, protože prvních $n$ symbolů ve slově $u=a^n b^n$ jsou pouze $a$.\\
+        Tedy $xw = a^n$.
+        \item Dále $w \not\in \varepsilon$, takže $w=a^k$, kde $1 \leq k \leq n$.
+    \end{itemize}
+Teď napumpujeme $w$, tedy například $i=2$, a dostaneme nové slovo $xw^2y = a^{n+k} b^n$.\\
+Pro slovo $a^{n+k} b^n$ platí $|u|_a > |u|_b$, protože má $n+k$ písmen $a$ a $n$ písmen $b$. A tedy $u \not\in L$. \\
+A protože Pumping lemma vyžaduje, aby  $\forall i \geq 0$ platilo $xw^iy \in L$, tak lze říct, že $L$ není regulární.
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+

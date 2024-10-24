@@ -1,0 +1,263 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+  }
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Třetí samostatná práce}}%replace X with the appropriate number
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\textbf{Příklad 5.6.} Pro daný NFA sestrojte podmnožinovou konstsrukcí DFA a výsledek redukujte.
+
+\[
+    \begin{tabular}{|r|c c|}
+        \hline
+        & $a$ & $b$\\
+        \hline
+        \hline
+        $\leftrightarrow A$ & $\{A, C\}$ & $\{B\}$\\
+        $B$ & $\emptyset$ & $\{B, D\}$\\
+        $\leftarrow C$ & $\emptyset$ & $\emptyset$\\
+        $\rightarrow D$ & $\{A\}$ & $\{C, D\}$\\
+        \hline
+    \end{tabular}
+\]
+
+\begin{enumerate}
+    \item Nakreslete stavový diagram tohoto NFA.
+    \item Podmnožinovou konstrukcí zkonstruujte příslušný DFA.
+    \item K DFA z bodu 2. sestrojte redukovaný DFA a nakreslete jeho stavový diagram.
+\end{enumerate}
+
+\splitpage{
+    1.
+
+    \begin{tikzpicture}
+        \node[state, initial, accepting] (q1) {$A$};
+        \node[state, below of=q1] (q2) {$B$};
+        \node[state, initial, right of=q2] (q4) {$D$};
+        \node[state, accepting, right of=q1] (q3) {$C$};
+        
+        \draw 
+            (q1) edge[loop above] node{$a$} (q1)
+            (q1) edge[bend left, above] node{$a$} (q3)
+            (q1) edge[bend right] node[left]{$b$} (q2)
+            (q2) edge[loop below] node{$b$} (q2)
+            (q2) edge[bend right, below] node{$b$} (q4)
+            (q4) edge[loop below] node{$b$} (q4)
+            (q4) edge[bend right] node[right]{$b$} (q3)
+            (q4) edge node[right]{$a$} (q1)
+            ;
+    \end{tikzpicture}
+}{
+3. 
+
+    \begin{tikzpicture}
+        \node[state, initial, accepting] (q1) {$K$};
+        \node[state, right of=q1] (q2) {$A$};
+        \node[state, below of=q2] (q3) {$C$};
+        \node[state, left of=q3] (q4) {$B$};
+        \node[state, right of=q3] (q5) {$0$};
+        
+        \draw 
+            (q1) edge[loop above] node{$b$} (q1)
+            (q1) edge[bend left, above] node{$a$} (q2)
+            (q2) edge[loop above] node{$a$} (q2)
+            (q2) edge[bend left, above] node[right]{$b$} (q3)
+            %(q3) edge[loop below] node{$a$} (q3)
+            (q3) edge[bend left, below] node{$b$} (q4)
+            (q3) edge node[above]{$a$} (q5)
+            (q4) edge[above] node{$a$} (q2)
+            (q4) edge[bend left, above] node[left]{$b$} (q1)
+            (q5) edge[loop right] node{$a, b$} (q5)
+            ;
+    \end{tikzpicture}
+}
+
+2.
+\[
+\begin{tabular}{|r|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$\\
+    \hline
+    \hline
+    $\leftrightarrow \{A,D\}$& $\{A,C\}$  & $\{B,C,D\}$ & $K$ & $K$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$\\
+    $\leftarrow \{A,C\}$     & $\{A,C\}$  & $\{B\}$     & $K$ & $K$ & $0$ & $A$ & $A$ & $0$ & $A$ & $A$ & $C$ & $A$\\
+    $\leftarrow \{B,C,D\}$   & $\{A\}$    & $\{B,C,D\}$ & $K$ & $K$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$\\
+    $\{B\}$                  & $\emptyset$& $\{B,D\}$   & $0$ & $0$ & $0$ & $0$ & $0$ & $B$ & $0$ & $0$ & $B$ & $C$\\
+    $\leftarrow \{A\}$       & $\{A,C\}$  & $\{B\}$     & $K$ & $K$ & $0$ & $A$ & $A$ & $0$ & $A$ & $A$ & $C$ & $A$\\
+    $\{B,D\}$                & $\{A\}$    & $\{B,C,D\}$ & $0$ & $K$ & $K$ & $B$ & $A$ & $K$ & $B$ & $A$ & $K$ & $B$\\
+    $\emptyset$              &$\emptyset$ &$\emptyset$  & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$\\ 
+    \hline
+\end{tabular}
+\]
+
+
+\pagebreak 
+\textbf{Příklad 5.7.} Je dán nedeterministický automat s $\varepsilon$ přechody tabulkou
+
+\[
+    \begin{tabular}{|r|c c c|}
+        \hline
+        & $\varepsilon$ & $a$ & $b$\\
+        \hline
+        \hline
+        $\rightarrow 1$ & $\emptyset$ & $\emptyset$ & $\{4\}$\\
+        $\rightarrow 2$ & $\emptyset$ & $\{5\}$ & $\{1, 4\}$\\
+        $3$ & $\{4\}$ & $\emptyset$ & $\{6\}$\\
+        $\leftarrow 4$ & $\{6\}$ & $\{2, 3\}$ & $\{6\}$\\
+        $5$ & $\emptyset$ & $\emptyset$ & $\{3, 6\}$\\
+        $\leftarrow 6$ & $\emptyset$ & $\{5\}$ & $\emptyset$\\
+        \hline
+    \end{tabular}
+\]
+
+\begin{enumerate}
+    \item Nakreslete stavový diagram tohoto NFA.
+    \item Podmnožinovou konstrukcí zkonstruujte příslušný DFA.
+    \item K DFA z bodu 2. sestrojte redukovaný DFA a nakreslete jeho stavový diagram.
+\end{enumerate}
+
+\splitpage{
+
+1. 
+
+\begin{tikzpicture}
+    \node[state, initial] (q1) {$1$};
+    \node[state, accepting, right of=q1] (q4) {$4$};
+    \node[state, accepting, right of=q4] (q6) {$6$};
+    %\node[state, below of=between=q1 and q4] (q2) {$2$};
+    \node[state, initial, below of=q1] (q2) {$2$};
+    \node[state, below of=q4] (q3) {$3$};
+    \node[state, below of=q6] (q5) {$5$};
+    
+    \draw 
+        (q1) edge[bend left, above] node{$b$} (q4)
+        (q4) edge[bend left, above] node{$\varepsilon, b$} (q6)
+        (q2) edge[bend left] node[left]{$b$} (q1)
+        (q2) edge[bend left, above] node{$b$} (q4)
+        (q2) edge[bend right, below] node{$a$} (q5)
+        (q4) edge[below] node{$a$} (q2)
+        (q4) edge[bend right, below] node[right]{$a$} (q3)
+        (q3) edge[bend right] node[left]{$\varepsilon$} (q4)
+        (q3) edge[above] node{$b$} (q6)
+        (q5) edge[above] node{$b$} (q3)
+        (q5) edge[bend right, above] node[right]{$b$} (q6)
+        (q6) edge[bend right, below] node[right]{$a$} (q5)
+        ;
+\end{tikzpicture}
+}{
+3.
+
+\begin{tikzpicture}
+    \node[state, initial] (q1) {$A$};
+    \node[state, right of=q1](q2){$C$}
+    \node[state, right of=q2](q3){$0$}
+    \node[state, below of=q1](q4){$E$}
+    \node[state, right of=q4](q5){$D$}
+    \node[state, right of=q5](q6){$B$}
+    \node[state, accepting, below of=q4](q7){$K$}
+    
+    \draw 
+        (q1) edge[bend left, above] node{$a$}(q2)
+        (q1) edge[bend right, below] node[left]{$b$}(q4)
+        (q2) edge[bend left, above] node{$a$}(q3)
+        (q2) edge[bend right, below] node[left]{$a$}(q5)
+        (q3) edge[loop above] node{$a, b$}(q3)
+        (q4) edge[bend right, above] node{$b$}(q5)
+        (q4) edge[bend right, below] node[left]{$a$}(q7)
+        (q5) edge[bend right, below] node{$b$} (q6)
+        (q5) edge[bend left, below] node{$a$} (q7)
+        (q6) edge[bend right, above] node[right]{$b$}(q3)
+        (q6) edge[left, above] node{$a$}(q2)
+        (q7) edge[loop below] node{$a$}(q7)
+        (q7) edge[bend right, above] node[right]{$b$}(q4)
+        ;
+\end{tikzpicture}
+}
+
+2.
+
+\[
+\begin{tabular}{|r|c c|c|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\
+    \hline
+    \hline
+    $\rightarrow \{$1, 2$\}$    & $\{5\}$        & $\{1,4,6\}$    & $0$ & $0$ & $K$ & $A$ & $A$ & $K$ & $A$ & $C$ & $K$ & $A$ & $C$ & $E$ & $A$\\
+    $\{$5$\}$                   & $\{\emptyset\}$& $\{3,4,6\}$    & $0$ & $0$ & $K$ & $A$ & $0$ & $K$ & $C$ & $0$ & $D$ & $C$ & $0$ & $D$ & $C$\\
+    $\leftarrow \{$1, 4, 6$\}$  & $\{2,3,4,5,6\}$& $\{4,6\}$      & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $D$ & $E$ & $K$ & $D$ & $E$\\
+    $\leftarrow \{$3,4,6$\}$    & $\{2,3,4,5,6\}$& $\{6\}$        & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ & $D$ & $K$ & $B$ & $D$ & $K$ & $B$ & $D$\\
+    $\leftarrow \{$2,3,4,5,6$\}$& $\{2,3,4,5,6\}$& $\{1,3,4,6\}$  & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $E$ & $K$\\
+    $\leftarrow \{$4,6$\}$      & $\{2,3,4,5,6\}$& $\{6\}$        & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ & $D$ & $K$ & $B$ & $D$ & $K$ & $B$ & $D$\\
+    $\leftarrow \{$6$\}$        & $\{5\}$        & $\{\emptyset\}$& $K$ & $0$ & $0$ & $B$ & $A$ & $0$ & $B$ & $C$ & $0$ & $B$ & $C$ & $0$ & $B$\\
+    $\leftarrow\{$1,3,4,6$\}$   & $\{2,3,4,5,6\}$& $\{4,6\}$      & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $D$ & $E$ & $K$ & $D$ & $E$\\
+    $\emptyset$                 &$\emptyset$     &$\emptyset$     & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$\\ 
+    \hline
+\end{tabular}
+\]
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
