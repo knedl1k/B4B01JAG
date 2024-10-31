@@ -111,7 +111,7 @@ B4B01JAG} %if necessary, replace with your course title
 
     \begin{tikzpicture}
         \node[state, initial, accepting] (q1) {$K$};
-        \node[state, right of=q1] (q2) {$A$};
+        \node[state, accepting, right of=q1] (q2) {$A$};
         \node[state, below of=q2] (q3) {$C$};
         \node[state, left of=q3] (q4) {$B$};
         \node[state, right of=q3] (q5) {$0$};
@@ -210,9 +210,9 @@ B4B01JAG} %if necessary, replace with your course title
     \node[state, initial] (q1) {$A$};
     \node[state, right of=q1](q2){$C$}
     \node[state, right of=q2](q3){$0$}
-    \node[state, below of=q1](q4){$E$}
-    \node[state, right of=q4](q5){$D$}
-    \node[state, right of=q5](q6){$B$}
+    \node[state, accepting, below of=q1](q4){$E$}
+    \node[state, accepting, right of=q4](q5){$D$}
+    \node[state, accepting, right of=q5](q6){$B$}
     \node[state, accepting, below of=q4](q7){$K$}
     
     \draw 
