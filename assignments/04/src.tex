@@ -1,0 +1,354 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+\usepackage{bm}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Čtvrtá samostatná práce}}%replace X with the appropriate number
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\textbf{Příklad 7.3.} Je dán regulární výraz \textbf{a(ab$^\star$ + b)$^\star$ba}. K danému regulárnímu výrazu sestrojte redukovaný DFA $M$, který přijímá jazyk reprezentovaný regulárním výrazem.
+\\
+
+Konstrukce konečného automatu k regulárnímu výrazu přímou metodou.
+$r = a_1 (a_2 b_3^\star + b_4)^\star b_5 a_6$.
+
+1. může začínat: $a_1$.
+
+2. můžou po sobě následovat: $\bm{a_1} \text{: } a_2, b_4, b_5; \bm{a_2}\text{: } a_2, b_3, b_4, b_5; \bm{b_3}\text{: } a_2, b_3, b_4, b_5; \bm{b_4}\text{: } a_2, b_4, b_5; \bm{b_5}\text{: } a_6$.
+
+3. slovo z $L_r$ končí: $a_6$.
+
+4. $\varepsilon$ neleží v $L_r$.
+
+\splitpage{
+    a) NFA:
+
+    \begin{tikzpicture}
+        \node[state, initial] (q1) {$S$};
+        \node[state, right of=q1] (q2) {$a_1$};
+        \node[state, right of=q2] (q3) {$a_2$};
+        \node[state, below of=q3] (q4) {$b_3$};
+        \node[state, below of=q2] (q5) {$b_4$};
+        \node[state, below of=q5] (q6) {$b_5$};
+        \node[state, accepting, left of=q6] (q7) {$a_6$};
+        
+        \draw 
+            (q1) edge[bend left, above] node{$a$} (q2)
+            (q2) edge[bend right] node[right]{$b$} (q5)
+            (q2) edge[bend left, above] node{$a$} (q3)
+            (q2) edge[bend right, below] node[left]{$b$}(q6)
+            (q3) edge[loop above] node{$a$} (q3)
+            (q3) edge[bend left, above] node[right]{$b$} (q4)
+            (q3) edge[bend below] node[right]{$b$}(q6)
+            (q3) edge[bend right, below] node[left]{$b$}(q5)
+            (q4) edge[loop right] node{$b$}(q4)
+            (q4) edge[above] node[right]{$a$} (q3)
+            (q4) edge[bend right, above] node{$b$}(q5)
+            (q4) edge[bend left, above] node{$b$}(q6)
+            (q5) edge[loop right] node{$b$}(q5)
+            (q5) edge[below] node[left]{$b$}(q6)
+            (q5) edge node[left]{$a$}(q3)
+            (q6) edge node[above]{$a$}(q7)
+            ;
+    \end{tikzpicture}
+}{
+c) redukovaný DFA:
+
+    \begin{tikzpicture}
+        \node[state, initial] (q1) {$C$};
+        \node[state, below of=q1] (q2) {$O$};
+        \node[state, right of=q1] (q3) {$B$};
+        \node[state, below of=q3] (q4) {$A$};
+        \node[state, right of=q3, accepting] (q5) {$K$};
+        
+        \draw 
+            (q1) edge[bend left, above] node{$a$} (q3)
+            (q1) edge[bend left, below] node[right]{$b$} (q2)
+            (q2) edge[loop below] node{$a,b$} (q2)
+            (q3) edge[loop above] node{$a$} (q3)
+            (q3) edge[bend right, below] node[left]{$b$} (q4)
+            (q4) edge[loop below] node{$b$} (q4)
+            (q4) edge[bend right, above] node{$a$}(q5)
+            (q5) edge[bend right, above] node{$a$}(q3)
+            (q5) edge[bend right, below] node{$b$}(q4)
+            ;
+    \end{tikzpicture}
+}
+
+b) podmnožinová konstrukce DFA a následná redukce
+\[
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\
+    \hline
+    \hline
+    $\rightarrow$& $S$                &$a_1$         &$\emptyset$        & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $O$ & $C$\\
+                 & $a_1$              &$a_2$         &$\{b_4, b_5\}$     & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $B$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$\\
+                 & $\emptyset$        &$\emptyset$   &$\emptyset$        & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$\\
+                 & $a_2$              &$a_2$         &$\{b_3, b_4, b_5\}$& $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $B$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$\\
+                 & $\{b_4, b_5\}$     &$\{a_2, a_6\}$&$\{b_4, b_5\}$     & $O$ & $K$ & $O$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$\\
+                 & $\{b_3, b_4, b_5\}$&$\{a_2, a_6\}$&$\{b_3, b_4, b_5\}$& $O$ & $K$ & $O$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$\\
+   $\leftarrow$ & $\{a_2, a_6\}$     &$a_2$         &$\{b_3, b_4, b_5\}$& $K$ & $O$ & $O$ & $K$ & $O$ & $A$ & $K$ & $B$ & $A$ & $K$ & $B$ & $A$ & $K$\\ 
+    \hline
+\end{tabular}
+\]
+
+
+\pagebreak 
+\textbf{Příklad 7.4.} Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$.
+\[ M:
+    \begin{tabular}{|r|c c|}
+        \hline
+        & $a$ & $b$\\
+        \hline
+        \hline
+        $\leftrightarrow 1$ & $1$ & $2$\\
+        $2$                 & $3$ & $4$\\
+        $\leftarrow 3$      & $1$ & $2$\\
+        $            4$     & $4$ & $4$\\
+        \hline
+    \end{tabular}
+\]
+Postup řešení vysvětlete.
+\\
+
+\splitpage{
+1. Úvodní DFA
+
+\begin{tikzpicture}
+   \node[state, initial, accepting] (q1) {$1$};
+   \node[state, right of=q1] (q2) {$2$};
+   \node[state, accepting, below of=q1] (q3) {$3$};
+   \node[state, below of=q2] (q4) {$4$};
+        
+   \draw    
+        (q1) edge[loop above] node{$a$} (q1)
+        (q1) edge[bend left, above] node{$b$} (q2)
+        (q2) edge[bend left, above] node{$a$} (q3)
+        (q2) edge[bend left, above] node[left]{$b$} (q4)
+        (q3) edge[bend left, above] node[left]{$a$} (q1)
+        (q3) edge[bend left, above] node[left]{$b$} (q2)
+        (q4) edge[loop left] node[above]{$a,b$} (q4)
+        ;
+\end{tikzpicture}
+}{
+
+2. Přidání $S$ a $F$ stavů.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, right of=q1] (q2) {$2$};
+   \node[state, below of=q1] (q3) {$3$};
+   \node[state, below of=q2] (q4) {$4$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw    
+        (q1) edge[loop above] node{$a$} (q1)
+        (q1) edge[bend left, above] node{$b$} (q2)
+        (q1) edge[bend right, below] node{$\varepsilon$} (q6)
+        (q2) edge[bend left, above] node{$a$} (q3)
+        (q2) edge[bend left, above] node[left]{$b$} (q4)
+        (q3) edge[bend left, above] node[left]{$a$} (q1)
+        (q3) edge[bend left, above] node[left]{$b$} (q2)
+        (q4) edge[loop left] node[above]{$a,b$} (q4)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        (q3) edge[bend left, above] node{$\varepsilon$} (q6)
+        ;
+\end{tikzpicture}
+}
+
+\splitpage{
+3. Odstranění smyček.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, right of=q1] (q2) {$2$};
+   \node[state, below of=q1] (q3) {$3$};
+   \node[state, below of=q2] (q4) {$4$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[bend left, above] node{$a^\star b$} (q2)
+        (q1) edge[bend right, below] node{$a ^\star$} (q6)
+        (q2) edge[bend left, above] node{$a$} (q3)
+        (q2) edge[bend left, above] node[left]{$b$} (q4) %FIXME Im not sure about this one (a^\star + b^\star)
+        (q3) edge[bend left, above] node[left]{$a$} (q1)
+        (q3) edge[bend left, above] node[left]{$b$} (q2)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        (q3) edge[bend left, above] node{$\varepsilon$} (q6)
+        ;
+\end{tikzpicture}
+}{
+4. Odstranění vrcholu č. 4.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, right of=q1] (q2) {$2$};
+   \node[state, below of=q1] (q3) {$3$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[bend left, above] node{$a^\star b$} (q2)
+        (q1) edge[bend right, below] node{$a ^\star$} (q6)
+        (q2) edge[bend left, above] node{$a$} (q3)
+        (q3) edge[bend left, above] node[left]{$a$} (q1)
+        (q3) edge[bend left, above] node[left]{$b$} (q2)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        (q3) edge[bend left, above] node{$\varepsilon$} (q6)
+        ;
+\end{tikzpicture}
+}
+
+\splitpage{
+5. Odstranění vrcholu č. 2.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, below of=q1] (q3) {$3$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[bend left, above] node[right]{$a^\star b a$} (q3)
+        (q1) edge[bend right, below] node{$a ^\star$} (q6)
+        (q3) edge[bend left, above] node[left]{$a$} (q1)
+        (q3) edge[loop right] node{$ba$} (q3)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        (q3) edge[bend left, above] node{$\varepsilon$} (q6)
+        ;
+\end{tikzpicture}
+}{
+6. Odstranění smyček.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, below of=q1] (q3) {$3$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[bend left, above] node[right]{$a^\star b a$} (q3)
+        (q1) edge[bend right, below] node[left]{$a ^\star$} (q6)
+        (q3) edge[bend left, above] node[left]{$(ba)^\star a$} (q1)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        (q3) edge[bend left, above] node{$(ba)^\star$} (q6)
+        ;
+\end{tikzpicture}
+}
+\[
+\text{Pokračování na další straně.}
+\]
+
+\splitpage{
+7. Odstranění vrcholu č. 3.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[loop right] node[right]{$a^\star b a (ba)^\star a$} (q1)
+        (q1) edge[bend right, below] node[left]{$a ^\star$} (q6)
+        (q1) edge[bend left, below] node[right]{$a^\star b a (b a)^\star$} (q6)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        ;
+\end{tikzpicture}
+}{
+8. Odstranění paralelních hran.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[loop right] node[right]{$a^\star b a (ba)^\star a$} (q1)
+        (q1) edge[bend left, below] node[right]{$a ^\star + a^\star b a (b a)^\star$} (q6)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        ;
+\end{tikzpicture}
+}
+
+\splitpage{
+9. Odstranění smyček.
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5] (q1) {$1$};
+   \node[state, below of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q1) edge[bend left, below] node[right]{$(a^\star b a (ba)^\star a)^\star (a ^\star + a^\star b a (b a)^\star)$} (q6)
+        (q5) edge[bend left, above] node{$\varepsilon$} (q1)
+        ;
+\end{tikzpicture}
+}{
+10. Odstranění vrcholu č. 1.
+\\
+
+\begin{tikzpicture}
+   \node[state, initial] (q5) {$S$};
+   \node[state, right of=q5, accepting] (q6) {$F$};
+        
+   \draw 
+        (q5) edge[bend right, below] node[below]{$(a^\star b a (ba)^\star a)^\star (a ^\star + a^\star b a (b a)^\star)$} (q6)
+        ;
+\end{tikzpicture}
+}
+
+\[
+    \text{Výsledný regulární výraz je: } (a^\star b a (ba)^\star a)^\star (a ^\star + a^\star b a (b a)^\star) \text{.}
+\]
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
