@@ -1,0 +1,126 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+\usepackage{bm}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Pátá samostatná práce}}%replace X with the appropriate number
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\noindent
+\textbf{Příklad 8.7.} K automatu $M$ zkonstruujte gramatiku typu 3, která generuje jazyk $L(M)$, kde $M$ je dán tabulkou
+\[
+    \begin{tabular}{|r|c|c|}
+        \hline
+        & $a$ & $b$\\
+        \hline
+        \hline
+        $\rightarrow A$     & $\{A,B\}$   & $\{C\}$\\
+        $B$                 & $\{B\}$     & $\{C\}$\\
+        $\leftrightarrow C$ & $\emptyset$ & $\{D\}$\\
+        $\leftarrow D$      & $\{B\}$     & $\{D\}$\\
+        \hline
+    \end{tabular}
+\]
+\splitpage{
+    $\mathcal{G} = (N, \Sigma, S, P)$\\
+    $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$\\
+    \begin{flalign*}
+        P:  A & \rightarrow aA | aB | bC&& \\
+            B & \rightarrow aB | bC&& \\
+            C & \rightarrow bD | \varepsilon&& \\ 
+            D & \rightarrow aB | bD | \varepsilon&& \\
+            S & \rightarrow A | C&&
+    \end{flalign*}
+}{
+    \[
+        \begin{tikzpicture}
+        \node[state, initial] (q1) {$S$};
+        \node[state, accepting, right of=q1] (q4) {$C$};
+        \node[state, below of=q4] (q2) {$A$};
+        \node[state, right of=q2] (q3) {$B$};
+        \node[state, accepting, right of=q4] (q5) {$D$};
+            
+        \draw 
+            (q1) edge[bend right, above] node{$\varepsilon$} (q2)
+            (q1) edge node[above]{$\varepsilon$} (q4)
+            (q2) edge[loop below] node{$a$} (q2)
+            (q2) edge node[above]{$a$} (q3)
+            (q2) edge node[left]{$b$} (q4)
+            (q3) edge[loop below] node{$a$} (q3)
+            (q3) edge node[above]{$b$}(q4)
+            (q4) edge node[above]{$b$}(q5)
+            (q5) edge[loop right] node{$b$} (q5)
+            (q5) edge[bend left] node[right]{$a$} (q3)
+            ;
+    \end{tikzpicture}
+    \]
+}
+
+\noindent
+\textbf{Příklad 8.8.} Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk ${L = \{0^i1^j; 0 \leq i \leq j\}}$. Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.\\
+
+\noindent
+Pozorování: jazyk $L$ není regulární.
+    \begin{flalign*}
+            S & \rightarrow XY&& \\
+            X & \rightarrow 0X1 | \varepsilon&& \\
+            Y & \rightarrow Y1 | \varepsilon&& \\ 
+    \end{flalign*}
+\noindent
+Dvě možnosti: $i < j \text{, kde } j=i+n, n >0$, nebo $i = j$.
+\[
+    S \xRightarrow{S \rightarrow XY} XY \xRightarrow{X \rightarrow 0X1(i)} 0^i X 1^i Y \implies 
+    \begin{cases*}
+        i<j: 0^i X 1^i Y \xRightarrow{Y \rightarrow Y1(n)} 0^i X1^i Y1^n \xRightarrow{X \rightarrow \varepsilon} 0^i 1^{j=i+n}   \\
+        i=j: 0^i X 1^i Y \xRightarrow{Y \rightarrow \varepsilon} 0^i X1^i 1^n \xRightarrow{X \rightarrow \varepsilon} 0^i 1^j
+    \end{cases*}
+    \qed
+\]
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
