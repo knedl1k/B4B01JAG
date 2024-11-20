@@ -1,0 +1,145 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+\usepackage{bm}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Šestá samostatná práce}}
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\noindent
+\textbf{Příklad 9.9.} 
+
+Navrhněte bezkontextovou gramatiku generující následující jazyk ${L = \{a^n b^m a^n \mid m, n \geq 0\}}$.\\
+Zdůvodněte, proč zkonstruovaná gramatika jazyk $L$ generuje.\\
+
+$P: $
+$S \rightarrow aSa \mid b$
+
+Důkaz:
+\\
+
+\splitpage{
+
+1. $a^n n^m a^n \in L(y)$.
+
+${S \xRightarrow{S \rightarrow a S a (n)} a^n S a^n \xRightarrow{S \rightarrow b (m)} a^n b^m a^n, m,n \geq 0}$.
+}{
+
+2. Když $w \in L(y)$, tak $w = a^n b^m a^n$.
+
+$S \Rightarrow^\star w$, $S \Rightarrow^\star a^l S a^l$, $S \Rightarrow^\star b^k$, $a^l b^k a^l \in L$.
+
+}
+\\
+\\
+\\
+
+\noindent
+\textbf{Příklad 9.10.} 
+
+\noindent
+\splitpage{
+Zredukujte gramatiku $\mathcal{G}$, která je dána {pravidly}:
+    \begin{flalign*}
+        \mathcal{G}:    S & \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon&& \\
+                        A & \rightarrow bCD \mid Dba&& \\
+                        B & \rightarrow Bb \mid AC&& \\ 
+                        C & \rightarrow aA \mid a&& \\
+                        D & \rightarrow DE&& \\
+                        E & \rightarrow \varepsilon&&
+    \end{flalign*}
+
+}{
+\\
+\\
+\\
+\\
+
+Mějme CF gramatiku $\mathcal{G} = \{N, \Sigma, S, P\}$.
+\\
+
+1. krok
+
+$V = \{A \mid A \in N, A \Rightarrow_\mathcal{G} ^\star w, w \in \Sigma^\star\}$
+
+$V_1 =\{A \mid A \rightarrow w \in P, w \in \Sigma^\star\} =\{S, C, E\}$
+
+${V_2 = V_1 \cup \{A \mid \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\} = \{S, C, E\} \cup \emptyset = V_1}$
+
+}
+\\
+\\
+\\
+
+\noindent
+2. krok 
+    \begin{flalign*}
+        \mathcal{G}':   S & \rightarrow aSa \mid bSb \mid \varepsilon&& \\
+                        C & \rightarrow a&& \\
+                        E & \rightarrow \varepsilon&&
+    \end{flalign*}
+
+Pro novou gramatiku $\mathcal{G}' = \{V, \Sigma, S, P'\}$ sestrojíme indukcí množinu
+
+$U = \{A \mid A \in V, \exists \alpha, \beta \in (V \cup \Sigma)^\star \text{ tak, že } S \Rightarrow_\mathcal{G} ^\star \alpha A \beta\}$.
+
+$U_0 = \{S\}$, $S \Rightarrow ^\star S$
+
+$U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v } \alpha \text{ pro pravidlo } Y \rightarrow \alpha \in P, Y \in U_0\} = \{S\} \cup \emptyset$
+
+
+
+
+
+\\
+
+Redukovaná gramatika je $\mathcal{G}'':  S \rightarrow aSa \mid bSb \mid \varepsilon$.
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
