@@ -1,0 +1,68 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+\usepackage{bm}
+\usepackage{amsmath}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{Sedmá samostatná práce}}
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\noindent
+\textbf{Příklad 10.5.} Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S, A, B, C, D\}$, $\Sigma = \{a,b,c\}$ a pravidla P jsou dána
+\begin{align*}
+    P:    S & \rightarrow AB \mid CD \mid AC \\
+          A & \rightarrow AC \mid a \\
+          B & \rightarrow BD \mid b \\ 
+          C & \rightarrow AD \mid a \\
+          D & \rightarrow BA \mid b \\
+\end{align*}
+Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde ${w_1 = baaba}$ a ${w_2 = abaaa}$. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
+
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
