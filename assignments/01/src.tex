@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[czech]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\usepackage{tabularray}
+\usepackage{bm}
+\usepackage{multicol}
+ 
+\begin{document}
+
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{\textbf{První samostatná práce}}
+\author{Jakub Adamec\\ %replace with your name
+B4B01JAG} %if necessary, replace with your course title
+
+\maketitle
+
+\noindent
+\textbf{Příklad 1.5.}
+Pro uvedený automat nakreslete stavový diagram. Najděte vlastnost $\mathcal{V}$, která charakterizuje slova přijímaná daným automatem. Dokažte, že automat přijímá právě všechna slova s vlastností $\mathcal{V}$.
+\begin{multicols}{2} % Start two-column layout
+    % Left column content
+    \section*{}
+        \begin{tikzpicture}
+            \node[state, initial, accepting] (q1) {$q_0$};
+            \node[state, accepting, right of=q1] (q2) {$q_1$};
+            \node[state, accepting, below of=q1] (q3) {$q_2$};
+                
+            \draw 
+                (q1) edge[loop above] node{$0$} (q1)
+                (q1) edge[bend left, above] node{$1$} (q2)
+                (q2) edge[loop above] node{$1$} (q2)
+                (q2) edge[bend right, below] node{$0$} (q3)
+                (q3) edge[bend left, above] node[left]{$0$} (q1)
+                (q3) edge[bend right, above] node{$1$} (q2)
+                ;
+        \end{tikzpicture}
+        \\
+        $F = \{q_1, q_2\}$.\\
+        $L(M) = \{w \mid w \text{ končí } 1 \text{ nebo } 10\}$.\\
+        Ať $u \in L$.
+    
+    % Right column content
+    \columnbreak % Force a break to the next column
+    \section*{}
+        \begin{multicols}{2} % Start two-column layout
+            % Left column content
+            \section*{}
+                Důkaz $u0 \not\in F:$\\
+                $\delta(q_i, 0) = q_0 \not\in F$\\
+                $i = 0, 2$.
+                \\
+                \\
+                \\
+                Důkaz $u00 \not\in F:$\\
+                $\delta(q_i, 00) = q_0 \not\in F$\\
+                $i = 0, 1, 2$.
+                \\
+                \\
+                \\
+                Důkaz $\varepsilon \not\in F:$\\
+                $\delta(q_1, \varepsilon) = q_1$.\\ 
+                
+            % Right column content
+            \columnbreak % Force a break to the next column
+            \section*{}
+                Důkaz $u1 \in F:$\\
+                $\delta(q_i, 1) = q_1$\\
+                $i = 0, 1, 2$.
+                \\
+                \\
+                \\
+                Důkaz $u10 \in F:$\\
+                $\delta(q_i, 10) = q_2$\\
+                $i = 0, 1, 2$.
+            
+        \end{multicols}
+    \end{multicols}
+\newpage
+\noindent
+\textbf{Příklad 1.6.} Jazyk $L$ nad abecedou $\Sigma = \{a, b\}$ je dán induktivně
+
+\begin{gather*}
+    \varepsilon \in L \\
+    u \in L \implies aua \in L \\
+    u \in L \implies bub \in L
+\end{gather*}
+
+\noindent
+Charakterizujte slova jazyka $L$, tj. najděte vlastnost $\mathcal{V}$ takovou, že $L = \{u \mid \text{slovo } u \text{ má vlastnost } \mathcal{V}\}$. Své tvrzení zdůvodněte.\\
+
+\noindent
+$\mathcal{V} = \text{slovo } u \text{ je sudé délky a } u = u^R \text{(tj. je palindrom).}$
+Označme $L_1 = \{u \mid u^R = u, |u| \text{ je sudé}\}$. Dokážeme, že $L=L_1$.\\
+
+\noindent
+a) $L \subseteq L_1$, indukcí podle definice množiny $L$.
+
+i) $\varepsilon$ je sudé délky a zároveň $\varepsilon^R = \varepsilon$, tedy $\varepsilon \in L_1$. \qed
+
+ii) Mějme slovo $u$, které je sudé délky a platí $u^R = u$. Pak také slova $v_1 = aua$ a $v_2=bub$ mají sudou délku a jsou palindromy, tj. ${v_1^R = (aua)^R = au^Ra=aua=v_1}$ a ${v_2^R = (bub)^R = bu^Rb=bub=v_2}$. \qed
+
+\noindent
+b) $L_1 \subseteq L$, každé slovo, které palindrom sudé délky vzniklo dle pravidel, indukcí podle délky slova $u \in L_1$.
+
+i) Nejkratší slovo podle pravidel $\mathcal{V}$ je $\varepsilon$, které patří do L. \qed
+
+ii) Předpokládejme, že všechny palindromy $v$ délky $2n$ vznikly podle pravidel jazyka $L$. \\
+Uvažujme libovolný palindrom $u$ délky $2(n+1)$. Pak $u$ nutně začíná buď písménem $a$ nebo písmenem $b$. Jestliže $u$ začíná $a$, pak musí končit $a$, protože je palindromem. Pak lze tedy říct, že $u=ava$, navíc platí $u^R = av^Ra = u$, proto $u^R = v$ a $|v|=2n$. Z indukčního předpokladu víme, že $v \in L$ a tedy i $u \in L$.
+
+A analogicky platí to samé pro případ, že $u$ začíná, a tedy i končí, písmenem $b$.
+\qed
+\\
+\\
+Takže platí, že $L = L_1$.
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
+
