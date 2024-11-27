@@ -1,3 +1,8 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
 \documentclass[11pt]{article}
  
 \usepackage[margin=1in]{geometry}
@@ -77,6 +82,25 @@ initial text=$ $, % sets the text that appears on the start arrow
           (q6) edge[loop right] node{a, b} (q6)
           ;
 \end{tikzpicture}
+
+\[
+\begin{tabular}{|r r|cc|c|cc|c|cc|c|cc|c|cc|c|cc|c|}
+    \hline
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ & $a$ & $b$ & $\sim_5$\\
+    \hline
+    \hline
+    $\rightarrow$& $q_1$& $q_2$& chyba& $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $O$ & $D$ & $C$ & $O$ & $D$\\
+                 & $q_2$& $q_2$& $q_3$& $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $C$ & $C$ & $B$ & $C$ & $C$ & $B$ & $C$\\
+                 & $q_3$& $q_2$& $q_4$& $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $C$ & $A$ & $B$ & $B$ & $A$ & $B$\\
+                 & $q_4$& $q_5$& $q_4$& $O$ & $K$ & $O$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$ & $K$ & $A$ & $A$ & $A$ & $A$ & $A$\\
+    $\leftarrow$ & $q_5$& $q_5$& $q_4$& $K$ & $K$ & $O$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$\\
+                 & chyba& chyba& chyba& $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$\\ 
+    \hline
+\end{tabular}
+\]
+\noindent
+$\sim_4 = \sim_5$, a protože každý řádek má jinou třídu, původní automat je již redukovaný.
+
 
 \pagebreak 
 
