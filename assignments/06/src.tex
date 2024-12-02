@@ -47,38 +47,36 @@ B4B01JAG} %if necessary, replace with your course title
 
 \maketitle
 
-% TODO(#1): Fix this section according to the report
-% it should be rewritten to S → aSa | Sb | ε
-% and proofs should reflect this change.
-
 \noindent
 \textbf{Příklad 9.9.} 
 
 Navrhněte bezkontextovou gramatiku generující následující jazyk ${L = \{a^n b^m a^n \mid m, n \geq 0\}}$.\\
 Zdůvodněte, proč zkonstruovaná gramatika jazyk $L$ generuje.\\
 
+\noindent
+Gramatika $\mathcal{G}=(N, \Sigma, S, P)$, kde $N=\{S, A\}$ a
+
+\noindent
 $P: $
 $S \rightarrow aSa \mid b$
 
+$A \rightarrow bA \mid \varepsilon$\\
+
+
+\noindent
 Důkaz:
 \\
 
-\splitpage{
+\textbf{1.} $a^n n^m a^n \in L(y)$.
 
-1. $a^n n^m a^n \in L(y)$.
+$S \xRightarrow{S \rightarrow a S a }^{(n)} a^n S a^n \xRightarrow{S \rightarrow A} a^n A a^n \xRightarrow{A \rightarrow bA}^{(m)} a^n b^m A a^n \xRightarrow{A \rightarrow \varepsilon} a^n b^m a^n , m,n \geq 0$.\\
 
-${S \xRightarrow{S \rightarrow a S a (n)} a^n S a^n \xRightarrow{S \rightarrow b (m)} a^n b^m a^n, m,n \geq 0}$.
-}{
+\textbf{2.} $\mathcal{G}$ nevygeneruje nic navíc.
 
-2. Když $w \in L(y)$, tak $w = a^n b^m a^n$.
+Předpokládejme, že $S \Rightarrow^\star u, u \in \Sigma^\star$. Pak poslední pravidlo derivace musí být $A \rightarrow \varepsilon$. Proto v derivaci musí být použito pravidlo $S \rightarrow A$. Mezi použitím pravidel $S \rightarrow A$ a $A \rightarrow \varepsilon$ může být použito několik (nebo žádné) pravidel $S \rightarrow bA$. Protože derivace začíná $S$, před použitím pravidla $S \rightarrow A$ může být použito několik (nebo žádné) pravidel $S \rightarrow aSa$. Jinak pravidla být použita nemohou. Tedy derivace má tvar $S \xRightarrow{S \rightarrow a S a}^{(k)} a^k S a^k \xRightarrow{S \rightarrow A} a^k A a^k \xRightarrow{A \rightarrow bA}^{(l)} a^k b^l A a^k \xRightarrow{A \rightarrow \varepsilon} a^k b^l a^k , k,l \geq 0$.
 
-$S \Rightarrow^\star w$, $S \Rightarrow^\star a^l S a^l$, $S \Rightarrow^\star b^k$, $a^l b^k a^l \in L$.
 
-}
-\\
-\\
-\\
-
+\newpage
 \noindent
 \textbf{Příklad 9.10.} 
 
@@ -110,7 +108,6 @@ $V = \{A \mid A \in N, A \Rightarrow_\mathcal{G} ^\star w, w \in \Sigma^\star\}$
 $V_1 =\{A \mid A \rightarrow w \in P, w \in \Sigma^\star\} =\{S, C, E\}$
 
 ${V_2 = V_1 \cup \{A \mid \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\} = \{S, C, E\} \cup \emptyset = V_1}$
-
 }
 \\
 \\
@@ -130,20 +127,12 @@ $U = \{A \mid A \in V, \exists \alpha, \beta \in (V \cup \Sigma)^\star \text{ ta
 
 $U_0 = \{S\}$, $S \Rightarrow ^\star S$
 
-$U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v } \alpha \text{ pro pravidlo } Y \rightarrow \alpha \in P, Y \in U_0\} = \{S\} \cup \emptyset$
-
-
-
-
-
-\\
+$U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v } \alpha \text{ pro pravidlo } Y \rightarrow \alpha \in P, Y \in U_0\} = \{S\} \cup \emptyset$\\
 
 Redukovaná gramatika je $\mathcal{G}'':  S \rightarrow aSa \mid bSb \mid \varepsilon$.
-
 
 % --------------------------------------------------------------
 %     You don't have to mess with anything below this line.
 % --------------------------------------------------------------
  
 \end{document}
-
