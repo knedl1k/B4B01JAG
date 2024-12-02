@@ -63,18 +63,26 @@ B4B01JAG} %if necessary, replace with your course title
     \end{tabular}
 \]
 \splitpage{
-    $\mathcal{G} = (N, \Sigma, S, P)$\\
-    $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$\\
-    \begin{flalign*}
-        P:  A & \rightarrow aA \mid aB \mid bC&& \\
-            B & \rightarrow aB \mid bC&& \\
-            C & \rightarrow bD \mid \varepsilon&& \\ 
-            D & \rightarrow aB \mid bD \mid \varepsilon&& \\
-            S & \rightarrow A \mid C&&
-    \end{flalign*}
-}{
-    \[
-        \begin{tikzpicture}
+Protože automat $M$ má dva počátčení stavy, vytvoříme nový automat $M'$ takto:
+
+\[
+    \begin{tabular}{|r|c|c|c|}
+        \hline
+        & $\varepsilon$ & $a$ & $b$\\
+        \hline
+        \hline
+        $\rightarrow S$&$\{A,C\}$  &$\emptyset$  &$\emptyset$\\
+        $A$            &$\emptyset$& $\{A,B\}$   & $\{C\}$\\
+        $B$            &$\emptyset$& $\{B\}$     & $\{C\}$\\
+        $\leftarrow C$ &$\emptyset$& $\emptyset$ & $\{D\}$\\
+        $\leftarrow D$ &$\emptyset$& $\{B\}$     & $\{D\}$\\
+        \hline
+    \end{tabular}
+\]
+
+
+\[
+    \begin{tikzpicture}
         \node[state, initial] (q1) {$S$};
         \node[state, accepting, right of=q1] (q4) {$C$};
         \node[state, below of=q4] (q2) {$A$};
@@ -94,33 +102,54 @@ B4B01JAG} %if necessary, replace with your course title
             (q5) edge[bend left] node[right]{$a$} (q3)
             ;
     \end{tikzpicture}
-    \]
+\]
+}{
+Nyní hledaná gramatika je $\mathcal{G} = (N, \Sigma, S, P)$, kde
+$N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a
+\begin{flalign*}
+    P:  S & \rightarrow A \mid C&& \\
+        A & \rightarrow aA \mid aB \mid bC&& \\
+        B & \rightarrow aB \mid bC&& \\
+        C & \rightarrow bD \mid \varepsilon&& \\ 
+        D & \rightarrow aB \mid bD \mid \varepsilon&&
+\end{flalign*}
 }
 
+\newpage
 \noindent
 \textbf{Příklad 8.8.} Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk ${L = \{0^i1^j; 0 \leq i \leq j\}}$. Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.\\
 
 \noindent
-Pozorování: jazyk $L$ není regulární.
-    \begin{flalign*}
-            S & \rightarrow XY&& \\
-            X & \rightarrow 0X1 \mid \varepsilon&& \\
-            Y & \rightarrow Y1 \mid \varepsilon&& \\ 
-    \end{flalign*}
+Hledaná gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N=\{S\}$, $\Sigma = \{0,1\}$ a $S \rightarrow 0S1 \mid S1 \mid \varepsilon$.\\
+
 \noindent
-Dvě možnosti: $i < j \text{, kde } j=i+n, n >0$, nebo $i = j$.
-\[
-    S \xRightarrow{S \rightarrow XY} XY \xRightarrow{X \rightarrow 0X1(i)} 0^i X 1^i Y \implies 
-    \begin{cases*}
-        i<j: 0^i X 1^i Y \xRightarrow{Y \rightarrow Y1(n)} 0^i X1^i Y1^n \xRightarrow{X \rightarrow \varepsilon} 0^i 1^{j=i+n}   \\
-        i=j: 0^i X 1^i Y \xRightarrow{Y \rightarrow \varepsilon} 0^i X1^i 1^n \xRightarrow{X \rightarrow \varepsilon} 0^i 1^j
-    \end{cases*}
-    \qed
-\]
+zdůvodnění:
+
+\begin{enumerate}
+    \item $L \subseteq L(\mathcal{G})$, tj. každé slovo $0^i 1^j$, $0 \leq i \leq j$, gramatika $\mathcal{G}$ vygeneruje.
+
+        $S \xRightarrow{S \rightarrow 0S1}^{(i)} 0^i S 1^i \xRightarrow{S \rightarrow S1}^{(j-i)} 0^i S 1^{j-i} 1^i \xRightarrow{S \rightarrow \varepsilon} 0^i 1^j$. \qed
+    \item $L(\mathcal{G}) \subseteq L$, tj. $\mathcal{G}$ nevygeneruje nic navíc.
+
+        Uvažujme derivaci $S \Rightarrow^\star u$. Pak poslední použité pravidlo musí být $S \rightarrow \varepsilon$. Indukcí podle počtu kroků dokážeme, že $S \Rightarrow ^{(n)} 0^i S q^j$, kde $i \leq j$.
+
+        \textit{Základní krok.} $n=1$, $S \Rightarrow 0S1$ nebo $S \Rightarrow S1$ a $S1 = 0^0 S 1^1$, kde $i \leq j$.\\
+        \textit{Indukční krok.} předpokládejme, že každá derivace o $n$ krocích vygeneruje $S \Rightarrow^{(n)} 0^i S 1^j$, $i \leq j$.
+        Pak derivace o $n+1$ krocích je
+        \begin{cases*}
+            $S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow 0S1} 0^{i+1} S 1^{j+1}$ a $i+1 \leq j+1$. \\
+            $S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow S1} 0^i S 1^{j+1}$ a $i \leq j+1$. 
+        \end{cases*}
+        
+        Tedy z $S$ je možné vygenerovat pouze $0^i S 1^j$, $0 \leq i \leq j$, a tedy \mbox{S \Rightarrow^\star 0^i S 1^j \xRightarrow{S \rightarrow \varepsilon} 0^i 1^j, 0 \leq i \leq j}.
+        
+        \qed
+        
+\end{enumerate}
+
 
 % --------------------------------------------------------------
 %     You don't have to mess with anything below this line.
 % --------------------------------------------------------------
  
 \end{document}
-
