@@ -69,7 +69,7 @@ Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $
 \splitpage{
         CYK pro slovo $w_1$.
         
-        \begin{NiceTabular}{|c|c|c|c|c|c|c|c}[hlines, corners = NE] % NE = north east
+        \begin{NiceTabular}{|c|c|c|c|c|}[hlines, corners = NE] % NE = north east
             $D$   &         &       &       &   \\ 
             $D$   & $S,A,C$ &       &       &   \\ 
             $D$   & $S,A,C$ & $S,C$ &       &   \\ 
@@ -86,19 +86,19 @@ Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $
         
         Pomocný přepis pravidel.
         
-        \begin{falign*}
+        \begin{align*}
             AB  \leftarrow S\\
             AC  \leftarrow S,A \\
             AD  \leftarrow C \\ 
             BA  \leftarrow D \\
             BD  \leftarrow B \\
             CD  \leftarrow S \\
-        \end{falign*}
+        \end{align*}
         
 }{
         CYK pro slovo $w_2$.
         
-        \begin{NiceTabular}{|c|c|c|c|c|c|c|c}[hlines, corners = NE] % NE = north east
+        \begin{NiceTabular}{|c|c|c|c|c|}[hlines, corners = NE] % NE = north east
             $S,C$ &       &       &       &   \\ 
             $S,C$ & $D$   &       &       &   \\ 
             $S,C$ & $D$   & $S,A$ &       &   \\ 
@@ -129,4 +129,3 @@ Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $
 % --------------------------------------------------------------
  
 \end{document}
-
