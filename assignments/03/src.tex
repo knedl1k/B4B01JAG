@@ -208,12 +208,12 @@ B4B01JAG} %if necessary, replace with your course title
 
 \begin{tikzpicture}
     \node[state, initial] (q1) {$A$};
-    \node[state, right of=q1](q2){$C$}
-    \node[state, right of=q2](q3){$0$}
-    \node[state, accepting, below of=q1](q4){$E$}
-    \node[state, accepting, right of=q4](q5){$D$}
-    \node[state, accepting, right of=q5](q6){$B$}
-    \node[state, accepting, below of=q4](q7){$K$}
+    \node[state, right of=q1](q2){$C$};
+    \node[state, right of=q2](q3){$0$};
+    \node[state, accepting, below of=q1](q4){$E$};
+    \node[state, accepting, right of=q4](q5){$D$};
+    \node[state, accepting, right of=q5](q6){$B$};
+    \node[state, accepting, below of=q4](q7){$K$};
     
     \draw 
         (q1) edge[bend left, above] node{$a$}(q2)
