@@ -41,9 +41,9 @@ between/.style args={#1 and #2}{
 %                         Start here
 % --------------------------------------------------------------
  
-\title{\textbf{Pátá samostatná práce}}%replace X with the appropriate number
-\author{Jakub Adamec\\ %replace with your name
-B4B01JAG} %if necessary, replace with your course title
+\title{\textbf{Pátá samostatná práce}}
+\author{Jakub Adamec\\
+B4B01JAG}
 
 \maketitle
 
@@ -135,13 +135,15 @@ zdůvodnění:
 
         \textit{Základní krok.} $n=1$, $S \Rightarrow 0S1$ nebo $S \Rightarrow S1$ a $S1 = 0^0 S 1^1$, kde $i \leq j$.\\
         \textit{Indukční krok.} předpokládejme, že každá derivace o $n$ krocích vygeneruje $S \Rightarrow^{(n)} 0^i S 1^j$, $i \leq j$.
-        Pak derivace o $n+1$ krocích je
-        \begin{cases*}
-            $S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow 0S1} 0^{i+1} S 1^{j+1}$ a $i+1 \leq j+1$. \\
-            $S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow S1} 0^i S 1^{j+1}$ a $i \leq j+1$. 
-        \end{cases*}
-        
-        Tedy z $S$ je možné vygenerovat pouze $0^i S 1^j$, $0 \leq i \leq j$, a tedy \mbox{S \Rightarrow^\star 0^i S 1^j \xRightarrow{S \rightarrow \varepsilon} 0^i 1^j, 0 \leq i \leq j}.
+        \noindent
+        \[
+            \text{Pak derivace o $n+1$ krocích je}
+            \begin{cases*}
+                S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow 0S1} 0^{i+1} S 1^{j+1} \text{ a } i+1 \leq j+1. \\
+                S \Rightarrow^{(n)} 0^i S 1^j \xRightarrow{S \rightarrow S1} 0^i S 1^{j+1} \text{ a } i \leq j+1. 
+            \end{cases*}
+        \]
+        Tedy z $S$ je možné vygenerovat pouze $0^i S 1^j$, $0 \leq i \leq j$, tedy $S \Rightarrow^\star 0^i S 1^j \xRightarrow{S \rightarrow \varepsilon} 0^i 1^j$, $0 \leq i \leq j$.
         
         \qed
         
