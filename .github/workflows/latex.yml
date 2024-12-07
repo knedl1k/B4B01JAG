@@ -1,0 +1,26 @@
+name: Build LaTeX Document
+
+on:
+  push:
+    branches:
+      - main  # Run on pushes to the main branch
+  pull_request:  # Run on pull requests
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up LaTeX
+      uses: dante-ev/latex-action@v2
+      with:
+        root_file: main.tex
+
+    - name: Upload PDF Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: compiled-pdf
+        path: resena_sbirka.pdf
