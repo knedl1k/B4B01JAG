@@ -1,0 +1,194 @@
+\section{První cvičení}
+
+\subsection{Příklad}
+Jazyk $L$ nad abecedou $\Sigma = \{a,b\}$ je dán induktivně
+\begin{gather*}
+    \varepsilon \in L \\
+    u \in L \implies aub \in L\\
+    u \in L \implies bua \in L\\
+    u, v \in L \implies uv \in L\\
+\end{gather*}
+Charakterizujte slova jazyka $L$, tj. najděte vlastnost $\mathcal{V}$ takovou, že $L = \{u \mid \text{slovo } u \text{ má vlastnost } \mathcal{V}\}$. Své tvrzení dokažte.
+
+$L_1 = \{w \mid w \in \{a,b\}^\star, |w|_a=|w|_b\}$.
+
+\noindent
+Důkaz:\\
+\splitpage{
+\noindent
+a) $L \subseteq L_1$
+
+1. $|\varepsilon|_a = 0 = |\varepsilon|_b$\\
+2. ${|u|_a = |u|_b \implies |aub|_a = |u|_a + 1 = |aub|_b = |u|_b + 1}$
+
+
+}{
+b) $L_1 \subseteq L$
+}
+
+% TODO 
+
+\newpage
+\subsection{Příklad}
+Je dán konečný automat $M$ tabulkou
+
+
+\begin{multicols}{2}
+
+
+\begin{tabular}{|r|c|c|}
+    \hline
+    & $a$ & $b$\\
+    \hline
+    \hline
+    $1$            & $2$   & $1$\\
+    $\leftarrow 2$ & $2$   & $1$\\
+    $3$            & $7$   & $5$\\
+    $\leftarrow 4$ & $7$   & $4$\\
+    $\rightarrow 5$& $2$   & $4$\\
+    $\leftarrow 6$ & $6$   & $3$\\
+    $ 7$           & $7$   & $4$\\
+    \hline
+\end{tabular}
+
+\columnbreak
+
+\noindent
+1. Nakreslete stavový diagram automatu.\\
+2. Simulujte krok po kroku výpočet automatu nad slovem $bbaaab$.\\
+3. Z induktivní definice odvoďte $\delta^\star(2, bab)$.\\
+
+\end{multicols}
+
+\splitpage{
+1.
+
+    \begin{tikzpicture}
+        
+        \node[state, accepting] (2) {$2$};
+        \node[state, below of=2] (1) {$1$};
+        \node[state, initial, right of=2] (5) {$5$};
+        \node[state, right of=5] (3) {$3$};
+        \node[state, accepting, below of=5] (4) {$4$};
+        \node[state, accepting, above of=5] (6) {$6$};
+        \node[state, below of=3] (7) {$7$};
+            
+        \draw 
+            (1) edge[loop right] node{$b$} (1)
+            (1) edge[bend left, above] node[left]{$a$} (2)
+            (2) edge[bend left, below] node[right]{$b$} (1)
+            (2) edge[loop above] node{$a$} (2)
+            (3) edge[bend right, above] node{$b$} (5)
+            (3) edge[bend left, below] node[right]{$a$} (7)
+            (4) edge[loop below] node{$b$} (4)
+            (4) edge[bend left, above] node{$a$} (7)
+            (5) edge[bend right, below] node[left]{$b$} (4)
+            (5) edge[bend right, above] node{$a$} (2)
+            (6) edge[loop above] node{$a$} (6)
+            (6) edge[bend left, above] node{$b$}(3)
+            (7) edge[loop above] node{$a$} (7)
+            (7) edge[bend left, below] node{$b$} (4)
+            ;
+    \end{tikzpicture}
+}{
+2. $\rightarrow5-4-4-7-7-7-4 \rightarrow$
+\\
+\\
+3. ${\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b) =} \delta(\delta(\delta(2,b),a),b)$.
+}
+\subsection{Příklad}
+Navrhněte automat modelující posuvný registr, který provádí celočíselné dělení $4$ binárně zadaného čísla (číslo se čte od nejvyššího řádu). O jaký typ automatu se jedná?
+
+\newpage
+\subsection{Příklad}
+Pro uvedené automaty nakreslete stavový diagram. Najděte vlastnost $\mathcal{V}$, která charakterizuje slova přijímaná daným automatem. Dokažte, že automat přijímá právě všechna slova s vlastností $\mathcal{V}$.
+
+\begin{multicols}{3}
+
+\begin{tabular}{|r|c|c|}
+    \hline
+    & $0$ & $1$\\
+    \hline
+    \hline
+    $\leftrightarrow q_0$& $q_1$   & $q_0$\\
+    $q_1$                & $q_2$   & $q_1$\\
+    $q_2$                & $q_0$   & $q_2$\\
+    \hline
+\end{tabular}
+
+\begin{tikzpicture}
+    \node[state, initial, accepting] (q0) at (0, 0) {$q_0$};
+    \node[state] (q1) at (2, 0) {$q_1$};
+    \node[state] (q2) at ($(q0)!0.5!(q1) + (0, -2)$) {$q_2$};
+
+    \draw 
+        (q0) edge[loop above] node{$1$} (q0)
+        (q0) edge[bend left, above] node{$0$} (q1)
+        (q1) edge[loop above] node{$1$} (q1)
+        (q1) edge[bend left, below] node[left]{$0$} (q2)
+        (q2) edge[bend left, above] node[right]{$0$} (q0)
+        (q2) edge[loop below] node{$1$} (q2)
+        ;
+\end{tikzpicture}
+
+$w \in L$ iff $|w|_0$ je dělitelný 3.
+
+\columnbreak
+\begin{tabular}{|r|c|c|}
+    \hline
+    & $0$ & $1$\\
+    \hline
+    \hline
+    $\rightarrow q_0$& $q_1$   & $q_0$\\
+    $\leftarrow q_1$ & $q_2$   & $q_1$\\
+    $\leftarrow q_2$ & $q_0$   & $q_2$\\
+    \hline
+\end{tabular}
+
+\begin{tikzpicture}
+    \node[state, initial] (q0) at (0, 0) {$q_0$};
+    \node[state, accepting] (q1) at (2, 0) {$q_1$};
+    \node[state, accepting] (q2) at ($(q0)!0.5!(q1) + (0, -2)$) {$q_2$};
+
+    \draw 
+        (q0) edge[loop above] node{$1$} (q0)
+        (q0) edge[bend left, above] node{$0$} (q1)
+        (q1) edge[loop above] node{$1$} (q1)
+        (q1) edge[bend left, below] node[left]{$0$} (q2)
+        (q2) edge[bend left, above] node[right]{$0$} (q0)
+        (q2) edge[loop below] node{$1$} (q2)
+        ;
+\end{tikzpicture}
+
+$w \in L$ iff  % TODO 
+
+\columnbreak
+\begin{tabular}{|r|c|c|}
+    \hline
+    & $0$ & $1$\\
+    \hline
+    \hline
+    $\rightarrow q_0$& $q_0$   & $q_1$\\
+    $q_1$            & $q_0$   & $q_2$\\
+    $\leftarrow q_2$ & $q_0$   & $q_2$\\
+    \hline
+\end{tabular}
+
+\begin{tikzpicture}
+    \node[state, initial] (q0) at (0, 0) {$q_0$};
+    \node[state] (q1) at (2, 0) {$q_1$};
+    \node[state, accepting] (q2) at ($(q0)!0.5!(q1) + (0, -2)$) {$q_2$};
+
+    \draw 
+        (q0) edge[loop above] node{$0$} (q0)
+        (q0) edge[bend left, above] node{$1$} (q1)
+        (q1) edge[bend left, above] node{$0$} (q0)
+        (q1) edge[bend left, below] node[left]{$1$} (q2)
+        (q2) edge[bend left, above] node[right]{$0$} (q0)
+        (q2) edge[loop below] node{$1$} (q2)
+        ;
+\end{tikzpicture}
+
+$w \in L$ iff $w$ končí 11.
+
+\end{multicols}

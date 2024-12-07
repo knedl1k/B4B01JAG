@@ -1,0 +1,33 @@
+\section{Páté cvičení}
+
+\subsection{Příklad}
+Dokažte, že pro libovolné jazyky $L_1$ a $L_2$ nad stejnou abecedou platí $(L_1 \cup L_2)^\star = (L_1^\star L_2^\star)^\star$.
+
+\subsection{Příklad}
+Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \{0,1\}$, jestliže výraz existuje.
+\begin{enumerate}[a), noitemsep]
+    \item $L$ se skládá ze všech slov, které obsahují pouze $0$.
+    \item $L$ se skládá ze všech slov, které obsahují přesně jednu $1$.
+    \item $L$ se skládá ze všech slov, které obsahují alespoň jednu $1$.
+    \item $L$ se skládá ze všech slov, které obsahují alespoň dvě $1$.
+    \item $L$ se skládá ze všech slov, které obsahují sudý počet $1$.
+    \item $L$ se skládá ze všech slov, které obsahují lichý počet $1$.
+\end{enumerate}
+Odpovědi zdůvodněte.
+
+\subsection{Příklad}
+Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován regulárním výrazem $r_2 = (01 + 10)^\star$.
+\begin{enumerate}[a), noitemsep]
+    \item Najděte nejkratší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
+    \item Najděte nejdělší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
+    \item Najděte nejkratší slovo, které leží v $L_1$, ale neleží v $L_2$.
+    \item Najděte nejkratší slovo, které neleží ve sjednocení $L_1 \cup L_2$.
+\end{enumerate}
+Odpovědi zdůvodněte.
+
+\subsection{Příklad}
+Je dán regulární výraz $r=(baa + bab) (ab)$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto regulárním výrazem.\\
+(Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení a Kleeneho operátor.)
+
+\subsection{Příklad}
+Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy grafu z přednášky).

@@ -1,0 +1,84 @@
+\section{Čtvrté cvičení}
+
+\subsection{Příklad}
+Pro dané NFA sestrojte podmnožinovou konstrukcí DFA a výsledek redukujte.
+\[
+M_1:
+\begin{tabular}{|r|c c c|}
+    \hline
+    & $a$ & $b$ & $c$\\
+    \hline
+    \hline
+    $\leftrightarrow 1$& $\{1\}$ & $\{2\}$& $\{1\}$\\
+    $\leftarrow2$      & $\{1\}$ & $\{3\}$& $\{1\}$\\
+    $\leftarrow3$      & $\emptyset$ & $\emptyset$& $\emptyset$\\
+    \hline
+\end{tabular}
+\]
+Všimněte si, že v automatu $M_1$ jsou všechny stavy koncové. Co z toho lze usoudit o jazyku, které je automatem přijímán?
+
+\subsection{Příklad} \label{subsection}
+NFA $M$ je dán tabulkou níže. Nakreslete jeho stavový diagram a podmnožinovou konstrukcí sestrojte DFA, který přijímá stejný jazyk. $DFA$ zredukujte.
+\[
+M:
+\begin{tabular}{|r|c c|}
+    \hline
+    & $0$ & $1$\\
+    \hline
+    \hline
+    $\rightarrow 1$& $\{1,2\}$ & $\{1\}$\\
+    $2$            & $\emptyset$ & $\{3\}$\\
+    $3$            & $\{4\}$ & $\{4\}$\\
+    $\leftarrow4$  & $\{4\}$ & $\{4\}$\\
+    \hline
+\end{tabular}
+\]
+
+\subsection{Příklad}
+Navrhněte NFA přijímající jazyk \( L= L_1 \cup L_2 \), kde $L_1 = L(M)$, kde $M$ je automat z \ref{subsection}, a ${L_2 = \{u \mid u \text{ končí } 1\}}$. K tomuto NFA zkonstruujte DFA přijímající stejný jazyk. DFA redukujte.
+
+\subsection{Příklad}
+Jsou dány dva $\varepsilon$-NFA. Rozhodněte, zda přijímají stejný jazyk. Pro oba $\varepsilon$-NFA sestrojte redukované DFA.
+\[
+M_1:
+\begin{tabular}{|r|c c c c|}
+    \hline
+    & $\varepsilon$ &$a$ &$b$ &$c$\\
+    \hline
+    \hline
+    $\rightarrow p$& $\emptyset$& $\{p\}$ & $\{q\}$ & $\{r\}$\\
+    $q$            & $\{p\}$    & $\{q\}$ & $\{r\}$ & $\emptyset$\\
+    $\leftarrow r$ & $\{q\}$    & $\{r\}$ & $\emptyset$ & $\{p\}$\\
+    \hline
+\end{tabular} 
+\quad
+M_2:
+\begin{tabular}{|r|c c c c|}
+    \hline
+    & $\varepsilon$ &$a$ &$b$ &$c$\\
+    \hline
+    \hline
+    $\rightarrow p$& $\{q,r\}$ & $\emptyset$ & $\{q\}$ & $\{r\}$\\
+    $q$            & $\emptyset$ & $\{p\}$ & $\{q\}$ & $\{p,q\}$\\
+    $\leftarrow r$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\
+    \hline
+\end{tabular}
+\]
+
+\subsection{Příklad}
+Je dán $\varepsilon$-NFA. Zkonstruujte redukovaný DFA přijímající stejný jazyk jako M.
+\[
+M:
+\begin{tabular}{|r|c c c|}
+    \hline
+    & $\varepsilon$ & $a$ & $b$\\
+    \hline
+    \hline
+    $\leftrightarrow 1$& $\emptyset$ & $\{2\}$& $\emptyset$\\
+    $2$                & $\emptyset$ & $\emptyset$& $\{3\}$\\
+    $3$                & $\{1,4\}$ & $\emptyset$& $\emptyset$\\
+    $\leftrightarrow 4$& $\emptyset$ & $\emptyset$& $\{5\}$\\
+    $5$                & $\{1,4\}$ & $\emptyset$& $\emptyset$\\
+    \hline
+\end{tabular}
+\]
