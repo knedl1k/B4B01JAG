@@ -23,8 +23,8 @@ jobs:
     - name: Upload PDF Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: main.pdf
-        path: exercises/sbirka.pdf
+        name: exercises/sbirka.pdf
+        path: main.pdf
         compression-level: 0
         overwrite: true
 
