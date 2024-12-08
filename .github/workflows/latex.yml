@@ -3,8 +3,8 @@ name: Build LaTeX Document
 on:
   push:
     branches:
-      - main  # Run on pushes to the main branch
-  pull_request:  # Run on pull requests
+      - main  #run on pushes to the main branch
+  pull_request:  #run on pull requests
 
 jobs:
   build:
@@ -18,9 +18,11 @@ jobs:
       uses: dante-ev/latex-action@latest
       with:
         root_file: exercises/main.tex
+        working_directory: exercises
 
     - name: Upload PDF Artifact
       uses: actions/upload-artifact@v3
       with:
         name: compiled-pdf
-        path: resena_sbirka.pdf
+        path: exercises/sbirka.pdf
+
