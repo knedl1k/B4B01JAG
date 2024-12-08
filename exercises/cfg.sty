@@ -1,0 +1,32 @@
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+\usepackage{tikz-qtree}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{tabularray}
+\usepackage{bm}
+\usepackage{ragged2e} 
+\usepackage{booktabs, tabularx}
+\usepackage{makecell}
+\usepackage{nicematrix}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+
+\tikzset{
+->, % makes the edges directed
+>=stealth', % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    },
+}
+
+\newcommand\splitpage[2]{
+      \begin{minipage}[t]{0.45\textwidth}#1
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[t]{0.45\textwidth}#2
+      \end{minipage}
+}
