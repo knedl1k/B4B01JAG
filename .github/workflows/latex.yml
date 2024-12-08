@@ -17,7 +17,7 @@ jobs:
     - name: Set up LaTeX
       uses: dante-ev/latex-action@latest
       with:
-        root_file: exercises/main.tex
+        root_file: main.tex
         working_directory: exercises
 
     - name: Upload PDF Artifact
