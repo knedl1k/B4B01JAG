@@ -14,15 +14,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up LaTeX
+    - name: Set up LaTeX & Compile
       uses: dante-ev/latex-action@latest
       with:
         root_file: main.tex
         working_directory: exercises
 
     - name: Upload PDF Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: compiled-pdf
+        name: main.pdf
         path: exercises/sbirka.pdf
+        compression-level: 0
+        overwrite: true
 
