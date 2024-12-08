@@ -1,17 +1,79 @@
 \section{Deváté cvičení}
 
 \subsection{Příklad}
+Navrhněte bezkontextové gramatiky generující následující jazyky
+\begin{enumerate}[a), noitemsep]
+    \item $L_1 = \{0^{m+n} 1^n 0^m \mid 0 \leq n,m\}$.
+    \item $L_2 = \{0^i 1^j \mid 0 \leq i < j\}$.
+\end{enumerate}
+Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 
 \subsection{Příklad}
+Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou $L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
+\begin{align*}
+    S & \rightarrow AB \mid \varepsilon \\
+    A & \rightarrow aAAb \mid bS \mid CA \\
+    B & \rightarrow BbA \mid CaC \mid \varepsilon \\ 
+    C & \rightarrow aBB \mid bS \\
+\end{align*}
 
 \subsection{Příklad}
+Zredukujte gramatiku $\mathcal{G}$, která je dána pravidly:
+\begin{align*}
+    S & \rightarrow SA \mid SB \mid \varepsilon \\
+    A & \rightarrow bSA \mid baS \\
+    B & \rightarrow aB \mid Ba \mid DA \\ 
+    C & \rightarrow aCB \mid bA \\
+    D & \rightarrow AB \\
+\end{align*}
 
 \subsection{Příklad}
+Rozhodněte, zda gramatika $\mathcal{G}$ generuje alespoň jedno slovo, tj. zda $L(\mathcal{G}) \not= \emptyset$, kde $\mathcal{G}$ je dána pravidly:
+\begin{align*}
+    S & \rightarrow aS \mid AB \mid CD \\
+    A & \rightarrow aDb \mid AD \mid BC \\
+    B & \rightarrow bSb \mid BB \\ 
+    C & \rightarrow BA \mid ASb \\
+    D & \rightarrow ABCD \mid \varepsilon\\
+\end{align*}
 
 \subsection{Příklad}
+Je dána CF gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B\}$, $\Sigma = \{0,1\}$ a $P$ je
+\begin{align*}
+    S & \rightarrow A \mid 0SA \mid \varepsilon \\
+    A & \rightarrow 1A \mid B1 \mid 1 \\
+    B & \rightarrow 0B \mid 0 \\ 
+\end{align*}
+Převěďte $\mathcal{G}$ do Chromského normálního tvaru.
 
 \subsection{Příklad}
+Je dán derivační strom v bezkontextové gramatice:
+
+\begin{enumerate}[a), noitemsep]
+    \item Napište pravidla minimální CF gramatiky, ve které je to derivační strom.
+    \item Napište levou derivaci odpovídající tomuto derivačnímu stromu.
+    \item Rozložte výsledek derivačního stromu $w$ na pět částí $w = w_1 w_2 w_3 w_4 w_5$ tak, že $w_2 w_4 \not= \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a).
+    \item Rozhodněte, zda je gramatika víceznačná.
+\end{enumerate}
 
 \subsection{Příklad}
+Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ jsou dána
+\begin{align*}
+  P:  S & \rightarrow AB \mid CS \mid AD \\
+    A & \rightarrow AC \mid AD \mid a \\
+    B & \rightarrow BC \mid b \\ 
+    C & \rightarrow DS \mid SC \mid a \\
+    D & \rightarrow BA \mid b \\
+\end{align*}
+Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
 \subsection{Příklad}
+Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ jsou dána
+\begin{align*}
+  P:  S & \rightarrow BD \mid CD \mid DA \\
+    A & \rightarrow CA \mid a \\
+    B & \rightarrow CB \mid b \\ 
+    C & \rightarrow AA \mid BC \mid DC \mid b \\
+    D & \rightarrow AC \mid BB \mid CB \mid a \\
+\end{align*}
+Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
