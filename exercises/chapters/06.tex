@@ -1,3 +1,45 @@
 \section{Šesté cvičení}
 
 \subsection{Příklad}
+Navrhněte NFA, který přijímá jazyk $L$ nad abecedou $\{a,bc\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
+\begin{itemize}[noitemsep]
+    \item druhý znak slova $w$ je $a$,
+    \item předpolsední znak slova $w$ je b.
+\end{itemize}
+K danému NFA (není-li již DFA) sestrojte podmnožinovou konstrukcí DFA přijímající stejný jazyk. Výsledný DFA redukujte.
+
+\subsection{Příklad}
+Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto: 
+\[L = \{w \mid w = ubabv; u,v\in\{a,b\}^\star\}\text{,}\] 
+tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá $L$. Podmnožinovou konstrukcí k $N$ zkonstruujte DFA a ten pak zredukujte.
+
+\subsection{Příklad}
+Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou $\Sigma = \{0,1\}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \{0,1,2\}$?
+
+\subsection{Příklad}
+Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
+
+Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo $n$ s touto vlastností:
+
+Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozdělit na tři slova $u =xwy$, tak, že
+\begin{enumerate}[noitemsep]
+    \item $|xw| \leq n,$
+    \item $w \not= \varepsilon$,
+    \item pro každé přirozené $i = 0, 1, ...$ platí $xw^iy \not\in L$.
+\end{enumerate}
+
+\subsection{Příklad}
+Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
+
+\noindent
+O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
+
+\subsection{Příklad}
+Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
+\[L = \{w \mid |w|_0 \text{ je sudé a za každým symbolem } 1 \text{ je symbol } 0\}\text{.}\]
+Postupujte buď součinovou konstrukcí nebo přímo. V druhém případě řádně zdůvodněte, proč $M$ opravdu přijímá jazyk $L$.
+
+\subsection{Příklad}
+Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
+\[L = \{w \mid w \text{ začíná } 10 \text{ nebo končí } 01\}\text{.}\]
+Zdůvodněte, proč $M$ přijímá jazyk $L$.
