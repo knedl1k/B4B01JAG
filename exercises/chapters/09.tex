@@ -1,6 +1,5 @@
 \section{Deváté cvičení}
-
-\subsection{Příklad}
+\subsection{Příklad}\noindent
 Navrhněte bezkontextové gramatiky generující následující jazyky
 \begin{enumerate}[a), noitemsep]
     \item $L_1 = \{0^{m+n} 1^n 0^m \mid 0 \leq n,m\}$.
@@ -8,59 +7,383 @@ Navrhněte bezkontextové gramatiky generující následující jazyky
 \end{enumerate}
 Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 
-\subsection{Příklad}
-Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou 
-$L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
-\begin{align*}
-    S & \rightarrow AB \mid \varepsilon \\
-    A & \rightarrow aAAb \mid bS \mid CA \\
-    B & \rightarrow BbA \mid CaC \mid \varepsilon \\ 
-    C & \rightarrow aBB \mid bS \\
-\end{align*}
+\begin{enumerate}[a)]
+    \item 
+\[
+    \hspace*{-105mm}
+    \begin{array}{l l}
+        P: & S \rightarrow 0S0 \mid A \\
+        & A \rightarrow 0A1 \mid \varepsilon\\
+    \end{array}
+\]
 
-\subsection{Příklad}
-Zredukujte gramatiku $\mathcal{G}$, která je dána pravidly:
-\begin{align*}
-    S & \rightarrow SA \mid SB \mid \varepsilon \\
-    A & \rightarrow bSA \mid baS \\
-    B & \rightarrow aB \mid Ba \mid DA \\ 
-    C & \rightarrow aCB \mid bA \\
-    D & \rightarrow AB \\
-\end{align*}
-
-\subsection{Příklad}
-Rozhodněte, zda gramatika $\mathcal{G}$ generuje alespoň jedno slovo, tj. zda $L(\mathcal{G}) \not= \emptyset$, kde 
-$\mathcal{G}$ je dána pravidly:
-\begin{align*}
-    S & \rightarrow aS \mid AB \mid CD \\
-    A & \rightarrow aDb \mid AD \mid BC \\
-    B & \rightarrow bSb \mid BB \\ 
-    C & \rightarrow BA \mid ASb \\
-    D & \rightarrow ABCD \mid \varepsilon\\
-\end{align*}
-
-\subsection{Příklad}
-Je dána CF gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B\}$, $\Sigma = \{0,1\}$ a $P$ je
-\begin{align*}
-    S & \rightarrow A \mid 0SA \mid \varepsilon \\
-    A & \rightarrow 1A \mid B1 \mid 1 \\
-    B & \rightarrow 0B \mid 0 \\ 
-\end{align*}
-Převěďte $\mathcal{G}$ do Chromského normálního tvaru.
-
-\subsection{Příklad}
-Je dán derivační strom v bezkontextové gramatice:
-
-\begin{enumerate}[a), noitemsep]
-    \item Napište pravidla minimální CF gramatiky, ve které je to derivační strom.
-    \item Napište levou derivaci odpovídající tomuto derivačnímu stromu.
-    \item Rozložte výsledek derivačního stromu $w$ na pět částí $w = w_1 w_2 w_3 w_4 w_5$ tak, že 
-    $w_2 w_4 \not= \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a).
-    \item Rozhodněte, zda je gramatika víceznačná.
+\begin{enumerate}[noitemsep]
+    \item $\quad S \stackrel{S \rightarrow 0S0 (m)}{\Longrightarrow} 0^m S 0^m \stackrel{S \rightarrow A}
+    {\Longrightarrow} 0^m A 0^m \stackrel{A \rightarrow 0A1(n)}{\Longrightarrow} 0^m 0^n A 1^n 0^m \stackrel
+    {A \rightarrow \varepsilon}{\Longrightarrow} 0^m 1^m 0^n 1^n 0^m = 0^{m+n}1^n0^m$
+    \item $\quad S \Rightarrow^* w, \, S \Rightarrow 0^i S 0^i, \, S \Rightarrow A, \, A \Rightarrow^* 0^j 
+    1^j, \, 0^i 0^j 1^j 0^i \in L(\G)$
 \end{enumerate}
 
-\subsection{Příklad}
-Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ jsou dána
+\item 
+
+\[
+    \hspace*{-105mm}
+    \begin{array}{l l}
+        P: & S \rightarrow 0S1 \mid S1 \mid 1 \\
+    \end{array}
+\]
+
+Důkazy mě těžce nebaví, všude jsou cca stejný. 
+\end{enumerate}
+
+\subsection{Příklad}\noindent % 9.2
+Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou 
+$L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
+
+\[
+    \begin{array}{l l}
+        P: & S \rightarrow AB \mid \varepsilon \\
+           & A \rightarrow aAAb \mid bS \mid CA \\
+           & B \rightarrow BbA \mid CaC \mid \varepsilon\\
+           & C \rightarrow aBB \mid bS \\
+    \end{array}
+\]
+% TODO: neni zredukovana asi?? 
+$V_1 = \{A \mid A \rightarrow \varepsilon \in P\}$\\
+$V_1 = \{S, B\}$\\
+$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\}$\\
+$V_2 = V_1 \cup \emptyset = \{S, B\}$
+
+\[
+\hspace*{-115mm}
+    \begin{array}{l l}
+        P: & S \rightarrow AB \mid A \\
+           & A \rightarrow aAAb \mid bS \mid b \mid CA \\
+           & B \rightarrow BbA \mid bA \mid CaC \\
+           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b \\
+    \end{array}
+\]
+
+
+\LARGE \bb{asi jsem ji zapomnela zredukovat \shrug } % TODO: 
+\normalsize
+\section*{Redukce gramatiky}
+obecně: \\
+$V = \{A \mid A \in N, A \implies_{\G}^{\star} \, w, w \in \Sigma^{\star}\}$\\
+$V_1 = \{A \mid A \implies^{\star} w \in P, w \in \Sigma^{\star}\}$\\
+$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^{\star}\}$\\
+$U = \{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ tak, že } S 
+\implies^{\star}_{\G} \quad \alpha A \beta\}$
+
+Jazyk není prázdný právě tehdy, kdy $S \in V$. 
+
+\subsection{Příklad - polopaticky vysvětlená redukce}
+
+Zredukujte gramatiku $\G$, která je dána pravidly 
+\[
+    \begin{array}{l l}
+        P: & S \rightarrow SA \mid SB \mid \varepsilon \\
+           & A \rightarrow bSA \mid baS \\
+           & B \rightarrow BbA \mid CaC \mid \varepsilon\\
+           & C \rightarrow aCB \mid bA \\
+           & D \rightarrow AB \\
+    \end{array}
+\]
+
+redukce tldr:\\
+$V_1\dots$ to, co se promítne na $\varepsilon$ nebo na terminály \\ 
+$V_2\dots$ to, co se promítne na terminály a na to, co už je ve $V_1$ \\ 
+$U_0\dots$ $\{S\}$ \\
+$U_1\dots$ neterminály, do kterých se dostanu z $S$, pak z $U_1$ atd. 
+
+$V_1 = \{S\}$\\ 
+$V_2 = V_1 \cup \{A\} = \{S, A\}$\\ 
+$V_3 = V_2 \cup \{C\} = \{S, A, C\}$\\ 
+$V_4 = V_3 \cup \emptyset = \{S, A, C\}$ 
+
+a tady v tom nechám jenom neterminály z $V$, a z pravé strany vyškrtám pravidla obsahující neterminály $\notin V$. 
+
+\[
+    \begin{array}{l l}
+        P: & S \rightarrow SA \mid \varepsilon \\
+           & A \rightarrow bSA \mid baS \\
+           & C \rightarrow \mid bA \\
+    \end{array}
+\]
+
+sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím $U_i$. 
+
+$U_0 = \{S\}$\\ 
+$U_1 = U_0 \cup \{A\} = \{S, A\}$ \\
+$U_2 = U_1 \cup \emptyset = \{S, A\}$. 
+
+a ponechám jen pravidla, která nám zbyla v $U$. 
+
+\[
+    \begin{array}{l l}
+        P: & S \rightarrow SA \mid \varepsilon \\
+           & A \rightarrow bSA \mid baS \\
+    \end{array}
+\]
+
+\subsection{Příklad} % 9.4
+
+Rozhodněte, zda gramatika $\G$ generuje aspoň jedno slovo, tj. zda $L(\G) \neq \emptyset$, kde $\G$ je dána pravidly 
+
+\[
+\begin{array}{l l}
+    P: & S \rightarrow aS \mid AB \mid CD \\
+       & A \rightarrow aDb \mid AD \mid BC \\
+       & B \rightarrow bSb \mid BB \\
+       & C \rightarrow BA \mid ASb \\
+       & D \rightarrow ABCD \mid \varepsilon \\
+\end{array}
+\]
+
+$V_1 = \{D\}$\\ 
+$V_2 = V_1 \cup \{A\} = \{D, A\}$\\ 
+$V_3 = V_2 \cup \emptyset = \{D, A\} = V$
+
+$S \notin V \quad \rightarrow \quad L(\G) = \emptyset$ 
+
+\section*{Chomského normální tvar}
+
+Chomského normální tvar: Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál. 
+
+\subsection{Příklad} % 9.5 
+
+Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\}$, $\Sigma = \{0, 1\}$ a P je 
+\[
+\begin{array}{l l}
+    P: & S \rightarrow A \mid 0SA \mid \varepsilon \\
+       & A \rightarrow 1A \mid B1 \mid 1 \\
+       & B \rightarrow 0B \mid 0 \\
+\end{array}
+\]
+
+Převeďte $\G$ do Chomského normálního tvaru. 
+
+1. Uděláme z toho nevypouštěcí gramatiku. 
+
+$V = \{S\}$\\ 
+\[
+\hspace*{-125mm}
+\begin{array}{l l}
+    P: & S \rightarrow A \mid 0SA \mid 0A \\
+       & A \rightarrow 1A \mid B1 \mid 1 \\
+       & B \rightarrow 0B \mid 0 \\
+\end{array}
+\]
+
+2. Zbavíme se toho, kdy 1 neterminál přepisujeme na 1 neterminál. 
+
+tady: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
+
+\[
+\hspace*{-105mm}
+\begin{array}{l l}
+    P: & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A \\
+       & A \rightarrow 1A \mid B1 \mid 1 \\
+       & B \rightarrow 0B \mid 0 \\
+\end{array}
+\]
+
+vytvořím pomocná pravidla pro terminály, které "nezůstaly samy" 
+
+\[
+\hspace*{-95mm}
+\begin{array}{l l}
+    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A \\
+       & A \rightarrow X_1A \mid BX_1 \mid 1 \\
+       & B \rightarrow X_0B \mid 0 \\
+       & X_0 \rightarrow 0\\
+       & X_1 \rightarrow 1\\
+\end{array}
+\]
+
+3. Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
+\[
+\hspace*{-95mm}
+\begin{array}{l l}
+    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A \\
+       & Y \rightarrow SA \\
+       & A \rightarrow X_1A \mid BX_1 \mid 1 \\
+       & B \rightarrow X_0B \mid 0 \\
+       & X_0 \rightarrow 0\\
+       & X_1 \rightarrow 1\\
+\end{array}
+\]
+
+\subsection{Příklad} % 9.6 
+
+Je dán derivační strom v bezkontextové gramatice: 
+
+% TODO: udelate ten strom symetrictejsi, tady i nahore 
+\begin{center}
+    \begin{forest}
+    for tree={
+        grow=south,                 % Tree grows downward
+        edge={->},                   % Draw edges as lines
+        align=center,               % Center align text inside nodes
+        parent anchor=south,        % Parent anchor point
+        child anchor=north        % Child anchor point
+    }
+    [$S$
+        [$A$
+            [$A$
+                [$a$]
+                [$S$
+                    [$\varepsilon$]
+                ]
+                [$b$]
+            ]
+            [$A$
+                [$\varepsilon$]
+            ]
+        ]
+        [$a$]
+        [$B$, text=red
+            [$S$
+                [$A$
+                    [$\varepsilon$]
+                ]
+                [$a$]
+                [$B$, text=red
+                    [$a$]
+                    [$c$]
+                ]
+            ]
+            [$A$
+                [$S$
+                    [$\varepsilon$]
+                ]
+                [$B$
+                    [$a$]
+                    [$c$]
+                ]
+            ]
+        ]
+    ]
+    \end{forest}
+    \end{center}
+    
+
+    
+\begin{enumerate}[label=\alph*), noitemsep]
+    \item Napiště pravidla minimální CF gramatiky, ve které je to derivační strom. 
+    \item Napiště levou derivaci odpovídající tomuto derivačnímu stromu. 
+    \item Rozlože výsledek derivačního stromu $w$ na pět částí $w = w_1 w_2 w_3 w_4 w_5$ tak, že $w_2 w_4 
+    \neq \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a). 
+    \item Rozhodněte, zda je gramatika víceznačná. 
+\end{enumerate}
+    
+a) \vspace*{-4mm}\[
+\hspace*{-95mm}
+\begin{array}{l l}
+    P: & S \rightarrow AaB \mid \varepsilon \\
+       & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon \\
+       & B \rightarrow SA \mid ac \\
+\end{array}
+\]
+
+b) 
+$\quad S \stackrel{S \rightarrow A a B}{\Longrightarrow} A a B \stackrel{A \rightarrow A A}{\Longrightarrow} 
+A A a B \stackrel{A \rightarrow a S b}{\Longrightarrow} a S b A a B \stackrel{S \rightarrow \varepsilon}
+{\Longrightarrow} a b A a B \stackrel{A \rightarrow \varepsilon}{\Longrightarrow} a b a B \stackrel
+{B \rightarrow SA}{\Longrightarrow} a b a S A \stackrel{A\rightarrow Aab}{\Longrightarrow} abaAaBA \stackrel
+{A\rightarrow \varepsilon}{\Longrightarrow} a b a aBA \stackrel{B \rightarrow ac}{\Longrightarrow} abaaacA 
+\stackrel{A \rightarrow SB}{\Longrightarrow} abaaacSB \stackrel{S \rightarrow \varepsilon}{\Longrightarrow} 
+abaaacB \stackrel{B \rightarrow ac}{\Longrightarrow} abaaacac $.
+
+\vspace*{1mm}
+c) basically pumping lemma pro gramatiky, snad by to v testech ani zkoušce chtít neměla. \\
+$w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w5 = \varepsilon$. 
+
+\begin{minipage}{0.7\textwidth}
+    
+\begin{center}
+        
+    \begin{forest}
+        for tree={
+            grow=south,                 % Tree grows downward
+            edge={->},                  % Draw edges as arrows
+            align=center,               % Center the text inside nodes
+        }
+        [$S$
+        [$A$
+            [$A$
+                [$a$]
+                [$S$
+                    [$\varepsilon$]
+                ]
+                [$b$]
+            ]
+            [$A$
+                [$\varepsilon$]
+            ]
+        ]
+        [$a$]
+        [$B$, text=red
+            [$S$
+                [$A$
+                    [$\varepsilon$]
+                ]
+                [$a$]
+                [$B$, text=red
+                    [$S$
+                        [$A$
+                            [$\varepsilon$]
+                        ]
+                        [$a$]
+                        [$B$
+                            [$a$]
+                            [$c$]
+                        ]
+                    ]
+                    [$A$
+                        [$A$
+                            [$\varepsilon$]
+                        ]
+                        [$B$
+                            [$a$]
+                            [$c$]
+                        ]
+                    ]
+                ]
+            ]
+            [$A$
+                [$S$
+                    [$\varepsilon$]
+                ]
+                [$B$
+                    [$a$]
+                    [$c$]
+                ]
+            ]
+        ]
+    ]
+    \end{forest}    \end{center}
+    
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+    
+    
+    (jak toho docílím: jdu odspoda stromu a najdu dva stejné neterminály (různě v grafu) a v podstatě ten strom 
+    nafouknu (zkopíruju nějaký podstrom z vyššího do nižšího neterminálu, v ukázce červený node $B$ v nejvýš 
+    vpravo kopíruju do červeného $B$čka vlevo od něj). )
+\end{minipage}
+
+\vspace{7mm}
+
+d) je víceznačná, přepisujeme $A \rightarrow AA$. 
+
+
+
+
+\subsection{Příklad - bez řešení} % 9.7 
+Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ 
+jsou dána
 \begin{align*}
   P:  S & \rightarrow AB \mid CS \mid AD \\
     A & \rightarrow AC \mid AD \mid a \\
@@ -68,11 +391,16 @@ Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $
     C & \rightarrow DS \mid SC \mid a \\
     D & \rightarrow BA \mid b \\
 \end{align*}
-Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$. 
-Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
+Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a 
+$w_2 = abbaa$. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
-\subsection{Příklad}
-Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ jsou dána
+\shrug
+% TODO: nemam vubec, ale bude easy 
+
+
+\subsection{Příklad - bez řešení}
+Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ 
+jsou dána
 \begin{align*}
   P:  S & \rightarrow BD \mid CD \mid DA \\
     A & \rightarrow CA \mid a \\
@@ -80,5 +408,82 @@ Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $
     C & \rightarrow AA \mid BC \mid DC \mid b \\
     D & \rightarrow AC \mid BB \mid CB \mid a \\
 \end{align*}
-Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom 
-a napište jemu odpovídající levou derivaci.
+Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační 
+strom a napište jemu odpovídající levou derivaci.
+% TODO: taky nemam, tyhle skoncily nekde v eteru 
+
+\shrug
+
+\subsection{Příklad}  % samostatna prace 6 
+
+Navrhněte bezkontextovou gramatiku generující následující jazyk $L = \{a^nb^ma^n \mid m, n \geq 0\}$. Zdůvodněte, 
+proč zkonstruovaná gramatika jazyk $L$ generuje.
+
+
+\[
+    \hspace*{-125mm}
+    \begin{array}{l l}
+        P: & S \rightarrow aSa \mid b \mid \varepsilon
+    \end{array}
+\]
+
+(1) $\quad    S \stackrel{S \rightarrow aSa (n)}{\Longrightarrow} a^nSa^n \stackrel{S \rightarrow Sb (m)}
+{\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
+% \]
+
+(2) \quad Když $w \in L(\mathcal{G})$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
+$S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
+$a^lb^ka^l \in L(\mathcal{G})$.
+
+
+\subsection{Příklad} %9.10, samostatna prace 6 6 
+
+Zredukujte gramatiku $\mathcal{G}$, kter je dána pravidly: 
+\[
+% \hspace*{-85mm}
+\begin{array}{l l}
+    \mathcal{G}: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
+    & A \rightarrow bCD \mid Dba \\
+    & B \rightarrow Bb \mid AC \\
+    & C \rightarrow aA \mid a \\
+    & D \rightarrow DE \\ 
+    & E \rightarrow \varepsilon
+\end{array}
+\]
+
+(1)
+
+% hned v prvnim kroku dostanu terminalni z neterminalniho: \\
+$V_1 = \{A \mid A \rightarrow ^\star w \in P, w\in \Sigma ^ \star\}$\\
+$V_1 = \{S, C, E\}$
+
+% ty neterminaly, kde mam pravidlo, a $\alpha$ obsahuje jen neterminaly z $V_1$\\
+$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\}$\\
+$V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
+
+\[
+    \hspace*{-107mm}
+    \begin{array}{l l}
+        \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon \\
+        & C \rightarrow a \\
+        & E \rightarrow \varepsilon
+    \end{array}
+\]
+\vspace*{3mm}
+
+(2) 
+
+
+$U = \{X \in V \mid \exists \alpha, \beta \in (V \cup \Sigma)^\star, S \implies \alpha X \beta \}$
+
+$U_0 = \{S\}$\\
+$U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v }\alpha \text{ nebo } \beta \text{ na pravé straně pro pravidlo } 
+Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
+$U_1 = U_0 \cup {\emptyset}$
+
+\[
+    \hspace*{-107mm}
+    \begin{array}{l l}
+        \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon \\
+    \end{array}
+\]
