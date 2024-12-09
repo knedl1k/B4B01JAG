@@ -5,9 +5,41 @@
 Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý}\}$ nad abecedou $\Sigma = \{a,b\}$. Navrhněte konečný 
 automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
 
+\begin{tikzpicture}
+    \node[state, initial, accepting] (q0) {$q_0$};
+    \node[state, right of=q0] (q1) {$q_1$};
+
+    \draw 
+        (q0) edge[bend left, above] node{$a$} (q1)    
+        (q0) edge[loop above] node{$b$} (q0)
+        (q1) edge[bend left, below] node{$a$} (q0)
+        (q1) edge[loop above] node{$b$} (q1)
+        ;
+\end{tikzpicture}
+%TODO invarianty
+
 \subsection{Příklad}
 Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}\}$ nad abecedou 
 $\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
+
+\begin{tikzpicture}
+    \node[state, initial] (q0) {$q_0$};
+    \node[state, right of=q0] (q1) {$q_1$};
+    \node[state, accepting, below of=q0] (q2) {$q_2$};
+    \node[state, right of=q2] (q3) {$q_3$};
+
+    \draw 
+        (q0) edge[bend left, above] node{$a$} (q1)    
+        (q0) edge[bend left, right] node{$b$} (q2)
+        (q1) edge[bend left, below] node{$a$} (q0)
+        (q1) edge[bend left, right] node{$b$} (q3)
+        (q2) edge[bend right, below] node{$a$} (q3)
+        (q2) edge[bend left, left] node{$b$} (q0)
+        (q3) edge[bend right, above] node{$a$} (q2)
+        (q3) edge[bend left, left] node{$b$} (q1)
+        ;
+\end{tikzpicture}
+%TODO invarianty
 
 \subsection{Příklad}
 Pro daný jazyk $L$ navrhněte koečný automat, který tento jazyk přijímá. O automatu ukažte, že opravdu přijímá daný jazyk.
@@ -18,5 +50,113 @@ Pro daný jazyk $L$ navrhněte koečný automat, který tento jazyk přijímá. 
     \item $\Sigma = \{0,1\}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
 \end{enumerate}
 
+\noindent
+a)
+
+\begin{tikzpicture}
+    \node[state, initial] (q0) {$q_0$};
+    \node[state, right of=q0] (q1) {$q_1$};
+    \node[state, accepting, above of=q1] (q2) {$q_2$};
+    \node[state, right of=q1] (q3) {$q_3$};
+
+    \draw 
+        (q0) edge[bend left, above] node{$a$} (q1)
+        (q0) edge[bend left, above] node{$b$} (q2)
+        (q1) edge[bend left, above] node{$a,b$} (q3)
+        (q2) edge[bend left, right] node{$a,b$} (q3)
+        (q3) edge[bend left, below] node{$a,b$} (q0)
+        ;
+\end{tikzpicture}
+%TODO invarianty
+
+\newpage %! THIS NEEDS CHECK AFTER COMPLETING TODOs
+\noindent
+b)
+
+\begin{tikzpicture}
+    \node[state, initial] (q0) {$q_0$};
+    \node[state, right of=q0] (q1) {$q_1$};
+    \node[state, right of=q1] (q2) {$q_2$};
+    \node[state, right of=q2] (q3) {$q_3$};
+    \node[state, accepting, right of=q3] (q4) {$q_4$};
+
+    \draw 
+        (q0) edge[bend left, above] node{$0$} (q1)
+        (q0) edge[loop above] node{$1$} (q0)
+        (q1) edge[bend left, above] node{$0$} (q0)
+        (q1) edge[bend left, above] node{$1$} (q2)
+        (q2) edge[bend left, above] node{$0$} (q3)
+        (q2) edge[bend left, below] node{$1$} (q0)
+        (q3) edge[bend left, below] node{$0$} (q1)
+        (q3) edge[bend left, above] node{$1$} (q4)
+        (q4) edge[loop below] node{$0,1$} (q4)
+        ;
+\end{tikzpicture}
+%TODO invarianty
+
+\noindent
+c)
+
+\begin{tikzpicture}
+    \node[state, accepting, initial] (q0) {$q_0$};
+    \node[state, accepting, right of=q0] (q1) {$q_1$};
+    \node[state, accepting, right of=q1] (q2) {$q_2$};
+    \node[state, right of=q2] (q3) {$q_3$};
+
+    \draw 
+        (q0) edge[loop above] node{$0$} (q0)
+        (q0) edge[bend left, above] node{$1$} (q1)
+        (q1) edge[bend left, above] node{$0$} (q0)
+        (q1) edge[bend left, above] node{$1$} (q2)
+        (q2) edge[bend left, below] node{$0$} (q0)
+        (q2) edge[bend left, above] node{$1$} (q3)
+        (q3) edge[loop above] node{$0,1$} (q3)
+        ;
+\end{tikzpicture}
+%TODO invarianty
+
 \subsection{Příklad}
-Pomocí Nerodovy věty a pomocí pumping lemmatu dokažte, že jazyk $L = \{0^i 1^j 0^k \mid 0 \leq i < j <k\}$ není regulární.
+Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \{0^i 1^j 0^k \mid 0 \leq i < j <k\}$ není regulární.
+\\
+
+\noindent
+Definice \textbf{Pumping lemma.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},\\
+|w| > n$ je 
+možné rozložit na 3 slova splňující:
+\begin{enumerate}[1), noitemsep]
+    \item $|xw| \leq n$
+    \item $w \not= \varepsilon$
+    \item $xw^i y \in L, \forall i = 0, 1, 2, ...$
+\end{enumerate}
+Důkaz:
+Kdyby $L$ byl regulární, tak existuje $n$ s vlastnostmi z Pumping lemma.
+
+Zvolíme $u = 0^n 1^{n+1} 0^{n+2}$.
+
+Pak 1) vlastnost říká, že $xw = 0^l, l \leq n$. Zároveň musí platit 2), tedy $w = 0^k, 1 \leq k \leq l$.
+
+Když teď napumpujeme $xw^i y$, například $i=2$, dostaneme $xw^2 y = 0^{n+k} 1^{n+1} 0^{n+2} \not\in L$.
+
+Tedy $L$ není regulární. $\blacksquare$
+\\
+
+\noindent
+Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $T$ na $\Sigma^\star$ taková, že:
+\begin{enumerate}[1), noitemsep]
+    \item $L$ je sjednocení některých tříd $T$
+    \item pokud $uTv$, tak $uwTvw$ pro každé $w \in \Sigma^\star$
+    \item $T$ má konečný počet tříd
+\end{enumerate}
+Důkaz:
+Kdyby existovala $T$.
+
+$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost $0$ a $1$. 
+
+$T$ musí mít konečně mnoho tříd, proto musí existovat $i > j, i \not= j \land 1^i T 1^j$.
+
+Zvolíme $w = 0^{j + 1}$.
+
+Pak podle vlastnosti 2) $\underbrace{1^i 0^{j+1}}_{\substack{i \geq j+1 \\ \not\in L}} T 
+\underbrace{1^j 0^{j+1}}_{\substack{j < j+1 \\\in L }}$.
+
+Tedy $L$ není regulární. $\blacksquare$
