@@ -1,3 +1,6 @@
+% ---------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows, calc}
 \usepackage{tikz-qtree}
@@ -11,18 +14,102 @@
 \usepackage{multicol}
 \usepackage[shortlabels]{enumitem}
 \usepackage{hyperref}
+\usepackage{graphicx, tabularx, xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[toc,page]{appendix} % appendices
+\usepackage{lipsum}
+\usepackage{siunitx} % SI unit handling
+\usepackage{listings}
+\usepackage{wrapfig} % package for wrapping figures
+\usepackage{forest}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage[absolute,overlay]{textpos}
 
+% ---------------------------------------------------------------
+% TikZ Settings
+% ---------------------------------------------------------------
 \tikzset{
-->, % makes the edges directed
->=stealth', % makes the arrow heads bold
-node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
-every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
-initial text=$ $, % sets the text that appears on the start arrow
-between/.style args={#1 and #2}{
-         at = ($(#1)!0.5!(#2)$)
-    },
+  ->, % makes the edges directed
+  >=stealth', % makes the arrow heads bold
+  node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+  every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+  initial text=$ $, % sets the text that appears on the start arrow
+  between/.style args={#1 and #2}{
+    at = ($(#1)!0.5!(#2)$)
+  },
+  initial text = $ $,  % no text in the initial state arrow
+  > = stealth,  % define arrow head style
+  % state/.style={fill={rgb:black,1;white,10}},  % default state style
+  accepting state/.style={state, double, thick},  % accepting state style
+
 }
 
+% -------------------------------------
+% Packages for Czech language support (and tengwar)
+% -------------------------------------
+\usepackage[utf8]{inputenc}
+% \usepackage[annatar]{tengwarscript} % tgw 
+
+
+% -------------------------------------
+% Page settings 
+% -------------------------------------
+\setlength{\parindent}{0mm} 
+\setlength{\parskip}{1.4ex}   
+\usepackage{setspace} 
+\usepackage{indentfirst} % for paragraph indentation
+
+% -------------------------------------
+% Custom Commands for Font and Style
+% -------------------------------------
+\renewcommand{\normalsize}{\fontsize{12}{14}\selectfont}
+\newcommand{\middlesize}{\fontsize{10}{12}\selectfont}
+\newcommand{\Middlesize}{\fontsize{11}{13}\selectfont}
+\newcommand{\smallsize}{\fontsize{7}{9}\selectfont}
+\newcommand{\Smallsize}{\fontsize{8}{10}\selectfont}
+\newcommand{\SMALLSIZE}{\fontsize{9}{11}\selectfont}
+\newcommand{\smallup}[1]{\textsuperscript{\smallsize#1}}
+\newcommand{\console}{\ttfamily} % monospaced 
+\newcommand{\ii}[1]{\textit{#1}} % italic 
+\newcommand{\bb}[1]{\textbf{#1}} $ bold 
+
+% -------------------------------------
+% Custom Maths Shortcuts 
+% -------------------------------------
+\newcommand{\m}[1]{$\mathbf{#1}$}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\inRn}{\in \mathbb{R}^n}
+\newcommand{\inRnn}{\in \mathbb{R}^{n \times n}}
+\newcommand{\inR}{\in \mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+
+% ---------------------------------------------------------------
+% Random Custom Commands
+% ---------------------------------------------------------------
+
+% Shrug symbol using TikZ 
+% \shrug
+\newcommand{\shrug}[1][]{%
+\begin{tikzpicture}[baseline, x=0.8\ht\strutbox, y=0.8\ht\strutbox, line width=0.125ex]
+    % Reset global styles completely
+    \tikzset{->, >=, every node/.style={}, every path/.style={}}
+    % Draw shrug figure
+    \def\arm{(-2.5,0.95) to (-2,0.95) (-1.9,1) to (-1.5,0) (-1.35,0) to (-0.8,0)};
+    \draw \arm;
+    \draw[xscale=-1] \arm;
+    \def\headpart{(0.6,0) arc[start angle=-40, end angle=40,x radius=0.6,y radius=0.8]};
+    \draw \headpart;
+    \draw[xscale=-1] \headpart;
+    \def\eye{(-0.075,0.15) .. controls (0.02,0) .. (0.075,-0.15)};
+    \draw[shift={(-0.3,0.8)}] \eye;
+    \draw[shift={(0,0.85)}] \eye;
+    % Draw mouth
+    \draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
+\end{tikzpicture}}
+
+% ---------------------------------------------------------------
+% \splitpage{foo}{foo}
 \newcommand\splitpage[2]{
       \begin{minipage}[t]{0.45\textwidth}#1
       \end{minipage}%
@@ -30,3 +117,9 @@ between/.style args={#1 and #2}{
       \begin{minipage}[t]{0.45\textwidth}#2
       \end{minipage}
 }
+
+% ---------------------------------------------------------------
+% ---------------------------------------------------------------
+
+ 
+\graphicspath{{media/}}
