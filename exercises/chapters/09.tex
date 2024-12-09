@@ -9,7 +9,8 @@ Navrhněte bezkontextové gramatiky generující následující jazyky
 Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 
 \subsection{Příklad}
-Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou $L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
+Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou 
+$L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
 \begin{align*}
     S & \rightarrow AB \mid \varepsilon \\
     A & \rightarrow aAAb \mid bS \mid CA \\
@@ -28,7 +29,8 @@ Zredukujte gramatiku $\mathcal{G}$, která je dána pravidly:
 \end{align*}
 
 \subsection{Příklad}
-Rozhodněte, zda gramatika $\mathcal{G}$ generuje alespoň jedno slovo, tj. zda $L(\mathcal{G}) \not= \emptyset$, kde $\mathcal{G}$ je dána pravidly:
+Rozhodněte, zda gramatika $\mathcal{G}$ generuje alespoň jedno slovo, tj. zda $L(\mathcal{G}) \not= \emptyset$, kde 
+$\mathcal{G}$ je dána pravidly:
 \begin{align*}
     S & \rightarrow aS \mid AB \mid CD \\
     A & \rightarrow aDb \mid AD \mid BC \\
@@ -52,7 +54,8 @@ Je dán derivační strom v bezkontextové gramatice:
 \begin{enumerate}[a), noitemsep]
     \item Napište pravidla minimální CF gramatiky, ve které je to derivační strom.
     \item Napište levou derivaci odpovídající tomuto derivačnímu stromu.
-    \item Rozložte výsledek derivačního stromu $w$ na pět částí $w = w_1 w_2 w_3 w_4 w_5$ tak, že $w_2 w_4 \not= \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a).
+    \item Rozložte výsledek derivačního stromu $w$ na pět částí $w = w_1 w_2 w_3 w_4 w_5$ tak, že 
+    $w_2 w_4 \not= \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a).
     \item Rozhodněte, zda je gramatika víceznačná.
 \end{enumerate}
 
@@ -65,7 +68,8 @@ Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $
     C & \rightarrow DS \mid SC \mid a \\
     D & \rightarrow BA \mid b \\
 \end{align*}
-Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
+Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$. 
+Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
 \subsection{Příklad}
 Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ jsou dána
@@ -76,4 +80,5 @@ Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $
     C & \rightarrow AA \mid BC \mid DC \mid b \\
     D & \rightarrow AC \mid BB \mid CB \mid a \\
 \end{align*}
-Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
+Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom 
+a napište jemu odpovídající levou derivaci.

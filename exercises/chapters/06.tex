@@ -11,15 +11,18 @@ K danému NFA (není-li již DFA) sestrojte podmnožinovou konstrukcí DFA přij
 \subsection{Příklad}
 Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto: 
 \[L = \{w \mid w = ubabv; u,v\in\{a,b\}^\star\}\text{,}\] 
-tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá $L$. Podmnožinovou konstrukcí k $N$ zkonstruujte DFA a ten pak zredukujte.
+tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá 
+$L$. Podmnožinovou konstrukcí k $N$ zkonstruujte DFA a ten pak zredukujte.
 
 \subsection{Příklad}
-Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou $\Sigma = \{0,1\}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \{0,1,2\}$?
+Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou 
+$\Sigma = \{0,1\}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \{0,1,2\}$?
 
 \subsection{Příklad}
 Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
 
-Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo $n$ s touto vlastností:
+Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo 
+$n$ s touto vlastností:
 
 Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozdělit na tři slova $u =xwy$, tak, že
 \begin{enumerate}[noitemsep]
@@ -29,7 +32,8 @@ Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozd
 \end{enumerate}
 
 \subsection{Příklad}
-Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
+Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě 
+všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
 
 \noindent
 O navrženém automatu ukažte, že opravdu přijímá daný jazyk.

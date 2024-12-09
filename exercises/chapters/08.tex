@@ -1,11 +1,13 @@
 \section{Osmé cvičení}
 
 \subsection{Příklad}
-K automatu $M$, který je dán následující tabulkou, zkonstruujte regulární gramatiku $\mathcal{G}$, která generuje jazyk $L = L(M)$.
+K automatu $M$, který je dán následující tabulkou, zkonstruujte regulární gramatiku $\mathcal{G}$, která generuje jazyk 
+$L = L(M)$.
 
 
 \subsection{Příklad}
-Ke gramatice $\mathcal{G}$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\mathcal{G})$. Gramatika \\${\mathcal{G} = (N, \{a,b\}, S, P)}$, kde $N={S,A,B}$ a pravidla jsou
+Ke gramatice $\mathcal{G}$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\mathcal{G})$. Gramatika \\
+${\mathcal{G} = (N, \{a,b\}, S, P)}$, kde $N={S,A,B}$ a pravidla jsou
 \begin{align*}
     S &\rightarrow abA \mid aB\\
     A &\rightarrow aA \mid aaA \mid a\\
@@ -32,7 +34,8 @@ Je dán derivační strom v bezkontextové gramatice:
 \end{enumerate}
 
 \subsection{Příklad}
-Je dána bezkontextová gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$, pravidly
+Je dána bezkontextová gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$, 
+pravidly
 \[
 S \rightarrow +SS \mid \star SS \mid - SS \mid x \mid y
 \]
@@ -42,10 +45,12 @@ S \rightarrow +SS \mid \star SS \mid - SS \mid x \mid y
 \end{enumerate}
 
 \subsection{Příklad}
-Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk $L = \{0^i 1^i 2^j; i,j \geq 0\}$. Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
+Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk $L = \{0^i 1^i 2^j; i,j \geq 0\}$. Zdůvodněte, 
+proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 
 \subsection{Příklad}
-Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou platí $L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$.
+Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou platí 
+$L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$.
 \begin{align*}
     \mathcal{G}: S &\rightarrow aSbA \mid \varepsilon\\
     A &\rightarrow aBbA \mid bCB \mid CD\\
