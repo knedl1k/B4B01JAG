@@ -42,7 +42,6 @@
   > = stealth,  % define arrow head style
   % state/.style={fill={rgb:black,1;white,10}},  % default state style
   accepting state/.style={state, double, thick},  % accepting state style
-
 }
 
 % -------------------------------------
@@ -85,7 +84,7 @@
 \newcommand{\G}{\mathcal{G}}
 
 % ---------------------------------------------------------------
-% Random Custom Commands
+% Custom Commands
 % ---------------------------------------------------------------
 
 % Shrug symbol using TikZ 
@@ -108,6 +107,11 @@
     \draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
 \end{tikzpicture}}
 
+
+% ---------------------------------------------------------------
+% \heart 
+\newcommand{\heart}{\ensuremath\heartsuit}
+
 % ---------------------------------------------------------------
 % \splitpage{foo}{foo}
 \newcommand\splitpage[2]{
@@ -118,8 +122,6 @@
       \end{minipage}
 }
 
-% ---------------------------------------------------------------
-% ---------------------------------------------------------------
 
  
 \graphicspath{{media/}}
