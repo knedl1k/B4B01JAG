@@ -1,589 +1,589 @@
 \section{Sedmé cvičení}
 
-\section*{Regulární výrazy}
+% \section*{Regulární výrazy}
 
-\subsection{Příklad}
-Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
+% \subsection{Příklad}
+% Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
+% který přijímá jazyk reprezentovaný regulárním výrazem. 
 
-\vspace*{3mm}
+% \vspace*{3mm}
 
-\begin{minipage}{0.5\textwidth}    
+% \begin{minipage}{0.5\textwidth}    
     
-    \m{(aaa^{\star} + bbb^{\star})^{\star}}
+%     \m{(aaa^{\star} + bbb^{\star})^{\star}}
     
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state,initial, accepting] (1) {}; 
-        \node[state] (3) [right of=1] {};
-        \node[state] (2) [right of=3] {};
-        \node[state] (4) [below of=1] {};
-        \node[state] (5) [below of=4] {};
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%         \node[state,initial, accepting] (1) {}; 
+%         \node[state] (3) [right of=1] {};
+%         \node[state] (2) [right of=3] {};
+%         \node[state] (4) [below of=1] {};
+%         \node[state] (5) [below of=4] {};
         
-        \path[->]
-        (1) edge [bend left] node {$a$} (3)
-        (3) edge [bend left] node {$a$} (2)
-        (2) edge [loop above] node {$a$} ()
-        (2) edge [bend left] node {$\varepsilon$} (1)
-        (1) edge [bend right] node {$b$} (4)
-        (4) edge [bend right] node {$b$} (5)
-        (5) edge [loop right] node {$b$} ()
-        (5) edge [bend right] node {$\varepsilon$} (1)
-        ;    
-    \end{tikzpicture}
+%         \path[->]
+%         (1) edge [bend left] node {$a$} (3)
+%         (3) edge [bend left] node {$a$} (2)
+%         (2) edge [loop above] node {$a$} ()
+%         (2) edge [bend left] node {$\varepsilon$} (1)
+%         (1) edge [bend right] node {$b$} (4)
+%         (4) edge [bend right] node {$b$} (5)
+%         (5) edge [loop right] node {$b$} ()
+%         (5) edge [bend right] node {$\varepsilon$} (1)
+%         ;    
+%     \end{tikzpicture}
     
-\end{minipage}
-\begin{minipage}{0.5\textwidth}    
-zjednodušení: výraz se dá přepsat jako \m{(aa^{\star}a + bb^{\star}b)^{\star}}
+% \end{minipage}
+% \begin{minipage}{0.5\textwidth}    
+% zjednodušení: výraz se dá přepsat jako \m{(aa^{\star}a + bb^{\star}b)^{\star}}
     
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state,initial, accepting] (1) {}; 
-    \node[state] (3) [right of=1] {};
-    \node[state] (4) [below of=1] {};
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state,initial, accepting] (1) {}; 
+%     \node[state] (3) [right of=1] {};
+%     \node[state] (4) [below of=1] {};
     
-    \path[->]
-    (1) edge [bend left] node {$a$} (3)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [loop right] node {$a$} ()
-    (1) edge [bend right] node {$b$} (4)
-    (4) edge [bend right] node {$b$} (1)
-    (4) edge [loop right] node {$b$} ()
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (1) edge [bend left] node {$a$} (3)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [loop right] node {$a$} ()
+%     (1) edge [bend right] node {$b$} (4)
+%     (4) edge [bend right] node {$b$} (1)
+%     (4) edge [loop right] node {$b$} ()
+%     ;    
+% \end{tikzpicture}
 
-\end{minipage}
+% \end{minipage}
 
 
-\subsection{Příklad}
-\noindent
-Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
+% \subsection{Příklad}
+% \noindent
+% Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
+% který přijímá jazyk reprezentovaný regulárním výrazem. 
 
-rozebereme si výraz: \\
-veprostřed máme \m{(ab^{\star}a)^{\star}}
+% rozebereme si výraz: \\
+% veprostřed máme \m{(ab^{\star}a)^{\star}}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state] (1) {}; 
-    \node[state] (2) [right of=1] {};
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state] (1) {}; 
+%     \node[state] (2) [right of=1] {};
     
-    \path[->]
-    (1) edge [bend left] node {$a$} (2)
-    (2) edge [bend left] node {$a$} (1)
-    (2) edge [loop right] node {$b$} (2)
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (1) edge [bend left] node {$a$} (2)
+%     (2) edge [bend left] node {$a$} (1)
+%     (2) edge [loop right] node {$b$} (2)
+%     ;    
+% \end{tikzpicture}
 
-a nabalujeme zbytek 
+% a nabalujeme zbytek 
 
-\m{(a + b(ab^{\star}a)^{\star}b)^{\star}}
+% \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial, accepting] (1) {}; 
-    \node[state] (2) [right of=1] {};
-    \node[state] (3) [right of=2] {};
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state, initial, accepting] (1) {}; 
+%     \node[state] (2) [right of=1] {};
+%     \node[state] (3) [right of=2] {};
     
-    \path[->]
-    (1) edge [bend left] node {$b$} (2)
-    (2) edge [bend left] node {$a$} (3)
-    (3) edge [loop right] node {$b$} ()
-    (3) edge [bend left] node {$a$} (2)
-    (2) edge [bend left] node {$b$} (1)
-    (1) edge [loop below] node {$a$} ()
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (1) edge [bend left] node {$b$} (2)
+%     (2) edge [bend left] node {$a$} (3)
+%     (3) edge [loop right] node {$b$} ()
+%     (3) edge [bend left] node {$a$} (2)
+%     (2) edge [bend left] node {$b$} (1)
+%     (1) edge [loop below] node {$a$} ()
+%     ;    
+% \end{tikzpicture}
 
-\newpage
+% \newpage
 
-\subsection{Příklad}
-\noindent
-Je dán regulární výraz \m{a(ab^{\star} + b)^{\star}ba}. K danému regulární výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
+% \subsection{Příklad}
+% \noindent
+% Je dán regulární výraz \m{a(ab^{\star} + b)^{\star}ba}. K danému regulární výrazu sestrojte redukovaný DFA $M$, 
+% který přijímá jazyk reprezentovaný regulárním výrazem. 
 
-\vspace*{1mm}
+% \vspace*{1mm}
 
-\m{a(ab^{\star} + b)^{\star}ba}: \\$a_1(a_2 b_3^{\star} + b_4)^{\star} b_5 a_6$
+% \m{a(ab^{\star} + b)^{\star}ba}: \\$a_1(a_2 b_3^{\star} + b_4)^{\star} b_5 a_6$
 
-\begin{minipage}{0.3\textwidth}
+% \begin{minipage}{0.3\textwidth}
     
     
-    \begin{tabular}{|c c|c c|} 
-        \hline
-        NFA& & $a$ & $b$ \\
-        \hline
-        \hline
-        $\leftarrow$ & $s$ & $1$& $-$\\
-        &$ 1$ & $2$ & $4,5$ \\
-        &$ 2$ & $2$ & $3,4,5$ \\
-        $$ &$ 3$ & $2$ & $3,4,5$ \\
-        &$ 4$ & $2$ & $4,5$ \\
-        & 5& 6 & $-$ \\
-        $\rightarrow$& 6& $-$ &$-$ \\
-        \hline
-    \end{tabular}
-\end{minipage}
-\begin{minipage}{0.7\textwidth}
+%     \begin{tabular}{|c c|c c|} 
+%         \hline
+%         NFA& & $a$ & $b$ \\
+%         \hline
+%         \hline
+%         $\leftarrow$ & $s$ & $1$& $-$\\
+%         &$ 1$ & $2$ & $4,5$ \\
+%         &$ 2$ & $2$ & $3,4,5$ \\
+%         $$ &$ 3$ & $2$ & $3,4,5$ \\
+%         &$ 4$ & $2$ & $4,5$ \\
+%         & 5& 6 & $-$ \\
+%         $\rightarrow$& 6& $-$ &$-$ \\
+%         \hline
+%     \end{tabular}
+% \end{minipage}
+% \begin{minipage}{0.7\textwidth}
 
-    \begin{tikzpicture}[shorten >=1pt, node distance=35mm, on grid, auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
+%     \begin{tikzpicture}[shorten >=1pt, node distance=35mm, on grid, auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
 
-    \node[state, initial] (S) {$S$};
-    \node[state] (1) [right of=S] {$1$};
-    \node[state] (2) [right of=1] {$2$};
-    \node[state] (3) [right of=2] {$3$};
-    \node[state] (5) [below of=1] {$5$};
-    % \node[state] (4) [below of=5] {$4$};
-    \node[state] (4) at ($(1)!0.5!(5)!0.5!(2)$) {$4$};
-    \node[state, accepting] (6) [left of=5] {$6$};
+%     \node[state, initial] (S) {$S$};
+%     \node[state] (1) [right of=S] {$1$};
+%     \node[state] (2) [right of=1] {$2$};
+%     \node[state] (3) [right of=2] {$3$};
+%     \node[state] (5) [below of=1] {$5$};
+%     % \node[state] (4) [below of=5] {$4$};
+%     \node[state] (4) at ($(1)!0.5!(5)!0.5!(2)$) {$4$};
+%     \node[state, accepting] (6) [left of=5] {$6$};
 
-    \path[->]
-        (S) edge [bend left] node {$a$} (1)
+%     \path[->]
+%         (S) edge [bend left] node {$a$} (1)
         
-        (1) edge [bend left] node {$a$} (2)
-        (1) edge [bend left] node {$b$} (4)
-        (1) edge [bend right] node {$b$} (5)
+%         (1) edge [bend left] node {$a$} (2)
+%         (1) edge [bend left] node {$b$} (4)
+%         (1) edge [bend right] node {$b$} (5)
 
-        (2) edge [loop above] node {$a$} ()
-        (2) edge [bend left] node {$b$} (3)
-        (2) edge [bend left] node {$b$} (4)
-        (2) edge [bend left] node {$b$} (5)
+%         (2) edge [loop above] node {$a$} ()
+%         (2) edge [bend left] node {$b$} (3)
+%         (2) edge [bend left] node {$b$} (4)
+%         (2) edge [bend left] node {$b$} (5)
    
-        (3) edge [bend left] node {$a$} (2)
-        (3) edge [loop above] node {$b$} (3)
-        (3) edge [bend left] node {$b$} (4)
-        (3) edge [bend left] node {$b$} (5)
+%         (3) edge [bend left] node {$a$} (2)
+%         (3) edge [loop above] node {$b$} (3)
+%         (3) edge [bend left] node {$b$} (4)
+%         (3) edge [bend left] node {$b$} (5)
 
-        (4) edge [bend left] node {$a$} (2)
-        (4) edge [loop left] node {$b$} ()
-        (4) edge [bend left] node {$b$} (5)
+%         (4) edge [bend left] node {$a$} (2)
+%         (4) edge [loop left] node {$b$} ()
+%         (4) edge [bend left] node {$b$} (5)
         
-        (5) edge [bend left] node {$a$} (6)
+%         (5) edge [bend left] node {$a$} (6)
         
 
-        ;
-\end{tikzpicture}
-\end{minipage}
-\vspace*{3mm}
+%         ;
+% \end{tikzpicture}
+% \end{minipage}
+% \vspace*{3mm}
 
-podmnožinová konstrukce:
+% podmnožinová konstrukce:
 
-  \begin{tabular}{l r | c c || c | c c || c | c c || c | c c || c | c c || c ||
-    }
+%   \begin{tabular}{l r | c c || c | c c || c | c c || c | c c || c | c c || c ||
+%     }
 
 
-    	&				&	$	a	$	&	$	b	$		&	$	\sim_0	$	&	$	a	$	&	$	b	$	&
-        	$	\sim_1	$	&	$	a	$	&	$	b	$	&	$	\sim_2	$	&	$	a	$	&	$	b	$	&
-            	$	\sim_3	$	&	$	a	$	&	$	b	$	&	$	\sim_4	$	\\	\hline	\hline
-$\rightarrow$	&	$\{	S	\}$	&	$\{	1	\}$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&	$
-	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	B	$	&	$	O	$	&	$
-    	D	$	&	$	B	$	&	$	O	$	&	$	D	$	\\		
-	&	$\{	1	\}$	&	$\{	2	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$	O
-    	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&	$
-        	B	$	&	$	A	$	&	$	B	$	\\		
-	&	$	\emptyset	$	&	$	\emptyset	$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&
-    	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$
-        	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	\\		
-	&	$\{	2	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$
-    	O	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&
-        	$	B	$	&	$	A	$	&	$	B	$	\\		
-	&	$\{	4,5	\}$	&	$\{	2,6	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&	$	A
-    	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$
-        	K	$	&	$	A	$	&	$	A	$	\\		
-	&	$\{	3,4,5	\}$	&	$\{	2,6	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&
-    	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$
-        	&	$	K	$	&	$	A	$	&	$	A	$	\\		
-$\leftarrow$	&	$\{	2,6	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	K	$	&	$	O	$	&	$	O
-	$	&	$	K	$	&	$	O	$	&	$	A	$	&	$	K	$	&	$	B	$	&	$	A	$	&	$	K
-    	$	&	$	B	$	&	$	A	$	&	$	K	$	\\		
+%     	&				&	$	a	$	&	$	b	$		&	$	\sim_0	$	&	$	a	$	&	$	b	$	&
+%         	$	\sim_1	$	&	$	a	$	&	$	b	$	&	$	\sim_2	$	&	$	a	$	&	$	b	$	&
+%             	$	\sim_3	$	&	$	a	$	&	$	b	$	&	$	\sim_4	$	\\	\hline	\hline
+% $\rightarrow$	&	$\{	S	\}$	&	$\{	1	\}$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&	$
+% 	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	B	$	&	$	O	$	&	$
+%     	D	$	&	$	B	$	&	$	O	$	&	$	D	$	\\		
+% 	&	$\{	1	\}$	&	$\{	2	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$	O
+%     	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&	$
+%         	B	$	&	$	A	$	&	$	B	$	\\		
+% 	&	$	\emptyset	$	&	$	\emptyset	$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&
+%     	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$
+%         	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	\\		
+% 	&	$\{	2	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$
+%     	O	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&
+%         	$	B	$	&	$	A	$	&	$	B	$	\\		
+% 	&	$\{	4,5	\}$	&	$\{	2,6	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&	$	A
+%     	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$
+%         	K	$	&	$	A	$	&	$	A	$	\\		
+% 	&	$\{	3,4,5	\}$	&	$\{	2,6	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&
+%     	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$
+%         	&	$	K	$	&	$	A	$	&	$	A	$	\\		
+% $\leftarrow$	&	$\{	2,6	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	K	$	&	$	O	$	&	$	O
+% 	$	&	$	K	$	&	$	O	$	&	$	A	$	&	$	K	$	&	$	B	$	&	$	A	$	&	$	K
+%     	$	&	$	B	$	&	$	A	$	&	$	K	$	\\		
 
    
 
-  \end{tabular}
-\vspace*{6mm}
+%   \end{tabular}
+% \vspace*{6mm}
 
-DFA:
-\vspace*{2mm}
+% DFA:
+% \vspace*{2mm}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
+% \begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
     
-    \def\radius{22mm}
+%     \def\radius{22mm}
     
-    \node[state, initial] (D) at (90:\radius) {$D$}; % Top center
-    \node[state] (B) at (162:\radius) {$B$}; % Top-left
-    \node[state] (O) at (18:\radius) {$O$}; % Bottom-left
-    \node[state] (A) at (306:\radius) {$A$}; % Bottom-right
-    \node[state, accepting] (K) at (234:\radius) {$K$}; % Top-right
-    \path[->]
-    (D) edge [bend left] node {$a$} (B)
-    (D) edge [bend left] node {$b$} (O)
+%     \node[state, initial] (D) at (90:\radius) {$D$}; % Top center
+%     \node[state] (B) at (162:\radius) {$B$}; % Top-left
+%     \node[state] (O) at (18:\radius) {$O$}; % Bottom-left
+%     \node[state] (A) at (306:\radius) {$A$}; % Bottom-right
+%     \node[state, accepting] (K) at (234:\radius) {$K$}; % Top-right
+%     \path[->]
+%     (D) edge [bend left] node {$a$} (B)
+%     (D) edge [bend left] node {$b$} (O)
 
-    (B) edge [loop above] node {$a$} ()
-    (B) edge [bend left] node {$b$} (A)
+%     (B) edge [loop above] node {$a$} ()
+%     (B) edge [bend left] node {$b$} (A)
 
-    (O) edge [loop above] node {$a,b$} ()
+%     (O) edge [loop above] node {$a,b$} ()
 
-    (A) edge [loop below] node {$b$} ()
-    (A) edge [bend right] node {$a$} (K)
+%     (A) edge [loop below] node {$b$} ()
+%     (A) edge [bend right] node {$a$} (K)
 
-    (K) edge [bend left] node {$a$} (B)
-    (K) edge [bend right] node {$b$} (A)
-    ;    
-\end{tikzpicture}
+%     (K) edge [bend left] node {$a$} (B)
+%     (K) edge [bend right] node {$b$} (A)
+%     ;    
+% \end{tikzpicture}
 
-\newpage
-\subsection{Příklad}
-\noindent
-Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$. 
+% \newpage
+% \subsection{Příklad}
+% \noindent
+% Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$. 
 
-\begin{minipage}{0.5\textwidth}    
-    $M$: $\quad$
-    \begin{tabular}{|c c|c c|} 
-        \hline
-         & & $a$ & $b$ \\
-        \hline
-        \hline
-        $\leftrightarrow$&$ 1$ & $1$ & $2$ \\
-        \hline
-        &$ 2$ & $3$ & $4$ \\
-        \hline
-        $\leftarrow$ &$ 3$ & $1$ & $2$ \\
-        \hline
-        &$ 4$ & $4$ & $4$ \\
-        \hline
-    \end{tabular}
+% \begin{minipage}{0.5\textwidth}    
+%     $M$: $\quad$
+%     \begin{tabular}{|c c|c c|} 
+%         \hline
+%          & & $a$ & $b$ \\
+%         \hline
+%         \hline
+%         $\leftrightarrow$&$ 1$ & $1$ & $2$ \\
+%         \hline
+%         &$ 2$ & $3$ & $4$ \\
+%         \hline
+%         $\leftarrow$ &$ 3$ & $1$ & $2$ \\
+%         \hline
+%         &$ 4$ & $4$ & $4$ \\
+%         \hline
+%     \end{tabular}
  
-\vspace*{5mm}
-\bb{0. DFA: }
+% \vspace*{5mm}
+% \bb{0. DFA: }
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state,initial] (1) {$1$}; 
-    \node[state, accepting] (3) [below of=1] {$3$};
-    \node[state] (2) [right of=1] {$2$};
-    \node[state] (4) [right of=3] {$4$};
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state,initial] (1) {$1$}; 
+%     \node[state, accepting] (3) [below of=1] {$3$};
+%     \node[state] (2) [right of=1] {$2$};
+%     \node[state] (4) [right of=3] {$4$};
     
-    \path[->]
-    (1) edge [loop above] node {$a$} ()
-    (1) edge [bend left] node {$b$} (2)
-    (2) edge [bend right] node {$a$} (3)
-    (2) edge [bend left] node {$b$} (4)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [bend right] node {$b$} (2)
-    (4) edge [loop right] node {$a,b$} ()
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (1) edge [loop above] node {$a$} ()
+%     (1) edge [bend left] node {$b$} (2)
+%     (2) edge [bend right] node {$a$} (3)
+%     (2) edge [bend left] node {$b$} (4)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [bend right] node {$b$} (2)
+%     (4) edge [loop right] node {$a,b$} ()
+%     ;    
+% \end{tikzpicture}
 
-\bb{1. zavedu stavy $S$, $F$:}
+% \bb{1. zavedu stavy $S$, $F$:}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
     
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    \node[state] (3) [below of=1] {$3$};
-    \node[state] (2) [right of=1] {$2$};
-    \node[state] (4) [right of=3] {$4$};
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+%     \node[state] (3) [below of=1] {$3$};
+%     \node[state] (2) [right of=1] {$2$};
+%     \node[state] (4) [right of=3] {$4$};
     
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$\varepsilon$} (F)
-    (3) edge [bend left] node {$\varepsilon$} (F)
-    (1) edge [loop above] node {$a$} ()
-    (1) edge [bend left] node {$b$} (2)
-    (2) edge [bend right] node {$a$} (3)
-    (2) edge [bend left] node {$b$} (4)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [bend right] node {$b$} (2)
-    (4) edge [loop right] node {$a,b$} ()
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$\varepsilon$} (F)
+%     (3) edge [bend left] node {$\varepsilon$} (F)
+%     (1) edge [loop above] node {$a$} ()
+%     (1) edge [bend left] node {$b$} (2)
+%     (2) edge [bend right] node {$a$} (3)
+%     (2) edge [bend left] node {$b$} (4)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [bend right] node {$b$} (2)
+%     (4) edge [loop right] node {$a,b$} ()
+%     ;    
+% \end{tikzpicture}
 
 
-\bb{2. odstraňuji smyčky:}
+% \bb{2. odstraňuji smyčky:}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
     
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    \node[state] (3) [below of=1] {$3$};
-    \node[state] (2) [right of=1] {$2$};
-    \node[state] (4) [right of=3] {$4$};
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+%     \node[state] (3) [below of=1] {$3$};
+%     \node[state] (2) [right of=1] {$2$};
+%     \node[state] (4) [right of=3] {$4$};
     
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$a^{\star}$} (F)
-    (3) edge [bend left] node {$\varepsilon$} (F)
-    (1) edge [bend left] node {$a^{\star}b$} (2)
-    (2) edge [bend right] node {$a$} (3)
-    (2) edge [bend left] node {$b$} (4)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [bend right] node {$b$} (2)
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$a^{\star}$} (F)
+%     (3) edge [bend left] node {$\varepsilon$} (F)
+%     (1) edge [bend left] node {$a^{\star}b$} (2)
+%     (2) edge [bend right] node {$a$} (3)
+%     (2) edge [bend left] node {$b$} (4)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [bend right] node {$b$} (2)
+%     ;    
+% \end{tikzpicture}
 
 
-\bb{3. odstraňuji vrchol $4$:}
+% \bb{3. odstraňuji vrchol $4$:}
 
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
     
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    \node[state] (3) [below of=1] {$3$};
-    \node[state] (2) [right of=1] {$2$};
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+%     \node[state] (3) [below of=1] {$3$};
+%     \node[state] (2) [right of=1] {$2$};
     
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$a^{\star}$} (F)
-    (3) edge [bend left] node {$\varepsilon$} (F)
-    (1) edge [bend left] node {$a^{\star}b$} (2)
-    (2) edge [bend right] node {$a$} (3)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [bend right] node {$b$} (2)
-    ;    
-\end{tikzpicture}
-\end{minipage}  \begin{minipage}{0.5\textwidth}
-    
-
-
-\vspace*{4mm}
-\bb{4. odstraňuji vrchol $2$:}
-
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    \node[state] (3) [below of=1] {$3$};
-    
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$a^{\star}$} (F)
-    (3) edge [bend left] node {$\varepsilon$} (F)
-    (1) edge [bend left] node {$a^{\star}ba$} (3)
-    (3) edge [bend left] node {$a$} (1)
-    (3) edge [loop right] node {$ba$} ()
-    ;    
-\end{tikzpicture}
-
-\bb{5. odstraňuji smyčky:}
-
-
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    \node[state] (3) [below of=1] {$3$};
-    
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node[swap] {$a^{\star}$} (F)
-    (3) edge [bend left] node {$(ba)^{\star}$} (F)
-    (1) edge [bend left] node {$a^{\star}ba$} (3)
-    (3) edge [bend left] node {$(ba)^{\star}a$} (1)
-    ;    
-\end{tikzpicture}
-
-\bb{6. odstraňuji vrchol $3$:}
-
-
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$a^{\star}$} (F)
-    (1) edge [bend left] node {$a^{\star}ba(ba)^{\star}$} (F)
-    (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
-    ;    
-\end{tikzpicture}
-
-
-\bb{7. odstraňuji paralelní hrany:}
-
-
-
-\begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [below of=S] {$F$};
-    
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend right] node {$a^{\star} + (a^{\star}ba(ba)^{\star})$} (F)
-    (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
-    ;    
-\end{tikzpicture}
-
-\vspace*{2mm}
-\bb{8. odstraňuji smyčky:}
-
-
-\begin{tikzpicture}[shorten >=1pt,node distance=22mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
-    \node[state, accepting] (F) [right of=1] {$F$};
-    
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend left] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
-    (F)
-    ;    
-\end{tikzpicture}
-
-
-\vspace*{2mm}
-\bb{9. odstraňuji vrchol $1$:}
-
-
-\begin{tikzpicture}[shorten >=1pt,node distance=65mm,on grid,auto]
-    \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state, accepting] (F) [right of=S] {$F$};
-    
-    \path[->]
-    (S) edge [above] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star} + (a^{\star}ba(ba)^{\star}))$} (F)
-    ;    
-\end{tikzpicture}
-
-\end{minipage}
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$a^{\star}$} (F)
+%     (3) edge [bend left] node {$\varepsilon$} (F)
+%     (1) edge [bend left] node {$a^{\star}b$} (2)
+%     (2) edge [bend right] node {$a$} (3)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [bend right] node {$b$} (2)
+%     ;    
+% \end{tikzpicture}
+% \end{minipage}  \begin{minipage}{0.5\textwidth}
     
 
-\newpage
-lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní): 
 
-$M$: $\quad$
-\begin{minipage}{0.4\textwidth}   
-    \begin{tabular}{|c c|c c|} 
-        \hline
-         & & $a$ & $b$ \\
-        \hline
-        \hline
-        $\leftrightarrow$&$ 1$ & $1$ & $2$ \\
-        \hline
-        &$ 2$ & $3$ & $4$ \\
-        \hline
-        $\leftarrow$ &$ 3$ & $1$ & $2$ \\
-        \hline
-        &$ 4$ & $4$ & $4$ \\
-        \hline
-    \end{tabular}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
+% \vspace*{4mm}
+% \bb{4. odstraňuji vrchol $2$:}
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
     
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state, initial, accepting] (1) {$1, 3$}; 
-        \node[state] (2) [right of=1] {$2$};
-        \node[state] (4) [right of=2] {$4$};
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+%     \node[state] (3) [below of=1] {$3$};
+    
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$a^{\star}$} (F)
+%     (3) edge [bend left] node {$\varepsilon$} (F)
+%     (1) edge [bend left] node {$a^{\star}ba$} (3)
+%     (3) edge [bend left] node {$a$} (1)
+%     (3) edge [loop right] node {$ba$} ()
+%     ;    
+% \end{tikzpicture}
+
+% \bb{5. odstraňuji smyčky:}
+
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+    
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+%     \node[state] (3) [below of=1] {$3$};
+    
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node[swap] {$a^{\star}$} (F)
+%     (3) edge [bend left] node {$(ba)^{\star}$} (F)
+%     (1) edge [bend left] node {$a^{\star}ba$} (3)
+%     (3) edge [bend left] node {$(ba)^{\star}a$} (1)
+%     ;    
+% \end{tikzpicture}
+
+% \bb{6. odstraňuji vrchol $3$:}
+
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+    
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+    
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$a^{\star}$} (F)
+%     (1) edge [bend left] node {$a^{\star}ba(ba)^{\star}$} (F)
+%     (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
+%     ;    
+% \end{tikzpicture}
+
+
+% \bb{7. odstraňuji paralelní hrany:}
+
+
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+    
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [below of=S] {$F$};
+    
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend right] node {$a^{\star} + (a^{\star}ba(ba)^{\star})$} (F)
+%     (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
+%     ;    
+% \end{tikzpicture}
+
+% \vspace*{2mm}
+% \bb{8. odstraňuji smyčky:}
+
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=22mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+    
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1$}; 
+%     \node[state, accepting] (F) [right of=1] {$F$};
+    
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [bend left] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
+%     (F)
+%     ;    
+% \end{tikzpicture}
+
+
+% \vspace*{2mm}
+% \bb{9. odstraňuji vrchol $1$:}
+
+
+% \begin{tikzpicture}[shorten >=1pt,node distance=65mm,on grid,auto]
+%     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+    
+%     \node[state,initial] (S) {$S$}; 
+%     \node[state, accepting] (F) [right of=S] {$F$};
+    
+%     \path[->]
+%     (S) edge [above] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star} + (a^{\star}ba(ba)^{\star}))$} (F)
+%     ;    
+% \end{tikzpicture}
+
+% \end{minipage}
+    
+
+% \newpage
+% lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní): 
+
+% $M$: $\quad$
+% \begin{minipage}{0.4\textwidth}   
+%     \begin{tabular}{|c c|c c|} 
+%         \hline
+%          & & $a$ & $b$ \\
+%         \hline
+%         \hline
+%         $\leftrightarrow$&$ 1$ & $1$ & $2$ \\
+%         \hline
+%         &$ 2$ & $3$ & $4$ \\
+%         \hline
+%         $\leftarrow$ &$ 3$ & $1$ & $2$ \\
+%         \hline
+%         &$ 4$ & $4$ & $4$ \\
+%         \hline
+%     \end{tabular}
+% \end{minipage}
+% \begin{minipage}{0.5\textwidth}
+    
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%         \node[state, initial, accepting] (1) {$1, 3$}; 
+%         \node[state] (2) [right of=1] {$2$};
+%         \node[state] (4) [right of=2] {$4$};
         
-        \path[->]
-        (1) edge [loop above] node {$a$} (a)
-        (1) edge [bend left] node {$b$} (2)
-        (2) edge [bend left] node {$b$} (4)
-        (2) edge [bend left] node {$a$} (1)
-        (4) edge [loop right] node {$b$} ()
-        ;    
-    \end{tikzpicture}
-\end{minipage}
+%         \path[->]
+%         (1) edge [loop above] node {$a$} (a)
+%         (1) edge [bend left] node {$b$} (2)
+%         (2) edge [bend left] node {$b$} (4)
+%         (2) edge [bend left] node {$a$} (1)
+%         (4) edge [loop right] node {$b$} ()
+%         ;    
+%     \end{tikzpicture}
+% \end{minipage}
 
-\vspace{3mm}
-\begin{minipage}{0.5\textwidth}
+% \vspace{3mm}
+% \begin{minipage}{0.5\textwidth}
     
 
-    \bb{1. přidám $S$, $F$:}
+%     \bb{1. přidám $S$, $F$:}
     
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state, initial] (S) {$S$}; 
-        \node[state] (1) [right of=S]{$1, 3$}; 
-        \node[state] (2) [right of=1] {$2$};
-        \node[state] (4) [right of=2] {$4$};
-        \node[state, accepting] (F) [below of=S] {$F$};
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%         \node[state, initial] (S) {$S$}; 
+%         \node[state] (1) [right of=S]{$1, 3$}; 
+%         \node[state] (2) [right of=1] {$2$};
+%         \node[state] (4) [right of=2] {$4$};
+%         \node[state, accepting] (F) [below of=S] {$F$};
         
-        \path[->]
-        (S) edge [bend left] node {$\varepsilon$} (1)
-        (1) edge [loop above] node {$a$} (a)
-        (1) edge [bend left] node {$b$} (2)
-        (2) edge [bend left] node {$b$} (4)
-        (2) edge [bend left] node {$a$} (1)
-        (4) edge [loop right] node {$b$} ()
-        (1) edge [bend right] node {$\varepsilon$} (F)
-        ;    
-    \end{tikzpicture}
+%         \path[->]
+%         (S) edge [bend left] node {$\varepsilon$} (1)
+%         (1) edge [loop above] node {$a$} (a)
+%         (1) edge [bend left] node {$b$} (2)
+%         (2) edge [bend left] node {$b$} (4)
+%         (2) edge [bend left] node {$a$} (1)
+%         (4) edge [loop right] node {$b$} ()
+%         (1) edge [bend right] node {$\varepsilon$} (F)
+%         ;    
+%     \end{tikzpicture}
     
     
-    \bb{2. zbavím se nodu č. 4:}
+%     \bb{2. zbavím se nodu č. 4:}
     
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1, 3$}; 
-    \node[state] (2) [right of=1] {$2$};
-    \node[state, accepting] (F) [below of=S] {$F$};
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state, initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1, 3$}; 
+%     \node[state] (2) [right of=1] {$2$};
+%     \node[state, accepting] (F) [below of=S] {$F$};
     
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [loop above] node {$a$} (a)
-    (1) edge [bend left] node {$b$} (2)
-    (2) edge [bend left] node {$a$} (1)
-    (1) edge [bend right] node {$\varepsilon$} (F)
-    ;    
-\end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.2\textwidth}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [loop above] node {$a$} (a)
+%     (1) edge [bend left] node {$b$} (2)
+%     (2) edge [bend left] node {$a$} (1)
+%     (1) edge [bend right] node {$\varepsilon$} (F)
+%     ;    
+% \end{tikzpicture}
+% \end{minipage}
+% \begin{minipage}{0.2\textwidth}
+% \end{minipage}
+% \begin{minipage}{0.5\textwidth}
     
-\bb{3. odstraním node č. 2:}
+% \bb{3. odstraním node č. 2:}
 
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1, 3$}; 
-    \node[state, accepting] (F) [right of=1] {$F$};
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state, initial] (S) {$S$}; 
+%     \node[state] (1) [right of=S]{$1, 3$}; 
+%     \node[state, accepting] (F) [right of=1] {$F$};
     
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [loop above] node {$a$} (a)
-    (1) edge [loop below] node {$ba$} (1)
-    (1) edge [loop above] node {$a$} (1)
-    (1) edge [bend left] node {$\varepsilon$} (F)
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (S) edge [bend left] node {$\varepsilon$} (1)
+%     (1) edge [loop above] node {$a$} (a)
+%     (1) edge [loop below] node {$ba$} (1)
+%     (1) edge [loop above] node {$a$} (1)
+%     (1) edge [bend left] node {$\varepsilon$} (F)
+%     ;    
+% \end{tikzpicture}
 
 
-\bb{4.spojím obsah smyček, \\odstraním smyčku a node:}
+% \bb{4.spojím obsah smyček, \\odstraním smyčku a node:}
 
-\vspace*{2mm}
-    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
-        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
-    \node[state, accepting] (F) [right of=1] {$F$};
+% \vspace*{2mm}
+%     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+%         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+%     \node[state, initial] (S) {$S$}; 
+%     \node[state, accepting] (F) [right of=1] {$F$};
     
-    \path[->]
-    (S) edge [above] node {$(a + ba)^{\star}$} (F)
-    ;    
-\end{tikzpicture}
+%     \path[->]
+%     (S) edge [above] node {$(a + ba)^{\star}$} (F)
+%     ;    
+% \end{tikzpicture}
 
-\end{minipage}
+% \end{minipage}
     
