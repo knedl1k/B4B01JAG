@@ -14,18 +14,18 @@ Charakterizujte slova jazyka $L$, tj. najděte vlastnost $\mathcal{V}$ takovou, 
 $L_1 = \{w \mid w \in \{a,b\}^\star, |w|_a=|w|_b\}$.
 
 \noindent
-Důkaz:\\
-\splitpage{
+Důkaz:
+\begin{multicols}{2}
 \noindent
 a) $L \subseteq L_1$
 
 1. $|\varepsilon|_a = 0 = |\varepsilon|_b$\\
-2. ${|u|_a = |u|_b \implies |aub|_a = |u|_a + 1 = |aub|_b = |u|_b + 1}$
+2. $|u|_a = |u|_b \Rightarrow |aub|_a = |u|_a + 1 = |aub|_b = |u|_b + 1$
 
+\columnbreak
 
-}{
 b) $L_1 \subseteq L$
-}
+\end{multicols}
 
 % TODO 
 
@@ -35,7 +35,6 @@ Je dán konečný automat $M$ tabulkou
 
 
 \begin{multicols}{2}
-
 
 \begin{tabular}{|r|c|c|}
     \hline
@@ -54,14 +53,15 @@ Je dán konečný automat $M$ tabulkou
 
 \columnbreak
 
-\noindent
-1. Nakreslete stavový diagram automatu.\\
-2. Simulujte krok po kroku výpočet automatu nad slovem $bbaaab$.\\
-3. Z induktivní definice odvoďte $\delta^\star(2, bab)$.\\
+\begin{enumerate}[noitemsep]
+    \item Nakreslete stavový diagram automatu.
+    \item Simulujte krok po kroku výpočet automatu nad slovem $bbaaab$.
+    \item Z induktivní definice odvoďte $\delta^\star(2, bab)$.
+\end{enumerate}
 
 \end{multicols}
 
-\splitpage{
+\begin{multicols}{2}
 1.
 
     \begin{tikzpicture}
@@ -91,12 +91,16 @@ Je dán konečný automat $M$ tabulkou
             (7) edge[bend left, below] node{$b$} (4)
             ;
     \end{tikzpicture}
-}{
-2. $\rightarrow5-4-4-7-7-7-4 \rightarrow$
-\\
-\\
-3. ${\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b) =} \delta(\delta(\delta(2,b),a),b)$.
-}
+
+\columnbreak
+
+\begin{enumerate}
+    \item $\rightarrow5-4-4-7-7-7-4 \rightarrow$
+    \item ${\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b) =} \delta(\delta(\delta(2,b),a),b)$.
+\end{enumerate}
+ 
+\end{multicols}
+
 \subsection{Příklad}
 Navrhněte automat modelující posuvný registr, který provádí celočíselné dělení $4$ binárně zadaného čísla (číslo se čte 
 od nejvyššího řádu). O jaký typ automatu se jedná?
