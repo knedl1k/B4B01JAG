@@ -3,23 +3,21 @@
 \section*{Regulární výrazy}
 
 \subsection{Příklad}
-Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
+Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
+který přijímá jazyk reprezentovaný regulárním výrazem.
 
-\vspace*{3mm}
+\begin{multicols}{2}
 
-\begin{minipage}{0.5\textwidth}    
-    
     \m{(aaa^{\star} + bbb^{\star})^{\star}}
-    
+
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state,initial, accepting] (1) {}; 
+        \node[state,initial, accepting] (1) {};
         \node[state] (3) [right of=1] {};
         \node[state] (2) [right of=3] {};
         \node[state] (4) [below of=1] {};
         \node[state] (5) [below of=4] {};
-        
+
         \path[->]
         (1) edge [bend left] node {$a$} (3)
         (3) edge [bend left] node {$a$} (2)
@@ -29,19 +27,19 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         (4) edge [bend right] node {$b$} (5)
         (5) edge [loop right] node {$b$} ()
         (5) edge [bend right] node {$\varepsilon$} (1)
-        ;    
+        ;
     \end{tikzpicture}
-    
-\end{minipage}
-\begin{minipage}{0.5\textwidth}    
+
+\columnbreak
+
 zjednodušení: výraz se dá přepsat jako \m{(aa^{\star}a + bb^{\star}b)^{\star}}
-    
+
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state,initial, accepting] (1) {}; 
+    \node[state,initial, accepting] (1) {};
     \node[state] (3) [right of=1] {};
     \node[state] (4) [below of=1] {};
-    
+
     \path[->]
     (1) edge [bend left] node {$a$} (3)
     (3) edge [bend left] node {$a$} (1)
@@ -49,42 +47,45 @@ zjednodušení: výraz se dá přepsat jako \m{(aa^{\star}a + bb^{\star}b)^{\sta
     (1) edge [bend right] node {$b$} (4)
     (4) edge [bend right] node {$b$} (1)
     (4) edge [loop right] node {$b$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
-\end{minipage}
+\end{multicols}
 
 
 \subsection{Příklad}
 \noindent
-Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
+Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
+který přijímá jazyk reprezentovaný regulárním výrazem.
 
+\begin{multicols}{2}
 rozebereme si výraz: \\
 veprostřed máme \m{(ab^{\star}a)^{\star}}
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state] (1) {}; 
+    \node[state] (1) {};
     \node[state] (2) [right of=1] {};
-    
+
     \path[->]
     (1) edge [bend left] node {$a$} (2)
     (2) edge [bend left] node {$a$} (1)
     (2) edge [loop right] node {$b$} (2)
-    ;    
+    ;
 \end{tikzpicture}
 
-a nabalujeme zbytek 
+\columnbreak
+
+a nabalujeme zbytek
 
 \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial, accepting] (1) {}; 
+    \node[state, initial, accepting] (1) {};
     \node[state] (2) [right of=1] {};
     \node[state] (3) [right of=2] {};
-    
+
     \path[->]
     (1) edge [bend left] node {$b$} (2)
     (2) edge [bend left] node {$a$} (3)
@@ -92,24 +93,21 @@ a nabalujeme zbytek
     (3) edge [bend left] node {$a$} (2)
     (2) edge [bend left] node {$b$} (1)
     (1) edge [loop below] node {$a$} ()
-    ;    
+    ;
 \end{tikzpicture}
-
+\end{multicols}
 \newpage
 
 \subsection{Příklad}
 \noindent
-Je dán regulární výraz \m{a(ab^{\star} + b)^{\star}ba}. K danému regulární výrazu sestrojte redukovaný DFA $M$, 
-který přijímá jazyk reprezentovaný regulárním výrazem. 
-
-\vspace*{1mm}
+Je dán regulární výraz \m{a(ab^{\star} + b)^{\star}ba}. K danému regulární výrazu sestrojte redukovaný DFA $M$,
+který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \m{a(ab^{\star} + b)^{\star}ba}: \\$a_1(a_2 b_3^{\star} + b_4)^{\star} b_5 a_6$
 
-\begin{minipage}{0.3\textwidth}
-    
-    
-    \begin{tabular}{|c c|c c|} 
+\begin{multicols}{3}
+
+    \begin{tabular}{|c c|c c|}
         \hline
         NFA& & $a$ & $b$ \\
         \hline
@@ -123,8 +121,8 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         $\rightarrow$& 6& $-$ &$-$ \\
         \hline
     \end{tabular}
-\end{minipage}
-\begin{minipage}{0.7\textwidth}
+
+\columnbreak
 
     \begin{tikzpicture}[shorten >=1pt, node distance=35mm, on grid, auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
@@ -140,7 +138,7 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
     \path[->]
         (S) edge [bend left] node {$a$} (1)
-        
+
         (1) edge [bend left] node {$a$} (2)
         (1) edge [bend left] node {$b$} (4)
         (1) edge [bend right] node {$b$} (5)
@@ -149,7 +147,7 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         (2) edge [bend left] node {$b$} (3)
         (2) edge [bend left] node {$b$} (4)
         (2) edge [bend left] node {$b$} (5)
-   
+
         (3) edge [bend left] node {$a$} (2)
         (3) edge [loop above] node {$b$} (3)
         (3) edge [bend left] node {$b$} (4)
@@ -158,14 +156,15 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         (4) edge [bend left] node {$a$} (2)
         (4) edge [loop left] node {$b$} ()
         (4) edge [bend left] node {$b$} (5)
-        
+
         (5) edge [bend left] node {$a$} (6)
-        
+
 
         ;
 \end{tikzpicture}
-\end{minipage}
-\vspace*{3mm}
+
+\end{multicols}
+
 
 podmnožinová konstrukce:
 
@@ -178,39 +177,37 @@ podmnožinová konstrukce:
             	$	\sim_3	$	&	$	a	$	&	$	b	$	&	$	\sim_4	$	\\	\hline	\hline
 $\rightarrow$	&	$\{	S	\}$	&	$\{	1	\}$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&	$
 	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	B	$	&	$	O	$	&	$
-    	D	$	&	$	B	$	&	$	O	$	&	$	D	$	\\		
+    	D	$	&	$	B	$	&	$	O	$	&	$	D	$	\\
 	&	$\{	1	\}$	&	$\{	2	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$	O
     	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&	$
-        	B	$	&	$	A	$	&	$	B	$	\\		
+        	B	$	&	$	A	$	&	$	B	$	\\
 	&	$	\emptyset	$	&	$	\emptyset	$	&	$	\emptyset	$		&	$	O	$	&	$	O	$	&
     	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$
-        	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	\\		
+        	&	$	O	$	&	$	O	$	&	$	O	$	&	$	O	$	\\
 	&	$\{	2	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	O	$	&	$	O	$	&	$
     	O	$	&	$	O	$	&	$	A	$	&	$	B	$	&	$	B	$	&	$	A	$	&	$	B	$	&
-        	$	B	$	&	$	A	$	&	$	B	$	\\		
+        	$	B	$	&	$	A	$	&	$	B	$	\\
 	&	$\{	4,5	\}$	&	$\{	2,6	\}$	&	$\{	4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&	$	A
     	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$
-        	K	$	&	$	A	$	&	$	A	$	\\		
+        	K	$	&	$	A	$	&	$	A	$	\\
 	&	$\{	3,4,5	\}$	&	$\{	2,6	\}$	&	$\{	3,4,5	\}$		&	$	O	$	&	$	K	$	&	$	O	$	&
     	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$	&	$	K	$	&	$	A	$	&	$	A	$
-        	&	$	K	$	&	$	A	$	&	$	A	$	\\		
+        	&	$	K	$	&	$	A	$	&	$	A	$	\\
 $\leftarrow$	&	$\{	2,6	\}$	&	$\{	2	\}$	&	$\{	3,4,5	\}$		&	$	K	$	&	$	O	$	&	$	O
 	$	&	$	K	$	&	$	O	$	&	$	A	$	&	$	K	$	&	$	B	$	&	$	A	$	&	$	K
-    	$	&	$	B	$	&	$	A	$	&	$	K	$	\\		
+    	$	&	$	B	$	&	$	A	$	&	$	K	$	\\
 
-   
+
 
   \end{tabular}
-\vspace*{6mm}
 
 DFA:
-\vspace*{2mm}
 
 \begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
-    
+
     \def\radius{22mm}
-    
+
     \node[state, initial] (D) at (90:\radius) {$D$}; % Top center
     \node[state] (B) at (162:\radius) {$B$}; % Top-left
     \node[state] (O) at (18:\radius) {$O$}; % Bottom-left
@@ -230,17 +227,17 @@ DFA:
 
     (K) edge [bend left] node {$a$} (B)
     (K) edge [bend right] node {$b$} (A)
-    ;    
+    ;
 \end{tikzpicture}
 
 \newpage
 \subsection{Příklad}
-\noindent
-Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$. 
+Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$.
 
-\begin{minipage}{0.5\textwidth}    
+\begin{multicols}{2}
+
     $M$: \hspace{2mm}
-    \begin{tabular}{|c c|c c|} 
+    \begin{tabular}{|c c|c c|}
         \hline
          & & $a$ & $b$ \\
         \hline
@@ -254,17 +251,17 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
         &$ 4$ & $4$ & $4$ \\
         \hline
     \end{tabular}
- 
-\vspace*{5mm}
-\bb{0. DFA: }
+
+
+0. DFA:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state,initial] (1) {$1$}; 
+    \node[state,initial] (1) {$1$};
     \node[state, accepting] (3) [below of=1] {$3$};
     \node[state] (2) [right of=1] {$2$};
     \node[state] (4) [right of=3] {$4$};
-    
+
     \path[->]
     (1) edge [loop above] node {$a$} ()
     (1) edge [bend left] node {$b$} (2)
@@ -273,21 +270,21 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     (3) edge [bend left] node {$a$} (1)
     (3) edge [bend right] node {$b$} (2)
     (4) edge [loop right] node {$a,b$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
-\bb{1. zavedu stavy $S$, $F$:}
+1. zavedu stavy $S$, $F$:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
     \node[state] (3) [below of=1] {$3$};
     \node[state] (2) [right of=1] {$2$};
     \node[state] (4) [right of=3] {$4$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$\varepsilon$} (F)
@@ -299,22 +296,22 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     (3) edge [bend left] node {$a$} (1)
     (3) edge [bend right] node {$b$} (2)
     (4) edge [loop right] node {$a,b$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
 
-\bb{2. odstraňuji smyčky:}
+2. odstraňuji smyčky:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
     \node[state] (3) [below of=1] {$3$};
     \node[state] (2) [right of=1] {$2$};
     \node[state] (4) [right of=3] {$4$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$a^{\star}$} (F)
@@ -324,21 +321,21 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     (2) edge [bend left] node {$b$} (4)
     (3) edge [bend left] node {$a$} (1)
     (3) edge [bend right] node {$b$} (2)
-    ;    
+    ;
 \end{tikzpicture}
 
 
-\bb{3. odstraňuji vrchol $4$:}
+3. odstraňuji vrchol $4$:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
     \node[state] (3) [below of=1] {$3$};
     \node[state] (2) [right of=1] {$2$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$a^{\star}$} (F)
@@ -347,23 +344,21 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     (2) edge [bend right] node {$a$} (3)
     (3) edge [bend left] node {$a$} (1)
     (3) edge [bend right] node {$b$} (2)
-    ;    
+    ;
 \end{tikzpicture}
-\end{minipage}  \begin{minipage}{0.5\textwidth}
-    
 
+\columnbreak
 
-\vspace*{4mm}
-\bb{4. odstraňuji vrchol $2$:}
+4. odstraňuji vrchol $2$:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
     \node[state] (3) [below of=1] {$3$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$a^{\star}$} (F)
@@ -371,109 +366,98 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     (1) edge [bend left] node {$a^{\star}ba$} (3)
     (3) edge [bend left] node {$a$} (1)
     (3) edge [loop right] node {$ba$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
-\bb{5. odstraňuji smyčky:}
-
+5. odstraňuji smyčky:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
     \node[state] (3) [below of=1] {$3$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node[swap] {$a^{\star}$} (F)
     (3) edge [bend left] node {$(ba)^{\star}$} (F)
     (1) edge [bend left] node {$a^{\star}ba$} (3)
     (3) edge [bend left] node {$(ba)^{\star}a$} (1)
-    ;    
+    ;
 \end{tikzpicture}
 
-\bb{6. odstraňuji vrchol $3$:}
-
+6. odstraňuji vrchol $3$:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$a^{\star}$} (F)
     (1) edge [bend left] node {$a^{\star}ba(ba)^{\star}$} (F)
     (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
-
-\bb{7. odstraňuji paralelní hrany:}
-
-
+7. odstraňuji paralelní hrany:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [below of=S] {$F$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend right] node {$a^{\star} + (a^{\star}ba(ba)^{\star})$} (F)
     (1) edge [loop right] node {$a^{\star}ba(ba)^{\star}a$} ()
-    ;    
+    ;
 \end{tikzpicture}
 
-\vspace*{2mm}
-\bb{8. odstraňuji smyčky:}
-
+8. odstraňuji smyčky:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=22mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1$}; 
+
+    \node[state,initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1$};
     \node[state, accepting] (F) [right of=1] {$F$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [bend left] node {\hspace*{21mm}$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
     (F)
-    ;    
+    ;
 \end{tikzpicture}
 
-
-\vspace*{2mm}
-\bb{9. odstraňuji vrchol $1$:}
-
+9. odstraňuji vrchol $1$:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=65mm,on grid,auto]
     \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    
-    \node[state,initial] (S) {$S$}; 
+
+    \node[state,initial] (S) {$S$};
     \node[state, accepting] (F) [right of=S] {$F$};
-    
+
     \path[->]
     (S) edge [above] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star} + (a^{\star}ba(ba)^{\star}))$} (F)
-    ;    
+    ;
 \end{tikzpicture}
 
-\end{minipage}
-    
+\end{multicols}
+
 
 \newpage
-lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní): 
+lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 
-$M$: \hspace{2mm}
-\begin{minipage}{0.4\textwidth}   
-    \begin{tabular}{|c c|c c|} 
+\begin{multicols}{2}
+    \begin{tabular}{|c c|c c|}
         \hline
          & & $a$ & $b$ \\
         \hline
@@ -487,39 +471,37 @@ $M$: \hspace{2mm}
         &$ 4$ & $4$ & $4$ \\
         \hline
     \end{tabular}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-    
+
+\columnbreak
+
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state, initial, accepting] (1) {$1, 3$}; 
+        \node[state, initial, accepting] (1) {$1, 3$};
         \node[state] (2) [right of=1] {$2$};
         \node[state] (4) [right of=2] {$4$};
-        
+
         \path[->]
         (1) edge [loop above] node {$a$} (a)
         (1) edge [bend left] node {$b$} (2)
         (2) edge [bend left] node {$b$} (4)
         (2) edge [bend left] node {$a$} (1)
         (4) edge [loop right] node {$b$} ()
-        ;    
+        ;
     \end{tikzpicture}
-\end{minipage}
+\end{multicols}
 
-\vspace{3mm}
-\begin{minipage}{0.5\textwidth}
-    
+\begin{multicols}{2}
 
     \bb{1. přidám $S$, $F$:}
-    
+
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-        \node[state, initial] (S) {$S$}; 
-        \node[state] (1) [right of=S]{$1, 3$}; 
+        \node[state, initial] (S) {$S$};
+        \node[state] (1) [right of=S]{$1, 3$};
         \node[state] (2) [right of=1] {$2$};
         \node[state] (4) [right of=2] {$4$};
         \node[state, accepting] (F) [below of=S] {$F$};
-        
+
         \path[->]
         (S) edge [bend left] node {$\varepsilon$} (1)
         (1) edge [loop above] node {$a$} (a)
@@ -528,47 +510,45 @@ $M$: \hspace{2mm}
         (2) edge [bend left] node {$a$} (1)
         (4) edge [loop right] node {$b$} ()
         (1) edge [bend right] node {$\varepsilon$} (F)
-        ;    
+        ;
     \end{tikzpicture}
-    
-    
+
+
     \bb{2. zbavím se nodu č. 4:}
-    
+
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1, 3$}; 
+    \node[state, initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1, 3$};
     \node[state] (2) [right of=1] {$2$};
     \node[state, accepting] (F) [below of=S] {$F$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [loop above] node {$a$} (a)
     (1) edge [bend left] node {$b$} (2)
     (2) edge [bend left] node {$a$} (1)
     (1) edge [bend right] node {$\varepsilon$} (F)
-    ;    
+    ;
 \end{tikzpicture}
-\end{minipage}
-\begin{minipage}{0.2\textwidth}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-    
+
+\columnbreak
+
 \bb{3. odstraním node č. 2:}
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
-    \node[state] (1) [right of=S]{$1, 3$}; 
+    \node[state, initial] (S) {$S$};
+    \node[state] (1) [right of=S]{$1, 3$};
     \node[state, accepting] (F) [right of=1] {$F$};
-    
+
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
     (1) edge [loop above] node {$a$} (a)
     (1) edge [loop below] node {$ba$} (1)
     (1) edge [loop above] node {$a$} (1)
     (1) edge [bend left] node {$\varepsilon$} (F)
-    ;    
+    ;
 \end{tikzpicture}
 
 
@@ -577,12 +557,12 @@ $M$: \hspace{2mm}
 \vspace*{2mm}
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$}; 
+    \node[state, initial] (S) {$S$};
     \node[state, accepting] (F) [right of=1] {$F$};
-    
+
     \path[->]
     (S) edge [above] node {$(a + ba)^{\star}$} (F)
-    ;    
+    ;
 \end{tikzpicture}
 
-\end{minipage}
+\end{multicols}
