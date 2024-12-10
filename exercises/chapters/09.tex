@@ -1,4 +1,4 @@
-\section{Deváté cvičení}
+% \section{Deváté cvičení}
 \subsection{Příklad}\noindent
 Navrhněte bezkontextové gramatiky generující následující jazyky
 \begin{enumerate}[a), noitemsep]
@@ -10,7 +10,7 @@ Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 \begin{enumerate}[a)]
     \item 
 \[
-    % \hspace*{-105mm}
+    \hspace*{-105mm}
     \begin{array}{l l}
         P: & S \rightarrow 0S0 \mid A \\
         & A \rightarrow 0A1 \mid \varepsilon\\
@@ -28,7 +28,7 @@ Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 \item 
 
 \[
-    % \hspace*{-105mm}
+    \hspace*{-105mm}
     \begin{array}{l l}
         P: & S \rightarrow 0S1 \mid S1 \mid 1 \\
     \end{array}
@@ -56,7 +56,7 @@ $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\}$\\
 $V_2 = V_1 \cup \emptyset = \{S, B\}$
 
 \[
-% \hspace*{-115mm}
+\hspace*{-115mm}
     \begin{array}{l l}
         P: & S \rightarrow AB \mid A \\
            & A \rightarrow aAAb \mid bS \mid b \mid CA \\
@@ -168,7 +168,7 @@ Převeďte $\G$ do Chomského normálního tvaru.
 
 $V = \{S\}$\\ 
 \[
-% \hspace*{-125mm}
+\hspace*{-125mm}
 \begin{array}{l l}
     P: & S \rightarrow A \mid 0SA \mid 0A \\
        & A \rightarrow 1A \mid B1 \mid 1 \\
@@ -181,7 +181,7 @@ $V = \{S\}$\\
 tady: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
 
 \[
-% \hspace*{-105mm}
+\hspace*{-105mm}
 \begin{array}{l l}
     P: & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A \\
        & A \rightarrow 1A \mid B1 \mid 1 \\
@@ -192,7 +192,7 @@ tady: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$
 vytvořím pomocná pravidla pro terminály, které "nezůstaly samy" 
 
 \[
-% \hspace*{-95mm}
+\hspace*{-95mm}
 \begin{array}{l l}
     P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A \\
        & A \rightarrow X_1A \mid BX_1 \mid 1 \\
@@ -204,7 +204,7 @@ vytvořím pomocná pravidla pro terminály, které "nezůstaly samy"
 
 3. Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
 \[
-% \hspace*{-95mm}
+\hspace*{-95mm}
 \begin{array}{l l}
     P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A \\
        & Y \rightarrow SA \\
@@ -279,7 +279,7 @@ Je dán derivační strom v bezkontextové gramatice:
 \end{enumerate}
     
 a) \vspace*{-4mm}\[
-% \hspace*{-95mm}
+\hspace*{-95mm}
 \begin{array}{l l}
     P: & S \rightarrow AaB \mid \varepsilon \\
        & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon \\
@@ -419,7 +419,7 @@ proč zkonstruovaná gramatika jazyk $L$ generuje.
 
 
 \[
-    % \hspace*{-125mm}
+    \hspace*{-125mm}
     \begin{array}{l l}
         P: & S \rightarrow aSa \mid b \mid \varepsilon
     \end{array}
@@ -429,8 +429,8 @@ proč zkonstruovaná gramatika jazyk $L$ generuje.
 {\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
 % \]
 
-(2) \quad Když $w \in L(\mathcal{G})$, tak $w = a^nb^ma^n$. $S \implies \quad^\star \quad w$, 
-$S \implies \quad^\star \quad a^lSa^l$, $S \implies \quad^\star \quad  b^k$, 
+(2) \quad Když $w \in L(\mathcal{G})$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
+$S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
 $a^lb^ka^l \in L(\mathcal{G})$.
 
 
@@ -460,7 +460,7 @@ $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1
 $V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
 
 \[
-    % \hspace*{-107mm}
+    \hspace*{-107mm}
     \begin{array}{l l}
         \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon \\
         & C \rightarrow a \\
@@ -480,7 +480,7 @@ Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
 $U_1 = U_0 \cup {\emptyset}$
 
 \[
-    % \hspace*{-107mm}
+    \hspace*{-107mm}
     \begin{array}{l l}
         \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon \\
     \end{array}

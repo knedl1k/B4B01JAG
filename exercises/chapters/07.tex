@@ -6,7 +6,7 @@
 Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$, 
 který přijímá jazyk reprezentovaný regulárním výrazem. 
 
-\vspace*{3mm} 
+\vspace*{3mm}
 
 \begin{minipage}{0.5\textwidth}    
     
@@ -239,7 +239,7 @@ DFA:
 Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$. 
 
 \begin{minipage}{0.5\textwidth}    
-    $M$: $\quad$
+    $M$: \hspace{2mm}
     \begin{tabular}{|c c|c c|} 
         \hline
          & & $a$ & $b$ \\
@@ -444,7 +444,7 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
     
     \path[->]
     (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [bend left] node {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
+    (1) edge [bend left] node {\hspace*{21mm}$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
     (F)
     ;    
 \end{tikzpicture}
@@ -471,7 +471,7 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
 \newpage
 lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní): 
 
-$M$: $\quad$
+$M$: \hspace{2mm}
 \begin{minipage}{0.4\textwidth}   
     \begin{tabular}{|c c|c c|} 
         \hline
@@ -586,4 +586,3 @@ $M$: $\quad$
 \end{tikzpicture}
 
 \end{minipage}
-    
