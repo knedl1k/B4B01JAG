@@ -1,4 +1,4 @@
-% \section{Deváté cvičení}
+\section{Deváté cvičení}
 \subsection{Příklad}\noindent
 Navrhněte bezkontextové gramatiky generující následující jazyky
 \begin{enumerate}[a), noitemsep]
@@ -58,16 +58,15 @@ $V_2 = V_1 \cup \emptyset = \{S, B\}$
 \[
 \hspace*{-115mm}
     \begin{array}{l l}
-        P: & S \rightarrow AB \mid A \\
+        \G_1: & S \rightarrow AB \mid A \\
            & A \rightarrow aAAb \mid bS \mid b \mid CA \\
            & B \rightarrow BbA \mid bA \mid CaC \\
            & C \rightarrow aBB \mid aB \mid a \mid bS \mid b \\
     \end{array}
 \]
 
+Gramatika $\G_1$ už je redukovaná. 
 
-\LARGE \bb{asi jsem ji zapomnela zredukovat} % TODO: 
-\normalsize
 \section*{Redukce gramatiky}
 obecně: \\
 $V = \{A \mid A \in N, A \implies_{\G}^{\star} \, w, w \in \Sigma^{\star}\}$\\
@@ -85,7 +84,7 @@ Zredukujte gramatiku $\G$, která je dána pravidly
     \begin{array}{l l}
         P: & S \rightarrow SA \mid SB \mid \varepsilon \\
            & A \rightarrow bSA \mid baS \\
-           & B \rightarrow BbA \mid CaC \mid \varepsilon\\
+           & B \rightarrow aB \mid Ba \mid DA\\
            & C \rightarrow aCB \mid bA \\
            & D \rightarrow AB \\
     \end{array}
@@ -378,39 +377,6 @@ $w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w5 = \varepsilon$.
 
 d) je víceznačná, přepisujeme $A \rightarrow AA$. 
 
-
-
-
-\subsection{Příklad - bez řešení} % 9.7 
-Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ 
-jsou dána
-\begin{align*}
-  P:  S & \rightarrow AB \mid CS \mid AD \\
-    A & \rightarrow AC \mid AD \mid a \\
-    B & \rightarrow BC \mid b \\ 
-    C & \rightarrow DS \mid SC \mid a \\
-    D & \rightarrow BA \mid b \\
-\end{align*}
-Algoritmem CYK rozhodněte, zda gramatika $\mathcal{G}$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a 
-$w_2 = abbaa$. Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
-
-
-% TODO: nemam vubec, ale bude easy 
-
-
-\subsection{Příklad - bez řešení}
-Je dána gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C,D\}$, $\Sigma = \{a,b\}$ a pravidla $P$ 
-jsou dána
-\begin{align*}
-  P:  S & \rightarrow BD \mid CD \mid DA \\
-    A & \rightarrow CA \mid a \\
-    B & \rightarrow CB \mid b \\ 
-    C & \rightarrow AA \mid BC \mid DC \mid b \\
-    D & \rightarrow AC \mid BB \mid CB \mid a \\
-\end{align*}
-Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační 
-strom a napište jemu odpovídající levou derivaci.
-% TODO: taky nemam, tyhle skoncily nekde v eteru 
 
 \subsection{Příklad}  % samostatna prace 6 
 
