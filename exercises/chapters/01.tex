@@ -94,7 +94,8 @@ Je dán konečný automat $M$ tabulkou
 
 \columnbreak
 
-\begin{enumerate}
+\begin{enumerate} %it's better with spacing between items
+    \setItemnumber{2}
     \item $\rightarrow5-4-4-7-7-7-4 \rightarrow$
     \item ${\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b) =} \delta(\delta(\delta(2,b),a),b)$.
 \end{enumerate}
@@ -104,6 +105,30 @@ Je dán konečný automat $M$ tabulkou
 \subsection{Příklad}
 Navrhněte automat modelující posuvný registr, který provádí celočíselné dělení $4$ binárně zadaného čísla (číslo se čte 
 od nejvyššího řádu). O jaký typ automatu se jedná?
+\begin{multicols}{2}
+
+    \begin{tikzpicture}
+        \node[state, initial] (q0) {$00$};
+        \node[state, right of=q0] (q1) {$01$};
+        \node[state, accepting, below of=q0] (q2) {$10$};
+        \node[state, right of=q2] (q3) {$11$};
+    
+        \draw 
+            (q0) edge[bend left, above] node{$a$} (q1)    
+            (q0) edge[bend left, right] node{$b$} (q2)
+            (q1) edge[bend left, below] node{$a$} (q0)
+            (q1) edge[bend left, right] node{$b$} (q3)
+            (q2) edge[bend right, below] node{$a$} (q3)
+            (q2) edge[bend left, left] node{$b$} (q0)
+            (q3) edge[bend right, above] node{$a$} (q2)
+            (q3) edge[bend left, left] node{$b$} (q1)
+            ;
+    \end{tikzpicture}
+
+\columnbreak
+
+
+\end{multicols}
 
 \newpage
 \subsection{Příklad}

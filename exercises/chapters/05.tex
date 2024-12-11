@@ -15,6 +15,18 @@ Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma 
 \end{enumerate}
 Odpovědi zdůvodněte.
 
+\begin{multicols}{2}
+    a) $0^\star$.\\
+    b) $0^\star 1 0^\star$.\\
+    c) $0^\star 1 (0+1)^\star$.
+\columnbreak
+
+    d) $0^\star 1 0^\star 1 (0+1)^\star$.\\
+    e) $(0^\star 1 0^\star 1)^\star 0^\star$.\\
+    f) $0^\star 1 (0^\star 1 0^\star)^\star 0^\star$.
+\end{multicols}
+%TODO pridat zduvodneni - dukazy
+
 \subsection{Příklad}
 Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován 
 regulárním výrazem $r_2 = (01 + 10)^\star$.
@@ -26,14 +38,157 @@ regulárním výrazem $r_2 = (01 + 10)^\star$.
 \end{enumerate}
 Odpovědi zdůvodněte.
 
+\begin{multicols}{2}
+    a) $01$ nebo $10$.\\
+    b) $01100110$.
+\columnbreak
+
+    c) $0$ nebo $1$, protože délka $\not\in L_2$.\\
+    d) $10101$.
+\end{multicols}
+%TODO pridat zduvodneni - dukazy
+
 \subsection{Příklad}
-Je dán regulární výraz $r=(baa + bab) (ab)$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto 
+Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto 
 regulárním výrazem.\\
 (Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné 
 najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení 
 a Kleeneho operátor.)
 
+\textbf{1. Obecný postup}
+
+\begin{multicols}{2}
+
+    $(baa + bab) \equiv ba(a+b)$
+
+    \begin{tikzpicture}
+        \node[state, initial, accepting] (0) {$0$};
+        \node[state, above of=0] (1) {$1$};
+        \node[state, right of=0] (2) {$2$};
+        \node[state, initial, accepting, right of=2] (3) {$3$};
+        \node[state, right of=3] (4) {$4$};
+
+        \draw
+            (0) edge[bend left, left] node{$b$} (1)
+            (0) edge[bend right, below] node{$\varepsilon$} (3)
+            (1) edge[bend left, right] node{$b$} (2)
+            (2) edge[bend right, above] node{$a,b$} (0)
+            (3) edge[bend left, above] node{$a$} (4)
+            (4) edge[bend left, below] node{$b$} (3)
+            ;
+    \end{tikzpicture}
+
+\columnbreak
+
+    \begin{tabular}{|r|c c c|c|}
+        \hline
+        & $\varepsilon$ & $a$ & $b$ & $\varepsilon$ uzávěry\\
+        \hline
+        \hline
+        $1$ & $4$ & $\emptyset$ & $2$         & $\varepsilon$-uz(1) = $\{1,4\}$\\
+        $2$ & $\emptyset$ & $3$ & $\emptyset$ & $\varepsilon$-uz(2) = $\{2\}$\\
+        $3$ & $\emptyset$ & $1$ & $1$         & $\varepsilon$-uz(3) = $\{3\}$\\
+        $4$ & $\emptyset$ & $5$ & $\emptyset$ & $\varepsilon$-uz(4) = $\{4\}$\\
+        $5$ & $\emptyset$ & $\emptyset$ & $4$ & $\varepsilon$-uz(5) = $\{5\}$\\
+        \hline
+    \end{tabular}
+\end{multicols}
+
+Podmnožinová konstrukce:
+
+\[
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$\\
+    \hline
+    \hline
+    $\leftrightarrow$& $\{1,4\}$ &$5$         &$2$         &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$C$ &$D$\\
+    $$&             $5$          &$\emptyset$ &$4$         &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$\\
+    $$&             $2$          &$3$         &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
+    $\leftarrow $&  $4$          &$5$         &$\emptyset$ &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$\\
+    $$&             $3$          &$\{1,4\}$   &$\{1,4\}$   &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$\\
+    $$&             $\emptyset$  &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$\\
+    \hline
+\end{tabular}
+\]
+
+\begin{tikzpicture}
+    \node[state, initial] (d) {$D$};
+    \node[state, right of=d] (a) {$A$};
+    \node[state, below of=d] (c) {$C$};
+    \node[state, accepting, right of=a] (k) {$K$};
+    \node[state, below of=a] (o) {$O$};
+    \node[state, below of=k] (b) {$B$};
+
+    \draw
+        (d) edge[bend left, above] node{$a$} (a)
+        (d) edge[bend right, left] node{$b$} (c)
+        (a) edge[bend right, left] node{$a$} (o)
+        (a) edge[bend left, above] node{$b$} (k)
+        (c) edge[bend left, above] node{$b$} (o)
+        (c) edge[bend right, below] node{$a$} (b)
+        (k) edge[bend left, below] node{$a$} (a)
+        (k) edge[bend left, below] node{$b$} (o)
+        (b) edge[bend right, right] node{$a,b$} (k)
+        (o) edge[loop above] node{$a,b$} (o)
+
+        ;
+\end{tikzpicture}
+
+
+\textbf{2. Rozdělení na podvýrazy} 
+
+I. krok očíslování 
+
+$(b_1 a_2 a_3 + b_4 a_5 b_6)^\star (a_7 b_8)^\star \equiv (b_1 a_2 (a_3 + b_4))^\star (a_5 b_6)^\star$
+
+II. krok
+
+Pro jazyk, který je přijímaný regulárním výrazem $r$ platí:
+
+výraz může začínat: $b_1, a_5$ \\
+mohou po sobě následovat: $\bm{b_1} : a_2$; $\bm{a_2} : a_3, b_4$; $\bm{a_3} : b_1, a_5$; $\bm{b4} : b_1, a_5$; $\bm{a_5} : b_6$; $\bm{b_6} : a_5$\\
+výraz může končit: $a_3, b_4, b_6$\\
+je $\varepsilon$ v $L$? Ano.
+
+III. krok
+
+\begin{tikzpicture}
+    \node[state, initial] (s) {$S$};
+    \node[state, right of=s] (1) {$b_1$};
+    \node[state, below of=1] (5) {$a_5$};
+    \node[state, accepting, left of=5] (6) {$b_6$};
+    \node[state, right of=1] (2) {$a_2$};
+    \node[state, accepting, right of=2] (3) {$a_3$};
+    \node[state, accepting, below of=2] (4) {$b_4$};
+
+    \draw
+        (s) edge[bend left, above] node{$b$} (1)
+        (s) edge[bend left, left] node{$a$} (5)
+        (1) edge[bend right, above] node{$a$} (2)
+        (2) edge[bend right, above] node{$a$} (3)
+        (2) edge[] node[right]{$b$} (4)
+        (3) edge[bend left=90, below] node{$a$} (5)
+        (3) edge[bend right, above] node{$b$} (1)
+        (4) edge[] node{$a$} (5)
+        (4) edge[bend left,above] node{$b$} (1)
+        (5) edge[bend left, below] node{$b$} (6)
+        (6) edge[bend left, above] node{$a$} (5)
+        ;
+\end{tikzpicture}
+
+IV. podmnožinová konstrukce DFA + redukce
+
 \subsection{Příklad}
 Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte 
 redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy 
 grafu z přednášky).
+
+\begin{tikzpicture}
+    \node[state, initial] (s) {$S$};
+
+
+    \draw
+        (s) edge[bend left, above] node{$b$} (1)
+       ;
+\end{tikzpicture}
