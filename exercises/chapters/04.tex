@@ -16,10 +16,51 @@ M_1:
 \end{tabular}
 \]
 Všimněte si, že v automatu $M_1$ jsou všechny stavy koncové. Co z toho lze usoudit o jazyku, které je automatem přijímán?
+\begin{center}
+    \begin{tabular}{|r r|c c c||c|c c c||c|c c c||c|c c c||c|}
+        \hline
+        & $ $ & $ a $ & $ b $ & $ c $ & $ \sim_0 $ & $ a $ & $ b $ & $ c $ & $ \sim_1 $ & $ a $ & $ b $ & $ c $ & $ \sim_2 $ & $ a $ & $ b $ & $ c $ & $ \sim_3 $ \\ \hline \hline
+        $\leftrightarrow$ & $\{1\}  $ & $ \{1\} $ & $ \{2\} $ & $ \{1\} $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ B $ & $ K $ \\
+        $\leftarrow$     & $\{2\}  $ & $ \{1\} $ & $ \{3\}  $ & $ \{1\} $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ &$ A $ & $ K $ & $ B $ & $ K $ & $ A $ & $ K $ & $ B $ \\
+        $\leftarrow$     & $ \{3\} $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ K $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ \\
+        $\leftarrow$     & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
+        \hline
+\end{tabular}\\
+\end{center}
+
+Automat se redukcí nezmění. 
+
+\begin{center}
+    \begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]        
+        \node[state,initial, accepting] (K) {$K$}; 
+        \node[state, accepting] (B) [right of=K] {$B$};
+        \node[state, accepting] (A) [right of=B] {$A$};
+        \node[state] (O) [right of=A] {$O$};
+    
+        \path[->]
+        (K) edge [bend left] node {$b$} (B)
+        (K) edge [loop above] node {$a, c$} (B)
+        (B) edge [bend left] node {$a,c$} (K)
+        (B) edge [bend left] node {$b$} (A)
+        (A) edge [bend left] node {$a, b, c$} (O)
+        (O) edge [loop above] node {$a, b, c$} ()
+        ;
+    
+    \end{tikzpicture}
+\end{center}
+
+Automat nepřijíme slova začínající sekvencí \ii{bb} následovanou libovolným dalším znakem. 
+
+
+
 
 \subsection{Příklad} \label{4.2}
 NFA $M$ je dán tabulkou níže. Nakreslete jeho stavový diagram a podmnožinovou konstrukcí sestrojte DFA, který přijímá 
 stejný jazyk. $DFA$ zredukujte.
+
+\begin{multicols}{2}
+\raggedcolumns
+
 \[
 M:
 \begin{tabular}{|r|c c|}
@@ -35,13 +76,136 @@ M:
 \end{tabular}
 \]
 
+
+\begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]        
+    \node[state,initial] (1) {$1$}; 
+    \node[state] (2) [right of=1] {$2$};
+    \node[state] (3) [below of=2] {$3$};
+    \node[state, accepting] (4) [below of=1] {$4$};
+
+    \path[->]
+    (1) edge [bend left] node {$0$} (2)
+    (1) edge [loop above] node {$0,1$} ()
+    (2) edge [bend left] node {$1$} (3)
+    (3) edge [bend left] node {$0, 1$} (4)
+    (4) edge [loop above] node {$0, 1$} ()
+    ;
+\end{tikzpicture}
+
+
+\end{multicols}
+
+\begin{center}
+    \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c|| c |}
+        \hline
+        & & $ 0 $ & $ 1 $ & $ \sim_0 $ & $ 0 $ & $ 1 $ & $ \sim_1 $ & $ 0 $ & $ 1 $ & $ \sim_2 $ & $ 0 $ & $ 1 $ & $\sim_3$ \\ \hline \hline
+        $\to$ & $\{1\}$ & $\{1,2\}$ & $\{1\}$ & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $O$\\
+        & $\{1,2\}$& $\{1, 2\}$ & $\{1, 3\}$ & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ \\
+        & $\{1,3\}$& $\{1, 2, 4\}$ & $\{1,4\}$ & $O$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ \\
+        $\gets$ & $\{1,2,4\}$& $\{1, 2, 4\}$ & $\{1, 3, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$\\
+        $\gets$ & $\{1,4\}$ & $\{1,2, 4\}$ & $\{1, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+        $\gets$ & $\{1, 3, 4\}$& $\{1, 2, 4\}$ & $\{1, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+        \hline
+    \end{tabular}
+
+\medskip
+
+\begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]        
+    \node[state,initial] (O) {$O$}; 
+    \node[state] (B) [right of=O] {$B$};
+    \node[state] (A) [right of=B] {$A$};
+    \node[state, accepting] (K) [right of=A] {$K$};
+
+    \path[->]
+    (O) edge [bend left] node {$0$} (B)
+    (O) edge [loop below] node {$1$} ()
+    (B) edge [bend left] node {$1$} (A)
+    (B) edge [loop below] node {$0$} ()
+    (A) edge [bend left] node {$0, 1$} (K)
+    (K) edge [loop below] node {$0, 1$} ()
+    ;
+\end{tikzpicture}
+
+
+
+\end{center}
+
+
+
 \subsection{Příklad}
 Navrhněte NFA přijímající jazyk $L= L_1 \cup L_2$, kde $L_1 = L(M)$, kde $M$ je automat z $4.2$, a % TODO: reference to 4.2 
 ${L_2 = \{u \mid u \text{ končí } 1\}}$. K tomuto NFA zkonstruujte DFA přijímající stejný jazyk. DFA redukujte.
 
+$L_1:$ 
+\begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]        
+    \node[state,initial] (O) {$O$}; 
+    \node[state] (B) [right of=O] {$B$};
+    \node[state] (A) [right of=B] {$A$};
+    \node[state, accepting] (K) [right of=A] {$K$};
+
+    \path[->]
+    (O) edge [bend left] node {$0$} (B)
+    (O) edge [loop above] node {$1$} ()
+    (B) edge [bend left] node {$1$} (A)
+    (B) edge [loop above] node {$0$} ()
+    (A) edge [bend left] node {$0, 1$} (K)
+    (K) edge [loop above] node {$0, 1$} ()
+    ;
+\end{tikzpicture}
+
+
+$L_2$: 
+\begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]        
+    \node[state,initial] (C) {$C$}; 
+    \node[state, accepting] (D) [right of=C] {$D$};
+
+    \path[->]
+    (C) edge [bend left] node {$1$} (D)
+    (C) edge [loop above] node {$0,1$} ()
+    ;
+\end{tikzpicture}
+
+\medskip
+
+Podmnožinová konstrukce: 
+
+\begin{tabular}{|r r|c c||c|c c||c|c c||c|c c|| c |}
+    \hline
+    & & $ 0 $ & $ 1 $ & $ \sim_0 $ & $ 0 $ & $ 1 $ & $ \sim_1 $ & $ 0 $ & $ 1 $ & $ \sim_2 $ & $ 0 $ & $ 1 $ & $\sim_3$ \\ \hline \hline
+    $\to$ & $\{O, C\}$ & $\{B, C\}$ & $\{O, C, D\}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $A$ & $L$ & $M$ & $A$ & $L$ \\
+    $\to$ & $\{B, C\}$ & $\{B, C\}$ & $\{A, C, D\}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $K$ & $M$ & $M$ & $K$ & $M$ \\
+    & $\{O, C, D\}$ & $\{O, C, D\}$ & $\{O, C, D\}$ & $K$ & $O$ & $K$ & $A$ & $O$ & $A$ & $A$ & $M$ & $A$ & $A$ \\
+    $\gets$ & $\{A, C, D\}$ & $\{K, C\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$ & $\{K, C\}$ & $\{K, C, D\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$ & $\{K, C, D\}$ & $\{K, C, D\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    \hline
+\end{tabular}
+
+Výsledný redukovaný DFA: 
+
+\begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
+    \node[state,initial] (L) {$L$}; 
+    \node[state,accepting] (A) [right of=L] {$A$};
+    \node[state] (M) [right of=A] {$M$};
+    \node[state] (K) [right of=M] {$K$};
+
+    \path[->]
+    (L) edge [bend right] node {$0$} (M)
+    (L) edge [bend left] node {$1$} (A)
+    (M) edge [loop above] node {$0$} ()
+    (M) edge [bend left] node {$1$} (K)
+    (A) edge [loop above] node {$1$} ()
+    (A) edge [bend left] node {$0$} (M)
+    (K) edge [loop above] node {$0, 1$} ()
+    ;
+\end{tikzpicture}
+
 \subsection{Příklad}
 Jsou dány dva $\varepsilon$-NFA. Rozhodněte, zda přijímají stejný jazyk. Pro oba $\varepsilon$-NFA sestrojte redukované 
 DFA.
+
+% TODO: not sure with the formatting here 
+
 \[
 M_1:
 \begin{tabular}{|r|c c c c|}
@@ -68,6 +232,154 @@ M_2:
 \end{tabular}
 \]
 
+
+$M_1$: 
+\begin{multicols}{2}
+\raggedcolumns
+
+\[
+\begin{tabular}{|r|c c c c| c |}
+    \hline
+    & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry\\
+    \hline
+    \hline
+    $\rightarrow p$& $\emptyset$& $\{p\}$ & $\{q\}$ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p\}$\\
+    $q$            & $\{p\}$    & $\{q\}$ & $\{r\}$ & $\emptyset$ & $\varepsilon\text{-uz}(q) = \{p,q\}$\\
+    $\leftarrow r$ & $\{q\}$    & $\{r\}$ & $\emptyset$ & $\{p\}$& $\varepsilon\text{-uz}(r) = \{p,q,r\}$\\
+    \hline
+\end{tabular} 
+\]
+\begin{center}
+    \begin{tikzpicture}[shorten >=1pt, node distance=30cm, on grid, auto]
+        \node[state, initial] (p) at (0,0) {$p$};
+        \node[state] (q) at (3, 0) {$q$};
+        \node[state, accepting] (r) at (1.5, -2.6) {$r$};
+
+        \path[->]
+        (p) edge [bend left=17] node {$b$} (q)
+        (p) edge [bend left=17] node {$c$} (r)
+        (p) edge [loop below] node {$a$} ()
+        (q) edge [bend left=17] node {$\varepsilon$} (p)
+        (q) edge [bend left=17] node {$b$} (r)
+        (q) edge [loop right] node {$a$} ()
+        (r) edge [bend left=17] node {$c$} (p)
+        (r) edge [bend left=17] node {$\varepsilon$} (q)
+        (r) edge [loop right] node {$a$} ()
+
+        ;
+    \end{tikzpicture}
+\end{center}
+
+\end{multicols}
+
+\begin{multicols}{2}
+    \raggedcolumns
+    Redukovaný DFA:\\
+    \begin{center}        
+    \begin{tabular}{|r r|c c c|}
+        \hline
+        & $ $ & $ a $ & $ b $ & $ c $ \\ \hline \hline
+        $ \to $ & $\{p\}$ & $\{p\}$ & $\{p, q\}$ & $\{p, q, r\}$ \\
+        & $\{p, q\}$ & $\{p, q\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ \\
+        $\gets$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ \\
+        \hline
+    \end{tabular}
+
+\end{center}
+% \begin{center}
+    
+        \begin{tikzpicture}[shorten >=1pt, node distance=30cm, on grid, auto]
+            \node[state, initial] (p) at (0,0) {$p$};
+            \node[state] (q) at (2.5, 0) {$p,q$};
+            \node[state, accepting] (r) at (1.25, -2) {$p,q,r$};
+        
+            \path[->]
+            (p) edge [loop above] node {$a$} ()
+            (p) edge node {$b$} (q)
+            (p) edge node {$c$} (r)
+            (q) edge [loop right] node {$a$} ()
+            (q) edge node {$b,c$} (r)
+            (r) edge [loop right] node {$a, b, c$} ()
+        
+            ;
+        \end{tikzpicture}
+    % \end{center}
+
+\end{multicols}
+
+$M_2$: 
+\begin{multicols}{2}
+\raggedcolumns
+
+\[
+\begin{tabular}{|r|c c c c| c |}
+    \hline
+    & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry\\
+    \hline
+    \hline
+    $\rightarrow p$& $\{q, r\}$& $\varepsilon$ & $\{q\} $ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p, q, r\}$\\
+    $q$            & $\emptyset$    & $\{p\}$ & $\{q\}$ & $\{p,q\}$ & $\varepsilon\text{-uz}(q) = \{q\}$\\
+    $\leftarrow r$ & $\emptyset$    & $\emptyset$ & $\emptyset$ & $\{p\}$& $\varepsilon\text{-uz}(r) = \{r\}$\\
+    \hline
+\end{tabular} 
+\]
+\begin{center}
+    \begin{tikzpicture}[shorten >=1pt, node distance=30cm, on grid, auto]
+        \node[state, initial] (p) at (0,0) {$p$};
+        \node[state] (q) at (3, 0) {$q$};
+        \node[state, accepting] (r) at (1.5, -2.6) {$r$};
+
+        \path[->]
+        (p) edge [bend left=17] node {$b$} (q)
+        (p) edge [bend left=17] node {$c$} (r)
+        (p) edge [loop below] node {$a$} ()
+        (q) edge [bend left=17] node {$\varepsilon$} (p)
+        (q) edge [bend left=17] node {$b$} (r)
+        (q) edge [loop right] node {$a$} ()
+        (r) edge [bend left=17] node {$c$} (p)
+        (r) edge [bend left=17] node {$\varepsilon$} (q)
+        (r) edge [loop right] node {$a$} ()
+
+        ;
+    \end{tikzpicture}
+\end{center}
+
+\end{multicols}
+
+\begin{multicols}{2}
+    \raggedcolumns
+    Redukovaný DFA:\\
+    \begin{center}
+        
+    \begin{tabular}{|r r|c c c|}
+        \hline
+        & $ $ & $ a $ & $ b $ & $ c $ \\ \hline \hline
+        $ \leftrightarrow $ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{pq\}$ & $\{p, q, r\}$ \\
+        & $\{q\}$ & $\{p, q, r\}$ & $\{q\}$ & $\{p, q, r\}$ \\
+        \hline
+    \end{tabular}
+    \end{center}
+
+    
+    % \begin{center}
+        
+    \begin{tikzpicture}[shorten >=1pt, node distance=30mm, on grid, auto]
+        \node[state, initial] (p) {$p$};
+        \node[state, accepting] (r) [right of=p] {$p,q,r$};
+    
+        \path[->]
+        (p) edge [loop above] node {$a,c$} ()
+        (p) edge [bend left] node {$b$} (q)
+        (r) edge [loop above] node {$b$} ()
+        (r) edge [bend left] node {$a, c$} (p)
+    
+        ;
+    \end{tikzpicture}
+
+% \end{center}
+
+\end{multicols}
+
 \subsection{Příklad}
 Je dán $\varepsilon$-NFA. Zkonstruujte redukovaný DFA přijímající stejný jazyk jako M.
 \[
@@ -85,3 +397,84 @@ M:
     \hline
 \end{tabular}
 \]
+
+\begin{multicols}{2}
+$\varepsilon$-NFA:
+\begin{center}
+    
+    \begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
+    
+        \def\radius{22mm}
+        
+        % Place nodes in a regular pentagon arrangement
+        \node[state, initial, accepting] (1) at (90:\radius) {$1$}; % Top center
+        \node[state] (2) at (18:\radius) {$2$}; % Bottom-left
+        \node[state] (5) at (162:\radius) {$5$}; % Top-left
+        \node[state] (3) at (306:\radius) {$3$}; % Bottom-right
+        \node[state, initial, accepting] (4) at (234:\radius) {$4$}; % Top-right
+        \path[->]
+        
+        (1) edge [bend left=20] node {$a$} (2)
+        (2) edge [bend left=20] node {$b$} (3)
+        (3) edge [bend right=20] node {$\varepsilon$} (4)
+        (3) edge [bend right=20] node {$\varepsilon$} (1)
+        (4) edge [bend left=20] node {$b$} (5)
+        (5) edge [bend left=20] node {$\varepsilon$} (1)
+        (5) edge [bend left=20] node {$\varepsilon$} (4)
+        
+        ;    
+    \end{tikzpicture}
+\end{center}
+    
+
+\[
+    \begin{tabular}{|r|c c c| l |}
+        \hline
+        & $\varepsilon$ & $a$ & $b$ & $\varepsilon$-uzávěry\\
+        \hline
+        \hline
+        $\leftrightarrow 1$& $\emptyset$ & $\{2\}$& $\emptyset$ & $\varepsilon\text{-uz}(1) = \{1\}$\\
+        $2$                & $\emptyset$ & $\emptyset$& $\{3\}$& $\varepsilon\text{-uz}(2) = \{2\}$\\
+        $3$                & $\{1,4\}$ & $\emptyset$& $\emptyset$ & $\varepsilon\text{-uz}(3) = \{1,3,4\}$\\
+        $\leftrightarrow 4$& $\emptyset$ & $\emptyset$& $\{5\}$ & $\varepsilon\text{-uz}(4) = \{4\}$\\
+        $5$                & $\{1,4\}$ & $\emptyset$& $\emptyset$ & $\varepsilon\text{-uz}(5) = \{1,4,5\}$\\
+        \hline
+    \end{tabular}
+    \]
+        
+
+\end{multicols}
+
+Podmnožinová konstrukce: 
+
+\begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|}
+    \hline
+    & & $ a $ & $ b $ & $ \sim_0 $ & $ a $ & $ b $ & $ \sim_1 $ & $ a $ & $ b $ & $ \sim_2 $ & $ a $ & $ b $ & $\sim_3$ \\ \hline \hline
+    $\to$ & $\bc{1, 4} $ & $ \bc{2} $ & $ \bc{1,4,5} $ & $ O $ & $ O $ & $ K $ & $ A $ & $ A $ & $ K $ & $ A $ & $ B $ & $ K $ & $ A $ \\
+     & $\bc{2}$ & $ \emptyset  $ & $ \bc{1, 3, 4}$ & $ O $ & $ O $ & $ K $ & $ A $ & $ O $ & $ K $ & $ B $ & $ O $ & $ K $ & $ B $ \\
+    $\gets$ & $ \bc{1, 4, 5}$ & $ \bc{2} $ & $\bc{1, 4, 5}$ & $ K $ & $ O $ & $ K $ & $  K$ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
+     & $ \emptyset  $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
+    $\gets$ & $ \bc{1, 3, 4} $ & $ \bc{2} $ & $ \bc{1, 4, 5} $ & $ K $ & $ O $ & $ K $ & $ K $ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
+    \hline
+\end{tabular}
+
+\medskip
+Výsledný DFA: 
+
+\begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]        
+    \node[state,initial] (A) {$A$}; 
+    \node[state] (B) [right of=A] {$B$};
+    \node[state] (O) [below of=B] {$O$};
+    \node[state, accepting] (K) [below of=A] {$K$};
+
+    \path[->]
+    (A) edge [bend left] node {$a$} (B)
+    (A) edge [bend left] node {$b$} (K)
+    (B) edge [bend left] node {$a$} (O)
+    (B) edge [bend left] node {$b$} (K)
+    (O) edge [loop right] node {$a, b$} (O)
+    (K) edge [bend left] node {$a$} (A)
+    (K) edge [loop left] node {$b$} ()
+    ;
+\end{tikzpicture}
+
