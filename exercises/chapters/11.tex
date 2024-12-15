@@ -21,3 +21,58 @@ $Q = \{q_0, q_1, q_2, q_f\}$, $\Sigma = \{a, b\}$, $\Gamma =\{Z_0, X\}$ a přech
     \item Ukažte práci zásobníkového automatu nad slovem $aabba$ a slovem $abbbb$.
     \item Charakterizujte jazyk $L$, který tento zásobníkový automat přijímá. Tvrzení zdůvodněte.
 \end{enumerate}
+
+\begin{multicols}{2}
+    Stavový diagram automatu $A$.
+
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, below of=0] (f) {$q_f$};
+
+        \draw
+            (0) edge[loop above] node[align=center] {$a,Z_0 / X Z_0$ \\ $a,X / XX$} (0)
+            (0) edge[bend right, below] node {$b, X / \varepsilon$} (1)
+            (0) edge[bend right, above] node {$b, Z_0 / Z_0$} (1)
+            (0) edge[bend right, left] node{$\varepsilon, Z_0 / \varepsilon$} (f)
+            (1) edge[loop above] node[align=center] {$b,Z_0 / Z_0$ \\ $b,X / \varepsilon$} (1)
+            (1) edge[bend left, right] node{$\varepsilon, Z_0 / \varepsilon$} (f)
+
+            ;
+    \end{tikzpicture}
+
+    \columnbreak
+
+    \noindent
+    Práce nad slovem $w_1 = aabba$.
+
+    \noindent
+    $(q_0, aabba, Z_0) \vdash (q_0, abba, X Z_0) \vdash (q_0, bba, XXZ_0) \vdash (q_1, ba, X Z_0) \vdash (q_1, a, Z_0)$. 
+    Konec, neúspěch.
+
+    \noindent
+    Práce nad slovem $w_2 = abbbb$.
+
+    \noindent
+    $(q_0, abbbb, Z_0) \vdash (q_0, bbbb, X Z_0) \vdash (q_1, bbb, Z_0) \vdash (q_1, bb, Z_0) \vdash (q_1, b, Z_0)
+    \vdash (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$. \\Konec, úspěch.
+\end{multicols}
+
+$L(A) \stackrel{?}{=} \overbrace{\{a^i b^j \mid 0 \leq i, i \leq j\}}^L$
+
+Důkaz.
+
+a) $L \subseteq L(A)$
+\begin{itemize}[leftmargin=*]
+    \item $i=j=0 \text{: } (q_0, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$
+    \item $0=i < j \text{: } (q_0, b^j, Z_0) \vdash (q_1, b^{j-1}, Z_0) \vdash^{(j-1)} (q_1, \varepsilon, Z_0) 
+    \vdash (q_f, \varepsilon, \varepsilon)$
+    \item ${0<i \leq j \text{: } (q_0, a^i b^j, Z_0) \vdash^i (q_0, b^{i+k}, X^i Z_0) \vdash (q_0, b^{i+k-1}, X^{i-1} Z_0)
+    \vdash^{(i-1)} (q_1, b^k, Z_0) \vdash^k (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon),}\\
+    i+k = j, k=j-i \geq 0$.
+\end{itemize}
+
+b) $L(A) = N(A) \subseteq L$
+
+$w \in L(A)$
+%TODO complete b) proof

@@ -1,18 +1,121 @@
 \section{Dvanácté cvičení}
 
 \subsection{Příklad}
-Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = N(B)$ 
+Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$ 
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{(ab)^i b^j a^{j-i} \mid 0 < i < j\}\text{.}\]
 
+$\implies L= \{(ab)^i b^{i+k} a^k \mid i>0, k>0\} \implies N(A)=\underbrace{\{(ab)^i b^i \mid k>0\}}_X,
+L(B)=\underbrace{\{b^k a^k \mid k>0\}}_Y$.
+
+Dva způsoby řešení:
+
+a) Přímo.
+
+\begin{tikzpicture}
+    \node[state, initial] (0) {$q_0$};
+    \node[state, right of=0] (1) {$q_1$};
+    \node[state, right of=1] (2) {$q_2$};
+    \node[state, right of=2] (3) {$q_3$};
+    \node[state, right of=3] (4) {$q_4$};
+    \node[state, right of=4] (5) {$q_5$};
+    \node[state, accepting, below of=5] (f) {$q_f$};
+
+    \draw
+        (0) edge[bend left, above] node{$a, Z_0 / Z_0$} (1)
+        (1) edge[bend left, above] node[align=center] {$b, Z_0 / X Z_0$ \\ $b, X / XX$} (2)
+        (2) edge[bend left, above] node{$b, X / \varepsilon$} (3)
+        (2) edge[bend left, below] node{$a, X / XX$} (1)
+        (3) edge[loop above] node{$b, X / \varepsilon$} (3)
+        (3) edge[bend left, above] node{$b, Z_0 / Y Z_0$} (4)
+        (4) edge[loop above] node{$b, Y / YY$} (4)
+        (4) edge[bend left, above] node{$a, Y / \varepsilon$} (5)
+        (5) edge[loop above] node{$a, Y / \varepsilon$} (5)
+        (5) edge[bend left, left] node{$\varepsilon Z_0 / \varepsilon$} (f)
+
+        ;
+\end{tikzpicture}
+
+b) Přes gramatiku.
+\begin{multicols}{2}
+    \begin{flalign*}
+        \mathcal{G}: S &\rightarrow AB &\\
+        A &\rightarrow abAb \mid abb &\\
+        B &\rightarrow bBa \mid ba &
+    \end{flalign*}
+    \columnbreak
+
+    \noindent
+    1. $L \subseteq L(G)$\\
+    $S \xRightarrow{S \rightarrow AB} AB \xRightarrow{A \rightarrow abAb}^{(i-1)} (ab)^{i-1} A b^{i-1} B \xRightarrow{A \rightarrow abb}
+    (ab)^i b^i B \xRightarrow{B \rightarrow bBa}^{(k-1)} (ab)^i b^i b^{k-1} B a^{k-1} \xRightarrow{B \rightarrow ba} (ab)^i b^i b^k a^k$.
+
+    \noindent
+    2. $L(G) \subseteq L$\\
+    $S \rightarrow^\star w$\\
+    $S \rightarrow AB$\\
+    $A \xRightarrow{A \rightarrow abAb}^j (ab)^j A b^j \xRightarrow{A \rightarrow abb} (ab)^j a b b^j$
+    %TODO complete proof 2.
+
+\end{multicols}
 
 \subsection{Příklad}
 Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = N(B)$ 
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{w \mid w \text{ začíná a končí symbolem } 1 \text{ a obsahuje o dvě } 1 \text{ více než } 0\}\text{.}\]
+\begin{multicols}{2}
+    $L = \{1u1 \mid |u|_0 = |u|_1\}, i = |u|_0$
+
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, right of=1] (f) {$q_f$};
+    
+        \draw
+            (0) edge[bend left, above] node{$1, Z_0 / Z_0$} (1)
+            (1) edge[loop above] node[align=center]{$0, Z_0 / 0 Z_0$\\$1, Z_0 / 1 Z_0$} (1)
+            (1) edge[loop below] node[align=center]{$0,0 / 00$\\ $1,1 / 11$\\ $0,1 / \varepsilon$\\ $1,0 / \varepsilon$} (1)
+            (1) edge[bend left, above] node{$1, Z_0 / \varepsilon$} (f)
+    
+            ;
+    \end{tikzpicture}
+
+    \columnbreak
+
+    1) $L \subseteq N(A)$\\
+    $(q_0, 1u1, Z_0) \vdash (q_1, u1, Z_0) \vdash^\star (q_1, 1, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$.
+
+    2) $L(B) \subseteq L$\\
+
+    $.$
+    %TODO complete proof 2.
+
+\end{multicols}
 
 \subsection{Příklad}
 Je dán jazyk $L = \{0^n 1^m; 0 \leq n \leq m \leq 2n\}$. Rozhodněte, zda jazyk $L$ je bezkontextový.\\
 V případě, že je bezkontextový, najděte buď bezkontextovou gramatiku, která ho generuje, nebo zásobníkový automat, který 
 ho přijímá.\\
 V případě, že není bezkontextový, tvrzení dokažte.
+\begin{multicols}{2}
+    \begin{flalign*}
+        \mathcal{G}_1: S \rightarrow 0SA1 \mid \varepsilon &\\
+        A \rightarrow 1 \mid \varepsilon
+    \end{flalign*}
+    \columnbreak
+
+    \begin{flalign*}
+        \mathcal{G}_2: S \rightarrow 0S11 \mid 0S1 \mid \varepsilon &\\
+        \\ \\
+    \end{flalign*}
+\end{multicols}
+
+Důkaz $\mathcal{G}_2$.
+
+1) $L \subseteq L(\mathcal{G}_2)$\\
+$0 < n \leq m \leq 2n \rightarrow k=2n-m \geq 0$\\
+$S \xRightarrow{S \rightarrow 0S1}^{(k)} 0^k S 1^k \xRightarrow{S \rightarrow 0S11}^{(n-k)} 0^k 0^{n-1} S 1^{n-1} 1^{n-1} 1^k
+\xRightarrow{S \rightarrow \varepsilon} 0^n 1^{2n-k} = 0^n 1^{2n - 2n + m} = 0^n 1^m$.
+
+2) $L(\mathcal{G}_2) \subseteq L$\\
+%TODO complete proof 2.
