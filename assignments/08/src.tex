@@ -56,8 +56,28 @@ B4B01JAG} %if necessary, replace with your course title
 
 \noindent
 \textbf{Příklad 12.5.}\\
-Je dán jazyk $L$. Sestrojte zásobníkové automaty $A, B$ tak, že $L = N(A)$ a $L = L(B)$, (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
+Je dán jazyk $L$. Sestrojte zásobníkové automaty $A, B$ tak, že $L = N(A)$ a $L = L(B)$, (tj. $A$ přijímá $L$ prázdným 
+zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{w \in \{a,b\}^\star \mid |w|_a = |w|_b -1\}\text{.}\]
+
+Přímou metodou:
+
+\begin{tikzpicture}
+      \node[state, initial] (0) {$q_0$};
+      \node[state, right of=0] (1) {$q_1$};
+      \node[state, accepting, right of=1] (f) {$q_f$};
+  
+      \draw
+          (0) edge[loop above] node[align=center]{$a, Z_0 / A Z_0$ \\ $b, Z_0 / B Z_0$} (0)
+          (0) edge[loop below] node[align=center]{$a, A / A A$ \\ $b, B / B B$ \\ $a, B / \varepsilon$ \\ $b, A / \varepsilon$} (0)
+          (0) edge[bend left, above] node{$b, Z_0 / \varepsilon$} (1)
+          (0) edge[bend left, below] node{$\varepsilon, B / \varepsilon$} (1)
+          (1) edge[bend left, above] node{$\varepsilon, \varepsilon / \varepsilon$} (f)
+          
+      
+          ;
+  \end{tikzpicture}
+
 
 % --------------------------------------------------------------
 %     You don't have to mess with anything below this line.
