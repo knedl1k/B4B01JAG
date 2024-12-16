@@ -11,7 +11,9 @@
 % --------------------------------------------------------------
 \title{\textbf{Sbírka řešených příkladů}}
 \author{\textbf{B4B01JAG}}
-\maketitle
+\maketitle 
+\thispagestyle{empty}
+
 
 \hypersetup{
     % colorlinks=true, %set true if you want colored links
@@ -20,9 +22,16 @@
     pdfborder=0 0 0  %hide red boxes
 }
 
-\pagebreak
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
 \tableofcontents
 \addtocontents{toc}{~\hfill\textbf{Strana}\par}
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1} 
 
 \input{chapters.tex}
 
