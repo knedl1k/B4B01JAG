@@ -5,7 +5,7 @@ Navrhněte bezkontextové gramatiky generující následující jazyky
     \item $L_1 = \{0^{m+n} 1^n 0^m \mid 0 \leq n,m\}$.
     \item $L_2 = \{0^i 1^j \mid 0 \leq i < j\}$.
 \end{enumerate}
-Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
+Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 \begin{enumerate}[a)]
     \item 
@@ -38,8 +38,8 @@ Důkazy mě těžce nebaví, všude jsou cca stejný.
 \end{enumerate}
 
 \subsection{Příklad}\noindent % 9.2
-Ke gramatice $\mathcal{G}$ zkonstruujte nevypouštěcí gramatiku $\mathcal{G}_1$, pro kterou 
-$L(\mathcal{G}_1) = L(\mathcal{G}) - \{\varepsilon\}$. Gramatiku $\mathcal{G}_1$ zredukujte.
+Ke gramatice $\G$ zkonstruujte nevypouštěcí gramatiku $\G_1$, pro kterou 
+$L(\G_1) = L(\G) - \{\varepsilon\}$. Gramatiku $\G_1$ zredukujte.
 
 \[
     \begin{array}{l l}
@@ -395,18 +395,18 @@ proč zkonstruovaná gramatika jazyk $L$ generuje.
 {\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
 % \]
 
-(2) \quad Když $w \in L(\mathcal{G})$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
+(2) \quad Když $w \in L(\G)$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
 $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
-$a^lb^ka^l \in L(\mathcal{G})$.
+$a^lb^ka^l \in L(\G)$.
 
 
 \subsection{Příklad} %9.10, samostatna prace 6 6 
 
-Zredukujte gramatiku $\mathcal{G}$, kter je dána pravidly: 
+Zredukujte gramatiku $\G$, kter je dána pravidly: 
 \[
 % \hspace*{-85mm}
 \begin{array}{l l}
-    \mathcal{G}: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
+    \G: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
     & A \rightarrow bCD \mid Dba \\
     & B \rightarrow Bb \mid AC \\
     & C \rightarrow aA \mid a \\

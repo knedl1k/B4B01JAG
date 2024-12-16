@@ -1,7 +1,7 @@
 \section{Osmé cvičení}
 
 \subsection{Příklad}    \noindent
-K automatu $M$, který je dán následující tabulkou, zkostruujte regulární gramatiku $\mathcal{G}$, která generuje jazyk 
+K automatu $M$, který je dán následující tabulkou, zkostruujte regulární gramatiku $\G$, která generuje jazyk 
 $L = L(M)$. 
 
 $M$: \hspace{2mm}
@@ -22,7 +22,7 @@ $M$: \hspace{2mm}
     \end{tabular}
 
     \vspace*{5mm}
-    $\mathcal{G} = (N, \Sigma, S, P)$ \\
+    $\G = (N, \Sigma, S, P)$ \\
     $ N = \{S, A, B, C, D\}$\\ 
     $\Sigma = \{a, b\}$
 
@@ -66,8 +66,8 @@ $M$: \hspace{2mm}
 
 \subsection{Příklad}
 \noindent
-Ke gramatice $\mathcal{G}$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\mathcal{G})$. Gramatika 
-$\mathcal{G} = (N, \{a,b\}, S, P)$, kde $N = \{S, A, B\}$ a pravidla jsou 
+Ke gramatice $\G$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\G)$. Gramatika 
+$\G = (N, \{a,b\}, S, P)$, kde $N = \{S, A, B\}$ a pravidla jsou 
 \[
     \begin{array}{l l}
         P: & S \rightarrow abA \mid aB \\
@@ -184,7 +184,7 @@ Je dán derivační strom v bezkontextové gramatice:
     \stackrel{A \rightarrow a}{\Longrightarrow} baaA\stackrel{A \rightarrow a}{\Longrightarrow} baaa$.
 
 \subsection{Příklad} % 8.4
-Je dána bezkontextová gramatika $\mathcal{G} = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$, 
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$, 
 s pravidly 
 $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$ 
 
@@ -263,8 +263,8 @@ $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 
 \subsection{Příklad} 
 \noindent
-Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk $L = \{0^ij^i2^j; i, j \geq 0\}$. Zdůvodněte, 
-proč gramatika $\mathcal{G}$ jazyk $L$ generuje. 
+Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^ij^i2^j; i, j \geq 0\}$. Zdůvodněte, 
+proč gramatika $\G$ jazyk $L$ generuje. 
 
 \[
     \begin{array}{l l}
@@ -275,14 +275,14 @@ proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
 \]
 \vspace*{3mm}
 
-1. $L \subseteq L(\mathcal{G})$ (gramatika vygeneruje vše): \\
+1. $L \subseteq L(\G)$ (gramatika vygeneruje vše): \\
 
 $\quad S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 (i)}{\Longrightarrow} 0^iX1^iY 
 \stackrel{Y \rightarrow 2Y(j)}{\Longrightarrow} 0^iX1^iY2^j \stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 
 0^i1^iY2^j\stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $
 
 \vspace*{3mm}
-2. $L(\mathcal{G}) \subseteq L$ (gramatika nevygeneruje nic navíc): \\
+2. $L(\G) \subseteq L$ (gramatika nevygeneruje nic navíc): \\
 
 \noindent
 Uvažujme derivaci $S \implies \star w$. Pak poslední použité pravidlo musí být $X \rightarrow \varepsilon$ nebo 
@@ -296,7 +296,7 @@ $ S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 
 
 \subsection{Příklad}
 \noindent
-Ke gramatice $\mathcal{G}$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \{\varepsilon\}$.
+Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \{\varepsilon\}$.
 
 \[
     \begin{array}{l l}
@@ -362,7 +362,7 @@ je dán tabulkou
     \end{tabular}
     \vspace*{10mm}
     
-    $\mathcal{G} = (N, \Sigma, S, P)$ \vspace*{2mm}
+    $\G = (N, \Sigma, S, P)$ \vspace*{2mm}
     
     $N = \{S, A, B, C, D\}$ \vspace*{2mm}
     
@@ -416,8 +416,8 @@ je dán tabulkou
 \section*{Navrhněte gramatiku}
 \subsection{Příklad}
     \noindent
-    Navrhněte bezkontextovou gramatiku $\mathcal{G}$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
-    Zdůvodněte, proč gramatika $\mathcal{G}$ jazyk $L$ generuje.
+    Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
+    Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
     
     \begin{quote}
     $S \rightarrow XY$\\

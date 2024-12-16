@@ -39,7 +39,7 @@ a) Přímo.
 b) Přes gramatiku.
 \begin{multicols}{2}
     \begin{flalign*}
-        \mathcal{G}: S &\rightarrow AB &\\
+        \G: S &\rightarrow AB &\\
         A &\rightarrow abAb \mid abb &\\
         B &\rightarrow bBa \mid ba &
     \end{flalign*}
@@ -99,23 +99,23 @@ ho přijímá.\\
 V případě, že není bezkontextový, tvrzení dokažte.
 \begin{multicols}{2}
     \begin{flalign*}
-        \mathcal{G}_1: S \rightarrow 0SA1 \mid \varepsilon &\\
+        \G_1: S \rightarrow 0SA1 \mid \varepsilon &\\
         A \rightarrow 1 \mid \varepsilon
     \end{flalign*}
     \columnbreak
 
     \begin{flalign*}
-        \mathcal{G}_2: S \rightarrow 0S11 \mid 0S1 \mid \varepsilon &\\
+        \G_2: S \rightarrow 0S11 \mid 0S1 \mid \varepsilon &\\
         \\ \\
     \end{flalign*}
 \end{multicols}
 
-Důkaz $\mathcal{G}_2$.
+Důkaz $\G_2$.
 
-1) $L \subseteq L(\mathcal{G}_2)$\\
+1) $L \subseteq L(\G_2)$\\
 $0 < n \leq m \leq 2n \rightarrow k=2n-m \geq 0$\\
 $S \xRightarrow{S \rightarrow 0S1}^{(k)} 0^k S 1^k \xRightarrow{S \rightarrow 0S11}^{(n-k)} 0^k 0^{n-1} S 1^{n-1} 1^{n-1} 1^k
 \xRightarrow{S \rightarrow \varepsilon} 0^n 1^{2n-k} = 0^n 1^{2n - 2n + m} = 0^n 1^m$.
 
-2) $L(\mathcal{G}_2) \subseteq L$\\
+2) $L(\G_2) \subseteq L$\\
 %TODO complete proof 2.
