@@ -51,16 +51,13 @@ $M$: \hspace{2mm}
     ;    
 \end{tikzpicture}
 
-\[
-    \hspace*{-45mm}
-    \begin{array}{l l}
-        P: & S \rightarrow A \mid D \\
-        & A \rightarrow aA \mid aC \mid bB \mid \varepsilon\\
-        & B \rightarrow bB \mid bD \\
-        & C \rightarrow \varepsilon \\
-        & D \rightarrow aA \mid bD \mid aA \\
-    \end{array}
-\]
+\begin{flalign*}
+    P: & S \rightarrow A \mid D & \\
+    & A \rightarrow aA \mid aC \mid bB \mid \varepsilon & \\
+    & B \rightarrow bB \mid bD & \\
+    & C \rightarrow \varepsilon & \\
+    & D \rightarrow aA \mid bD \mid aA & \\
+\end{flalign*}
 
 \end{minipage}
 
@@ -368,16 +365,15 @@ je dán tabulkou
     
     $\Sigma = \{a, b\}$ 
     
-    \[
-        \hspace*{-45mm}
-        \begin{array}{l l}
-            P: & S \rightarrow A \mid C \\
-            & A \rightarrow aA \mid aB \mid bC\\
-            & B \rightarrow aB \mid bC \\
-            & C \rightarrow bD \mid \varepsilon \\
-            & D \rightarrow aB \mid bD \mid \varepsilon
-        \end{array}
-        \]
+
+    \begin{flalign*}
+        P: & S \rightarrow A \mid C & \\
+        & A \rightarrow aA \mid aB \mid bC & \\
+        & B \rightarrow aB \mid bC & \\
+        & C \rightarrow bD \mid \varepsilon & \\
+        & D \rightarrow aB \mid bD \mid \varepsilon
+    \end{flalign*}
+
         
 \columnbreak 
         
@@ -415,11 +411,11 @@ je dán tabulkou
 
 \section*{Navrhněte gramatiku}
 \subsection{Příklad}
-    \noindent
-    Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
-    Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
+\noindent
+Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
+Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
     
-    \begin{quote}
+\begin{quote}
     $S \rightarrow XY$\\
     $X \rightarrow 0X1 \mid \varepsilon$\\
     $Y \rightarrow Y1 \mid \varepsilon$\\

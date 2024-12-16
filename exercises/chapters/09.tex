@@ -9,13 +9,10 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 \begin{enumerate}[a)]
     \item 
-\[
-    \hspace*{-105mm}
-    \begin{array}{l l}
+    \begin{flalign*}
         P: & S \rightarrow 0S0 \mid A \\
         & A \rightarrow 0A1 \mid \varepsilon\\
-    \end{array}
-\]
+    \end{flalign*}
 
 \begin{enumerate}[noitemsep]
     \item $\quad S \stackrel{S \rightarrow 0S0 (m)}{\Longrightarrow} 0^m S 0^m \stackrel{S \rightarrow A}
@@ -27,12 +24,10 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 \item 
 
-\[
-    \hspace*{-105mm}
-    \begin{array}{l l}
-        P: & S \rightarrow 0S1 \mid S1 \mid 1 \\
-    \end{array}
-\]
+    \begin{flalign*}
+        P: & S \rightarrow 0S1 \mid S1 \mid 1 & \\
+    \end{flalign*}
+
 
 Důkazy mě těžce nebaví, všude jsou cca stejný. 
 \end{enumerate}
@@ -55,15 +50,12 @@ $V_1 = \{S, B\}$\\
 $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\}$\\
 $V_2 = V_1 \cup \emptyset = \{S, B\}$
 
-\[
-\hspace*{-115mm}
-    \begin{array}{l l}
-        \G_1: & S \rightarrow AB \mid A \\
-           & A \rightarrow aAAb \mid bS \mid b \mid CA \\
-           & B \rightarrow BbA \mid bA \mid CaC \\
-           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b \\
-    \end{array}
-\]
+    \begin{flalign*}
+        \G_1: & S \rightarrow AB \mid A & \\
+           & A \rightarrow aAAb \mid bS \mid b \mid CA & \\
+           & B \rightarrow BbA \mid bA \mid CaC & \\
+           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b & \\
+    \end{flalign*}
 
 Gramatika $\G_1$ už je redukovaná. 
 
@@ -166,59 +158,50 @@ Převeďte $\G$ do Chomského normálního tvaru.
 1. Uděláme z toho nevypouštěcí gramatiku. 
 
 $V = \{S\}$\\ 
-\[
-\hspace*{-125mm}
-\begin{array}{l l}
-    P: & S \rightarrow A \mid 0SA \mid 0A \\
-       & A \rightarrow 1A \mid B1 \mid 1 \\
-       & B \rightarrow 0B \mid 0 \\
-\end{array}
-\]
+
+\begin{flalign*}
+    P: & S \rightarrow A \mid 0SA \mid 0A & \\
+       & A \rightarrow 1A \mid B1 \mid 1 & \\
+       & B \rightarrow 0B \mid 0 & \\
+\end{flalign*}
+
 
 2. Zbavíme se toho, kdy 1 neterminál přepisujeme na 1 neterminál. 
 
 tady: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
 
-\[
-\hspace*{-105mm}
-\begin{array}{l l}
-    P: & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A \\
-       & A \rightarrow 1A \mid B1 \mid 1 \\
-       & B \rightarrow 0B \mid 0 \\
-\end{array}
-\]
+\begin{flalign*}
+    P: & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A & \\
+       & A \rightarrow 1A \mid B1 \mid 1 & \\
+       & B \rightarrow 0B \mid 0 & \\
+\end{flalign*}
 
 vytvořím pomocná pravidla pro terminály, které "nezůstaly samy" 
 
-\[
-\hspace*{-95mm}
-\begin{array}{l l}
-    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A \\
-       & A \rightarrow X_1A \mid BX_1 \mid 1 \\
-       & B \rightarrow X_0B \mid 0 \\
-       & X_0 \rightarrow 0\\
-       & X_1 \rightarrow 1\\
-\end{array}
-\]
+\begin{flalign*}
+    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A & \\
+       & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
+       & B \rightarrow X_0B \mid 0 & \\
+       & X_0 \rightarrow 0 & \\
+       & X_1 \rightarrow 1 & \\
+\end{flalign*}
 
 3. Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
-\[
-\hspace*{-95mm}
-\begin{array}{l l}
-    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A \\
-       & Y \rightarrow SA \\
-       & A \rightarrow X_1A \mid BX_1 \mid 1 \\
-       & B \rightarrow X_0B \mid 0 \\
-       & X_0 \rightarrow 0\\
-       & X_1 \rightarrow 1\\
-\end{array}
-\]
+\begin{flalign*}
+    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A  & \\
+       & Y \rightarrow SA & \\
+       & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
+       & B \rightarrow X_0B \mid 0 & \\
+       & X_0 \rightarrow 0 & \\
+       & X_1 \rightarrow 1 & \\
+\end{flalign*}
+
 
 \subsection{Příklad} % 9.6 
 
 Je dán derivační strom v bezkontextové gramatice: 
 
-% TODO: udelate ten strom symetrictejsi, tady i nahore 
+% TODO: udelat ten strom symetrictejsi, tady i nahore 
 \begin{center}
     \begin{forest}
     for tree={
@@ -277,14 +260,11 @@ Je dán derivační strom v bezkontextové gramatice:
     \item Rozhodněte, zda je gramatika víceznačná. 
 \end{enumerate}
     
-a) \vspace*{-4mm}\[
-\hspace*{-95mm}
-\begin{array}{l l}
-    P: & S \rightarrow AaB \mid \varepsilon \\
-       & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon \\
-       & B \rightarrow SA \mid ac \\
-\end{array}
-\]
+a) \begin{flalign*}
+    P: & S \rightarrow AaB \mid \varepsilon & \\
+       & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon & \\
+       & B \rightarrow SA \mid ac & \\
+\end{flalign*}
 
 b) 
 $\quad S \stackrel{S \rightarrow A a B}{\Longrightarrow} A a B \stackrel{A \rightarrow A A}{\Longrightarrow} 
@@ -384,12 +364,9 @@ Navrhněte bezkontextovou gramatiku generující následující jazyk $L = \{a^n
 proč zkonstruovaná gramatika jazyk $L$ generuje.
 
 
-\[
-    \hspace*{-125mm}
-    \begin{array}{l l}
-        P: & S \rightarrow aSa \mid b \mid \varepsilon
-    \end{array}
-\]
+\begin{flalign*}
+    P: & S \rightarrow aSa \mid b \mid \varepsilon & \\
+\end{flalign*}
 
 (1) $\quad    S \stackrel{S \rightarrow aSa (n)}{\Longrightarrow} a^nSa^n \stackrel{S \rightarrow Sb (m)}
 {\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
@@ -404,7 +381,6 @@ $a^lb^ka^l \in L(\G)$.
 
 Zredukujte gramatiku $\G$, kter je dána pravidly: 
 \[
-% \hspace*{-85mm}
 \begin{array}{l l}
     \G: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
     & A \rightarrow bCD \mid Dba \\
@@ -425,15 +401,11 @@ $V_1 = \{S, C, E\}$
 $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\}$\\
 $V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
 
-\[
-    \hspace*{-107mm}
-    \begin{array}{l l}
-        \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon \\
-        & C \rightarrow a \\
-        & E \rightarrow \varepsilon
-    \end{array}
-\]
-\vspace*{3mm}
+\begin{flalign*}
+    \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon & \\
+    & C \rightarrow a & \\
+    & E \rightarrow \varepsilon & \\
+\end{flalign*}
 
 (2) 
 
@@ -445,9 +417,6 @@ $U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v }\alpha \text{ nebo } \beta \te
 Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
 $U_1 = U_0 \cup {\emptyset}$
 
-\[
-    \hspace*{-107mm}
-    \begin{array}{l l}
-        \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon \\
-    \end{array}
-\]
+\begin{flalign*}
+    \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon & \\
+\end{flalign*}
