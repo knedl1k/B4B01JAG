@@ -1,3 +1,34 @@
 \section{Třinácté cvičení}
 
 \subsection{Příklad}
+Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
+(tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
+\[L = \{0^i 1^j 0^k \mid 0 \leq i < k, j > 0\}\text{.}\]
+
+\subsection{Příklad}
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}, \Sigma = \{0,1\}$ a $P$ je dáno
+\begin{align*}
+    S &\rightarrow SA \mid 0 \\
+    A &\rightarrow BAB \mid 1 \\
+    B &\rightarrow CB \mid \varepsilon \\
+    C &\rightarrow AS \mid 0 \mid \varepsilon \\
+\end{align*}
+Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$ odstraňte levou rekurzi.
+
+\subsection{Příklad}
+Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, E, F\},\\ 
+\Sigma = \{a, *, +, ), (\}$ a $P$ je dáno 
+\begin{align*}
+    S &\rightarrow (E)\\
+    E &\rightarrow F * F \mid F + F\\
+    F &\rightarrow a \mid S
+\end{align*}
+
+\subsection{Příklad}
+Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\},\\
+\Sigma = \{a, b, c\}$ a $P$ je dáno 
+\begin{align*}
+    S &\rightarrow Ab \mid B\\
+    A &\rightarrow Aba \mid Bcc\\
+    B &\rightarrow Sa
+\end{align*}
