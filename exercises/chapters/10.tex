@@ -23,7 +23,7 @@ Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou de
 
 slovo $w_1$:
 
-\begin{minipage}{0.5\textwidth}
+\begin{multicols}{2}
 \[
 \hspace*{-20mm}
 \begin{array}{r c l}
@@ -50,7 +50,6 @@ slovo $w_1$:
 \end{NiceTabular}
 
 
-\end{minipage}\begin{minipage}{0.5\textwidth}
     
 
     \begin{center}
@@ -85,18 +84,16 @@ slovo $w_1$:
                 ]
             ]
         \end{forest}    \end{center}
-    
-
-\end{minipage}
-
+\end{multicols}
+\vspace{-5mm}
 $$S \stackrel{S \rightarrow CS}{\Longrightarrow} CS \stackrel{C \rightarrow a}{\Longrightarrow} aS \stackrel{S 
 \rightarrow CS}{\Longrightarrow} aCS \stackrel{C \rightarrow a}{\Longrightarrow} aaS \stackrel{S \rightarrow AD}
 {\Longrightarrow} aaAD \stackrel{A \rightarrow a}{\Longrightarrow} aaaD \stackrel{D \rightarrow BA}{\Longrightarrow} 
 aaaBA \stackrel{B \rightarrow b}{\Longrightarrow} aaabA \stackrel{A \rightarrow a}{\Longrightarrow} aaaba$$
 
 \vspace*{-2mm}
-slovo $w_2$: \\
-\begin{minipage}{0.5\textwidth}
+slovo $w_2$: 
+\begin{multicols}{2}
     
 \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
     $C,A, S$ &   &   &   &   \\ 
@@ -106,9 +103,6 @@ slovo $w_2$: \\
     $A,C$ & $B,D$ & $B,D$ & $A,C$ & $A,C$ \\ 
     $a$ & $b$ & $b$ & $a$ & $a$ \\ 
 \end{NiceTabular}
-
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
     
 
 \begin{center}
@@ -144,7 +138,7 @@ slovo $w_2$: \\
         ]
     \end{forest}    \end{center}
 
-\end{minipage}
+\end{multicols}
 \vspace*{-5mm}
 $$S \stackrel{S \rightarrow AD}{\Longrightarrow} AD \stackrel{A \rightarrow AD}{\Longrightarrow} ADD \stackrel{A 
 \rightarrow a}{\Longrightarrow} aDD \stackrel{D \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow BA}
@@ -171,7 +165,7 @@ a napište levou derivaci.
 
 $w_1 = abaab$: 
 
-\begin{minipage}{0.5\textwidth}
+\begin{multicols}{2}
     
 
 \begin{NiceTabular}{ccccc}[hvlines, corners=NE]
@@ -182,8 +176,6 @@ $w_1 = abaab$:
     A, D & B, C & A, D & A, D & B, C \\
     a & b & a & a & b \\
 \end{NiceTabular}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
     
 
 \begin{center}
@@ -218,7 +210,7 @@ $w_1 = abaab$:
         ]
     \end{forest}
     \end{center}
-\end{minipage}
+\end{multicols}
 
 $S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
 {D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
@@ -307,7 +299,6 @@ $A \stackrel{I.P.}{\Longrightarrow} S^n A C^n \stackrel{A \rightarrow SC}{\Longr
 Je dána gramatika $\G = (N, \Sigma, S, P )$, kde $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b, c\}$ a
 pravidla~$P$ jsou dána
 \[
-% \hspace*{-85mm}
 \begin{array}{l l}
     P: & S \rightarrow AB \mid CD \mid AC\\
     & A \rightarrow AC \mid a \\
@@ -321,7 +312,7 @@ Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde
  Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
 
-\begin{minipage}{0.5\textwidth}
+\begin{multicols}{2}
     
 
 \[
@@ -334,7 +325,6 @@ Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde
     & CD \leftarrow S \\ 
     \end{array}
 \]
-\end{minipage}\begin{minipage}{0.5\textwidth}
     
 slovo $w_1 = baaba$: 
 
@@ -353,10 +343,6 @@ slovo $w_1 = baaba$:
 \vspace*{2mm}
     Gramatika $\G$ negeneruje slovo $w_1$. 
 
-\end{minipage}
-
-
-\begin{minipage}{0.5\textwidth}
     slovo $w_2 = abaaa$: 
     
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
@@ -370,30 +356,25 @@ slovo $w_1 = baaba$:
 \hspace*{5mm}$a$ \hspace*{8mm} $b$ \hspace*{8mm} $a$ \hspace*{8mm} $a$ \hspace*{8mm} $a$
 
 
-        \vspace*{2mm}
-        Gramatika $\G$ generuje slovo $w_2$. 
-        
-        \vspace*{3mm}
-
-        Levá derivace: 
-
-            \begin{align*}
-                        & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD 
-                        \stackrel{C \rightarrow a}{\Longrightarrow} aD 
-                        \stackrel{D \rightarrow BA}{\Longrightarrow} aBA  
-                        \stackrel{B \rightarrow b}{\Longrightarrow} abA \Longrightarrow\\
-                        &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC 
-                    \stackrel{A \rightarrow AC}{\Longrightarrow} abACC 
-                    \stackrel{A \rightarrow a}{\Longrightarrow} abaCC \Longrightarrow\\
-                  &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC 
-                    \stackrel{C \rightarrow a}{\Longrightarrow} abaaa
-            \end{align*}
-        
-\end{minipage}\begin{minipage}{0.5\textwidth}
+    \vspace*{2mm}
+    Gramatika $\G$ generuje slovo $w_2$. 
     
+    \columnbreak
+    Levá derivace: 
+        \begin{align*}
+                & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD 
+                \stackrel{C \rightarrow a}{\Longrightarrow} aD 
+                \stackrel{D \rightarrow BA}{\Longrightarrow} aBA  
+                \stackrel{B \rightarrow b}{\Longrightarrow} abA \Longrightarrow\\
+                &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC 
+                \stackrel{A \rightarrow AC}{\Longrightarrow} abACC 
+                \stackrel{A \rightarrow a}{\Longrightarrow} abaCC \Longrightarrow\\
+                &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC 
+                \stackrel{C \rightarrow a}{\Longrightarrow} abaaa
+        \end{align*}
+        
 
     Derivační strom pro slovo $w_2$:
-    \vspace*{5mm}
     \begin{center}
         
         \begin{forest}
@@ -429,4 +410,4 @@ slovo $w_1 = baaba$:
                 ]
             \end{forest}
         \end{center}
-\end{minipage}
+\end{multicols}

@@ -5,29 +5,31 @@ K automatu $M$, který je dán následující tabulkou, zkostruujte regulární 
 $L = L(M)$. 
 
 $M$: \hspace{2mm}
-\begin{minipage}{0.4\textwidth}    
-    \begin{tabular}{|r c|c c|} 
-        \hline
-         & & $a$ & $b$ \\
-        \hline
-        \hline
-        $\leftrightarrow$&$ A$ & $A,C$ & $B$ \\
-        \hline
-        &$ B$ & $\emptyset$ & $B, D$ \\
-        \hline
-        $\leftarrow$ &$ C$ & $\emptyset$ & $\emptyset$ \\
-        \hline
-        $\rightarrow$&$D$ & $A$ & $C,D$ \\
-        \hline
-    \end{tabular}
+\begin{multicols}{2}    
 
-    \vspace*{5mm}
-    $\G = (N, \Sigma, S, P)$ \\
-    $ N = \{S, A, B, C, D\}$\\ 
-    $\Sigma = \{a, b\}$
+\begin{tabular}{|r c|c c|} 
+    \hline
+        & & $a$ & $b$ \\
+    \hline
+    \hline
+    $\leftrightarrow$&$ A$ & $A,C$ & $B$ \\
+    \hline
+    &$ B$ & $\emptyset$ & $B, D$ \\
+    \hline
+    $\leftarrow$ &$ C$ & $\emptyset$ & $\emptyset$ \\
+    \hline
+    $\rightarrow$&$D$ & $A$ & $C,D$ \\
+    \hline
+\end{tabular}
 
-\end{minipage}\begin{minipage}{0.5\textwidth}
-    mám více vstupů $\rightarrow$ přidám si $S$ 
+\vspace*{5mm}
+$\G = (N, \Sigma, S, P)$ \\
+$ N = \{S, A, B, C, D\}$\\ 
+$\Sigma = \{a, b\}$
+
+\columnbreak
+mám více vstupů $\rightarrow$ přidám si $S$ 
+
 
 \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -50,7 +52,6 @@ $M$: \hspace{2mm}
     (D) edge [left] node {$a$} (A)
     ;    
 \end{tikzpicture}
-
 \begin{flalign*}
     P: & S \rightarrow A \mid D & \\
     & A \rightarrow aA \mid aC \mid bB \mid \varepsilon & \\
@@ -59,7 +60,7 @@ $M$: \hspace{2mm}
     & D \rightarrow aA \mid bD \mid aA & \\
 \end{flalign*}
 
-\end{minipage}
+\end{multicols}
 
 \subsection{Příklad}
 \noindent
