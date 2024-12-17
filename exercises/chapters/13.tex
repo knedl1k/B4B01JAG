@@ -1,9 +1,75 @@
+%%% Ugly hack for no spacing around alignments, just a local thing
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+%%% 
+
 \section{Třinácté cvičení}
 
 \subsection{Příklad}
 Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{0^i 1^j 0^k \mid 0 \leq i < k, j > 0\}\text{.}\]
+Ukažte práci jednoho ze zásobníkových automatů nad slovem $011000$ a nad slovem $001110$.
+
+Přímou metodou:
+
+\begin{multicols}{2}
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, right of=1] (2) {$q_2$};
+        \node[state, accepting, below of=1] (f) {$q_f$};
+    
+        \draw
+            (0) edge[loop above] node[align=center]{$0, A / AA$ \\ $0, Z_0 / A Z_0$} (0)
+            (0) edge[bend left, above] node{$1, Z_0 / Z_0$} (1)
+            (0) edge[bend left, below] node{$1, A / A$} (1)
+            (1) edge[loop above] node[align=center]{$1, A / A$ \\ $1, Z_0 / Z_0$} (1)
+            (1) edge[bend left, above] node{$0, Z_0 / Z_0$} (2)
+            (1) edge[bend left, below] node{$0, A / A$} (2)
+            (2) edge[loop above] node[align=center]{$0, A / \varepsilon$ \\ $0, Z_0 / Z_0$} (2)
+            (2) edge[bend left, left] node{$\varepsilon, Z_0 / \varepsilon$} (f) 
+            ;
+  \end{tikzpicture}
+
+    \columnbreak\
+
+    Práce nad slovem $w_1 = 011000$.
+
+    ${(q_0, 011000, Z_0) \vdash (q_0, 11000, A Z_0) \vdash (q_1, 1000, A Z_0)}$
+    \begin{flalign*}
+        \vdash (q_1, 000, A Z_0) \vdash (q_2, 00, A Z_0) &\vdash (q_f, 0, A Z_0) \xmark & \\
+        &\vdash (q_2, 0, Z_0)
+    \end{flalign*}
+    \begin{flalign*}
+        (q_2, 0, Z_0) &\vdash (q_f, 0, Z_0) \xmark & \\
+        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark\\
+    \end{flalign*}
+    
+    Práce nad slovem $w_2 = 001110$.
+
+    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash} \\ 
+    (q_1, 110, AA Z_0) \vdash^{(2)} (q_1, 0, AA Z_0) \vdash (q_2, \varepsilon, AA Z_0) \xmark $
+
+\end{multicols}
+
+Přes gramatiku:
+\begin{flalign*}
+    \G : S &\rightarrow S0 \mid 0S0 \mid A0 & \\
+    A &\rightarrow 1A \mid 1 \\
+\end{flalign*}
+
+Důkaz.
+
+1) $L \subseteq L(\G)$\\
+$S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRightarrow{A \rightarrow 1A}^{(j)} 
+0^i 1^j A 0^{k+1} \xRightarrow{A \rightarrow 1} 0^i 1^{j+1} 0^{k+1}$, $i \leq k, j > 0$. %? Is this in the right spot?
+
+2) $L(\G) \subseteq L$\\
+%TODO complete proof 2.
+
 
 \subsection{Příklad}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}, \Sigma = \{0,1\}$ a $P$ je dáno
@@ -15,6 +81,24 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}
 \end{align*}
 Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$ odstraňte levou rekurzi.
 
+1. krok Vytvoření nevypouštěcí gramatiky $\G_1$.
+\begin{flalign*}
+    V &= \{x \mid x \Rightarrow^\star \varepsilon\} & \\
+    V_1 &= \{x \mid x \rightarrow \varepsilon \in P\} = \{B,C\} & \\
+    V_2 &= V_1 \cup \{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+\} = V_1 \cup \emptyset = V_1 = V.
+\end{flalign*}
+
+2. krok odstranění levé rekurze. (postup shora dolů)
+\begin{flalign*}
+    S    &\rightarrow 0 \mid 0S^{'} & \\
+    S^{'}&\rightarrow A \mid AS^{'} & \\
+    A    &\rightarrow BAB \mid BA \mid 1 \mid BABA^{'} \mid BAA^{'} \mid 1A^{'} & \\
+    A^{'}&\rightarrow B \mid BA^{'} & \\
+    B    &\rightarrow CB \mid C & \\
+    C    &\rightarrow AS \mid 0 &
+\end{flalign*}
+
+
 \subsection{Příklad}
 Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, E, F\},\\ 
 \Sigma = \{a, *, +, ), (\}$ a $P$ je dáno 
@@ -23,6 +107,38 @@ Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigm
     E &\rightarrow F * F \mid F + F\\
     F &\rightarrow a \mid S
 \end{align*}
+\textbf{1. krok} oindexování neterminálů.
+
+$A_1 = S \\
+A_2 = E \\
+A_3 = F
+$
+
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším indexem), 
+jinak sloučit pravidla. (postup shora dolů)
+\begin{flalign*}
+    S &\rightarrow (E) & \\
+    E &\rightarrow F * F \mid F + F& \\
+    F &\rightarrow a \mid (E)
+\end{flalign*}
+
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda nahoru)
+\begin{flalign*}
+    S &\rightarrow (E) & \\
+    E &\rightarrow a * F \mid a + F \mid (E) * F \mid (E) + F& \\
+    F &\rightarrow a \mid (E)
+\end{flalign*}
+
+\textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály.
+\begin{flalign*}
+    S &\rightarrow (EX & \\
+    E &\rightarrow a Y F \mid a Z F \mid (EX Y F \mid (EX Z F & \\
+    F &\rightarrow a \mid (EX & \\
+    X &\rightarrow ) & \\
+    Y &\rightarrow * & \\
+    Z &\rightarrow +
+\end{flalign*}
+
 
 \subsection{Příklad}
 Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\},\\
@@ -30,5 +146,43 @@ Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigm
 \begin{align*}
     S &\rightarrow Ab \mid B\\
     A &\rightarrow Aba \mid Bcc\\
-    B &\rightarrow Sa
+    B &\rightarrow Sa \mid b
 \end{align*}
+\textbf{1. krok} oindexování neterminálů.
+
+$A_1 = S \\
+A_2 = A \\
+A_3 = B
+$
+
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším indexem), 
+jinak sloučit pravidla. (postup shora dolů)
+\begin{flalign*}
+    S &\rightarrow Ab \mid B & \\
+    A &\rightarrow Ba \mid BaA^{'} & \\
+    A^{'} &\rightarrow ba \mid baA^{'} & \\
+    B &\rightarrow Aba \mid Ba \mid b & \\
+    B &\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
+    B &\rightarrow b \mid bB^{'} & \\
+    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
+\end{flalign*}
+
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda nahoru)
+\begin{flalign*}
+    S &\rightarrow Bab \mid BaA^{'} \mid b \mid bB^{'} & \\
+    A &\rightarrow ba \mid bB^{'}a \mid baA^{'} \mid bB^{'}aA^{'} & \\
+    A^{'} &\rightarrow ba \mid baA^{'} & \\
+    B &\rightarrow b \mid bB^{'} & \\
+    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
+\end{flalign*}
+
+\textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály.
+\begin{flalign*}
+    S &\rightarrow BaY \mid BaA^{'} \mid b \mid bB^{'} & \\
+    A &\rightarrow bX \mid bB^{'}X \mid bXA^{'} \mid bB^{'}aA^{'} & \\
+    A^{'} &\rightarrow bX \mid bXA^{'} & \\
+    B &\rightarrow b \mid bB^{'} & \\
+    B^{'} &\rightarrow aXY \mid aA^{'}YX \mid a \mid aYXB^{'} \mid aA^{'}YXB^{'} \mid aB^{'} & \\
+    X &\rightarrow a & \\
+    Y &\rightarrow b
+\end{flalign*}

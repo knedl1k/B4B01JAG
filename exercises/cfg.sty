@@ -14,6 +14,8 @@
 \usepackage{forest}
 \usepackage{soul}
 
+\usepackage{utfsym} %for cross mark
+
 \tikzset{
 ->, % makes the edges directed
 >=stealth', % makes the arrow heads bold
@@ -44,3 +46,8 @@ between/.style args={#1 and #2}{
 \setlength{\parskip}{1.4ex}
 
 \newcommand\setItemnumber[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
+
+\newenvironment{closealign}{\par\centering$\displaystyle\begin{aligned}}{\end{aligned}$\par}
+\newenvironment{closeflalign}{\par\centering$\displaystyle\begin{flalign}}{\end{flalign}$\par}
+
+\newcommand{\xmark}{\usym{2613}}
