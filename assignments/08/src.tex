@@ -62,21 +62,30 @@ zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 
 Přímou metodou:
 
-\begin{tikzpicture}
-      \node[state, initial] (0) {$q_0$};
-      \node[state, right of=0] (1) {$q_1$};
-      \node[state, accepting, right of=1] (f) {$q_f$};
-  
-      \draw
-          (0) edge[loop above] node[align=center]{$a, Z_0 / A Z_0$ \\ $b, Z_0 / B Z_0$} (0)
-          (0) edge[loop below] node[align=center]{$a, A / A A$ \\ $b, B / B B$ \\ $a, B / \varepsilon$ \\ $b, A / \varepsilon$} (0)
-          (0) edge[bend left, above] node{$b, Z_0 / \varepsilon$} (1)
-          (0) edge[bend left, below] node{$\varepsilon, B / \varepsilon$} (1)
-          (1) edge[bend left, above] node{$\varepsilon, \varepsilon / \varepsilon$} (f)
-          
+\begin{multicols}{2}
+      \begin{tikzpicture}
+            \node[state, initial] (0) {$q_0$};
+            \node[state, right of=0] (1) {$q_1$};
+            \node[state, accepting, right of=1] (f) {$q_f$};
+        
+            \draw
+                (0) edge[loop above] node[align=center]{$a, Z_0 / A Z_0$ \\ $a, A / AA$} (0)
+                (0) edge[bend left, above] node{$b, Z_0 / Z_0$} (1)
+                (0) edge[bend left, below] node{$b, A / A$} (1)
+                (1) edge[loop above] node[align=center]{$a, Z_0 / Z_0$\\$b, Z_0, Z_0$} (1)
+                (1) edge[loop below] node[align=center]{$a, A/AA$ \\ $b, B /BB$ \\ $a,B / \varepsilon$ \\ $b,A/\varepsilon$} (1)
+                (1) edge[bend left, above] node{$\varepsilon, Z_0 / \varepsilon$} (f)
       
-          ;
-  \end{tikzpicture}
+                ;
+      \end{tikzpicture}
+
+      \columnbreak
+
+      $\Gamma = \{Z_0, A, B\}$
+
+\end{multicols}
+
+
 
 
 % --------------------------------------------------------------
