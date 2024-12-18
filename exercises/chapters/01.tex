@@ -126,6 +126,8 @@ od nejvyššího řádu). O jaký typ automatu se jedná?
     \end{tikzpicture}
 
 \columnbreak
+\raggedcolumns
+Jedná se o \ii{Mealyho automat} $$M = (Q, \Sigma, Y, \delta, q_o, \lambda)\text{ .}$$
 
 
 \end{multicols}
@@ -165,6 +167,15 @@ daným automatem. Dokažte, že automat přijímá právě všechna slova s vlas
 
 $w \in L$ iff $|w|_0$ je dělitelný 3.
 
+Invarianty: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: \texttt{in}, \texttt{out}, $|w|_0 = 3k$,
+    \item $q_1$: $|w|_0 = 3k + 1$,  
+    \item $q_2$: $|w|_0 = 3k + 2$,
+\end{itemize}
+pro $k \in \mathbb{Z}$.
+
+
 \columnbreak
 \begin{tabular}{|r|c|c|}
     \hline
@@ -192,7 +203,16 @@ $w \in L$ iff $|w|_0$ je dělitelný 3.
         ;
 \end{tikzpicture}
 
-$w \in L$ iff  % TODO 
+$w \in L$ iff $|w|_0$ není dělitelný 3.  
+
+Invarianty: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: \texttt{in}, $|w|_0 = 3k$,
+    \item $q_1$: \texttt{out}, $|w|_0 = 3k + 1$,  
+    \item $q_2$: \texttt{out}, $|w|_0 = 3k + 2$,
+\end{itemize}
+pro $k \in \mathbb{Z}$.
+
 
 \columnbreak
 \begin{tabular}{|r|c|c|}
@@ -223,4 +243,13 @@ $w \in L$ iff  % TODO
 
 $w \in L$ iff $w$ končí 11.
 
-\end{multicols}
+Invarianty: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: \texttt{in}, končí $0$, 
+    \item $q_1$: končí $1$,   
+    \item $q_2$: \texttt{out}, končí $11$.
+\end{itemize}
+\medspace
+
+
+\end{multicols}. 
