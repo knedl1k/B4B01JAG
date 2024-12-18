@@ -204,7 +204,7 @@ Výsledný redukovaný DFA:
 Jsou dány dva $\varepsilon$-NFA. Rozhodněte, zda přijímají stejný jazyk. Pro oba $\varepsilon$-NFA sestrojte redukované 
 DFA.
 
-% TODO: not sure with the formatting here 
+% TODO: přijímají stejný jazyk? 
 
 \[
 M_1:
@@ -317,7 +317,7 @@ $M_2$:
     & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry\\
     \hline
     \hline
-    $\rightarrow p$& $\{q, r\}$& $\varepsilon$ & $\{q\} $ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p, q, r\}$\\
+    $\rightarrow p$& $\{q, r\}$& $\emptyset$ & $\{q\} $ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p, q, r\}$\\
     $q$            & $\emptyset$    & $\{p\}$ & $\{q\}$ & $\{p,q\}$ & $\varepsilon\text{-uz}(q) = \{q\}$\\
     $\leftarrow r$ & $\emptyset$    & $\emptyset$ & $\emptyset$ & $\{p\}$& $\varepsilon\text{-uz}(r) = \{r\}$\\
     \hline
@@ -330,15 +330,11 @@ $M_2$:
         \node[state, accepting] (r) at (1.5, -2.6) {$r$};
 
         \path[->]
-        (p) edge [bend left=17] node {$b$} (q)
-        (p) edge [bend left=17] node {$c$} (r)
-        (p) edge [loop below] node {$a$} ()
-        (q) edge [bend left=17] node {$\varepsilon$} (p)
-        (q) edge [bend left=17] node {$b$} (r)
-        (q) edge [loop right] node {$a$} ()
+        (p) edge [bend left=17] node {$\varepsilon, b$} (q)
+        (p) edge [bend left=17] node {$\varepsilon, c$} (r)
+        (q) edge [bend left=17] node {$a,c$} (p)
+        (q) edge [loop right] node {$b,c$} ()
         (r) edge [bend left=17] node {$c$} (p)
-        (r) edge [bend left=17] node {$\varepsilon$} (q)
-        (r) edge [loop right] node {$a$} ()
 
         ;
     \end{tikzpicture}
@@ -364,8 +360,8 @@ $M_2$:
     % \begin{center}
         
     \begin{tikzpicture}[shorten >=1pt, node distance=30mm, on grid, auto]
-        \node[state, initial] (p) {$p$};
-        \node[state, accepting] (r) [right of=p] {$p,q,r$};
+        \node[state, initial, accepting] (p) {$p, q, r$};
+        \node[state] (r) [right of=p] {$q$};
     
         \path[->]
         (p) edge [loop above] node {$a,c$} ()
@@ -406,12 +402,11 @@ $\varepsilon$-NFA:
     
         \def\radius{22mm}
         
-        % Place nodes in a regular pentagon arrangement
-        \node[state, initial, accepting] (1) at (90:\radius) {$1$}; % Top center
-        \node[state] (2) at (18:\radius) {$2$}; % Bottom-left
-        \node[state] (5) at (162:\radius) {$5$}; % Top-left
-        \node[state] (3) at (306:\radius) {$3$}; % Bottom-right
-        \node[state, initial, accepting] (4) at (234:\radius) {$4$}; % Top-right
+        \node[state, initial, accepting] (1) at (90:\radius) {$1$}; 
+        \node[state] (2) at (18:\radius) {$2$}; 
+        \node[state] (5) at (162:\radius) {$5$}; 
+        \node[state] (3) at (306:\radius) {$3$}; 
+        \node[state, initial, accepting] (4) at (234:\radius) {$4$}; 
         \path[->]
         
         (1) edge [bend left=20] node {$a$} (2)
