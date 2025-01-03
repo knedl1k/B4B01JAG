@@ -5,41 +5,63 @@
 Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý}\}$ nad abecedou $\Sigma = \{a,b\}$. Navrhněte konečný 
 automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
 
-\begin{tikzpicture}
-    \node[state, initial, accepting] (q0) {$q_0$};
-    \node[state, right of=q0] (q1) {$q_1$};
+\begin{multicols}{2}
+    \begin{tikzpicture}
+        \node[state, initial, accepting] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+    
+        \draw 
+            (q0) edge[bend left, above] node{$a$} (q1)    
+            (q0) edge[loop above] node{$b$} (q0)
+            (q1) edge[bend left, below] node{$a$} (q0)
+            (q1) edge[loop above] node{$b$} (q1)
+            ;
+    \end{tikzpicture}
+    
+    Důkaz pomocí invariantů: 
+    \begin{itemize}[noitemsep]
+        \item $q_0$: $|w|_a = 2k$, \texttt{in}, \texttt{out}, 
+        \item $q_1$: $|w|_a = 2k + 1$,  
+    \end{itemize}
+    pro $k \in \mathbb{Z}$.
 
-    \draw 
-        (q0) edge[bend left, above] node{$a$} (q1)    
-        (q0) edge[loop above] node{$b$} (q0)
-        (q1) edge[bend left, below] node{$a$} (q0)
-        (q1) edge[loop above] node{$b$} (q1)
-        ;
-\end{tikzpicture}
-%TODO invarianty
+\end{multicols}
 
 \subsection{Příklad}
 Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}\}$ nad abecedou 
 $\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
 
-\begin{tikzpicture}
-    \node[state, initial] (q0) {$q_0$};
-    \node[state, right of=q0] (q1) {$q_1$};
-    \node[state, accepting, below of=q0] (q2) {$q_2$};
-    \node[state, right of=q2] (q3) {$q_3$};
-
-    \draw 
+\begin{multicols}{2}
+    
+    \begin{tikzpicture}
+        \node[state, initial] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, accepting, below of=q0] (q2) {$q_2$};
+        \node[state, right of=q2] (q3) {$q_3$};
+        
+        \draw 
         (q0) edge[bend left, above] node{$a$} (q1)    
         (q0) edge[bend left, right] node{$b$} (q2)
         (q1) edge[bend left, below] node{$a$} (q0)
         (q1) edge[bend left, right] node{$b$} (q3)
-        (q2) edge[bend right, below] node{$a$} (q3)
+        (q2) edge[bend left, below] node{$a$} (q3)
         (q2) edge[bend left, left] node{$b$} (q0)
-        (q3) edge[bend right, above] node{$a$} (q2)
+        (q3) edge[bend left, above] node{$a$} (q2)
         (q3) edge[bend left, left] node{$b$} (q1)
         ;
-\end{tikzpicture}
-%TODO invarianty
+    \end{tikzpicture}
+
+    Důkaz pomocí invariantů: 
+    \begin{itemize}[noitemsep]
+        \item $q_0$: $|w|_a = 2k$, $|w|_b = 2k$, \texttt{in}, 
+        \item $q_1$: $|w|_a = 2k + 1$, $|w|_b = 2k$,  
+        \item $q_2$: $|w|_a = 2k$, $|w|_b = 2k + 1$, \texttt{out},  
+        \item $q_3$: $|w|_a = 2k + 1$ $|w|_b = 2k+ 1$,  
+    \end{itemize}
+    pro $k \in \mathbb{Z}$.
+    
+
+\end{multicols}
 
 \subsection{Příklad}
 Pro daný jazyk $L$ navrhněte koečný automat, který tento jazyk přijímá. O automatu ukažte, že opravdu přijímá daný jazyk.
@@ -50,26 +72,38 @@ Pro daný jazyk $L$ navrhněte koečný automat, který tento jazyk přijímá. 
     \item $\Sigma = \{0,1\}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
 \end{enumerate}
 
-\newpage %! THIS NEEDS CHECK AFTER COMPLETING TODOs
+\newpage 
 \noindent
+
 a)
+\begin{multicols}{2}
+    
+    \begin{tikzpicture}
+        \node[state, initial] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, accepting, above of=q1] (q2) {$q_2$};
+        \node[state, right of=q1] (q3) {$q_3$};
 
-\begin{tikzpicture}
-    \node[state, initial] (q0) {$q_0$};
-    \node[state, right of=q0] (q1) {$q_1$};
-    \node[state, accepting, above of=q1] (q2) {$q_2$};
-    \node[state, right of=q1] (q3) {$q_3$};
+        \draw 
+            (q0) edge[bend left, above] node{$a$} (q1)
+            (q0) edge[bend left, above] node{$b$} (q2)
+            (q1) edge[bend left, above] node{$a,b$} (q3)
+            (q2) edge[bend left, right] node{$a,b$} (q3)
+            (q3) edge[bend left, below] node{$a,b$} (q0)
+            ;
+    \end{tikzpicture}
 
-    \draw 
-        (q0) edge[bend left, above] node{$a$} (q1)
-        (q0) edge[bend left, above] node{$b$} (q2)
-        (q1) edge[bend left, above] node{$a,b$} (q3)
-        (q2) edge[bend left, right] node{$a,b$} (q3)
-        (q3) edge[bend left, below] node{$a,b$} (q0)
-        ;
-\end{tikzpicture}
-%TODO invarianty
- 
+    Důkaz pomocí invariantů: 
+    \begin{itemize}[noitemsep]
+        \item $q_0$: končí $a,b$, $|w| = 3k$, \texttt{in}, 
+        \item $q_1$: končí $a$, $|w| = 3k+1$, 
+        \item $q_2$: končí $b$, $|w| = 3k+1$, \texttt{out}, 
+        \item $q_3$: končí $a,b$, $|w| = 3k+2$, 
+    \end{itemize}
+    pro $k \in \mathbb{Z}$.
+
+\end{multicols}
+
 \noindent
 b)
 
@@ -92,7 +126,17 @@ b)
         (q4) edge[loop below] node{$0,1$} (q4)
         ;
 \end{tikzpicture}
-%TODO invarianty
+
+
+Důkaz pomocí invariantů: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: neobsahuje $0101$, \texttt{in}, 
+    \item $q_1$: obsahuje $0$, 
+    \item $q_2$: obsahuje $01$, 
+    \item $q_3$: obsahuje $010$, 
+    \item $q_4$: obsahuje $0101$, \texttt{out}.
+\end{itemize}
+
 
 \noindent
 c)
@@ -113,14 +157,20 @@ c)
         (q3) edge[loop above] node{$0,1$} (q3)
         ;
 \end{tikzpicture}
-%TODO invarianty
 
-\newpage %! THIS NEEDS CHECK AFTER COMPLETING TODOs
+Důkaz pomocí invariantů: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: končí $0$, neobsahuje $111$, \texttt{in}, \texttt{out},
+    \item $q_1$: končí $1$, neobsahuje $111$, \texttt{out},
+    \item $q_2$: končí $11$, neobsahuje $111$, \texttt{out},
+    \item $q_3$: obsahuje $111$. 
+\end{itemize}
+
 \subsection{Příklad}
 Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \{0^i 1^j 0^k \mid 0 \leq i < j <k\}$ není regulární.\\
 
 \noindent
-Definice \textbf{Pumping lemma.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},\\
+Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},\\
 |w| > n$ je 
 možné rozložit na 3 slova splňující:
 \begin{enumerate}[1), noitemsep]
