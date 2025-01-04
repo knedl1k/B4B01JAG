@@ -102,7 +102,7 @@ $1100$ a končí $000$. Navržený automat redukujte.
         (1) edge[bend left, above] node{$1$} (2)
         (2) edge[bend left, above] node{$0$} (3)
         (2) edge[above] node{$1$} (9)
-        (3) edge[bend left, above] node{$1$} (4)
+        (3) edge[bend left, above] node{$0$} (4)
         (3) edge[above] node{$1$} (9)
         (4) edge[above] node{$0$}(8)
         (4) edge[bend left] node[right]{$1$} (5)
@@ -111,14 +111,82 @@ $1100$ a končí $000$. Navržený automat redukujte.
         (6) edge[bend right, above] node{$0$} (7)
         (6) edge[bend right, above] node{$1$} (5)
         (7) edge[bend right, above] node{$0$} (8)
-        (7) edge[bend right, above] node{$1$} (6)
-        (8) edge[bend right, below] node{$0$} (7)
+        (7) edge[bend right, above] node{$1$} (5)
+        (8) edge[loop below] node{$0$} (7)
         (8) edge[bend right, above] node{$1$} (5)
         (9) edge[loop left] node{$0,1$} (9)
         ;
 \end{tikzpicture}
-%TODO invarianty
-%TODO redukce
+
+Invarianty: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: \texttt{in}, 
+    \item $q_1$: začíná $1$, končí $1$,  
+    \item $q_2$: začíná $11$, končí $11$,  
+    \item $q_3$: začíná $110$, končí $110$,  
+    \item $q_4$: začíná $1100$, končí $1100$,  
+    \item $q_5$: začíná $1100$, končí $1$,  
+    \item $q_6$: začíná $1100$, končí $10$,  
+    \item $q_7$: začíná $1100$, končí $100$,  
+    \item $q_8$: začíná $1100$, končí $000$, \texttt{out},  
+    \item chyba: nezačíná $1100$.  
+\end{itemize}
+
+Redukce podmnožinovou konstrukcí: 
+\[
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|c c| c|}
+    \hline
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ & $a$ & $b$ & $\sim_5$ & $0$ & $1$ & $\sim_6$\\
+    \hline
+    \hline
+    $\rightarrow$ & $q_0$ & ch &$1$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$D$ &$G$ &$O$ &$D$ &$G$\\
+              & $q_1$ & ch &$2$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$C$ &$D$ &$O$ &$C$ &$D$ &$O$ &$C$ &$D$\\
+              & $q_2$ &$3$ & ch &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
+              & $q_3$ &$4$ & ch &$O$ &$O$ &$O$ &$O$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$\\
+              & $q_4$ &$8$ &$5$ &$O$ &$K$ &$O$ &$A$ &$K$ &$O$ &$A$ &$K$ &$O$ &$A$ &$K$ &$C$ &$A$ &$K$ &$E$ &$A$ &$K$ &$E$ &$A$\\
+              & $q_5$ &$6$ &$5$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$C$ &$E$ &$F$ &$E$ &$E$ &$F$ &$E$ &$E$\\
+              & $q_6$ &$7$ &$5$ &$O$ &$O$ &$O$ &$O$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$C$ &$F$ &$A$ &$E$ &$F$ &$A$ &$E$ &$F$\\
+              & $q_7$ &$8$ &$5$ &$O$ &$K$ &$O$ &$A$ &$K$ &$O$ &$A$ &$K$ &$O$ &$A$ &$K$ &$C$ &$A$ &$K$ &$E$ &$A$ &$K$ &$E$ &$A$\\
+    $\leftarrow$  & $q_8$ &$8$ &$5$ &$K$ &$K$ &$O$ &$K$ &$K$ &$O$ &$K$ &$K$ &$O$ &$K$ &$K$ &$C$ &$K$ &$K$ &$E$ &$K$ &$K$ &$E$ &$K$\\
+              &  ch   & ch & ch &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$\\
+    \hline
+\end{tabular}
+\]
+
+Redukovaný automat: 
+
+\begin{tikzpicture}
+    \node[state, initial] (0) {$G$};
+    \node[state, right of=0] (1) {$D$};
+    \node[state, right of=1] (2) {$C$};
+    \node[state, right of=2] (3) {$B$};
+    \node[state, right of=3] (4) {$A$};
+    \node[state, accepting, right of=4] (5) {$K$};
+    \node[state, below of=4] (6) {$E$};
+    \node[state, below of=3] (7) {$F$};
+    \node[state, below of=0] (9) {O};
+
+    \draw
+        (0) edge[bend right, left] node{$0$} (9)
+        (0) edge[bend left, above] node{$1$} (1)
+        (1) edge[above] node{$0$} (9)
+        (1) edge[bend left, above] node{$1$} (2)
+        (2) edge[bend left, above] node{$0$} (3)
+        (2) edge[above] node{$1$} (9)
+        (3) edge[bend left, above] node{$0$} (4)
+        (3) edge[above] node{$1$} (9)
+        (4) edge[bend left, above] node{$0$}(5)
+        (4) edge[bend right] node[right]{$1$} (6)
+        (5) edge[left] node{$1$} (6)
+        (5) edge[loop right] node{$0$} (5)
+        (6) edge[bend right, above] node{$0$} (7)
+        (6) edge[loop right] node{$1$} (6)
+        (7) edge[bend left] node{$0$} (4)
+        (7) edge[bend right, above] node{$1$} (6)
+        (9) edge[loop below] node{$0,1$} (9)
+        ;
+\end{tikzpicture}
+
 
 \subsection{Příklad}
 Jsou dány dva automaty. Rozhodněte, zda jsou ekvivalentní, tj. zda přijímají stejný jazyk.
@@ -204,31 +272,33 @@ A teď zredukovat oba automaty.
 $M_1$:
 
 \begin{tikzpicture}
-    \node[state, initial, accepting] (0) {$0$};
-    \node[state, right of=0] (5) {$5$};
-    \node[state, right of=1] (1) {$1$};
-    \node[state, below of=1] (3) {$3$};
-    \node[state, below of=5] (2) {$2$};
-    \node[state, below of=0] (7) {$7$};
+    \node[state] (7) at (0, 1) {$7$}; % 7
+    \node[state] (3) at (3.75, 1) {$3$}; % 3 
+    \node[state] (2) at (1.875, 0) {$2$}; % 2 
+    \node[state] (5) at (1.875, 4) {$5$}; % 5 
+    \node[state] (1) at (3.75, 3) {$1$}; % 1 
+    \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0 
 
     \draw
         (0) edge[loop above] node{$a$} (0)
-        (0) edge[bend left, above] node{$b$} (5)
+        (0) edge[bend left=18] node{$b$} (5)
         (5) edge[loop above] node{$a$} (5)
-        (5) edge[bend left, above] node{$b$} (1)
-        (1) edge[loop above] node{$a$} (1)
-        (1) edge[bend left, right] node{$b$} (3)
-        (3) edge[loop below] node{$a$} (3)
-        (3) edge[bend left] node[below]{$b$} (2)
-        (2) edge[loop below] node{$a$} (2)
-        (2) edge[bend left, below] node{$b$} (7)
+        (5) edge[bend left=18] node{$b$} (1)
+        (1) edge[loop right] node{$a$} (1)
+        (1) edge[bend left=18] node{$b$} (3)
+        (3) edge[loop right] node{$a$} (3)
+        (3) edge[bend left=18] node[below]{$b$} (2)
+        (2) edge[loop above] node{$a$} (2)
+        (2) edge[bend left=18] node{$b$} (7)
         (7) edge[loop below] node{$a$} (7)
-        (7) edge[bend left,left] node{$b$} (0)
+        (7) edge[bend left=18] node{$b$} (0)
         ;
 \end{tikzpicture}
+
 $M_1$ je již redukovaný.
 
 $M_2$:
+
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
@@ -251,7 +321,63 @@ Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
 
 Změníme labely $M_1$ tak, aby odpovídaly redukci $M_2$.
 
-%TODO dodělat srovnání
+\begin{multicols}{2}
+    
+    $M_2$: 
+
+    \begin{tikzpicture}
+        \node[state] (a) at (0, 1) {$A$}; % k 
+        \node[state] (c) at (3.75, 1) {$C$}; % c 
+        \node[state] (b) at (1.875, 0) {$B$}; % b 
+        \node[state] (o) at (1.875, 4) {$O$}; % o
+        \node[state] (d) at (3.75, 3) {$D$}; % d  
+        \node[state, initial, accepting] (k) at (0, 3) {$K$}; % k
+
+        \draw
+            (k) edge[loop above] node{$a$} (k)
+            (k) edge[bend left=18] node{$b$} (o)
+            (o) edge[loop above] node{$a$} (o)
+            (o) edge[bend left=18] node{$b$} (d)
+            (d) edge[bend left=18] node{$a$} (o)
+            (d) edge[bend left=18] node{$b$} (c)
+            (c) edge[loop right] node{$a$} (c)
+            (c) edge[bend left=18] node{$b$} (b)
+            (b) edge[loop above] node{$a$} (b)
+            (b) edge[bend left=18] node{$b$} (a)
+            (a) edge[loop left] node{$a$} (a)
+            (a) edge[bend left=18] node{$b$} (k)
+            ;
+    \end{tikzpicture}
+
+    $M_1$:
+
+    \begin{tikzpicture}
+        \node[state] (7) at (0, 1) {$7$}; % 7
+        \node[state] (3) at (3.75, 1) {$3$}; % 3 
+        \node[state] (2) at (1.875, 0) {$2$}; % 2 
+        \node[state] (5) at (1.875, 4) {$5$}; % 5 
+        \node[state] (1) at (3.75, 3) {$1$}; % 1 
+        \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0 
+
+        \draw
+            (0) edge[loop above] node{$a$} (0)
+            (0) edge[bend left=18] node{$b$} (5)
+            (5) edge[loop above] node{$a$} (5)
+            (5) edge[bend left=18] node{$b$} (1)
+            (1) edge[loop right] node{$a$} (1)
+            (1) edge[bend left=18] node{$b$} (3)
+            (3) edge[loop right] node{$a$} (3)
+            (3) edge[bend left=18] node[below]{$b$} (2)
+            (2) edge[loop above] node{$a$} (2)
+            (2) edge[bend left=18] node{$b$} (7)
+            (7) edge[loop left] node{$a$} (7)
+            (7) edge[bend left=18] node{$b$} (0)
+            ;
+    \end{tikzpicture}
+
+\end{multicols}
+
+Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme. 
 
 \subsection{Příklad}
 Navrhněte DFA, který přijímá $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
@@ -264,29 +390,41 @@ Výsledný DFA redukujte.
 
 \begin{tikzpicture}
     \node[state, initial] (0) {$q_0$};
-    \node[state, right of=0] (1) {$q_1$};
-    \node[state, right of=1] (2) {$q_2$};
-    \node[state, right of=2] (3) {$q_3$};
-    \node[state, accepting, above of=3] (4) {$q_4$};
-    \node[state, accepting, right of=3] (5) {$q_5$};
-    \node[state, above of=1] (9) {chyba};
+    \node[state, above right of=0] (1) {$q_1$};
+    \node[state, below right of=1] (2) {$q_2$};
+    \node[state, below right of=2] (3) {$q_3$};
+    \node[state, accepting, above right of=2] (4) {$q_4$};
+    \node[state, accepting, below right of=4] (5) {$q_5$};
+    \node[state, below right of=0] (9) {chyba};
 
     \draw
-        (0) edge[bend left, above] node{$a,b$} (1)
+        (0) edge[bend left] node{$a,b$} (1)
         (1) edge[bend left, above] node{$a$} (2)
         (1) edge[] node[left]{$b$} (9)
-        (2) edge[loop below] node{$a$}(2)
-        (2) edge[bend left, above] node{$b$}(3)
-        (3) edge[bend left, above] node{$b$} (5)
+        (2) edge[loop left] node{$a$}(2)
+        (2) edge[bend right, above] node{$b$}(3)
+        (3) edge[bend right, above] node{$b$} (5)
         (3) edge[bend left] node[left]{$a$} (4)
         (4) edge[bend left] node[left]{$b$} (3)
         (4) edge[bend right] node[left]{$a$} (2)
-        (5) edge[loop below] node{$b$} (5)
+        (5) edge[loop above] node{$b$} (5)
         (5) edge[bend right] node[right]{$a$} (4)
         (9) edge[loop right] node{$a,b$} (9)
         ;
 \end{tikzpicture}
-%TODO invarianty
+
+Invarianty: 
+\begin{itemize}[noitemsep]
+    \item $q_0$: $|w| < 3$, \texttt{in}, 
+    \item chyba: druhý znak je $b$,  
+    \item $q_1$: $|w| < 3$, druhý znak je $\varepsilon$, předposlední znak je $\varepsilon$,   
+    \item $q_2$: $|w| < 3$, druhý znak je $a$, předposlední znak je $a,b$, 
+    \item $q_3$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $a$, 
+    \item $q_4$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $ba$, \texttt{out}, 
+    \item $q_5$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $bb$, \texttt{out}. 
+\end{itemize}
+
+Redukce podmnožinovou konstrukcí: 
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
