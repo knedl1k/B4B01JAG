@@ -26,7 +26,8 @@ b) $L_1 \subseteq L$
 
 \begin{enumerate}
     \item $|\varepsilon|_a = |\varepsilon|_b = 0$, $\varepsilon \in L_1$, $\varepsilon \in L$. 
-    \item Každé slovo $w \in L_1$ lze rozdělit na následující případy, které umožňují jeho postupné rozdělení až na prázdné slovo $\varepsilon$: 
+    \item Každé slovo $w \in L_1$ lze rozdělit na následující případy, které umožňují jeho postupné rozdělení až na prázdné 
+    slovo $\varepsilon$: 
     \begin{enumerate}[label={}, noitemsep]
         \item \bb{Možnost 1:} $w$ začíná $a$ a končí $b$, 
         \item \bb{Možnost 2:} $w$ začíná $b$ a končí $a$, 
@@ -39,8 +40,13 @@ b) $L_1 \subseteq L$
     $|u|_a = |u|_b$. Podle definice pravidel $L$, pokud $u \in L$, pak $aub \in L$. 
     \item \bb{Možnost 2: $w = aub$}. Rozdělíme slovo $w$ na $w = aub$, kde $u$ je prostřední část slova splňující 
     $|u|_a = |u|_b$. Podle definice pravidel $L$, pokud $u \in L$, pak $bua \in L$.
-    \item \bb{Možnost 3: $w = axa$, $w = bxb$}. Předpokládejme, že $w$ začíná i končí znakem $a$. Procházíme $a$ zleva doprava a hledáme první $b$, kde počet znaků $a$ od začátku do tohoto $b$ je stejný jako počet znaků $b$ (včetně tohoto $b$). Toto $b$ rozděluje $w$ na dvě části: $w = uv$, kde $u$ obsahuje první část $w$ (od prvního znaku do tohoto $b$ včetně), kde $|u|_a = |u|_b$, a $v$ obsahuje druhou část slova $w$, kde $|v|_a = |v|_b$. Podle pravidel $L$, pokud $u, v \in L$, pak $uv \in L$. 
+    \item \bb{Možnost 3: $w = axa$, $w = bxb$}. Předpokládejme, že $w$ začíná i končí znakem $a$. Procházíme $a$ zleva 
+    doprava a hledáme první $b$, kde počet znaků $a$ od začátku do tohoto $b$ je stejný jako počet znaků $b$ (včetně 
+    tohoto $b$). Toto $b$ rozděluje $w$ na dvě části: $w = uv$, kde $u$ obsahuje první část $w$ (od prvního znaku do 
+    tohoto $b$ včetně), kde $|u|_a = |u|_b$, a $v$ obsahuje druhou část slova $w$, kde $|v|_a = |v|_b$. Podle pravidel 
+    $L$, pokud $u, v \in L$, pak $uv \in L$. 
 \end{enumerate}
+
 
 \newpage
 \subsection{Příklad}
