@@ -16,5 +16,5 @@ CTU FEE Subject Languages, Automats and Gramatics
 - website: <https://math.fel.cvut.cz/en/people/demlova/jag/>
 
 ## License
-GNU General Public License v3.0\
+CC-BY-SA-4.0 license\
 ©2024 knedl1k and SomiLotr
