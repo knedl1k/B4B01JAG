@@ -9,6 +9,16 @@ Do Greibachové normální formy převeďte gramatiku $\G$, kde $\G = (N, \Sigma
     A &\rightarrow AS \mid 1
 \end{align*}
 
+% TODO: dodelat 
+
+\textbf{1. krok} oindexování neterminálů.
+
+$X_1 = S \\
+X_2 = A \\
+X_3 = S^{'} \\
+X_4 = A^{'}
+$
+
 \subsection{Příklad}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}$, $\Sigma = \{a,b\}$ a $P$ je dáno
 
@@ -28,3 +38,91 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}
     \item Je gramatika $\G$ víceznačná? Víceznačnou gramatiku definujte.
     \item V gramatice $\G_1$ odstraňte levou rekurzi u symbolu $S$. Postup popište.
 \end{enumerate}
+
+\textbf{1.} Nevypouštěcí gramatika $\G_1$. 
+
+$V = \{A \mid A \Rightarrow^\star \varepsilon \}$\\
+$V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{B, C\}$\\
+$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \{A\} = \{A, B, C\}$\\
+$V_3 = V_2 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}\} = V_2 \cup \varepsilon = V_2 = V$
+
+\begin{flalign*}
+    \G_1: S &\rightarrow Sa \mid Sb \mid bC \mid b & \\
+    A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid b & \\
+    B &\rightarrow aB \mid a & \\
+    C &\rightarrow AA \mid A \mid bBb \mid bb &
+\end{flalign*}
+
+\textbf{2.} Chomského normální tvar gramatiky $\G_1$.
+
+\textbf{1. krok} nahrazení samostatných terminálů pravidly. (pokud nastane např. $A \rightarrow A$, tak vynechat.)
+\begin{flalign*}
+    S &\rightarrow Sa \mid Sb \mid bC \mid b & \\
+    A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid \underbrace{aB \mid a}_B \mid \underbrace{AA \mid bBb \mid bb}_C \mid b & \\
+    B &\rightarrow aB \mid a & \\
+    C &\rightarrow AA \mid \underbrace{CBA \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid b}_A \mid bBb \mid bb &
+\end{flalign*}
+
+\textbf{2. krok} nahrazení terminálů neterminály pokud nejsou samotné.
+\begin{flalign*}
+    S &\rightarrow SX_1 \mid SX_2 \mid X_2C \mid b & \\
+    A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid X_1B \mid X_1 \mid AA \mid X_2BX_2 \mid X_2X_2 \mid X_2 & \\
+    B &\rightarrow X_1B \mid X_1 & \\
+    C &\rightarrow AA \mid CBA \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid X_2 \mid X_2BX_2 \mid X_2X_2 & \\
+    X_1 &\rightarrow a & \\
+    X_2 &\rightarrow b & \\
+\end{flalign*}
+
+\textbf{3. krok} nahrazení pravých stran, která mají délku $\geq 3$.
+\begin{flalign*}
+    S &\rightarrow SX_1 \mid SX_2 \mid X_2C \mid b & \\
+    A &\rightarrow Y \mid CA \mid CB \mid BA \mid BC \mid X_1B \mid X_1 \mid AA \mid Z \mid X_2X_2 \mid X_2 & \\
+    Y &\rightarrow CBA & \\
+    Z &\rightarrow X_2BX_2 & \\
+    B &\rightarrow X_1B \mid X_1 & \\
+    C &\rightarrow AA \mid Y \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid X_2 \mid Z \mid X_2X_2 & \\
+    X_1 &\rightarrow a & \\
+    X_2 &\rightarrow b & \\
+\end{flalign*}
+
+\textbf{3.} Důkaz.
+
+$A \Rightarrow_\G^\star A^i C (BA)^{i+1}$
+
+Základní krok: $i=0$: $A^0 C (BA)^1 = CBA$ $\checkmark$ $A \Rightarrow_\G^\star CBA$.
+
+Indukční krok: $i \geq 0$: indukční předpoklad: $A \Rightarrow^\star A^i C (BA)^{i+1}$.
+
+$A \xRightarrow{A \rightarrow CBA} CBA \xRightarrow{C \rightarrow AA} A\underline{A}_{IP} (BA) \xRightarrow{IP}^\star 
+AA^i C (BA)^{i+1} (BA) = A^{i+1} C (BA)^{i+2}$. $\checkmark$
+
+A tedy, $b^{i+2} (ab)^{i+1} \in L(\G)$?
+
+$S \xRightarrow{S \rightarrow bC} bC \xRightarrow{C \rightarrow AA} bAA \xRightarrow{A \rightarrow b} b^2 A \Rightarrow
+|\text{dle důkazu výše}| \xRightarrow{}^\star b^2 A^i C (BA)^{i+1} \xRightarrow{A \rightarrow b} b^{i+2} C (BA)^{i+1} 
+\xRightarrow{C \rightarrow \varepsilon} b^{i+2} (BA)^{i+1} \xRightarrow{B \rightarrow aB} b^{i+2} (aBA)^{i+1} 
+\xRightarrow{B \rightarrow \varepsilon} b^{i+2} (aA)^{i+1} \xRightarrow{A \rightarrow b} b^{i+2} (ab)^{i+1}$. $\checkmark$
+
+\textbf{4.} Je gramatika $\G$ víceznačná?
+
+Víceznačnost = existují alespoň 2 derivační stromy / 2 levé derivace pro jedno libovolné slovo z $\G$.
+
+Například mějme slovo $w=bbb$.
+
+První způsob vygenerování slova $w$: $S \xRightarrow{S \rightarrow bC} bC \xRightarrow{C \rightarrow AA} bAA
+\xRightarrow{A \rightarrow b}^2 bbb.$
+
+Druhý způsob vygenerování slova $w$: $S \xRightarrow{S \rightarrow bC} bC \xRightarrow{C \rightarrow bBb} bbBb
+\xRightarrow{B \rightarrow \varepsilon} bbb.$
+
+A tedy gramatika $\G$ je víceznačná.
+
+\textbf{5.} Odstranění levých rekurzí.
+
+Levá rekurze se vyskytuje pouze v pravidlu $S \rightarrow Sa \mid Sb \mid bC \mid b$.
+
+Je potřeba přidat pouze jeden neterminál. Pokud by se jich přidalo více, nová gramatika by generovala méně slov, než původní.
+\begin{flalign*}
+    S &\rightarrow bC \mid bCS^{'} \mid b \mid S^{'} & \\
+    S^{'} &\rightarrow a \mid aS^{'} \mid b \mid bS^{'} &
+\end{flalign*}
