@@ -1,3 +1,30 @@
 \section{Čtrnácté cvičení}
 
+\subsection{Přílkad}
+Do Greibachové normální formy převeďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A\}$, 
+\\$\Sigma = \{0, 1\}$ a $P$ je dáno
+
+\begin{align*}
+    S &\rightarrow SA \mid 0 \\
+    A &\rightarrow AS \mid 1
+\end{align*}
+
 \subsection{Příklad}
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}$, $\Sigma = \{a,b\}$ a $P$ je dáno
+
+\begin{align*}
+    S &\rightarrow Sa \mid Sb \mid bC \\
+    A &\rightarrow CBA \mid BC \mid b \\
+    B &\rightarrow aB \mid \varepsilon \\
+    C &\rightarrow AA \mid bBb \mid \varepsilon
+\end{align*}
+
+\begin{enumerate}[noitemsep]
+    \item Ke gramatice $\G$ najděte nevypouštěcí gramatiku $\G_1$. Kroky převodu popište.
+    \item Ke gramatice $\G_1$ najděte gramatiku $\G_2$ v Chomského normálním tvaru, která generuje stejný jazyk jako 
+    gramatika $\G_1$. Jednotlivé kroky popište, gramatiku v Chomského normálním tvaru definujte.
+    \item Pomocí matematické indukce dokažte, že platí $A \Rightarrow_\G^\star A^i C (BA)^{i+1}$ pro každé $i \geq 0$.
+    Toho využijte k důkazu, že $b^{i+2}(ab)^{i+1}$ je generováno gramatikou $\G$ pro každé $i \geq 0$.
+    \item Je gramatika $\G$ víceznačná? Víceznačnou gramatiku definujte.
+    \item V gramatice $\G_1$ odstraňte levou rekurzi u symbolu $S$. Postup popište.
+\end{enumerate}
