@@ -21,6 +21,7 @@
 \usepackage{nicematrix,tikz}
 \usepackage{multicol}
 \usepackage{tikz-qtree}
+\usepackage[shortlabels]{enumitem}
  
 \begin{document}
 
@@ -80,13 +81,49 @@ Přímou metodou:
       \end{tikzpicture}
 
       \columnbreak
+      Zásobníkový automat: $(Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$,
 
-      $\Gamma = \{Z_0, A, B\}$
+      $Q = \{q_0, q_1, q_f\}$,
+
+      $\Sigma = \{a, b\}$,
+
+      $\Gamma = \{Z_0, A, B\}$,
+
+      $F = \{q_f\}$.
 
 \end{multicols}
 
+Tento zásobníkový automat přijímá stejné slovo jak prázdným zásobníkem, tak koncovým stavem, protože k vyprázdnění 
+zásobníku dojde pouze v přechodu $q_1 \rightarrow q_f$, a to do koncového stavu.
 
+\begin{enumerate}
+      \item ZA přijímá každé slovo z jazyka $L$:
+      
+      Jestliže slovo $w$ splňuje $|w|_a = |w|_b -1$, pak obsahuje alespoň jeden symbol $b$. Tedy ze stavu $q_0$ přejde
+      do $q_1$ a při prvním navštívení $q_1$ bude mít na zásobníku $A^i Z_0$, kde $i$ je počet $a$ předcházejících před
+      prvním $b$.
 
+      Proto při prvním navštívení $q_1$ bude zbývat přečíst slovo $u$, kde $w = a^i b u$ a $|a^i u|_a > |a^i u|_b$.
+
+      Tedy ve stavu $q_1$ dojde po přečtení celého slova $u$ k situaci, kdy je ZA ve stavu $q_1$, na vrcholu zásobníku
+      je $Z_0$ a slovo je přečtené. Proto automat skončí v koncovém stavu s prázdným zásobníkem.
+
+      Tedy slovo je přijato jak koncovým stavem, tak prázdným zásobníkem.
+
+      \item ZA nepřijme slovo $w \not\in L$:
+      
+      \begin{enumerate}[a)]
+            \item Jestliže $w$ neobsahuje $b$, pak ZA skončí v $q_0$ a na zásobníku bude mít $A^{|w|} Z_0$. Tedy není
+            přijato ani koncovým stavem, ani prázdným zásobníkem.
+            \item Jestliže $w$ obsahuje $b$ a není z jazyka $L$, pak $|w|_a = |w|_b -1$. ZA přejde do $q_1$ poprvé se
+            zásobníkem $A^i Z_0$, kde $w=a^i b u$. Protože $w \not\in L$ neplatí $|a^i u|_a = |a^i u|_b$, proto ZA
+            skončí práci (při přečtení slova $w$) ve stavu $q_1$, kde na vrcholu zásobníku je buď $A$ ($|a^i u|_a > |a^i u|_b$)
+            nebo B ($|a^i u|_a < |a^i u|_b$). Proto $w$ není přijato.
+
+            I kdyby během práce nad slovem $w$ se automat dostal do situace, kdy je ve stavu $q_1$ a na vrcholu zásobníku
+            je $Z_0$, pak i při přechodu do $q_f$, slovo přijato není, protože nebylo celé přečteno. 
+      \end{enumerate}
+\end{enumerate}
 
 % --------------------------------------------------------------
 %     You don't have to mess with anything below this line.
