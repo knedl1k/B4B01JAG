@@ -3,7 +3,11 @@
 \subsection{Příklad}
 Dokažte, že pro libovolné jazyky $L_1$ a $L_2$ nad stejnou abecedou platí $(L_1 \cup L_2)^\star = (L_1^\star L_2^\star)^\star$.
 
-% TODO: chybi reseni 
+% TODO: chybi reseni
+
+a) $(L_1 \cup L_2)^\star \subseteq (L_1^\star L_2^\star)$
+
+b) $(L_1^\star L_2^\star) \subseteq (L_1 \cup L_2)^\star$
 
 \subsection{Příklad}
 Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \{0,1\}$, jestliže výraz existuje.
@@ -30,7 +34,7 @@ Odpovědi zdůvodněte.
 % TODO: pridat zduvodneni - dukazy
 
 \subsection{Příklad}
-Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován 
+Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován
 regulárním výrazem $r_2 = (01 + 10)^\star$.
 \begin{enumerate}[a), noitemsep]
     \item Najděte nejkratší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
@@ -51,10 +55,10 @@ Odpovědi zdůvodněte.
 % TODO: pridat zduvodneni - dukazy
 
 \subsection{Příklad}
-Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto 
+Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto
 regulárním výrazem.\\
-(Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné 
-najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení 
+(Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné
+najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení
 a Kleeneho operátor.)
 
 \textbf{1. Obecný postup}
@@ -138,9 +142,9 @@ Podmnožinová konstrukce:
 \end{tikzpicture}
 
 
-\textbf{2. Rozdělení na podvýrazy} 
+\textbf{2. Rozdělení na podvýrazy}
 
-I. krok očíslování 
+I. krok očíslování
 
 $(b_1 a_2 a_3 + b_4 a_5 b_6)^\star (a_7 b_8)^\star \equiv (b_1 a_2 (a_3 + b_4))^\star (a_5 b_6)^\star$
 
@@ -182,8 +186,8 @@ III. krok
 IV. podmnožinová konstrukce DFA + redukce
 
 \subsection{Příklad}
-Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte 
-redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy 
+Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte
+redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy
 grafu z přednášky).
 
 $\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}$
@@ -231,6 +235,6 @@ L DFA:
         (1) edge[bend left, above] node{$1$} (2)
         (2) edge[loop above] node{$0,1$} (2)
        ;
-\end{tikzpicture} 
+\end{tikzpicture}
 
-% TODO: dodelat regularni vyraz 
+% TODO: dodelat regularni vyraz
