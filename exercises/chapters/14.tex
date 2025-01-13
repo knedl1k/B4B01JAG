@@ -3,13 +3,10 @@
 \subsection{Přílkad}
 Do Greibachové normální formy převeďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A\}$, 
 \\$\Sigma = \{0, 1\}$ a $P$ je dáno
-
 \begin{align*}
     S &\rightarrow SA \mid 0 \\
     A &\rightarrow AS \mid 1
-\end{align*}
-
-% TODO: dodelat 
+\end{align*} 
 
 \textbf{1. krok} oindexování neterminálů.
 
@@ -18,6 +15,25 @@ X_2 = A \\
 X_3 = S^{'} \\
 X_4 = A^{'}
 $
+
+\textbf{2. krok} odstranění levých rekurzí.
+\begin{flalign*}
+    S &\rightarrow 0 \mid 0S^{'} & \\
+    S^{'} &\rightarrow A \mid AS^{'} & \\
+    A &\rightarrow 1 \mid 1A^{'} & \\
+    A^{'} &\rightarrow S \mid SA^{'} &
+\end{flalign*}
+
+\textbf{3. krok} Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
+indexem), jinak sloučit pravidla. (postup shora dolů)
+\begin{flalign*}
+    S &\rightarrow 0 \mid 0S^{'} & \\
+    A &\rightarrow 1 \mid 1A^{'} & \\
+    S^{'} &\rightarrow 1 \mid 1A^{'} \mid 1S^{'} \mid 1A^{'}S^{'}  & \\
+    A^{'} &\rightarrow 0 \mid 0S^{'} \mid 0A^{'} \mid 0S^{'}A^{'} &
+\end{flalign*}
+
+\textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály. $\checkmark$
 
 \subsection{Příklad}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}$, $\Sigma = \{a,b\}$ a $P$ je dáno
