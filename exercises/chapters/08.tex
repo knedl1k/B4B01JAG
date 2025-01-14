@@ -1,6 +1,6 @@
 \section{Osmé cvičení}
 
-\subsection{Příklad}    \noindent
+\subsection{Konstrukce regulární gramatiky k automatu}
 K automatu $M$, který je dán následující tabulkou, zkostruujte regulární gramatiku $\G$, která generuje jazyk 
 $L = L(M)$. 
 
@@ -62,7 +62,7 @@ mám více vstupů $\rightarrow$ přidám si $S$
 
 \end{multicols}
 
-\subsection{Příklad}
+\subsection{Tvorba DFA ke gramatice 3. typu}
 \noindent
 Ke gramatice $\G$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\G)$. Gramatika 
 $\G = (N, \{a,b\}, S, P)$, kde $N = \{S, A, B\}$ a pravidla jsou 
@@ -116,7 +116,7 @@ $\G = (N, \{a,b\}, S, P)$, kde $N = \{S, A, B\}$ a pravidla jsou
 \end{multicols}
 
 \newpage
-\subsection{Příklad}\noindent
+\subsection{Práce s derivačním stromem bezkontextové gramatiky}\noindent
 Je dán derivační strom v bezkontextové gramatice:
 
 
@@ -181,7 +181,7 @@ Je dán derivační strom v bezkontextové gramatice:
     \stackrel{B \rightarrow b}{\Longrightarrow} bAA \stackrel{A \rightarrow a}{\Longrightarrow} baAA 
     \stackrel{A \rightarrow a}{\Longrightarrow} baaA\stackrel{A \rightarrow a}{\Longrightarrow} baaa$.
 
-\subsection{Příklad} % 8.4
+\subsection{Tvorba derivačního stromu k bezkontextové gramatice} % 8.4
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$, 
 s pravidly 
 $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$ 
@@ -259,7 +259,7 @@ $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 
 \end{multicols}
 
-\subsection{Příklad} 
+\subsection{Návrh bezkontextové gramatiky pro jazyk} 
 \noindent
 Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^ij^i2^j; i, j \geq 0\}$. Zdůvodněte, 
 proč gramatika $\G$ jazyk $L$ generuje. 
@@ -290,9 +290,7 @@ $ S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 
 \stackrel{Y \rightarrow 2Y(j)}{\Longrightarrow} 0^iX1^iY2^j \stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 
 0^i1^iY2^j\stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $.
 
-\section*{Nevypouštěcí gramatiky}
-
-\subsection{Příklad}
+\subsection{Tvorba nevypouštěcí gramatiky}
 \noindent
 Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \{\varepsilon\}$.
 
@@ -341,7 +339,7 @@ $\G_1$:
 \end{multicols}
 
 
-\subsection{Příklad}
+\subsection{Konstrukce gramatiky 3. typu k automatu}
 \noindent
 K automatu $M$ zkonstruujte gramatiku typu 3 která generuje jazyk $L(M)$, kde $M$
 je dán tabulkou
@@ -410,8 +408,7 @@ je dán tabulkou
         
 \end{multicols}  
 
-\section*{Navrhněte gramatiku}
-\subsection{Příklad}
+\subsection{Návrh bezkontextové gramatiky}
 \noindent
 Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
 Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.

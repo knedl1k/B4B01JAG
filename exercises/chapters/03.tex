@@ -1,7 +1,7 @@
 \section{Třetí cvičení}
 
-\subsection{Příklad}
-Pomocí Nerodovy věty a pomocí pumping lemmatu dokažte, že jazyk $L = \{0^n 1^m \mid n > m \geq 0\}$ není regulární.
+\subsection{Nerodova věta a Pumping lemma}
+Pomocí Nerodovy věty a pomocí Pumping lemmatu dokažte, že jazyk $L = \{0^n 1^m \mid n > m \geq 0\}$ není regulární.
 
 \noindent
 Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $T$ na $\Sigma^\star$ taková, že:
@@ -41,7 +41,7 @@ Když teď napumpujeme $xw^i y$, například $i=0$, dostaneme $xw^0 y = 0^{n+1-k
 
 Tedy $L$ není regulární. $\blacksquare$
 
-\subsection{Příklad}
+\subsection{Nalezení slova rozlišující stavy}
 Je dán DFA tabulkou:
 \[
 \begin{tabular}{|r|c|c|}
@@ -79,7 +79,7 @@ $\delta(3,b) = 2, \delta(5, b) = 3$.
 
 b) $\delta(2,a) = 4, \delta(4,a) =2$. $\delta(2,b)=5, \delta(4,b)=5$. Tyto stavy nelze rozlišit.
 
-\subsection{Příklad}
+\subsection{Návrh a redukce DFA podle jazyka}
 Navrhněte DFA, který přijímá jazyk $L$ skládající se ze všech slov nad abecedou $\Sigma = \{0, 1\}$, která začínají 
 $1100$ a končí $000$. Navržený automat redukujte.
 
@@ -188,7 +188,7 @@ Redukovaný automat:
 \end{tikzpicture}
 
 
-\subsection{Příklad}
+\subsection{Srovnání dvou DFA automatů}
 Jsou dány dva automaty. Rozhodněte, zda jsou ekvivalentní, tj. zda přijímají stejný jazyk.
 \[
 M_1:
@@ -379,7 +379,7 @@ Změníme labely $M_1$ tak, aby odpovídaly redukci $M_2$.
 
 Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme. 
 
-\subsection{Příklad}
+\subsection{Návrh a redukce DFA podle jazyka}
 Navrhněte DFA, který přijímá $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
     \item druhý znak slova $w$ je $a$,

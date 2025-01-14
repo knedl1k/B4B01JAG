@@ -1,6 +1,6 @@
 \section{Páté cvičení}
 
-\subsection{Příklad}
+\subsection{Důkaz obecné vlastnosti dvou libovolnných jazyků}
 Dokažte, že pro libovolné jazyky $L_1$ a $L_2$ nad stejnou abecedou platí $(L_1 \cup L_2)^\star = (L_1^\star L_2^\star)^\star$.
 
 % TODO: chybi reseni
@@ -9,7 +9,7 @@ a) $(L_1 \cup L_2)^\star \subseteq (L_1^\star L_2^\star)$
 
 b) $(L_1^\star L_2^\star) \subseteq (L_1 \cup L_2)^\star$
 
-\subsection{Příklad}
+\subsection{Tvorba regulárního výrazu reprezentujícího jazyk}
 Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \{0,1\}$, jestliže výraz existuje.
 \begin{enumerate}[a), noitemsep]
     \item $L$ se skládá ze všech slov, které obsahují pouze $0$.
@@ -33,7 +33,7 @@ Odpovědi zdůvodněte.
 \end{multicols}
 % TODO: pridat zduvodneni - dukazy
 
-\subsection{Příklad}
+\subsection{Hledání slov splňující různé regulární výrazy}
 Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován
 regulárním výrazem $r_2 = (01 + 10)^\star$.
 \begin{enumerate}[a), noitemsep]
@@ -54,7 +54,7 @@ Odpovědi zdůvodněte.
 \end{multicols}
 % TODO: pridat zduvodneni - dukazy
 
-\subsection{Příklad}
+\subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
 Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto
 regulárním výrazem.\\
 (Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné
@@ -185,7 +185,7 @@ III. krok
 
 IV. podmnožinová konstrukce DFA + redukce
 
-\subsection{Příklad}
+\subsection{Tvorba DFA a regulárního výrazu dle jazyka}
 Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte
 redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy
 grafu z přednášky).

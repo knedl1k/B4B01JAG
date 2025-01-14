@@ -1,5 +1,5 @@
 \section{Deváté cvičení}
-\subsection{Příklad}\noindent
+\subsection{Návrh bezkontextové gramatiky}
 Navrhněte bezkontextové gramatiky generující následující jazyky
 \begin{enumerate}[a), noitemsep]
     \item $L_1 = \{0^{m+n} 1^n 0^m \mid 0 \leq n,m\}$.
@@ -32,7 +32,7 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 Důkazy mě těžce nebaví, všude jsou cca stejný. 
 \end{enumerate}
 
-\subsection{Příklad}\noindent % 9.2
+\subsection{Konstrukce nevypouštěcí gramatiky} % 9.2
 Ke gramatice $\G$ zkonstruujte nevypouštěcí gramatiku $\G_1$, pro kterou 
 $L(\G_1) = L(\G) - \{\varepsilon\}$. Gramatiku $\G_1$ zredukujte.
 
@@ -59,8 +59,8 @@ $V_2 = V_1 \cup \emptyset = \{S, B\}$
 
 Gramatika $\G_1$ už je redukovaná. 
 
-\section*{Redukce gramatiky}
-obecně: \\
+\textbf{Obecný postup pro redukci}
+
 $V = \{A \mid A \in N, A \implies_{\G}^{\star} \, w, w \in \Sigma^{\star}\}$\\
 $V_1 = \{A \mid A \implies^{\star} w \in P, w \in \Sigma^{\star}\}$\\
 $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^{\star}\}$\\
@@ -69,7 +69,7 @@ $U = \{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ t
 
 Jazyk není prázdný právě tehdy, kdy $S \in V$. 
 
-\subsection{Příklad - polopaticky vysvětlená redukce}
+\subsection{Redukce gramatiky}
 
 Zredukujte gramatiku $\G$, která je dána pravidly 
 \[
@@ -112,7 +112,7 @@ a ponechám jen pravidla, která nám zbyla v $U$.
         & A \rightarrow bSA \mid baS & \\
 \end{flalign*}
 
-\subsection{Příklad} % 9.4
+\subsection{Důkaz, že gramatika generuje alespoň jedno slovo} % 9.4
 
 Rozhodněte, zda gramatika $\G$ generuje aspoň jedno slovo, tj. zda $L(\G) \neq \emptyset$, kde $\G$ je dána pravidly 
 
@@ -132,11 +132,11 @@ $V_3 = V_2 \cup \emptyset = \{D, A\} = V$
 
 $S \notin V \quad \rightarrow \quad L(\G) = \emptyset$ 
 
-\section*{Chomského normální tvar}
+\textbf{Polopatě}
 
 Chomského normální tvar: Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál. 
 
-\subsection{Příklad} % 9.5 
+\subsection{Převod gramatiky do Chomského normálního tvaru} % 9.5 
 
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\}$, $\Sigma = \{0, 1\}$ a P je 
 \[
@@ -191,7 +191,7 @@ vytvořím pomocná pravidla pro terminály, které "nezůstaly samy"
 \end{flalign*}
 
 
-\subsection{Příklad} % 9.6 
+\subsection{Práce s derivačním stromem bezkontextové gramatiky} % 9.6 
 
 Je dán derivační strom v bezkontextové gramatice: 
 
@@ -352,65 +352,69 @@ $w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w5 = \varepsilon$.
 d) je víceznačná, přepisujeme $A \rightarrow AA$. 
 
 
-\subsection{Příklad}  % samostatna prace 6 
-
-Navrhněte bezkontextovou gramatiku generující následující jazyk $L = \{a^nb^ma^n \mid m, n \geq 0\}$. Zdůvodněte, 
-proč zkonstruovaná gramatika jazyk $L$ generuje.
+% TODO: zvážit přesun samostatné práce
+%% Samostatná práce 6
 
 
-\begin{flalign*}
-    P: & S \rightarrow aSa \mid b \mid \varepsilon & \\
-\end{flalign*}
+% \subsection{Příklad}  % samostatna prace 6 
 
-(1) $\quad    S \stackrel{S \rightarrow aSa (n)}{\Longrightarrow} a^nSa^n \stackrel{S \rightarrow Sb (m)}
-{\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
+% Navrhněte bezkontextovou gramatiku generující následující jazyk $L = \{a^nb^ma^n \mid m, n \geq 0\}$. Zdůvodněte, 
+% proč zkonstruovaná gramatika jazyk $L$ generuje.
+
+
+% \begin{flalign*}
+%     P: & S \rightarrow aSa \mid b \mid \varepsilon & \\
+% \end{flalign*}
+
+% (1) $\quad    S \stackrel{S \rightarrow aSa (n)}{\Longrightarrow} a^nSa^n \stackrel{S \rightarrow Sb (m)}
+% {\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
+% % \]
+
+% (2) \quad Když $w \in L(\G)$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
+% $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
+% $a^lb^ka^l \in L(\G)$.
+
+
+% \subsection{Příklad} %9.10, samostatna prace 6 6 
+
+% Zredukujte gramatiku $\G$, kter je dána pravidly: 
+% \[
+% \begin{array}{l l}
+%     \G: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
+%     & A \rightarrow bCD \mid Dba \\
+%     & B \rightarrow Bb \mid AC \\
+%     & C \rightarrow aA \mid a \\
+%     & D \rightarrow DE \\ 
+%     & E \rightarrow \varepsilon
+% \end{array}
 % \]
 
-(2) \quad Když $w \in L(\G)$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
-$S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
-$a^lb^ka^l \in L(\G)$.
+% (1)
+
+% % hned v prvnim kroku dostanu terminalni z neterminalniho: \\
+% $V_1 = \{A \mid A \rightarrow ^\star w \in P, w\in \Sigma ^ \star\}$\\
+% $V_1 = \{S, C, E\}$
+
+% % ty neterminaly, kde mam pravidlo, a $\alpha$ obsahuje jen neterminaly z $V_1$\\
+% $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\}$\\
+% $V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
+
+% \begin{flalign*}
+%     \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon & \\
+%     & C \rightarrow a & \\
+%     & E \rightarrow \varepsilon & \\
+% \end{flalign*}
+
+% (2) 
 
 
-\subsection{Příklad} %9.10, samostatna prace 6 6 
+% $U = \{X \in V \mid \exists \alpha, \beta \in (V \cup \Sigma)^\star, S \implies \alpha X \beta \}$
 
-Zredukujte gramatiku $\G$, kter je dána pravidly: 
-\[
-\begin{array}{l l}
-    \G: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
-    & A \rightarrow bCD \mid Dba \\
-    & B \rightarrow Bb \mid AC \\
-    & C \rightarrow aA \mid a \\
-    & D \rightarrow DE \\ 
-    & E \rightarrow \varepsilon
-\end{array}
-\]
+% $U_0 = \{S\}$\\
+% $U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v }\alpha \text{ nebo } \beta \text{ na pravé straně pro pravidlo } 
+% Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
+% $U_1 = U_0 \cup {\emptyset}$
 
-(1)
-
-% hned v prvnim kroku dostanu terminalni z neterminalniho: \\
-$V_1 = \{A \mid A \rightarrow ^\star w \in P, w\in \Sigma ^ \star\}$\\
-$V_1 = \{S, C, E\}$
-
-% ty neterminaly, kde mam pravidlo, a $\alpha$ obsahuje jen neterminaly z $V_1$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\}$\\
-$V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
-
-\begin{flalign*}
-    \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon & \\
-    & C \rightarrow a & \\
-    & E \rightarrow \varepsilon & \\
-\end{flalign*}
-
-(2) 
-
-
-$U = \{X \in V \mid \exists \alpha, \beta \in (V \cup \Sigma)^\star, S \implies \alpha X \beta \}$
-
-$U_0 = \{S\}$\\
-$U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v }\alpha \text{ nebo } \beta \text{ na pravé straně pro pravidlo } 
-Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
-$U_1 = U_0 \cup {\emptyset}$
-
-\begin{flalign*}
-    \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon & \\
-\end{flalign*}
+% \begin{flalign*}
+%     \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon & \\
+% \end{flalign*}
