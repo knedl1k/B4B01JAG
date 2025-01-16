@@ -29,16 +29,32 @@ Odpovědi zdůvodněte.
 
     d) $0^\star 1 0^\star 1 (0+1)^\star$.\\
     e) $(0^\star 1 0^\star 1)^\star 0^\star$.\\
-    f) $0^\star 1 (0^\star 1 0^\star)^\star 0^\star$.
+    f) $0^\star 1 (0^\star 1 0^\star 1)^\star 0^\star$.
 \end{multicols}
-% TODO: pridat zduvodneni - dukazy
+Zdůvodnění:
+\begin{enumerate}[a), noitemsep]
+    \item Kleenyho operátor zajistí, že je libovolný počet $0$ a nepovolujeme žádnou $1$.
+    \item Před první $1$ povolíme libovolný počet $0$. Po první $1$ následně povolíme pouze libovolný počet $0$.
+    \item Před první $1$ povolíme libovolný počet $0$. Po první $1$ následně povolíme všechny znaky abecedy 
+    $\Sigma$ v libovolném počtu.
+    \item Dovolíme libovolný počet $0$, po kterých následuje právě jedna $1$. Následovat může následovat libovolný počet 
+    $0$. Po té zas vynutíme právě jednu $1$. Po této sekvenci může následovat libovolný počet znaků abecedy $\Sigma$.
+    \item Zde mohou nastat dva případy - Slovo neobsahuje žádnou $1$, nebo jich obsahuje sudý počet. Pokud neobsahuje 
+    žádnou $1$, můžeme celou závorku přeskočit díky Kleenyho operátoru, pak přijmeme pouze libovolný počet $0$. Pokud 
+    obsahuje jedničku, závorka nám zaručí, že jich bude nutně sudý počet. Mezi nimi na všech stranách může být libovolný
+    počet $0$.
+    \item Zde vynutíme alespoň jednu $1$ a pokud by se mělo ve slově vyskytovat více $1$, tak závorka zaručí, že vždy
+    přijmeme dvojici $1$. Tím bude v celém slově stále lichý počet již zpracovaných $1$. Znovu z obou stran obklopeny 
+    libovolným počtem $0$.
+\end{enumerate}
 
+\newpage % TODO: kontrola formatovani
 \subsection{Hledání slov splňující různé regulární výrazy}
 Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován
 regulárním výrazem $r_2 = (01 + 10)^\star$.
 \begin{enumerate}[a), noitemsep]
     \item Najděte nejkratší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
-    \item Najděte nejdělší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
+    \item Najděte nejdelší neprázdné slovo, které patří do průniku $L_1 \cap L_2$.
     \item Najděte nejkratší slovo, které leží v $L_1$, ale neleží v $L_2$.
     \item Najděte nejkratší slovo, které neleží ve sjednocení $L_1 \cup L_2$.
 \end{enumerate}
@@ -52,11 +68,20 @@ Odpovědi zdůvodněte.
     c) $0$ nebo $1$, protože délka $\not\in L_2$.\\
     d) $10101$.
 \end{multicols}
-% TODO: pridat zduvodneni - dukazy
+Zdůvodnění:
+\begin{enumerate}[a), noitemsep]
+    \item Silnější restrikci do průniku vnáší $L_2$. $L_2$ vynucuje vybrání si jedné z dvojic $10$ nebo $01$. $L_1$ nám 
+    obě varianty povoluje.
+    \item Teď naopak využijeme flexibility $L_1$. Jedinou povinností je používat vždy dvojice, kvůli $L_2$. Pro 
+    visualizaci: $0 1^2 0^2 1^2 0$. To má přesně tvar jako $r_1$.
+    \item Protože $L_2$ vyžaduje dvojice, zaměříme se na slova s menší délkou: $0$, $1$. Obě varianty $L_1$ přijme.
+    \item Musíme porušit dvojice z $L_2$ a zároveň pravidelné střídání $0$ a $1$ z $L_1$. Stačí tedy prohodit pořadí 
+    střídání a aby slovo mělo lichou délku. Také je potřeba, aby délka byla alespoň $|r_1|$, kvůli $L_1$. 
+\end{enumerate}
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
-Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk reprezentovaný tímto
-regulárním výrazem.\\
+Je dán regulární výraz $r=(baa + bab)^\star (ab)^\star$. K $r$ zkonstruujte redukovaný DFA, který přijímá jazyk 
+reprezentovaný tímto regulárním výrazem.\\
 (Návod: Postupujte dvěma způsoby; jednak obecným postupem z přednášky, jednak rozdělením na podvýrazy, pro které je možné
 najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení
 a Kleeneho operátor.)
@@ -99,9 +124,8 @@ a Kleeneho operátor.)
         \hline
     \end{tabular}
 \end{multicols}
-
+\newpage % TODO: kontrola formatovani
 Podmnožinová konstrukce:
-
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
     \hline
@@ -117,7 +141,6 @@ Podmnožinová konstrukce:
     \hline
 \end{tabular}
 \]
-
 \begin{tikzpicture}
     \node[state, initial] (d) {$D$};
     \node[state, right of=d] (a) {$A$};
@@ -141,24 +164,17 @@ Podmnožinová konstrukce:
         ;
 \end{tikzpicture}
 
-
-\textbf{2. Rozdělení na podvýrazy}
-
-I. krok očíslování
-
-$(b_1 a_2 a_3 + b_4 a_5 b_6)^\star (a_7 b_8)^\star \equiv (b_1 a_2 (a_3 + b_4))^\star (a_5 b_6)^\star$
-
-II. krok
-
-Pro jazyk, který je přijímaný regulárním výrazem $r$ platí:
-
+\textbf{2. postup Rozdělením na podvýrazy}\\
+I. krok očíslování\\
+$(b_1 a_2 a_3 + b_4 a_5 b_6)^\star (a_7 b_8)^\star \equiv (b_1 a_2 (a_3 + b_4))^\star (a_5 b_6)^\star$\\
+II. krok\\
+Pro jazyk, který je přijímaný regulárním výrazem $r$ platí:\\
 výraz může začínat: $b_1, a_5$ \\
 mohou po sobě následovat: $\bm{b_1} : a_2$; $\bm{a_2} : a_3, b_4$; $\bm{a_3} : b_1, a_5$; $\bm{b4} : b_1, a_5$; $\bm{a_5} : b_6$; $\bm{b_6} : a_5$\\
 výraz může končit: $a_3, b_4, b_6$\\
 je $\varepsilon$ v $L$? Ano.
 
-III. krok
-
+III. krok\\
 \begin{tikzpicture}
     \node[state, initial] (s) {$S$};
     \node[state, right of=s] (1) {$b_1$};
@@ -183,7 +199,7 @@ III. krok
         ;
 \end{tikzpicture}
 
-IV. podmnožinová konstrukce DFA + redukce
+IV. podmnožinová konstrukce DFA + redukce % TODO: dodělat
 
 \subsection{Tvorba DFA a regulárního výrazu dle jazyka}
 Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte
