@@ -9,54 +9,45 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 \begin{enumerate}[a)]
     \item 
-    \begin{flalign*}
-        P: & S \rightarrow 0S0 \mid A \\
-        & A \rightarrow 0A1 \mid \varepsilon\\
-    \end{flalign*}
+        \begin{flalign*}
+            P\text{: } & S \rightarrow 0S0 \mid A & \\
+            & A \rightarrow 0A1 \mid \varepsilon &
+        \end{flalign*}
 
-\begin{enumerate}[noitemsep]
-    \item $\quad S \stackrel{S \rightarrow 0S0 (m)}{\Longrightarrow} 0^m S 0^m \stackrel{S \rightarrow A}
-    {\Longrightarrow} 0^m A 0^m \stackrel{A \rightarrow 0A1(n)}{\Longrightarrow} 0^m 0^n A 1^n 0^m \stackrel
-    {A \rightarrow \varepsilon}{\Longrightarrow} 0^m 1^m 0^n 1^n 0^m = 0^{m+n}1^n0^m$
-    \item $\quad S \Rightarrow^* w, \, S \Rightarrow 0^i S 0^i, \, S \Rightarrow A, \, A \Rightarrow^* 0^j 
-    1^j, \, 0^i 0^j 1^j 0^i \in L(\G)$
-\end{enumerate}
+        \begin{enumerate}[noitemsep]
+            \item $\quad S \stackrel{S \rightarrow 0S0 (m)}{\Longrightarrow} 0^m S 0^m \stackrel{S \rightarrow A}
+            {\Longrightarrow} 0^m A 0^m \stackrel{A \rightarrow 0A1(n)}{\Longrightarrow} 0^m 0^n A 1^n 0^m \stackrel
+            {A \rightarrow \varepsilon}{\Longrightarrow} 0^m 1^m 0^n 1^n 0^m = 0^{m+n}1^n0^m$
+            \item $\quad S \Rightarrow^* w, \, S \Rightarrow 0^i S 0^i, \, S \Rightarrow A, \, A \Rightarrow^* 0^j 
+            1^j, \, 0^i 0^j 1^j 0^i \in L(\G)$
+        \end{enumerate}
 
-\item 
+    \item 
+        \begin{flalign*}
+            P\text{: } & S \rightarrow 0S1 \mid S1 \mid 1 &
+        \end{flalign*}
 
-    \begin{flalign*}
-        P: & S \rightarrow 0S1 \mid S1 \mid 1 & \\
-    \end{flalign*}
-
-
-Důkazy mě těžce nebaví, všude jsou cca stejný. 
+        Důkazy mě těžce nebaví, všude jsou cca stejný. % TODO: dodělat důkaz
 \end{enumerate}
 
 \subsection{Konstrukce nevypouštěcí gramatiky} % 9.2
 Ke gramatice $\G$ zkonstruujte nevypouštěcí gramatiku $\G_1$, pro kterou 
 $L(\G_1) = L(\G) - \{\varepsilon\}$. Gramatiku $\G_1$ zredukujte.
-
-\[
-    \begin{array}{l l}
-        P: & S \rightarrow AB \mid \varepsilon \\
-           & A \rightarrow aAAb \mid bS \mid CA \\
-           & B \rightarrow BbA \mid CaC \mid \varepsilon\\
-           & C \rightarrow aBB \mid bS \\
-    \end{array}
-\]
+\begin{align*}
+    P\text{: } & S \rightarrow AB \mid \varepsilon \\
+    & A \rightarrow aAAb \mid bS \mid CA \\
+    & B \rightarrow BbA \mid CaC \mid \varepsilon \\
+    & C \rightarrow aBB \mid bS
+\end{align*}
 % TODO: neni zredukovana asi?? 
-$V_1 = \{A \mid A \rightarrow \varepsilon \in P\}$\\
-$V_1 = \{S, B\}$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\}$\\
-$V_2 = V_1 \cup \emptyset = \{S, B\}$
-
+$V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{S, B\}$\\
+$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \emptyset = \{S, B\}$
     \begin{flalign*}
         \G_1: & S \rightarrow AB \mid A & \\
            & A \rightarrow aAAb \mid bS \mid b \mid CA & \\
            & B \rightarrow BbA \mid bA \mid CaC & \\
-           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b & \\
+           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b &
     \end{flalign*}
-
 Gramatika $\G_1$ už je redukovaná. 
 
 \textbf{Obecný postup pro redukci}
@@ -72,16 +63,13 @@ Jazyk není prázdný právě tehdy, kdy $S \in V$.
 \subsection{Redukce gramatiky}
 
 Zredukujte gramatiku $\G$, která je dána pravidly 
-\[
-    \begin{array}{l l}
-        P: & S \rightarrow SA \mid SB \mid \varepsilon \\
-           & A \rightarrow bSA \mid baS \\
-           & B \rightarrow aB \mid Ba \mid DA\\
-           & C \rightarrow aCB \mid bA \\
-           & D \rightarrow AB \\
-    \end{array}
-\]
-
+\begin{align*}
+    P\text{: } & S \rightarrow SA \mid SB \mid \varepsilon \\
+    & A \rightarrow bSA \mid baS \\
+    & B \rightarrow aB \mid Ba \mid DA\\
+    & C \rightarrow aCB \mid bA \\
+    & D \rightarrow AB
+\end{align*}
 redukce tldr:\\
 $V_1\dots$ to, co se promítne na $\varepsilon$ nebo na terminály \\ 
 $V_2\dots$ to, co se promítne na terminály a na to, co už je ve $V_1$ \\ 
@@ -95,11 +83,10 @@ $V_4 = V_3 \cup \emptyset = \{S, A, C\}$
 
 a tady v tom nechám jenom neterminály z $V$, a z pravé strany vyškrtám pravidla obsahující neterminály~$\notin~V$.
 \begin{flalign*}
-    P: & S \rightarrow SA \mid \varepsilon & \\
-        & A \rightarrow bSA \mid baS & \\
-        & C \rightarrow \mid bA & \\
+    P\text{: } & S \rightarrow SA \mid \varepsilon & \\
+    & A \rightarrow bSA \mid baS & \\
+    & C \rightarrow \mid bA &
 \end{flalign*}
-
 sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$. 
 
 $U_0 = \{S\}$\\ 
@@ -108,28 +95,23 @@ $U_2 = U_1 \cup \emptyset = \{S, A\}$.
 
 a ponechám jen pravidla, která nám zbyla v $U$. 
 \begin{flalign*}
-    P: & S \rightarrow SA \mid \varepsilon & \\
-        & A \rightarrow bSA \mid baS & \\
+    P\text{: } & S \rightarrow SA \mid \varepsilon & \\
+    & A \rightarrow bSA \mid baS &
 \end{flalign*}
 
 \subsection{Důkaz, že gramatika generuje alespoň jedno slovo} % 9.4
 
 Rozhodněte, zda gramatika $\G$ generuje aspoň jedno slovo, tj. zda $L(\G) \neq \emptyset$, kde $\G$ je dána pravidly 
-
-\[
-\begin{array}{l l}
-    P: & S \rightarrow aS \mid AB \mid CD \\
-       & A \rightarrow aDb \mid AD \mid BC \\
-       & B \rightarrow bSb \mid BB \\
-       & C \rightarrow BA \mid ASb \\
-       & D \rightarrow ABCD \mid \varepsilon \\
-\end{array}
-\]
-
+\begin{align*}
+    P\text{: } & S \rightarrow aS \mid AB \mid CD \\
+    & A \rightarrow aDb \mid AD \mid BC \\
+    & B \rightarrow bSb \mid BB \\
+    & C \rightarrow BA \mid ASb \\
+    & D \rightarrow ABCD \mid \varepsilon
+\end{align*}
 $V_1 = \{D\}$\\ 
 $V_2 = V_1 \cup \{A\} = \{D, A\}$\\ 
-$V_3 = V_2 \cup \emptyset = \{D, A\} = V$
-
+$V_3 = V_2 \cup \emptyset = \{D, A\} = V$\\
 $S \notin V \quad \rightarrow \quad L(\G) = \emptyset$ 
 
 \textbf{Polopatě}
@@ -139,63 +121,50 @@ Chomského normální tvar: Všechna pravidla na pravé straně mají buď přes
 \subsection{Převod gramatiky do Chomského normálního tvaru} % 9.5 
 
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\}$, $\Sigma = \{0, 1\}$ a P je 
-\[
-\begin{array}{l l}
-    P: & S \rightarrow A \mid 0SA \mid \varepsilon \\
-       & A \rightarrow 1A \mid B1 \mid 1 \\
-       & B \rightarrow 0B \mid 0 \\
-\end{array}
-\]
-
+\begin{align*}
+    P\text{: } & S \rightarrow A \mid 0SA \mid \varepsilon \\
+    & A \rightarrow 1A \mid B1 \mid 1 \\
+    & B \rightarrow 0B \mid 0
+\end{align*}
 Převeďte $\G$ do Chomského normálního tvaru. 
 
-1. Uděláme z toho nevypouštěcí gramatiku. 
+\textbf{1. krok} Vytvořit nevypouštěcí gramatiku. 
 
-$V = \{S\}$\\ 
-
+$V = \{S\}$
 \begin{flalign*}
-    P: & S \rightarrow A \mid 0SA \mid 0A & \\
-       & A \rightarrow 1A \mid B1 \mid 1 & \\
-       & B \rightarrow 0B \mid 0 & \\
+    P\text{: } & S \rightarrow A \mid 0SA \mid 0A & \\
+    & A \rightarrow 1A \mid B1 \mid 1 & \\
+    & B \rightarrow 0B \mid 0 &
 \end{flalign*}
+\textbf{2. krok} Nahrazení právě jednoho neterminálu pravých stran jeho pravidly. 
 
-
-2. Zbavíme se toho, kdy 1 neterminál přepisujeme na 1 neterminál. 
-
-tady: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
-
+zde: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
 \begin{flalign*}
-    P: & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A & \\
-       & A \rightarrow 1A \mid B1 \mid 1 & \\
-       & B \rightarrow 0B \mid 0 & \\
+    P\text{: } & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A & \\
+    & A \rightarrow 1A \mid B1 \mid 1 & \\
+    & B \rightarrow 0B \mid 0 &
 \end{flalign*}
-
 vytvořím pomocná pravidla pro terminály, které "nezůstaly samy" 
-
 \begin{flalign*}
-    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A & \\
-       & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
-       & B \rightarrow X_0B \mid 0 & \\
-       & X_0 \rightarrow 0 & \\
-       & X_1 \rightarrow 1 & \\
+    P\text{: } & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A & \\
+    & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
+    & B \rightarrow X_0B \mid 0 & \\
+    & X_0 \rightarrow 0 & \\
+    & X_1 \rightarrow 1 &
 \end{flalign*}
-
-3. Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
+\textbf{3. krok} Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
 \begin{flalign*}
-    P: & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A  & \\
-       & Y \rightarrow SA & \\
-       & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
-       & B \rightarrow X_0B \mid 0 & \\
-       & X_0 \rightarrow 0 & \\
-       & X_1 \rightarrow 1 & \\
+    P\text{: } & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A  & \\
+    & Y \rightarrow SA & \\
+    & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
+    & B \rightarrow X_0B \mid 0 & \\
+    & X_0 \rightarrow 0 & \\
+    & X_1 \rightarrow 1 &
 \end{flalign*}
-
 
 \subsection{Práce s derivačním stromem bezkontextové gramatiky} % 9.6 
-
 Je dán derivační strom v bezkontextové gramatice: 
 
-% TODO: udelat ten strom symetrictejsi, tady i nahore 
 \begin{center}
     \begin{forest}
     for tree={
@@ -242,10 +211,7 @@ Je dán derivační strom v bezkontextové gramatice:
         ]
     ]
     \end{forest}
-    \end{center}
-    
-
-    
+\end{center}
 \begin{enumerate}[label=\alph*), noitemsep]
     \item Napiště pravidla minimální CF gramatiky, ve které je to derivační strom. 
     \item Napiště levou derivaci odpovídající tomuto derivačnímu stromu. 
@@ -255,11 +221,10 @@ Je dán derivační strom v bezkontextové gramatice:
 \end{enumerate}
     
 a) \begin{flalign*}
-    P: & S \rightarrow AaB \mid \varepsilon & \\
-       & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon & \\
-       & B \rightarrow SA \mid ac & \\
+    P\text{: } & S \rightarrow AaB \mid \varepsilon & \\
+    & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon & \\
+    & B \rightarrow SA \mid ac &
 \end{flalign*}
-
 b) 
 $\quad S \stackrel{S \rightarrow A a B}{\Longrightarrow} A a B \stackrel{A \rightarrow A A}{\Longrightarrow} 
 A A a B \stackrel{A \rightarrow a S b}{\Longrightarrow} a S b A a B \stackrel{S \rightarrow \varepsilon}
@@ -273,148 +238,70 @@ abaaacB \stackrel{B \rightarrow ac}{\Longrightarrow} abaaacac $.
 c) basically pumping lemma pro gramatiky, snad by to v testech ani zkoušce chtít neměla. \\
 $w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w5 = \varepsilon$. 
 
-\begin{minipage}{0.7\textwidth}
-    
 \begin{center}
-        
     \begin{forest}
-        for tree={
-            grow=south,                 % Tree grows downward
-            edge={->},                  % Draw edges as arrows
-            align=center,               % Center the text inside nodes
-        }
-        [$S$
-        [$A$
-            [$A$
-                [$a$]
-                [$S$
-                    [$\varepsilon$]
-                ]
-                [$b$]
-            ]
-            [$A$
-                [$\varepsilon$]
-            ]
-        ]
-        [$a$]
-        [$B$, text=red
+            for tree={
+                grow=south,                 % Tree grows downward
+                edge={->},                  % Draw edges as arrows
+                align=center,               % Center the text inside nodes
+            }
             [$S$
+            [$A$
+                [$A$
+                    [$a$]
+                    [$S$
+                        [$\varepsilon$]
+                    ]
+                    [$b$]
+                ]
                 [$A$
                     [$\varepsilon$]
                 ]
-                [$a$]
-                [$B$, text=red
-                    [$S$
-                        [$A$
-                            [$\varepsilon$]
-                        ]
-                        [$a$]
-                        [$B$
-                            [$a$]
-                            [$c$]
-                        ]
-                    ]
-                    [$A$
-                        [$A$
-                            [$\varepsilon$]
-                        ]
-                        [$B$
-                            [$a$]
-                            [$c$]
-                        ]
-                    ]
-                ]
             ]
-            [$A$
+            [$a$]
+            [$B$, text=red
                 [$S$
-                    [$\varepsilon$]
-                ]
-                [$B$
+                    [$A$
+                        [$\varepsilon$]
+                    ]
                     [$a$]
-                    [$c$]
+                    [$B$, text=red
+                        [$S$
+                            [$A$
+                                [$\varepsilon$]
+                            ]
+                            [$a$]
+                            [$B$
+                                [$a$]
+                                [$c$]
+                            ]
+                        ]
+                        [$A$
+                            [$A$
+                                [$\varepsilon$]
+                            ]
+                            [$B$
+                                [$a$]
+                                [$c$]
+                            ]
+                        ]
+                    ]
+                ]
+                [$A$
+                    [$S$
+                        [$\varepsilon$]
+                    ]
+                    [$B$
+                        [$a$]
+                        [$c$]
+                    ]
                 ]
             ]
         ]
-    ]
-    \end{forest}    \end{center}
-    
-\end{minipage}
-\begin{minipage}{0.3\textwidth}
-    
-    
-    (jak toho docílím: jdu odspoda stromu a najdu dva stejné neterminály (různě v grafu) a v podstatě ten strom 
-    nafouknu (zkopíruju nějaký podstrom z vyššího do nižšího neterminálu, v ukázce červený node $B$ v nejvýš 
-    vpravo kopíruju do červeného $B$čka vlevo od něj).)
-\end{minipage}
-
-\vspace{7mm}
+    \end{forest}    
+\end{center}
+Jak toho docílím: jdu odspoda stromu a najdu dva stejné neterminály (různě v grafu) a v podstatě ten strom nafouknu 
+(zkopíruju nějaký podstrom z vyššího do nižšího neterminálu, v ukázce červený node $B$ v nejvýš vpravo kopíruju do 
+červeného $B$čka vlevo od něj).
 
 d) je víceznačná, přepisujeme $A \rightarrow AA$. 
-
-
-% TODO: zvážit přesun samostatné práce
-%% Samostatná práce 6
-
-
-% \subsection{Příklad}  % samostatna prace 6 
-
-% Navrhněte bezkontextovou gramatiku generující následující jazyk $L = \{a^nb^ma^n \mid m, n \geq 0\}$. Zdůvodněte, 
-% proč zkonstruovaná gramatika jazyk $L$ generuje.
-
-
-% \begin{flalign*}
-%     P: & S \rightarrow aSa \mid b \mid \varepsilon & \\
-% \end{flalign*}
-
-% (1) $\quad    S \stackrel{S \rightarrow aSa (n)}{\Longrightarrow} a^nSa^n \stackrel{S \rightarrow Sb (m)}
-% {\Longrightarrow} a^nSb^ma^n\stackrel{S \rightarrow \varepsilon}{\Longrightarrow} a^n b^m a^n$
-% % \]
-
-% (2) \quad Když $w \in L(\G)$, tak $w = a^nb^ma^n$. $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} w$, 
-% $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm} a^lSa^l$, $S \implies \hspace*{-2.5mm}^\star \hspace*{1mm}  b^k$, 
-% $a^lb^ka^l \in L(\G)$.
-
-
-% \subsection{Příklad} %9.10, samostatna prace 6 6 
-
-% Zredukujte gramatiku $\G$, kter je dána pravidly: 
-% \[
-% \begin{array}{l l}
-%     \G: & S \rightarrow aA \mid bB \mid aSa \mid bSb \mid \varepsilon \\
-%     & A \rightarrow bCD \mid Dba \\
-%     & B \rightarrow Bb \mid AC \\
-%     & C \rightarrow aA \mid a \\
-%     & D \rightarrow DE \\ 
-%     & E \rightarrow \varepsilon
-% \end{array}
-% \]
-
-% (1)
-
-% % hned v prvnim kroku dostanu terminalni z neterminalniho: \\
-% $V_1 = \{A \mid A \rightarrow ^\star w \in P, w\in \Sigma ^ \star\}$\\
-% $V_1 = \{S, C, E\}$
-
-% % ty neterminaly, kde mam pravidlo, a $\alpha$ obsahuje jen neterminaly z $V_1$\\
-% $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^\star\}$\\
-% $V_2 = V_1 \cup {\emptyset} = \{S, C, E\} \cup {\emptyset} = \{S, C, E\}$
-
-% \begin{flalign*}
-%     \mathcal{G'}: & S \rightarrow aSa \mid bSb \mid \varepsilon & \\
-%     & C \rightarrow a & \\
-%     & E \rightarrow \varepsilon & \\
-% \end{flalign*}
-
-% (2) 
-
-
-% $U = \{X \in V \mid \exists \alpha, \beta \in (V \cup \Sigma)^\star, S \implies \alpha X \beta \}$
-
-% $U_0 = \{S\}$\\
-% $U_1 = U_0 \cup \{X \mid X \text{ se vyskytuje v }\alpha \text{ nebo } \beta \text{ na pravé straně pro pravidlo } 
-% Y \rightarrow \alpha \in P, Y \in U_0\}$, $S \implies ^\star S$\\
-% $U_1 = U_0 \cup {\emptyset}$
-
-% \begin{flalign*}
-%     \mathcal{G''}: & S \rightarrow  aSa \mid bSb \mid \varepsilon & \\
-% \end{flalign*}
