@@ -335,6 +335,24 @@ Zdůvodněte, proč $M$ přijímá jazyk $L$.
         \item $q_2$: začíná $10$, \texttt{out},
         \item $q_3$: nezačíná $10$, končí $0$,
         \item $q_4$: nezačíná $10$, končí $1$,
-        \item $q_5$: nezačíná $10$, končí $10$, \texttt{out}.
+        \item $q_5$: nezačíná $10$, končí $01$, \texttt{out}.
     \end{itemize}
 \end{multicols}
+
+Podmnožinová konstrukce: 
+
+\begin{center}
+    \begin{tabular}{|r r|c c||c|c c||c|c c||c|}
+        \hline
+        &  & $0$ & $1$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$\\ \hline \hline
+        $\to$  & $q_0$ & $q_3$ & $q_1$ & $O$ & $O$ & $O$ & $O$ & $B$ & $A$ & $D$ \\
+               & $q_1$ & $q_2$ & $q_4$ & $O$ & $K$ & $O$ & $A$ & $K$ & $O$ & $A$ \\
+        $\gets$& $q_2$ & $q_2$ & $q_2$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+               & $q_3$ & $q_3$ & $q_5$ & $O$ & $O$ & $K$ & $B$ & $B$ & $C$ & $B$ \\
+               & $q_4$ & $q_3$ & $q_4$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ & $O$ \\
+        $\gets$& $q_5$ & $q_3$ & $q_4$ & $K$ & $O$ & $O$ & $C$ & $B$ & $O$ & $C$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Protože má každý stav svou vlastní třídu, původní automat je již redukovaný.
