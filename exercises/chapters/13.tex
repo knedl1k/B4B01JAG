@@ -114,15 +114,16 @@ A_2 = E \\
 A_3 = F
 $
 
-\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším indexem), 
-jinak sloučit pravidla. (postup shora dolů)
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
+indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
     S &\rightarrow (E) & \\
     E &\rightarrow F * F \mid F + F& \\
     F &\rightarrow a \mid (E)
 \end{flalign*}
 
-\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda nahoru)
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
+nahoru)
 \begin{flalign*}
     S &\rightarrow (E) & \\
     E &\rightarrow a * F \mid a + F \mid (E) * F \mid (E) + F& \\
@@ -139,8 +140,6 @@ jinak sloučit pravidla. (postup shora dolů)
     Z &\rightarrow +
 \end{flalign*}
 
-
-% TODO: fix whole subsection
 \subsection{Převod gramatiky do Greibachové normální formy}
 Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\},\\
 \Sigma = \{a, b, c\}$ a $P$ je dáno 
@@ -154,10 +153,10 @@ Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigm
 $A_1 = S \\
 A_2 = A \\
 A_3 = B
-$
+$`'
 
-\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším indexem), 
-jinak sloučit pravidla. (postup shora dolů)
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
+indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
     S &\rightarrow Ab \mid B & \\
     A &\rightarrow Ba \mid BaA^{'} & \\
@@ -168,7 +167,8 @@ jinak sloučit pravidla. (postup shora dolů)
     B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
 \end{flalign*}
 
-\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda nahoru)
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
+nahoru)
 \begin{flalign*}
     S &\rightarrow Bab \mid BaA^{'} \mid b \mid bB^{'} & \\
     A &\rightarrow ba \mid bB^{'}a \mid baA^{'} \mid bB^{'}aA^{'} & \\

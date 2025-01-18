@@ -39,14 +39,13 @@ $L(\G_1) = L(\G) - \{\varepsilon\}$. Gramatiku $\G_1$ zredukujte.
     & B \rightarrow BbA \mid CaC \mid \varepsilon \\
     & C \rightarrow aBB \mid bS
 \end{align*}
-% TODO: neni zredukovana asi?? 
 $V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{S, B\}$\\
 $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \emptyset = \{S, B\}$
     \begin{flalign*}
-        \G_1: & S \rightarrow AB \mid A & \\
-           & A \rightarrow aAAb \mid bS \mid b \mid CA & \\
-           & B \rightarrow BbA \mid bA \mid CaC & \\
-           & C \rightarrow aBB \mid aB \mid a \mid bS \mid b &
+        \G_1\text{: } & S \rightarrow AB \mid A & \\
+        & A \rightarrow aAAb \mid bS \mid b \mid CA & \\
+        & B \rightarrow BbA \mid bA \mid CaC & \\
+        & C \rightarrow aBB \mid aB \mid a \mid bS \mid b &
     \end{flalign*}
 Gramatika $\G_1$ už je redukovaná. 
 
