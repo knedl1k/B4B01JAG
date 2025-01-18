@@ -10,7 +10,7 @@ Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $
     \item pokud $uTv$, tak $uwTvw$ pro každé $w \in \Sigma^\star$
     \item $T$ má konečný počet tříd
 \end{enumerate}
-Důkaz:
+Důkaz sporem:
 Kdyby existovala $T$ na $\{0,1\}^\star$.
 
 $1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost z $\{0,1\}$.
@@ -31,7 +31,7 @@ možné rozložit na 3 slova splňující:
     \item $w \not= \varepsilon$
     \item $xw^i y \in L, \forall i = 0, 1, 2, ...$
 \end{enumerate}
-Důkaz:
+Důkaz sporem:
 Kdyby $L$ byl regulární, tak existuje $n$ s vlastnostmi z Pumping lemma.
 
 Zvolíme $u = 0^{n+1} 1^n$.
@@ -41,7 +41,7 @@ Když teď napumpujeme $xw^i y$, například $i=0$, dostaneme $xw^0 y = 0^{n+1-k
 
 Tedy $L$ není regulární. $\blacksquare$
 
-\subsection{Nalezení slova rozlišující stavy}
+\subsection{Nalezení slova rozlišujícího stavy}
 Je dán DFA tabulkou:
 \[
 \begin{tabular}{|r|c|c|}
