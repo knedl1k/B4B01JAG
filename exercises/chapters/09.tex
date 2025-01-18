@@ -80,19 +80,19 @@ $V_2 = V_1 \cup \{A\} = \{S, A\}$\\
 $V_3 = V_2 \cup \{C\} = \{S, A, C\}$\\ 
 $V_4 = V_3 \cup \emptyset = \{S, A, C\}$ 
 
-a tady v tom nechám jenom neterminály z $V$, a z pravé strany vyškrtám pravidla obsahující neterminály~$\notin~V$.
+a tady v tom nechám jenom neterminály z $V$, a z pravé strany vyškrtám pravidla obsahující neterminály~$\notin~V$:
 \begin{flalign*}
     P\text{: } & S \rightarrow SA \mid \varepsilon & \\
     & A \rightarrow bSA \mid baS & \\
     & C \rightarrow \mid bA &
 \end{flalign*}
-sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$. 
+sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$: 
 
 $U_0 = \{S\}$\\ 
 $U_1 = U_0 \cup \{A\} = \{S, A\}$ \\
 $U_2 = U_1 \cup \emptyset = \{S, A\}$. 
 
-a ponechám jen pravidla, která nám zbyla v $U$. 
+a ponechám jen pravidla, která nám zbyla v $U$: 
 \begin{flalign*}
     P\text{: } & S \rightarrow SA \mid \varepsilon & \\
     & A \rightarrow bSA \mid baS &
