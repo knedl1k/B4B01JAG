@@ -2,12 +2,94 @@
 \section{Šesté cvičení}
 
 \subsection{Návrh NFA a redukovaný DFA}
-Navrhněte NFA, který přijímá jazyk $L$ nad abecedou $\{a,bc\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
+Navrhněte NFA, který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
     \item druhý znak slova $w$ je $a$,
-    \item předpolsední znak slova $w$ je b.
+    \item předposlední znak slova $w$ je b.
 \end{itemize}
 K danému NFA (není-li již DFA) sestrojte podmnožinovou konstrukcí DFA přijímající stejný jazyk. Výsledný DFA redukujte.
+
+NFA:
+
+\begin{tikzpicture}
+
+    \node[state, initial] (0) {$0$};
+    \node[state] (1) [right of=0] {$1$};
+    \node[state, accepting] (2) [right of=1] {$2$};
+
+    \path[->]
+    (0) edge node {$b$} (1)
+    (1) edge node {$a$} (2);
+
+\end{tikzpicture}
+
+\begin{tikzpicture}
+
+    \node[state, initial] (3) {$3$};
+    \node[state] (4) [right of=3] {$4$};
+    \node[state] (5) [right of=4] {$5$};
+    \node[state] (6) [right of=5] {$6$};
+    \node[state, accepting] (7) [right of=6] {$7$};
+
+    \path[->]
+    (3) edge node {$a, b$} (4)
+    (4) edge node {$a$} (5)
+    (5) edge [loop below] node {$a, b$} ()
+        edge node {$b$} (6)
+    (6) edge node {$a, b$} (7);
+
+\end{tikzpicture}
+
+Podmnožinová konstrukce: 
+
+\begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|c c||c|}
+    \hline
+    & & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\ \hline \hline
+      $\to$ & $\{0,3\}$ & $\{4\}$ & $\{1,4\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $D$ & $O$ & $A$ & $D$ & $F$ & $A$ & $D$ \\
+            & $\{4\}$ & $\{5\}$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $E$ & $O$ & $F$ & $E$ & $O$ & $F$ \\
+        & $\{1,4\}$ & $\{2,5\}$ & $\emptyset$ & $O$ & $K$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ \\
+              & $\{5\}$ & $\{5\}$ & $\{5,6\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $E$ & $E$ & $C$ & $E$ & $E$ & $C$ & $E$ \\
+    & $\emptyset$ & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+      $\gets$&$\{2,5\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
+        & $\{5,6\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
+      $\gets$&$\{5,7\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\  
+$\gets$&$\{5,6,7\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
+    \hline
+\end{tabular}
+
+DFA: 
+
+\begin{tikzpicture} 
+
+    \node[state, initial] (D) {$D$};
+    \node[state] (F) [right of=D] {$F$};
+    \node[state] (A) [below of=D] {$A$};
+    \node[state] (O) [below of=F] {$O$};
+    \node[state, accepting] (B) [right of=O] {$B$};
+    \node[state] (E) [right of=F] {$E$};
+    \node[state] (C) [right of=E] {$C$};
+    \node[state, accepting] (K) [right of=B] {$K$};
+
+    \path[->]
+    (D) edge [bend left] node {$a$} (F)
+        edge [bend right] node {$b$} (A)
+    (F) edge [bend left] node {$a$} (E)
+        edge [bend left] node {$b$} (O)
+    (A) edge [bend right] node {$b$} (O)
+        edge [bend right] node [swap] {$a$} (B)
+    (O) edge [loop right] node {$a, b$} ()
+    (E) edge [loop above] node {$a$} ()
+        edge [bend left] node {$b$} (C)
+    (C) edge [bend left] node {$a$} (B)
+        edge [bend left] node {$b$} (K)
+    (B) edge [bend left] node {$a$} (E)
+        edge [bend left] node {$b$} (C)
+    (K) edge [loop right] node {$b$} ()
+        edge [bend left] node {$a$} (B)
+    ;
+
+\end{tikzpicture}
+
 
 \subsection{Návrh NFA a redukovaný DFA}
 Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto: 
@@ -38,10 +120,12 @@ Podmnožinová konstrukce:
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|}
     \hline
     & & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
-    $\to$ & $\{1\}$ & $\{1\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ \\
-          & $\{1,2\}$ & $\{1,3\}$ & $\{1\}$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $B$ & $A$ & $O$ & $B$ \\
-    $\gets$ & $\{1,3\}$ & $\{1\}$ & $\{1,4\}$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
-            & $\{1,4\}$ & $\{1,4\}$ & $\{1,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
+              $\to$ & $\{1\}$ & $\{1\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ \\
+                & $\{1,2\}$ & $\{1,3\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $B$ & $A$ & $B$ & $B$ \\
+                & $\{1,3\}$ & $\{1\}$ & $\{1,2,4\}$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
+    $\gets$&$\{1,2,4\}$ & $\{1,3,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
+    $\gets$ & $\{1,3,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
+    $\gets$   & $\{1,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
     \hline
 \end{tabular}
 
@@ -131,14 +215,14 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
 
 Důkaz pomocí invariantů: 
 \begin{itemize}[noitemsep]
-    \item $q_s$: initial 
-    \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$
-    \item $q_1$: $|w|_a = 5k + 1$, začíná $b$
-    \item $q_2$: $|w|_a = 5k + 2$, začíná $b$
-    \item $q_3$: $|w|_a = 5k + 3$, začíná $b$
-    \item $q_4$: $|w|_a = 5k + 4$, začíná $b$
-    \item $q_0$: $|w|_a = 5k$, začíná $b$, končí $a$ 
-    \item $q_f$: začíná $a$
+    \item $q_s$: \texttt{in},
+    \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$,
+    \item $q_1$: $|w|_a = 5k + 1$, začíná $b$,
+    \item $q_2$: $|w|_a = 5k + 2$, začíná $b$,
+    \item $q_3$: $|w|_a = 5k + 3$, začíná $b$,
+    \item $q_4$: $|w|_a = 5k + 4$, začíná $b$,
+    \item $q_0$: $|w|_a = 5k$, začíná $b$, končí $a$, \texttt{out},
+    \item $q_f$: začíná $a$.
 \end{itemize}
 
 \end{multicols}
