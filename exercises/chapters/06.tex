@@ -178,56 +178,55 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
 
 \begin{multicols}{2} 
 
-\begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]        
+    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]        
+        
+        \def\radius{18mm}
+        \node[state, initial] (s) at (-5, 1.8) {$q_s$}; 
+        \node[state] (m) at (-3, 1.8) {$q_m$};
+        \node[state] (f) at (-4, -0.5) {$q_f$};  
+        \node[state] (1) at (90:\radius) {$q_1$}; 
+        \node[state] (2) at (18:\radius) {$q_2$}; 
+        \node[state, accepting] (0) at (162:\radius) {$q_0$};
+        \node[state] (3) at (306:\radius) {$q_3$};
+        \node[state] (4) at (234:\radius) {$q_4$}; 
+
     
-    \def\radius{18mm}
-    \node[state, initial] (s) at (-5, 1.8) {$q_s$}; 
-    \node[state] (m) at (-3, 1.8) {$q_m$};
-    \node[state] (f) at (-4, -0.5) {$q_f$};  
-    \node[state] (1) at (90:\radius) {$q_1$}; 
-    \node[state] (2) at (18:\radius) {$q_2$}; 
-    \node[state, accepting] (0) at (162:\radius) {$q_0$};
-    \node[state] (3) at (306:\radius) {$q_3$};
-    \node[state] (4) at (234:\radius) {$q_4$}; 
-
-   
 
 
-    \path[->]
-    (s) edge [bend left=20] node {$b$} (m)
-        edge [bend right=20] node [below left] {$a$} (f)
-    (f) edge [loop below] node {$a,b$} ()
-    (m) edge [loop above] node {$b$} ()
-        edge [bend left=20] node {$a$} (1)
-    (1) edge [loop above] node {$b$} ()
-        edge [bend left=20] node {$a$} (2)
-    (2) edge [loop above] node {$b$} ()
-        edge [bend left=20] node {$a$} (3)
-    (3) edge [loop right] node {$b$} ()
-        edge [bend left=20] node {$a$} (4) 
-    (4) edge [loop left] node {$b$} () 
-        edge [bend left=20] node {$a$} (0) 
-    (0) edge [bend left=20] node {$a$} (1) 
-        edge [bend left=20] node {$b$} (m)
-    ;
+        \path[->]
+        (s) edge [bend left=20] node {$b$} (m)
+            edge [bend right=20] node [below left] {$a$} (f)
+        (f) edge [loop below] node {$a,b$} ()
+        (m) edge [loop above] node {$b$} ()
+            edge [bend left=20] node {$a$} (1)
+        (1) edge [loop above] node {$b$} ()
+            edge [bend left=20] node {$a$} (2)
+        (2) edge [loop above] node {$b$} ()
+            edge [bend left=20] node {$a$} (3)
+        (3) edge [loop right] node {$b$} ()
+            edge [bend left=20] node {$a$} (4) 
+        (4) edge [loop left] node {$b$} () 
+            edge [bend left=20] node {$a$} (0) 
+        (0) edge [bend left=20] node {$a$} (1) 
+            edge [bend left=20] node {$b$} (m)
+        ;
 
-\end{tikzpicture}
+    \end{tikzpicture}
 
-Důkaz pomocí invariantů: 
-\begin{itemize}[noitemsep]
-    \item $q_s$: \texttt{in},
-    \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$,
-    \item $q_1$: $|w|_a = 5k + 1$, začíná $b$,
-    \item $q_2$: $|w|_a = 5k + 2$, začíná $b$,
-    \item $q_3$: $|w|_a = 5k + 3$, začíná $b$,
-    \item $q_4$: $|w|_a = 5k + 4$, začíná $b$,
-    \item $q_0$: $|w|_a = 5k$, začíná $b$, končí $a$, \texttt{out},
-    \item $q_f$: začíná $a$.
-\end{itemize}
+    Důkaz pomocí invariantů: 
+    \begin{itemize}[noitemsep]
+        \item $q_s$: \texttt{in},
+        \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$,
+        \item $q_1$: $|w|_a = 5k + 1$, začíná $b$,
+        \item $q_2$: $|w|_a = 5k + 2$, začíná $b$,
+        \item $q_3$: $|w|_a = 5k + 3$, začíná $b$,
+        \item $q_4$: $|w|_a = 5k + 4$, začíná $b$,
+        \item $q_0$: $|w|_a = 5k$, začíná $b$, končí $a$, \texttt{out},
+        \item $q_f$: začíná $a$.
+    \end{itemize}
 
 \end{multicols}
 
-\newpage % TODO: zkontrolovat az se doplni ostatni reseni
 \subsection{Návrh DFA součinovou konstrukcí}
 Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
 \[L = \{w \mid |w|_0 \text{ je sudé a za každým symbolem } 1 \text{ je symbol } 0\}\text{.}\]
@@ -298,8 +297,44 @@ DFA sestavený součinovou konstrukcí dvou výše nakreslených automatů:
 
 \end{tikzpicture}
 
-
 \subsection{Návrh DFA}
 Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
 \[L = \{w \mid w \text{ začíná } 10 \text{ nebo končí } 01\}\text{.}\]
 Zdůvodněte, proč $M$ přijímá jazyk $L$.
+
+\begin{multicols}{2}
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, right of=1] (2) {$q_2$};
+        \node[state, below of=0] (3) {$q_3$};
+        \node[state, right of=3] (4) {$q_4$};
+        \node[state, accepting, below of=4] (5) {$q_5$};
+    
+        \draw
+            (0) edge[bend left, above] node{$1$} (1)
+            (0) edge[bend right, right] node{$0$} (3)
+            (1) edge[bend left, above] node{$0$} (2)
+            (1) edge[bend left, right] node{$1$} (4)
+            (2) edge[loop below] node{$0, 1$} (2)
+            (3) edge[loop left] node{$0$} (3)
+            (3) edge[bend left] node{$1$} (5)
+            (4) edge[bend right, above] node{$0$} (3)
+            (4) edge[loop right] node{$1$} (4)
+            (5) edge[bend left] node{$0$} (3)
+            (5) edge[bend right, right] node{$1$} (4)
+            ;
+    \end{tikzpicture}
+
+    \columnbreak
+
+    Důkaz pomocí invariantů: 
+    \begin{itemize}[noitemsep]
+        \item $q_0$: \texttt{in},
+        \item $q_1$: začíná $1$,
+        \item $q_2$: začíná $10$, \texttt{out},
+        \item $q_3$: nezačíná $10$, končí $0$,
+        \item $q_4$: nezačíná $10$, končí $1$,
+        \item $q_5$: nezačíná $10$, končí $10$, \texttt{out}.
+    \end{itemize}
+\end{multicols}
