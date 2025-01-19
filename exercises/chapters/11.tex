@@ -11,7 +11,7 @@ $Q = \{q_0, q_1, q_2, q_f\}$, $\Sigma = \{a, b\}$, $\Gamma =\{Z_0, X\}$ a přech
     \hline
     $\rightarrow q_0$& $(q_0, X Z_0)$ & $(q_0, XX)$ & $(q_1, Z_0)$ & $(q_1, \varepsilon)$ & $(q_f, \varepsilon)$ & $-$\\
     $q_1$            & $-$            & $-$         & $(q_1, Z_0)$ & $(q_1, \varepsilon)$ & $(q_f, \varepsilon)$ & $-$\\
-    $\leftarrow q_2$ & $-$& $-$& $-$ & $-$ & $-$ & $-$\\
+    $\leftarrow q_f$ & $-$& $-$& $-$ & $-$ & $-$ & $-$\\
     \hline
 \end{tabular}
 \]
@@ -58,7 +58,7 @@ $Q = \{q_0, q_1, q_2, q_f\}$, $\Sigma = \{a, b\}$, $\Gamma =\{Z_0, X\}$ a přech
     \vdash (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$. \\Konec, úspěch.
 \end{multicols}
 
-$L(A) \stackrel{?}{=} \overbrace{\{a^i b^j \mid 0 \leq i, i \leq j\}}^L$
+$L(A) \stackrel{?}{=} \overbrace{\{a^i b^j \mid 0 \leq i \leq j\}}^L$
 
 Důkaz.
 

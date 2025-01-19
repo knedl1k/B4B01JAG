@@ -25,7 +25,7 @@ a) Přímo.
         (0) edge[bend left, above] node{$a, Z_0 / Z_0$} (1)
         (1) edge[bend left, above] node[align=center] {$b, Z_0 / X Z_0$ \\ $b, X / XX$} (2)
         (2) edge[bend left, above] node{$b, X / \varepsilon$} (3)
-        (2) edge[bend left, below] node{$a, X / XX$} (1)
+        (2) edge[bend left, below] node{$a, X / X$} (1)
         (3) edge[loop above] node{$b, X / \varepsilon$} (3)
         (3) edge[bend left, above] node{$b, Z_0 / Y Z_0$} (4)
         (4) edge[loop above] node{$b, Y / YY$} (4)
@@ -36,31 +36,61 @@ a) Přímo.
         ;
 \end{tikzpicture}
 
+
+
 b) Přes gramatiku.
-\begin{multicols}{2}
+\begin{multicols}{3}
+    \raggedcolumns
     \begin{flalign*}
         \G: S &\rightarrow AB &\\
         A &\rightarrow abAb \mid abb &\\
         B &\rightarrow bBa \mid ba &
     \end{flalign*}
+
     \columnbreak
 
-    \noindent
-    1. $L \subseteq L(G)$\\
-    $S \xRightarrow{S \rightarrow AB} AB \xRightarrow{A \rightarrow abAb}^{(i-1)} (ab)^{i-1} A b^{i-1} B \xRightarrow{A \rightarrow abb}
-    (ab)^i b^i B \xRightarrow{B \rightarrow bBa}^{(k-1)} (ab)^i b^i b^{k-1} B a^{k-1} \xRightarrow{B \rightarrow ba} (ab)^i b^i b^k a^k$.
+    Prázdným zásobníkem: 
+    \[
+    \begin{array}{l l}
+        & \delta(q, \varepsilon, S) = \{(q, AB)\} \\
+        & \delta(q, \varepsilon, A) = \{(q, abAb), (q, abb)\} \\
+        & \delta(q, \varepsilon, B) = \{(q, bBa), (q, ba)\} \\
+        & \delta(q, a, a) = \{(q, \varepsilon)\} \\
+        & \delta(q, b, b) = \{(q, \varepsilon)\} \\ 
+    \end{array}
+    \]
+    
 
-    \noindent
-    2. $L(G) \subseteq L$\\
-    $S \rightarrow^\star w$\\
-    $S \rightarrow AB$\\
-    $A \xRightarrow{A \rightarrow abAb}^j (ab)^j A b^j \xRightarrow{A \rightarrow abb} (ab)^j a b b^j$
-    % TODO: complete proof 2.
+    Koncovým stavem: 
+    \[
+    \begin{array}{l l}
+        & \delta(q_0, \varepsilon, Z_0) = \{(q, SZ_0)\} \\
+        & \delta(q, \varepsilon, S) = \{(q, AB)\} \\
+        & \delta(q, \varepsilon, A) = \{(q, abAb), (q, abb)\} \\
+        & \delta(q, \varepsilon, B) = \{(q, bBa), (q, ba)\} \\
+        & \delta(q, a, a) = \{(q, \varepsilon)\} \\
+        & \delta(q, b, b) = \{(q, \varepsilon)\} \\ 
+        & \delta(q, \varepsilon, Z_0) = \{(q_f, \varepsilon)\} \\ 
+    \end{array}
+    \]
 
 \end{multicols}
 
+
+\noindent
+1. $L \subseteq L(G)$\\
+$S \xRightarrow{S \rightarrow AB} AB \xRightarrow{A \rightarrow abAb}^{(i-1)} (ab)^{i-1} A b^{i-1} B \xRightarrow{A \rightarrow abb}
+(ab)^i b^i B \xRightarrow{B \rightarrow bBa}^{(k-1)} (ab)^i b^i b^{k-1} B a^{k-1} \xRightarrow{B \rightarrow ba} (ab)^i b^i b^k a^k$.
+
+\noindent
+2. $L(G) \subseteq L$\\
+$S \rightarrow^\star w$\\
+$S \rightarrow AB$\\
+$A \xRightarrow{A \rightarrow abAb}^j (ab)^j A b^j \xRightarrow{A \rightarrow abb} (ab)^j a b b^j$
+% TODO: complete proof 2.
+
 \subsection{Tvorba zásobníkového automatu podle jazyka}
-Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = N(B)$ 
+Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$ 
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{w \mid w \text{ začíná a končí symbolem } 1 \text{ a obsahuje o dvě } 1 \text{ více než } 0\}\text{.}\]
 \begin{multicols}{2}
@@ -91,6 +121,61 @@ Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové auto
     % TODO: complete proof 2.
 
 \end{multicols}
+
+\subsection{Tvorba zásobníkového automatu podle gramatiky}
+Je dán jazyk $L$. Sestrojte zásobníkové automaty $A$, $B$ tak, že $L = N(A)$ a $L = L(B)$ (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde $$L = \{a^i b^i c^{i+j}\}$$
+Ukažte práci nad slovem $w = abcc$. 
+
+Konstrukce pomocí gramatiky: 
+
+$\medskip S \to aSc \mid A$\\
+$\medskip A \to bAc \mid \varepsilon$
+
+\begin{multicols}{2}
+    
+
+Prázdným zásobníkem: 
+
+\[
+\begin{array}{l l}
+    & \delta(q, \varepsilon, S) = \{(q, aSc), (q, A)\} \\
+    & \delta(q, \varepsilon, A) = \{(q, bAc), (q, \varepsilon)\} \\
+    & \delta(q, a, a) = \{(q, \varepsilon)\} \\
+    & \delta(q, b, b) = \{(q, \varepsilon)\} \\ 
+    & \delta(q, c, c) = \{(q, \varepsilon)\} \\ 
+\end{array}
+\]
+
+Práce nad slovem $w = abcc$: 
+
+$(q, abbc, S) \vdash (q, abcc, aSc) \vdash q(bcc, Sc) \vdash (q, bcc, Ac) \vdash (q, bcc, bAcc) \vdash (q, cc, Acc) 
+\vdash ( q, cc, cc) \vdash (q, c, c) \vdash(q, \varepsilon, \varepsilon)$
+
+\columnbreak
+Koncovým stavem: 
+
+\[
+\begin{array}{l l}
+    & \delta(q_0, \varepsilon, Z_0) = \{(q, SZ_0)\} \\
+    & \delta(q, \varepsilon, S) = \{(q, AB)\} \\
+    & \delta(q, \varepsilon, A) = \{(q, abAb), (q, abb)\} \\
+    & \delta(q, \varepsilon, B) = \{(q, bBa), (q, ba)\} \\
+    & \delta(q, \varepsilon, a) = \{(q, \varepsilon)\} \\
+    & \delta(q, \varepsilon, b) = \{(q, \varepsilon)\} \\ 
+    & \delta(q, \varepsilon, Z_0) = \{(q_f, \varepsilon)\} \\ 
+\end{array}
+\]
+
+Práce nad slovem $w = abcc$: 
+
+$(q_0, abc, Z_0) \vdash (q, abbc, SZ_0) \vdash (q, abcc, aScZ_0) \vdash q(bcc, SZ_0c) \vdash (q, bcc, AcZ_0) \vdash
+ (q, bcc, bAccZ_0) \vdash (q, cc, AccZ_0) \vdash ( q, cc, ccZ_0) \vdash (q, c, cZ_0) \vdash(q, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$
+
+
+\end{multicols}
+
+
+
 
 \subsection{Důkaz bezkontextovosti jazyka}
 Je dán jazyk $L = \{0^n 1^m; 0 \leq n \leq m \leq 2n\}$. Rozhodněte, zda jazyk $L$ je bezkontextový.\\
