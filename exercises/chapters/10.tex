@@ -150,11 +150,11 @@ abbAC \stackrel{A \rightarrow a}{\Longrightarrow} abbaC \stackrel{C \rightarrow 
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde 
 $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:\[
     \begin{array}{l l}
-        P: & S \rightarrow AB \mid AC \mid BC \\
-           & A \rightarrow AD \mid a \\
-           & B \rightarrow BD \mid b \\
-           & C \rightarrow AB \mid BB \\
-           & D \rightarrow a \mid b \\
+        P: & S \rightarrow BD \mid CD \mid DA \\
+           & A \rightarrow CA \mid a \\
+           & B \rightarrow CB \mid b \\
+           & C \rightarrow AA \mid BC \mid DC \mid b \\
+           & D \rightarrow AC \mid BB \mid CB \mid a \\
     \end{array}
 \]
 
@@ -189,7 +189,7 @@ $w_1 = abaab$:
                     [$a$]
                 ]
                 [$C$
-                    [$a$]
+                    [$b$]
                 ]
             ]
             [$D$
@@ -271,9 +271,9 @@ každé $i \geq 0$.
 
 1) Základní krok: $i = 0$
 
-Pro $i = 0$, platí:
+Pro $i = 0$ platí:
 \[
-A \stackrel{A \rightarrow \varepsilon}{\Longrightarrow} A
+A {\Longrightarrow^\star} A
 \]
 což odpovídá:
 \[
@@ -282,7 +282,7 @@ S^0 A C^0 = A \quad \checkmark
 
 2) Indukční krok:
 
-předp. $A \implies^{\star} S^n a C^n$, chceme dokázat $A \implies^{\star} S^{n+1} A C^{n+1}$.
+předp. $A {\implies^\star} S^n A C^n$, chceme dokázat $A \implies^{\star} S^{n+1} A C^{n+1}$.
 
 $A \stackrel{A \rightarrow SC}{\Longrightarrow} SC \stackrel{S \rightarrow SA}{\Longrightarrow} SAC \stackrel{I.P.}
 {\Longrightarrow}^{\star} SS^nAC^nC$
