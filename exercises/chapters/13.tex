@@ -8,7 +8,7 @@
 \section{Třinácté cvičení}
 
 \subsection{Tvorba a práce zásobníkového automatu podle jazyka}
-Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
+Je dán jazyk $L$ nad abecedou $\Sigma = \{0,1\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{0^i 1^j 0^k \mid 0 \leq i < k, j > 0\}\text{.}\]
 Ukažte práci jednoho ze zásobníkových automatů nad slovem $011000$ a nad slovem $001110$.
@@ -88,6 +88,8 @@ Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$
     V_2 &= V_1 \cup \{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+\} = V_1 \cup \emptyset = V_1 = V.
 \end{flalign*}
 
+% TODO: dopsat sem nevypousteci gramatiku 
+
 2. krok odstranění levé rekurze. (postup shora dolů)
 \begin{flalign*}
     S    &\rightarrow 0 \mid 0S^{'} & \\
@@ -152,8 +154,9 @@ Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigm
 
 $A_1 = S \\
 A_2 = A \\
-A_3 = B
-$`'
+A_3 = B$
+
+% TODO: prepsat gramatiky z flalign do table \raggedleft, at to je zarovnany 
 
 \textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
 indexem), jinak sloučit pravidla. (postup shora dolů)
@@ -164,8 +167,22 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
     B &\rightarrow Aba \mid Ba \mid b & \\
     B &\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
     B &\rightarrow b \mid bB^{'} & \\
-    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
+    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}& \\
 \end{flalign*}
+
+% \begin{table}[h]
+%     \raggedright % Aligns the table to the left of the page
+%     \begin{tabular}{l l l} % 'l' ensures left alignment within the columns
+%     $S$ &\rightarrow Ab \mid B & \\
+%     $A $&\rightarrow Ba \mid BaA^{'} & \\
+%     $A^{'}$ &\rightarrow ba \mid baA^{'} & \\
+%     $B $&\rightarrow Aba \mid Ba \mid b & \\
+%     $B $&\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
+%     $B $&\rightarrow b \mid bB^{'} & \\
+%     $B^{'}$ &$\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}$\\
+%     \end{tabular}
+%     \caption{Example Table Aligned to the Left}
+% \end{table}
 
 \textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
 nahoru)
