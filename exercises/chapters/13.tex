@@ -92,12 +92,12 @@ Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$
 
 2. krok odstranění levé rekurze. (postup shora dolů)
 \begin{flalign*}
-    S    &\rightarrow 0 \mid 0S^{'} & \\
+    S^{\phantom{'}}    &\rightarrow 0 \mid 0S^{'} & \\
     S^{'}&\rightarrow A \mid AS^{'} & \\
-    A    &\rightarrow BAB \mid BA \mid 1 \mid BABA^{'} \mid BAA^{'} \mid 1A^{'} & \\
+    A^{\phantom{'}}    &\rightarrow BAB \mid BA \mid 1 \mid BABA^{'} \mid BAA^{'} \mid 1A^{'} & \\
     A^{'}&\rightarrow B \mid BA^{'} & \\
-    B    &\rightarrow CB \mid C & \\
-    C    &\rightarrow AS \mid 0 &
+    B^{\phantom{'}}    &\rightarrow CB \mid C & \\
+    C^{\phantom{'}}    &\rightarrow AS \mid 0 &
 \end{flalign*}
 
 
@@ -156,20 +156,17 @@ $A_1 = S \\
 A_2 = A \\
 A_3 = B$
 
-% TODO: prepsat gramatiky z flalign do table \raggedleft, at to je zarovnany 
-
 \textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
 indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
-    S &\rightarrow Ab \mid B & \\
-    A &\rightarrow Ba \mid BaA^{'} & \\
+    S^{\phantom{'}} &\rightarrow Ab \mid B & \\
+    A^{\phantom{'}} &\rightarrow Ba \mid BaA^{'} & \\
     A^{'} &\rightarrow ba \mid baA^{'} & \\
-    B &\rightarrow Aba \mid Ba \mid b & \\
-    B &\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
-    B &\rightarrow b \mid bB^{'} & \\
+    B^{\phantom{'}} &\rightarrow Aba \mid Ba \mid b & \\
+    B^{\phantom{'}} &\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
+    B^{\phantom{'}} &\rightarrow b \mid bB^{'} & \\
     B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}& \\
 \end{flalign*}
-
 % \begin{table}[h]
 %     \raggedright % Aligns the table to the left of the page
 %     \begin{tabular}{l l l} % 'l' ensures left alignment within the columns
@@ -183,24 +180,23 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
 %     \end{tabular}
 %     \caption{Example Table Aligned to the Left}
 % \end{table}
-
 \textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
 nahoru)
 \begin{flalign*}
-    S &\rightarrow Bab \mid BaA^{'} \mid b \mid bB^{'} & \\
-    A &\rightarrow ba \mid bB^{'}a \mid baA^{'} \mid bB^{'}aA^{'} & \\
+    S^{\phantom{'}} &\rightarrow Bab \mid BaA^{'} \mid b \mid bB^{'} & \\
+    A^{\phantom{'}} &\rightarrow ba \mid bB^{'}a \mid baA^{'} \mid bB^{'}aA^{'} & \\
     A^{'} &\rightarrow ba \mid baA^{'} & \\
-    B &\rightarrow b \mid bB^{'} & \\
+    B^{\phantom{'}} &\rightarrow b \mid bB^{'} & \\
     B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
 \end{flalign*}
 
 \textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály.
 \begin{flalign*}
-    S &\rightarrow BaY \mid BaA^{'} \mid b \mid bB^{'} & \\
-    A &\rightarrow bX \mid bB^{'}X \mid bXA^{'} \mid bB^{'}aA^{'} & \\
+    S^{\phantom{'}} &\rightarrow BaY \mid BaA^{'} \mid b \mid bB^{'} & \\
+    A^{\phantom{'}} &\rightarrow bX \mid bB^{'}X \mid bXA^{'} \mid bB^{'}aA^{'} & \\
     A^{'} &\rightarrow bX \mid bXA^{'} & \\
-    B &\rightarrow b \mid bB^{'} & \\
+    B^{\phantom{'}} &\rightarrow b \mid bB^{'} & \\
     B^{'} &\rightarrow aXY \mid aA^{'}YX \mid a \mid aYXB^{'} \mid aA^{'}YXB^{'} \mid aB^{'} & \\
-    X &\rightarrow a & \\
-    Y &\rightarrow b
+    X^{\phantom{'}} &\rightarrow a & \\
+    Y^{\phantom{'}} &\rightarrow b
 \end{flalign*}

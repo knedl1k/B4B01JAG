@@ -18,17 +18,17 @@ $
 
 \textbf{2. krok} odstranění levých rekurzí.
 \begin{flalign*}
-    S &\rightarrow 0 \mid 0S^{'} & \\
+    S^{\phantom{'}} &\rightarrow 0 \mid 0S^{'} & \\
     S^{'} &\rightarrow A \mid AS^{'} & \\
-    A &\rightarrow 1 \mid 1A^{'} & \\
+    A^{\phantom{'}} &\rightarrow 1 \mid 1A^{'} & \\
     A^{'} &\rightarrow S \mid SA^{'} &
 \end{flalign*}
 
 \textbf{3. krok} Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
 indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
-    S &\rightarrow 0 \mid 0S^{'} & \\
-    A &\rightarrow 1 \mid 1A^{'} & \\
+    S^{\phantom{'}} &\rightarrow 0 \mid 0S^{'} & \\
+    A^{\phantom{'}} &\rightarrow 1 \mid 1A^{'} & \\
     S^{'} &\rightarrow 1 \mid 1A^{'} \mid 1S^{'} \mid 1A^{'}S^{'}  & \\
     A^{'} &\rightarrow 0 \mid 0S^{'} \mid 0A^{'} \mid 0S^{'}A^{'} &
 \end{flalign*}
@@ -139,6 +139,6 @@ Levá rekurze se vyskytuje pouze v pravidlu $S \rightarrow Sa \mid Sb \mid bC \m
 
 Je potřeba přidat pouze jeden neterminál. Pokud by se jich přidalo více, nová gramatika by generovala méně slov, než původní.
 \begin{flalign*}
-    S &\rightarrow bC \mid bCS^{'} \mid b \mid S^{'} & \\
+    S^{\phantom{'}} &\rightarrow bC \mid bCS^{'} \mid b \mid S^{'} & \\
     S^{'} &\rightarrow a \mid aS^{'} \mid b \mid bS^{'} &
 \end{flalign*}
