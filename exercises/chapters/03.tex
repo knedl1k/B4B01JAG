@@ -319,38 +319,10 @@ $M_2$:
 
 Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
 
-Změníme labely $M_1$ tak, aby odpovídaly redukci $M_2$.
+\newpage
 
 \begin{multicols}{2}
-    
-    $M_2$: 
-
-    \begin{tikzpicture}
-        \node[state] (a) at (0, 1) {$A$}; % k 
-        \node[state] (c) at (3.75, 1) {$C$}; % c 
-        \node[state] (b) at (1.875, 0) {$B$}; % b 
-        \node[state] (o) at (1.875, 4) {$O$}; % o
-        \node[state] (d) at (3.75, 3) {$D$}; % d  
-        \node[state, initial, accepting] (k) at (0, 3) {$K$}; % k
-
-        \draw
-            (k) edge[loop above] node{$a$} (k)
-            (k) edge[bend left=18] node{$b$} (o)
-            (o) edge[loop above] node{$a$} (o)
-            (o) edge[bend left=18] node{$b$} (d)
-            (d) edge[bend left=18] node{$a$} (o)
-            (d) edge[bend left=18] node{$b$} (c)
-            (c) edge[loop right] node{$a$} (c)
-            (c) edge[bend left=18] node{$b$} (b)
-            (b) edge[loop above] node{$a$} (b)
-            (b) edge[bend left=18] node{$b$} (a)
-            (a) edge[loop left] node{$a$} (a)
-            (a) edge[bend left=18] node{$b$} (k)
-            ;
-    \end{tikzpicture}
-
-    $M_1$:
-
+    $M_1$:\\
     \begin{tikzpicture}
         \node[state] (7) at (0, 1) {$7$}; % 7
         \node[state] (3) at (3.75, 1) {$3$}; % 3 
@@ -375,10 +347,38 @@ Změníme labely $M_1$ tak, aby odpovídaly redukci $M_2$.
             ;
     \end{tikzpicture}
 
+\columnbreak
+
+    $M_2$:\\
+    \begin{tikzpicture}
+        \node[state] (a) at (0, 1) {$A$}; % k 
+        \node[state] (c) at (3.75, 1) {$C$}; % c 
+        \node[state] (b) at (1.875, 0) {$B$}; % b 
+        \node[state] (o) at (1.875, 4) {$O$}; % o
+        \node[state] (d) at (3.75, 3) {$D$}; % d  
+        \node[state, initial, accepting] (k) at (0, 3) {$K$}; % k
+
+        \draw
+            (k) edge[loop above] node{$a$} (k)
+            (k) edge[bend left=18] node{$b$} (o)
+            (o) edge[loop above] node{$a$} (o)
+            (o) edge[bend left=18] node{$b$} (d)
+            (d) edge[bend left=18] node{$a$} (o)
+            (d) edge[bend left=18] node{$b$} (c)
+            (c) edge[loop right] node{$a$} (c)
+            (c) edge[bend left=18] node{$b$} (b)
+            (b) edge[loop above] node{$a$} (b)
+            (b) edge[bend left=18] node{$b$} (a)
+            (a) edge[loop left] node{$a$} (a)
+            (a) edge[bend left=18] node{$b$} (k)
+            ;
+    \end{tikzpicture}
+
 \end{multicols}
 
 Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme. 
 
+\newpage
 \subsection{Návrh a redukce DFA podle jazyka}
 Navrhněte DFA, který přijímá $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
