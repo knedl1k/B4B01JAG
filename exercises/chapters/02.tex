@@ -98,10 +98,8 @@ a)
         \item $q_0$: končí $a,b$, $|w| = 3k$, \texttt{in}, 
         \item $q_1$: končí $a$, $|w| = 3k+1$, 
         \item $q_2$: končí $b$, $|w| = 3k+1$, \texttt{out}, 
-        \item $q_3$: končí $a,b$, $|w| = 3k+2$, 
+        \item $q_3$: končí $a,b$, $|w| = 3k+2$, $k \in \mathbb{Z}$.
     \end{itemize}
-    pro $k \in \mathbb{Z}$.
-
 \end{multicols}
 
 \noindent
@@ -130,16 +128,18 @@ b)
 
 Důkaz pomocí invariantů: 
 \begin{itemize}[noitemsep]
-    \item $q_0$: neobsahuje $0101$, \texttt{in}, 
-    \item $q_1$: obsahuje $0$, 
-    \item $q_2$: obsahuje $01$, 
-    \item $q_3$: obsahuje $010$, 
+    \item $q_0$: $\varepsilon$, $1$, končí $11$, neobsahuje $0101$, \texttt{in}, 
+    \item $q_1$: končí $0$, neobsahuje $0101$,
+    \item $q_2$: končí $01$, neobsahuje $0101$,
+    \item $q_3$: končí $010$, neobsahuje $0101$,
     \item $q_4$: obsahuje $0101$, \texttt{out}.
 \end{itemize}
 
 
 \noindent
-c)
+c) řešíme doplňkem, tedy jazyk $\mathcal{L}$ obsahuje právě všechna slova, jejižch každé podslovo délky $3$ \textbf{neobsahuje} 
+znak $0$. Následně všechny stavy, které nebyly výstupní, se stanou výstupními a stavy, které byly výstupní, se stanou 
+nevýstupními. 
 
 \begin{tikzpicture}
     \node[state, accepting, initial] (q0) {$q_0$};
