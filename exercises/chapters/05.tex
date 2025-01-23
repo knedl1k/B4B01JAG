@@ -26,7 +26,7 @@ Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma 
 Odpovědi zdůvodněte.
 
 \begin{multicols}{2}
-    a) $0^\star$.\\
+    a) $0^\star 0 0^\star$.\\
     b) $0^\star 1 0^\star$.\\
     c) $0^\star 1 (0+1)^\star$.
 \columnbreak
@@ -37,7 +37,8 @@ Odpovědi zdůvodněte.
 \end{multicols}
 Zdůvodnění:
 \begin{enumerate}[a), noitemsep]
-    \item Kleenyho operátor zajistí, že je libovolný počet $0$ a nepovolujeme žádnou $1$.
+    \item Vynutíme si alespoň jednu nulu, protože prázdné slovo neobsahuje $0$. Zároveň umožníme pomocí Kleenyho 
+    operátoru libovolný počet $0$ na obou stranách slova. Žádnou $1$ nepovolíme.
     \item Před první $1$ povolíme libovolný počet $0$. Po první $1$ následně povolíme pouze libovolný počet $0$.
     \item Před první $1$ povolíme libovolný počet $0$. Po první $1$ následně povolíme všechny znaky abecedy 
     $\Sigma$ v libovolném počtu.
@@ -128,7 +129,7 @@ a Kleeneho operátor.)
         \hline
     \end{tabular}
 \end{multicols}
-\newpage % TODO: kontrola formatovani
+\newpage
 Podmnožinová konstrukce:
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
@@ -203,8 +204,53 @@ III. krok\\
         ;
 \end{tikzpicture}
 
-IV. podmnožinová konstrukce DFA + redukce % TODO: dodělat
+\newpage
+IV. podmnožinová konstrukce DFA + redukce
 
+\begin{center}
+    \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+        \hline
+        & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$\\
+        \hline
+        \hline
+        $\rightarrow$& $S$        &$5$        &$1$        &$O$ &$O$ &$O$ &$O$ &$A$ &$O$ &$C$ &$A$ &$D$ &$C$ \\
+        $$&            $5$        &$\emptyset$&$6$        &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$E$ &$A$ \\
+        $$&            $1$        &$2$        &$\emptyset$&$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$D$ &$B$ &$O$ &$D$ \\
+        $$&            $\emptyset$&$\emptyset$&$\emptyset$&$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+        $\leftarrow$&  $6$        &$5$        &$\emptyset$&$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$E$ &$A$ &$O$ &$E$ \\
+        $$&            $2$        &$3$        &$4$        &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ \\
+        $\leftarrow$&  $3$        &$5$        &$1$        &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$D$ &$K$ \\
+        $\leftarrow$&  $4$        &$5$        &$1$        &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$D$ &$K$ \\
+        \hline
+    \end{tabular}
+
+    \begin{tikzpicture}
+        \node[state, initial] (c) {$C$};
+        \node[state, right of=c] (a) {$A$};
+        \node[state, below of=c] (d) {$D$};
+        \node[state, below of=a] (o) {$O$};
+        \node[state, right of=o] (e) {$E$};
+        \node[state, below of=d] (b) {$B$};
+        \node[state, accepting, left of=c] (k) {$K$};
+    
+        \draw
+            (c) edge[bend left, above] node{$a$} (a)
+            (c) edge[bend right, right] node{$b$} (d)
+            (a) edge[] node{$a$} (o)
+            (a) edge[bend left, right] node{$b$} (e)
+            (d) edge[] node[right]{$a$} (b)
+            (d) edge[] node[below]{$b$} (o)
+            (o) edge[loop below] node{$a,b$} (o)
+            (e) edge[loop below] node{$a$} (e)
+            (e) edge[] node[below]{$b$} (o)
+            (b) edge[bend left] node[right]{$a,b$} (k)
+            (k) edge[bend left=60, below] node{$a$} (a)
+            (k) edge[bend right] node{$b$} (d)
+            ;
+    \end{tikzpicture}
+\end{center}
+
+\newpage
 \subsection{Tvorba DFA a regulárního výrazu dle jazyka}
 Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte
 redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy
