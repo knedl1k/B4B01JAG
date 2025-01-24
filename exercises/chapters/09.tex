@@ -51,11 +51,11 @@ Gramatika $\G_1$ už je redukovaná.
 
 \textbf{Obecný postup pro redukci}
 
-$V = \{A \mid A \in N, A \implies_{\G}^{\star} \, w, w \in \Sigma^{\star}\}$\\
-$V_1 = \{A \mid A \implies^{\star} w \in P, w \in \Sigma^{\star}\}$\\
+$V = \{A \mid A \in N, A \Rightarrow^{\star}_{\G} w, w \in \Sigma^{\star}\}$\\
+$V_1 = \{A \mid A \Rightarrow_{\star} w \in P, w \in \Sigma^{\star}\}$\\
 $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^{\star}\}$\\
-$U = \{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ tak, že } S 
-\implies^{\star}_{\G} \quad \alpha A \beta\}$
+$U = \{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ tak, že } S \Rightarrow^{\star}_{\G} 
+\alpha A \beta\}$
 
 Jazyk není prázdný právě tehdy, kdy $S \in V$. 
 
@@ -80,19 +80,21 @@ $V_2 = V_1 \cup \{A\} = \{S, A\}$\\
 $V_3 = V_2 \cup \{C\} = \{S, A, C\}$\\ 
 $V_4 = V_3 \cup \emptyset = \{S, A, C\}$ 
 
-a tady v tom nechám jenom neterminály z $V$, a z pravé strany vyškrtám pravidla obsahující neterminály~$\notin~V$:
+Zde nechám jenom neterminály z $V$ a z pravé strany vyškrtám pravidla obsahující neterminály $\not\in V$:
 \begin{flalign*}
     P\text{: } & S \rightarrow SA \mid \varepsilon & \\
     & A \rightarrow bSA \mid baS & \\
-    & C \rightarrow \mid bA &
+    & C \rightarrow bA &
 \end{flalign*}
-sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$: 
+Sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$: 
 
 $U_0 = \{S\}$\\ 
+$U_{i+1} = U_i \cup \{A \mid \text{existují } B \in U_i, \alpha, \beta \in (V \cup \Sigma)^\star \text{ tak, že } B 
+\rightarrow \alpha A \beta \in P^{'} \}$\\
 $U_1 = U_0 \cup \{A\} = \{S, A\}$ \\
-$U_2 = U_1 \cup \emptyset = \{S, A\}$. 
+$U_2 = U_1 \cup \emptyset = \{S, A\}$ 
 
-a ponechám jen pravidla, která nám zbyla v $U$: 
+A ponechám jen pravidla, která nám zbyla v $U$: 
 \begin{flalign*}
     P\text{: } & S \rightarrow SA \mid \varepsilon & \\
     & A \rightarrow bSA \mid baS &
@@ -100,7 +102,7 @@ a ponechám jen pravidla, která nám zbyla v $U$:
 
 \subsection{Důkaz, že gramatika generuje alespoň jedno slovo} % 9.4
 
-Rozhodněte, zda gramatika $\G$ generuje aspoň jedno slovo, tj. zda $L(\G) \neq \emptyset$, kde $\G$ je dána pravidly 
+Rozhodněte, zda gramatika $\G$ generuje alespoň jedno slovo, tj. zda $L(\G) \neq \emptyset$, kde $\G$ je dána pravidly 
 \begin{align*}
     P\text{: } & S \rightarrow aS \mid AB \mid CD \\
     & A \rightarrow aDb \mid AD \mid BC \\
@@ -111,11 +113,11 @@ Rozhodněte, zda gramatika $\G$ generuje aspoň jedno slovo, tj. zda $L(\G) \neq
 $V_1 = \{D\}$\\ 
 $V_2 = V_1 \cup \{A\} = \{D, A\}$\\ 
 $V_3 = V_2 \cup \emptyset = \{D, A\} = V$\\
-$S \notin V \quad \rightarrow \quad L(\G) = \emptyset$ 
+$S \notin V \quad \rightarrow \quad L(\G) = \emptyset$. Tedy gramatika $\G$ negeneruje ani jedno slovo.
 
-\textbf{Polopatě}
+\textbf{Chomského normální tvar polopatě}
 
-Chomského normální tvar: Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál. 
+Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál. 
 
 \subsection{Převod gramatiky do Chomského normálního tvaru} % 9.5 
 
@@ -218,9 +220,8 @@ Je dán derivační strom v bezkontextové gramatice:
     \neq \varepsilon$ a slovo $w_1 w_2^2 w_3 w_4^2 w_5$ je také generované gramatikou z bodu a). 
     \item Rozhodněte, zda je gramatika víceznačná. 
 \end{enumerate}
-    
-a) \begin{flalign*}
-    P\text{: } & S \rightarrow AaB \mid \varepsilon & \\
+\begin{flalign*}
+    a) P\text{: } & S \rightarrow AaB \mid \varepsilon & \\
     & A \rightarrow AA \mid SB \mid aSb \mid \varepsilon & \\
     & B \rightarrow SA \mid ac &
 \end{flalign*}
@@ -234,8 +235,8 @@ A A a B \stackrel{A \rightarrow a S b}{\Longrightarrow} a S b A a B \stackrel{S 
 abaaacB \stackrel{B \rightarrow ac}{\Longrightarrow} abaaacac $.
 
 \vspace*{1mm}
-c) basically pumping lemma pro gramatiky, snad by to v testech ani zkoušce chtít neměla. \\
-$w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w5 = \varepsilon$. 
+c) basically pumping lemma pro gramatiky \\
+$w_1 = aba$, $w_2 = a$, $w_3 = ac$, $w_4 = ac$, $w_5 = \varepsilon$. 
 
 \begin{center}
     \begin{forest}
