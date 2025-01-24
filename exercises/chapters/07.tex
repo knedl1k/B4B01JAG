@@ -8,7 +8,7 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \begin{multicols}{2}
 
-    \m{(aaa^{\star} + bbb^{\star})^{\star}}
+    I. \m{(aaa^{\star} + bbb^{\star})^{\star}}
 
     \begin{tikzpicture}
         \node[state,initial, accepting] (1) {$q_0$};
@@ -31,7 +31,7 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \columnbreak
 
-    zjednodušení: výraz se dá přepsat jako \\ \m{(aa^{\star}a + bb^{\star}b)^{\star}}
+    zjednodušení: výraz se dá přepsat jako \\ II. \m{(aa^{\star}a + bb^{\star}b)^{\star}}
 
     \begin{tikzpicture}
         \node[state,initial, accepting] (1) {$q_0$};
@@ -48,8 +48,55 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         ;
     \end{tikzpicture}
 
+    NFA: 
+    \begin{tabular}{|r r|c c|}
+        \hline
+        &  & $a$ & $b$ \\ \hline \hline
+        $\leftrightarrow$& $q_0$ & $q_1$          & $q_2$ \\
+                        & $q_1$ & $\{q_0, q_1\}$ & $\emptyset$ \\
+                        & $q_2$ & $\emptyset$    & $\{q_0, q_2\}$ \\
+        \hline
+    \end{tabular}
 \end{multicols}
 
+
+
+Podmnožinová konstrukce pro II.
+
+\begin{tabular}{|r r|c c||c|c c||c|c c||c|}
+    \hline
+    &  & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$\\ \hline \hline
+    $\leftrightarrow$& $q_0$          & $q_1$          & $q_2$          & $K$ & $O$ & $O$ & $A$ & $B$ & $C$ & $A$ \\
+                     & $q_1$          & $\{q_0, q_1\}$ & $\emptyset$    & $O$ & $K$ & $O$ & $B$ & $K$ & $O$ & $B$ \\
+              $\gets$& $q_2$          & $\emptyset$    & $\{q_0, q_2\}$ & $O$ & $O$ & $K$ & $C$ & $O$ & $D$ & $C$ \\
+                     & $\{q_0, q_1\}$ & $\{q_0, q_1\}$ & $q_2$          & $K$ & $K$ & $O$ & $K$ & $K$ & $C$ & $K$ \\
+                     & $\emptyset$    & $\emptyset$    & $\emptyset$    & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+              $\gets$& $\{q_0, q_2\}$ & $q_1$          & $\{q_0, q_2\}$ & $K$ & $O$ & $K$ & $D$ & $B$ & $D$ & $D$ \\
+    \hline
+\end{tabular}
+
+% \begin{tikzpicture} % TODO: dodělat diagram
+%     \node[state, initial] (0) {$q_0$};
+%     \node[state, right of=0] (1) {$q_1$};
+%     \node[state, accepting, right of=1] (2) {$q_2$};
+%     \node[state, below of=0] (3) {$q_3$};
+%     \node[state, right of=3] (4) {$q_4$};
+%     \node[state, accepting, below of=4] (5) {$q_5$};
+
+%     \draw
+%         (0) edge[bend left, above] node{$1$} (1)
+%         (0) edge[bend right, right] node{$0$} (3)
+%         (1) edge[bend left, above] node{$0$} (2)
+%         (1) edge[bend left, right] node{$1$} (4)
+%         (2) edge[loop below] node{$0, 1$} (2)
+%         (3) edge[loop left] node{$0$} (3)
+%         (3) edge[bend left] node{$1$} (5)
+%         (4) edge[bend right, above] node{$0$} (3)
+%         (4) edge[loop right] node{$1$} (4)
+%         (5) edge[bend left] node{$0$} (3)
+%         (5) edge[bend right, right] node{$1$} (4)
+%         ;
+% \end{tikzpicture}
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
 \noindent
@@ -92,6 +139,19 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         ;
     \end{tikzpicture}
 \end{multicols}
+
+Podmnožinová konstrukce.
+
+\begin{tabular}{|r r|c c||c|c c||c|}
+    \hline
+    &  & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ \\ \hline \hline
+    $\leftrightarrow$&$q_0$ & $q_0$ & $q_1$ & $K$ & $K$ & $O$ & $K$\\
+                    & $q_1$ & $q_2$ & $q_0$ & $O$ & $O$ & $K$ & $A$\\
+                    & $q_2$ & $q_1$ & $q_2$ & $O$ & $O$ & $O$ & $O$\\
+    \hline
+\end{tabular} 
+Protože každý řádek má svou třídu, automat je již redukovaný.
+
 \newpage
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
@@ -157,14 +217,14 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \end{multicols}
 
-podmnožinová konstrukce:
+Podmnožinová konstrukce.
 
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
     & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\
     \hline
     \hline
-    $\rightarrow$ &$\{ S\}$     &$\{ 1\}$    &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$D$ &$B$ &$O$ &$D$\\
+    $\rightarrow$ &$\{ S\}$     &$\{ 1\}$    &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
                   &$\{ 1\}$     &$\{ 2\}$    &$\{ 4,5 \}$  &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$\\
                   &$\emptyset$  &$\emptyset$ &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$\\
                   &$\{ 2\}$     &$\{ 2\}$    &$\{ 3,4,5\}$ &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$\\
@@ -179,7 +239,7 @@ DFA:
 \begin{tikzpicture}
     \def\radius{22mm}
 
-    \node[state, initial] (D) at (90:\radius) {$D$}; % Top center
+    \node[state, initial] (D) at (90:\radius) {$C$}; % Top center
     \node[state] (B) at (162:\radius) {$B$}; % Top-left
     \node[state] (O) at (18:\radius) {$O$}; % Bottom-left
     \node[state] (A) at (306:\radius) {$A$}; % Bottom-right
