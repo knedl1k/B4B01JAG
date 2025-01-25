@@ -87,35 +87,53 @@ $A \xRightarrow{A \rightarrow abAb}^j (ab)^j A b^j \xRightarrow{A \rightarrow ab
 Je dán jazyk $L$ nad abecedou $\Sigma = \{a,b\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$ 
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
 \[L = \{w \mid w \text{ začíná a končí symbolem } 1 \text{ a obsahuje o dvě } 1 \text{ více než } 0\}\text{.}\]
-\begin{multicols}{2}
-    $L = \{1u1 \mid |u|_0 = |u|_1\}, i = |u|_0$
 
-    \begin{tikzpicture}
-        \node[state, initial] (0) {$q_0$};
-        \node[state, right of=0] (1) {$q_1$};
-        \node[state, accepting, right of=1] (f) {$q_f$};
+$L = \{1u1 \mid |u|_0 = |u|_1\}, i = |u|_0$
+
+\begin{tikzpicture}
+    \node[state, initial] (0) {$q_0$};
+    \node[state, right of=0] (1) {$q_1$};
+    \node[state, accepting, right of=1] (f) {$q_f$};
     
-        \draw
-            (0) edge[bend left, above] node{$1, Z_0 / Z_0$} (1)
-            (1) edge[loop above] node[align=center]{$0, Z_0 / 0 Z_0$\\$1, Z_0 / 1 Z_0$} (1)
-            (1) edge[loop below] node[align=center]{$0,0 / 00$\\ $1,1 / 11$\\ $0,1 / \varepsilon$\\ $1,0 / \varepsilon$} (1)
-            (1) edge[bend left, above] node{$1, Z_0 / \varepsilon$} (f)
-    
-            ;
-    \end{tikzpicture}
+    \draw
+        (0) edge[bend left, above] node{$1, Z_0 / Z_0$} (1)
+        (1) edge[loop above] node[align=center]{$0, Z_0 / 0 Z_0$\\$1, Z_0 / 1 Z_0$} (1)
+        (1) edge[loop below] node[align=center]{$0,0 / 00$\\ $1,1 / 11$\\ $0,1 / \varepsilon$\\ $1,0 / \varepsilon$} (1)
+        (1) edge[bend left, above] node{$1, Z_0 / \varepsilon$} (f)
+        ;
+\end{tikzpicture}
 
-\columnbreak
+\textbf{1)} $L \subseteq N(A)$
 
-    1) $L \subseteq N(A)$\\
-    $(q_0, 1u1, Z_0) \vdash (q_1, u1, Z_0) \vdash^\star (q_1, 1, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$.
+$(q_0, 1u1, Z_0) \vdash (q_1, u1, Z_0) \vdash^\star (q_1, 1, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$.
 
-    2) $L(B) \subseteq L$\\ % TODO: dodělat důkaz
+\textbf{2)} $L(B) \subseteq L$
 
+Musíme ukázat, že pokud zásobníkový automat $B$ přijme slovo $w$, pak $w \in L$. To znamená, že $w$ začíná a končí 
+symbolem $1$ a obsahuje o dvě více symbolů $1$ než $0$.
 
-\end{multicols}
+Vlastnosti přechodů:
+\begin{enumerate}[noitemsep]
+    \item Automat přechází z počátečního stavu $q_0$ do $q_1$, pokud první symbol je $1$. Tuto $1$ nezapočítáme.
+    \item Ve stavu $q_1$ se zásobníkem automat udržuje informaci o rozdílu mezi počtem symbolů $1$ a $0$:
+    \begin{itemize}[noitemsep]
+        \item Při čtení symbolů $0$ a $1$ přidává, respektive odstraní (pokud existuje) odpovídající značku do zásobníku,
+        což udržuje informaci o tom, zda je stejný počet obou znaků.
+    \end{itemize}
+    \item Pokud zpracování skončí symbolem $1$ a zásobník je prázdný, automat přejde do koncového stavu $q_f$, což 
+    zajišťuje, že rozdíl mezi počtem symbolů $1$ a $0$ je přesně dvě.
+\end{enumerate}
+Každé slovo přijaté automatem $B$ splňuje podmínky:
+\begin{itemize}[noitemsep]
+    \item Začíná symbolem $1$ (nutný přechod z $q_0$ do $q_1$).
+    \item Končí symbolem $1$ (nutný přechod z $q_1$ do $q_f$).
+    \item Obsahuje přesně o dvě více symbolů $1$ než $0$ (zásobník na konci zajišťuje prázdný stav).
+\end{itemize}
+Z toho plyne, že $L(B) \subseteq L$.
 
-\subsection{Tvorba zásobníkového automatu podle gramatiky}
-Je dán jazyk $L$. Sestrojte zásobníkové automaty $A$, $B$ tak, že $L = N(A)$ a $L = L(B)$ (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde $$L = \{a^i b^i c^{i+j}\}$$
+\subsection{Tvorba zásobníkového automatu podle jazyka}
+Je dán jazyk $L$. Sestrojte zásobníkové automaty $A$, $B$ tak, že $L = N(A)$ a $L = L(B)$ (tj. $A$ přijímá $L$ prázdným 
+zásobníkem, $B$ přijímá $L$ koncovým stavem), kde $$L = \{a^i b^i c^{i+j}\}$$
 Ukažte práci nad slovem $w = abcc$. 
 
 Konstrukce pomocí gramatiky: 
@@ -174,25 +192,31 @@ Je dán jazyk $L = \{0^n 1^m; 0 \leq n \leq m \leq 2n\}$. Rozhodněte, zda jazyk
 V případě, že je bezkontextový, najděte buď bezkontextovou gramatiku, která ho generuje, nebo zásobníkový automat, který 
 ho přijímá.\\
 V případě, že není bezkontextový, tvrzení dokažte.
-\begin{multicols}{2}
-    \begin{flalign*}
-        \G_1: S \rightarrow 0SA1 \mid \varepsilon &\\
-        A \rightarrow 1 \mid \varepsilon
-    \end{flalign*}
 
-\columnbreak
+Například $\G$ s pravidly $P$:
+\begin{flalign*}
+    S \rightarrow 0S11 \mid 0S1 \mid \varepsilon & \\
+\end{flalign*}
+Důkaz.
 
-    \begin{flalign*}
-        \G_2: S \rightarrow 0S11 \mid 0S1 \mid \varepsilon &\\
-        \\ \\
-    \end{flalign*}
-\end{multicols}
+\textbf{1)} $L \subseteq L(\G)$ $-$ $\G$ generuje celé $L$
+\begin{itemize}[leftmargin=*]
+    \item $0 < n \leq m \leq 2n \rightarrow k=2n-m \geq 0$:\\
+    $S \xRightarrow{S \rightarrow 0S1}^{(k)} 0^k S 1^k \xRightarrow{S \rightarrow 0S11}^{(n-k)} 0^k 0^{n-1} S 1^{n-1} 
+    1^{n-1} 1^k \xRightarrow{S \rightarrow \varepsilon} 0^n 1^{2n-k} = 0^n 1^{2n - 2n + m} = 0^n 1^m$.
+    \item $0 = n = m$: $ 0^0 1^0 = \varepsilon \in L$.
+\end{itemize}
+\textbf{2)} $L(\G) \subseteq L$ $-$ $\G$ negeneruje nic navíc
 
-Důkaz $\G_2$.
+Nechť $w \in L(\G)$, kde $w = 0^n 1^m$. Sledujeme pravidla gramatiky $\G$:
 
-1) $L \subseteq L(\G_2)$\\
-$0 < n \leq m \leq 2n \rightarrow k=2n-m \geq 0$\\
-$S \xRightarrow{S \rightarrow 0S1}^{(k)} 0^k S 1^k \xRightarrow{S \rightarrow 0S11}^{(n-k)} 0^k 0^{n-1} S 1^{n-1} 1^{n-1} 1^k
-\xRightarrow{S \rightarrow \varepsilon} 0^n 1^{2n-k} = 0^n 1^{2n - 2n + m} = 0^n 1^m$.
+(0) základní krok: Pokud $S \rightarrow \varepsilon$, pak $w = \varepsilon = 0^0 1^0$. Zřejmě $\varepsilon \in L$.
 
-2) $L(\G_2) \subseteq L$\\ % TODO: dodělat důkaz
+(1) indukční krok: 
+\begin{itemize}
+    \item Pokud $S \rightarrow 0S1$, přidáváme jeden symbol $0$ na začátek a jeden symbol $1$ na konec. Po aplikaci 
+    tohoto pravidla se počet $0$ zvýší o jeden a počet $1$ o jedna, tedy platí $n \leq m \leq 2n$.
+    \item Pokud $S \rightarrow 0S11$, přidáváme jeden symbol $0$ na začátek a dva symboly $1$ na konec. Po aplikaci 
+    tohoto pravidla se počet $0$ zvýší o jeden a počet $1$ o dva, tedy stále platí $n \leq m \leq 2n$.
+\end{itemize}
+
