@@ -1,54 +1,53 @@
 \section{Desáté cvičení}
  
 \subsection{Algoritmus CYK} % 10.1 
-
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde 
 $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
-\vspace*{-4mm}
-\[
-    \begin{array}{l l}
-        P: & S \rightarrow AB \mid CS \mid AD \\
+\begin{multicols}{2}
+    \begin{align*}
+        P \text{: } & S \rightarrow AB \mid CS \mid AD \\
            & A \rightarrow AC \mid AD \mid a \\
            & B \rightarrow BC \mid b \\
            & C \rightarrow DS \mid SC \mid a \\
-           & D \rightarrow BA \mid b \\
-    \end{array}
-\]
+           & D \rightarrow BA \mid b
+    \end{align*}
 
+\columnbreak
+
+    Přepis pravidel:
+    \begin{align*}
+        AB & \leftarrow S \\
+        AC & \leftarrow A \\
+        AD & \leftarrow S, A \\
+        BA & \leftarrow D \\
+        BC & \leftarrow B \\
+        CS & \leftarrow S \\
+        DS & \leftarrow C \\
+        SC & \leftarrow C
+    \end{align*}
+\end{multicols}
 Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$.  
 Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
-\vspace*{3mm}
 
 slovo $w_1$:
-
 \begin{multicols}{2}
-\[
-\hspace*{-20mm}
-\begin{array}{r c l}
+    \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
+        $C,A, S$ &   &   &   &   \\ 
+        $S, A$ & $C, A, S$ &   &   &   \\ 
+        $A$ & $S,A$ & $S,A, C$ &   &   \\ 
+        $A$ & $A$ & $S,A$ & $D,B$ &   \\ 
+        $A,C$ & $A, C$ & $A,C$ & $B,D$ & $A,C$ \\ 
+        $a$ & $a$ & $a$ & $b$ & $a$
+    \end{NiceTabular} % TODO: upravit vzhled CYK tabulek - slovo mimo buňky
 
-    AB & \leftarrow &S \\
-    AC & \leftarrow &A \\
-    AD & \leftarrow &S, A \\
-    BA & \leftarrow &D \\
-    BC & \leftarrow &B \\
-    CS & \leftarrow &S \\
-    DS & \leftarrow &C \\
-    SC & \leftarrow &C \\
-\end{array}
-\]
+    $
+    S \stackrel{S \rightarrow CS}{\Longrightarrow} CS \stackrel{C \rightarrow a}{\Longrightarrow} aS \stackrel{S 
+    \rightarrow CS}{\Longrightarrow} aCS \stackrel{C \rightarrow a}{\Longrightarrow} aaS \stackrel{S \rightarrow AD}
+    {\Longrightarrow} aaAD \stackrel{A \rightarrow a}{\Longrightarrow} aaaD \stackrel{D \rightarrow BA}{\Longrightarrow} 
+    aaaBA \stackrel{B \rightarrow b}{\Longrightarrow} aaabA \stackrel{A \rightarrow a}{\Longrightarrow} aaaba.
+    $
 
-
-\begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-    $C,A, S$ &   &   &   &   \\ 
-    $S, A$ & $C, A, S$ &   &   &   \\ 
-    $A$ & $S,A$ & $S,A, C$ &   &   \\ 
-    $A$ & $A$ & $S,A$ & $D,B$ &   \\ 
-    $A,C$ & $A, C$ & $A,C$ & $B,D$ & $A,C$ \\ 
-    $a$ & $a$ & $a$ & $b$ & $a$ \\ 
-\end{NiceTabular}
-
-
-    
+\columnbreak
 
     \begin{center}
         
@@ -81,138 +80,134 @@ slovo $w_1$:
                     ]
                 ]
             ]
-        \end{forest}    \end{center}
+        \end{forest}    
+    \end{center}
 \end{multicols}
-\vspace{-5mm}
-$$S \stackrel{S \rightarrow CS}{\Longrightarrow} CS \stackrel{C \rightarrow a}{\Longrightarrow} aS \stackrel{S 
-\rightarrow CS}{\Longrightarrow} aCS \stackrel{C \rightarrow a}{\Longrightarrow} aaS \stackrel{S \rightarrow AD}
-{\Longrightarrow} aaAD \stackrel{A \rightarrow a}{\Longrightarrow} aaaD \stackrel{D \rightarrow BA}{\Longrightarrow} 
-aaaBA \stackrel{B \rightarrow b}{\Longrightarrow} aaabA \stackrel{A \rightarrow a}{\Longrightarrow} aaaba$$
 
-\vspace*{-2mm}
+\vspace*{-20mm}
 slovo $w_2$: 
 \begin{multicols}{2}
-    
-\begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-    $C,A, S$ &   &   &   &   \\ 
-    $C, A, S$ & $ - $ &   &   &   \\ 
-    $S,A$ & $- $ & $D,B$ &   &   \\ 
-    $S,A$ & $- $ & $D,B$ & $A$ &   \\ 
-    $A,C$ & $B,D$ & $B,D$ & $A,C$ & $A,C$ \\ 
-    $a$ & $b$ & $b$ & $a$ & $a$ \\ 
-\end{NiceTabular}
-    
+    \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
+        $C,A, S$ &   &   &   &   \\ 
+        $C, A, S$ & $ - $ &   &   &   \\ 
+        $S,A$ & $- $ & $D,B$ &   &   \\ 
+        $S,A$ & $- $ & $D,B$ & $A$ &   \\ 
+        $A,C$ & $B,D$ & $B,D$ & $A,C$ & $A,C$ \\ 
+        $a$ & $b$ & $b$ & $a$ & $a$
+    \end{NiceTabular}
 
-\begin{center}
-        
-    \begin{forest}
-        for tree={
-            grow=south,                 % Tree grows downward
-            edge={->},                  % Draw edges as arrows
-            align=center,               % Center the text inside nodes
-        }
-        [$S$
-            [$A$
-                [$A$
-                    [$a$]
-                ]
-                [$D$
-                    [$b$]
-                ]
-            ]
-            [$D$
-                [$B$
-                    [$b$]
-                ]
+    $
+    S \stackrel{S \rightarrow AD}{\Longrightarrow} AD \stackrel{A \rightarrow AD}{\Longrightarrow} ADD \stackrel{A 
+    \rightarrow a}{\Longrightarrow} aDD \stackrel{D \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow BA}
+    {\Longrightarrow} abBA \stackrel{B \rightarrow b}{\Longrightarrow} abbA \stackrel{A \rightarrow AC}{\Longrightarrow} 
+    abbAC \stackrel{A \rightarrow a}{\Longrightarrow} abbaC \stackrel{C \rightarrow a}{\Longrightarrow} abbaa.
+    $
+    
+\columnbreak
+
+    \begin{center}   
+        \begin{forest}
+            for tree={
+                grow=south,                 % Tree grows downward
+                edge={->},                  % Draw edges as arrows
+                align=center,               % Center the text inside nodes
+            }
+            [$S$
                 [$A$
                     [$A$
                         [$a$]
                     ]
-                    [$C$
-                        [$a$]
+                    [$D$
+                        [$b$]
+                    ]
+                ]
+                [$D$
+                    [$B$
+                        [$b$]
+                    ]
+                    [$A$
+                        [$A$
+                            [$a$]
+                        ]
+                        [$C$
+                            [$a$]
+                        ]
                     ]
                 ]
             ]
-        ]
-    \end{forest}    \end{center}
-
+        \end{forest}    
+    \end{center}
 \end{multicols}
-\vspace*{-5mm}
-$$S \stackrel{S \rightarrow AD}{\Longrightarrow} AD \stackrel{A \rightarrow AD}{\Longrightarrow} ADD \stackrel{A 
-\rightarrow a}{\Longrightarrow} aDD \stackrel{D \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow BA}
-{\Longrightarrow} abBA \stackrel{B \rightarrow b}{\Longrightarrow} abbA \stackrel{A \rightarrow AC}{\Longrightarrow} 
-abbAC \stackrel{A \rightarrow a}{\Longrightarrow} abbaC \stackrel{C \rightarrow a}{\Longrightarrow} abbaa$$
 
 % \includegraphics[width=1\textwidth]{CYK.jpg}
 
 \subsection{Algoritmus CYK} % 10.2
-
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde 
-$N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:\[
-    \begin{array}{l l}
-        P: & S \rightarrow BD \mid CD \mid DA \\
-           & A \rightarrow CA \mid a \\
-           & B \rightarrow CB \mid b \\
-           & C \rightarrow AA \mid BC \mid DC \mid b \\
-           & D \rightarrow AC \mid BB \mid CB \mid a \\
-    \end{array}
-\]
-
+$N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
+\begin{align*}
+    P: & S \rightarrow BD \mid CD \mid DA \\
+       & A \rightarrow CA \mid a \\
+       & B \rightarrow CB \mid b \\
+       & C \rightarrow AA \mid BC \mid DC \mid b \\
+       & D \rightarrow AC \mid BB \mid CB \mid a
+\end{align*}
 Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom 
 a napište levou derivaci.
 
 $w_1 = abaab$: 
-
 \begin{multicols}{2}
-    
-\begin{NiceTabular}{ccccc}[hvlines, corners=NE]
-    $D, C, B, S $&   &   &   &   \\
-    $D, C, A, S$ & $S, D, C, B$ &   &   &   \\
-    $A, S, C$ & $C$ & $D, B, C$ &   &   \\
-    $D, C$ & $S, A$ & $C, S$ & $D, C$ &   \\
-    $A, D$ & $B, C$ & $A, D$ & $A, D$ & $B, C$ \\
-    $a$ & $b$ & $a$ & $a$ & $b$ \\
-\end{NiceTabular}
+    \begin{NiceTabular}{ccccc}[hvlines, corners=NE]
+        $D, C, B, S $&   &   &   &   \\
+        $D, C, A, S$ & $S, D, C, B$ &   &   &   \\
+        $A, S, C$ & $C$ & $D, B, C$ &   &   \\
+        $D, C$ & $S, A$ & $C, S$ & $D, C$ &   \\
+        $A, D$ & $B, C$ & $A, D$ & $A, D$ & $B, C$ \\
+        $a$ & $b$ & $a$ & $a$ & $b$
+    \end{NiceTabular}
 
-\begin{center}
-    \begin{forest}
-        for tree={
-            grow=south,                 % Tree grows downward
-            edge={->},                  % Draw edges as arrows
-            align=center,               % Center the text inside nodes
-        }
-        [$S$
-            [$C$
+    $
+    S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
+    {D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
+    {\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow} 
+    abaAB \Longrightarrow \stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow} 
+    abaab.
+    $
+
+\columnbreak
+
+    \begin{center}
+        \begin{forest}
+            for tree={
+                grow=south,                 % Tree grows downward
+                edge={->},                  % Draw edges as arrows
+                align=center,               % Center the text inside nodes
+            }
+            [$S$
+                [$C$
+                    [$D$
+                        [$a$]
+                    ]
+                    [$C$
+                        [$b$]
+                    ]
+                ]
                 [$D$
-                    [$a$]
-                ]
-                [$C$
-                    [$b$]
-                ]
-            ]
-            [$D$
-                [$C$
-                    [$A$
-                        [$a$]
+                    [$C$
+                        [$A$
+                            [$a$]
+                        ]
+                        [$A$
+                            [$a$]
+                        ]
                     ]
-                    [$A$
-                        [$a$]
+                    [$B$
+                        [$b$]
                     ]
                 ]
-                [$B$
-                    [$b$]
-                ]
             ]
-        ]
-    \end{forest}
+        \end{forest}
     \end{center}
 \end{multicols}
-
-$S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
-{D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
-{\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow} 
-abaAB \Longrightarrow $\\
-$\stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow} abaab$
 
 \subsection{Bezkontextové Pumping lemma}
 \textbf{Tento důkaz se neobjeví u písemné ani ústní zkoušky}
@@ -250,15 +245,12 @@ Takže to dělat nebudeme.
 
 \subsection{Důkaz generování slova matematickou indukcí} % 10.4 
 Je dána CF gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B, C\}$, $\Sigma = \{a, b\}$ a $P$ je:
-
-\[
-\begin{array}{l l}
+\begin{align*}
     P: & S \rightarrow SA \mid aSb \mid Cb \\
        & A \rightarrow SC \mid \varepsilon \\
        & B \rightarrow bAB \mid bS \mid AA \\
        & C \rightarrow CB \mid bA \mid a \\
-\end{array}
-\]
+\end{align*}
 
 Pomocí matematické indukce dokažte, že:
 \[
@@ -290,58 +282,50 @@ nebo
 $A \stackrel{I.P.}{\Longrightarrow} S^n A C^n \stackrel{A \rightarrow SC}{\Longrightarrow} S^nSCC^n \stackrel
 {S \rightarrow SA}{\Longrightarrow} S^nSACC^n$.
 
-
-
+\newpage
 \subsection{Algoritmus CYK} % 10.5 
 Je dána gramatika $\G = (N, \Sigma, S, P )$, kde $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b, c\}$ a
 pravidla~$P$ jsou dána
-\[
-\begin{array}{l l}
+\begin{align*}
     P: & S \rightarrow AB \mid CD \mid AC\\
     & A \rightarrow AC \mid a \\
     & B \rightarrow BD \mid b \\
     & C \rightarrow AD \mid a \\
     & D \rightarrow BA \mid b \\ 
-\end{array}
-\]
+\end{align*}
 
 Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde $w_1 = baaba$ a $w_2 = abaaa$.
- Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
-
+Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
 \begin{multicols}{2}
+    \begin{align*}
+        & AB \leftarrow S \\
+        & AC \leftarrow S, A \\
+        & AD \leftarrow C \\
+        & BA \leftarrow D \\
+        & BD \leftarrow B \\ 
+        & CD \leftarrow S \\ 
+    \end{align*}
     
+    slovo $w_1 = baaba$: 
 
-\[
-    \begin{array}{l l}
-    & AB \leftarrow S \\
-    & AC \leftarrow S, A \\
-    & AD \leftarrow C \\
-    & BA \leftarrow D \\
-    & BD \leftarrow B \\ 
-    & CD \leftarrow S \\ 
-    \end{array}
-\]
-    
-slovo $w_1 = baaba$: 
+    \vspace*{2mm}
 
-\vspace*{2mm}
+    \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
+        $D$ &  &   &   &   \\ 
+        $D$ & $S, A, C$ &  &   &   \\ 
+        $D$ & $S, C, A$ & $C, S$ &  &  \\ 
+        $D$ & $S, A$ & $S, C$ & $D$ &  \\ 
+        $B, D$ & $A,C$ & $A,C$ & $B, D$ & $A, C$ \\ 
+    \end{NiceTabular}
 
-\begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-    $D$ &  &   &   &   \\ 
-    $D$ & $S, A, C$ &  &   &   \\ 
-    $D$ & $S, C, A$ & $C, S$ &  &  \\ 
-    $D$ & $S, A$ & $S, C$ & $D$ &  \\ 
-    $B, D$ & $A,C$ & $A,C$ & $B, D$ & $A, C$ \\ 
-\end{NiceTabular}
-
-\hspace*{5mm}$b$ \hspace*{10mm} $a$ \hspace*{10mm} $a$ \hspace*{9mm} $b$ \hspace*{8mm} $a$
-    
-\vspace*{2mm}
+    \hspace*{5mm}$b$ \hspace*{10mm} $a$ \hspace*{10mm} $a$ \hspace*{9mm} $b$ \hspace*{8mm} $a$
+        
+    \vspace*{2mm}
     Gramatika $\G$ negeneruje slovo $w_1$. 
 
     slovo $w_2 = abaaa$: 
-    
+        
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
         $C,S$ &   &   &   &   \\ 
         $C, S$ & $D$ &   &   &   \\ 
@@ -349,31 +333,28 @@ slovo $w_1 = baaba$:
         $S,C$ & $D$ & $S,A$ & $S,A$ &   \\ 
         $A,C$ & $B, D$ & $A,C$ & $A,C$ & $A,C$ \\ 
     \end{NiceTabular}
-    
-\hspace*{5mm}$a$ \hspace*{8mm} $b$ \hspace*{8mm} $a$ \hspace*{8mm} $a$ \hspace*{8mm} $a$
-
+        
+    \hspace*{5mm}$a$ \hspace*{8mm} $b$ \hspace*{8mm} $a$ \hspace*{8mm} $a$ \hspace*{8mm} $a$
 
     \vspace*{2mm}
     Gramatika $\G$ generuje slovo $w_2$. 
     
-    \columnbreak
+\columnbreak
     Levá derivace: 
-        \begin{align*}
-                & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD 
-                \stackrel{C \rightarrow a}{\Longrightarrow} aD 
-                \stackrel{D \rightarrow BA}{\Longrightarrow} aBA  
-                \stackrel{B \rightarrow b}{\Longrightarrow} abA \Longrightarrow\\
-                &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC 
-                \stackrel{A \rightarrow AC}{\Longrightarrow} abACC 
-                \stackrel{A \rightarrow a}{\Longrightarrow} abaCC \Longrightarrow\\
-                &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC 
-                \stackrel{C \rightarrow a}{\Longrightarrow} abaaa
-        \end{align*}
-        
+    \begin{align*}
+        & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD 
+        \stackrel{C \rightarrow a}{\Longrightarrow} aD 
+        \stackrel{D \rightarrow BA}{\Longrightarrow} aBA  
+        \stackrel{B \rightarrow b}{\Longrightarrow} abA \Longrightarrow\\
+        &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC 
+        \stackrel{A \rightarrow AC}{\Longrightarrow} abACC 
+        \stackrel{A \rightarrow a}{\Longrightarrow} abaCC \Longrightarrow\\
+        &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC 
+        \stackrel{C \rightarrow a}{\Longrightarrow} abaaa
+    \end{align*}
 
     Derivační strom pro slovo $w_2$:
     \begin{center}
-        
         \begin{forest}
             for tree={
                 grow=south,                 % Tree grows to the right
