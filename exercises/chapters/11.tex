@@ -41,28 +41,23 @@ $Q = \{q_0, q_1, q_2, q_f\}$, $\Sigma = \{a, b\}$, $\Gamma =\{Z_0, X\}$ a přech
             ;
     \end{tikzpicture}
 
-    \columnbreak
+\columnbreak
 
-    \noindent
     Práce nad slovem $w_1 = aabba$.
 
-    \noindent
     $(q_0, aabba, Z_0) \vdash (q_0, abba, X Z_0) \vdash (q_0, bba, XXZ_0) \vdash (q_1, ba, X Z_0) \vdash (q_1, a, Z_0)$. 
     Konec, neúspěch.
 
-    \noindent
     Práce nad slovem $w_2 = abbbb$.
 
-    \noindent
     $(q_0, abbbb, Z_0) \vdash (q_0, bbbb, X Z_0) \vdash (q_1, bbb, Z_0) \vdash (q_1, bb, Z_0) \vdash (q_1, b, Z_0)
     \vdash (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$. \\Konec, úspěch.
 \end{multicols}
-
 $L(A) \stackrel{?}{=} \overbrace{\{a^i b^j \mid 0 \leq i \leq j\}}^L$
 
 Důkaz.
 
-a) $L \subseteq L(A)$
+\textbf{a)} $L \subseteq L(A)$
 \begin{itemize}[leftmargin=*]
     \item $i=j=0 \text{: } (q_0, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$
     \item $0=i < j \text{: } (q_0, b^j, Z_0) \vdash (q_1, b^{j-1}, Z_0) \vdash^{(j-1)} (q_1, \varepsilon, Z_0) 
@@ -71,8 +66,20 @@ a) $L \subseteq L(A)$
     \vdash^{(i-1)} (q_1, b^k, Z_0) \vdash^k (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon),}\\
     i+k = j, k=j-i \geq 0$.
 \end{itemize}
+\textbf{b)} $L(A) = N(A) \subseteq L$
 
-b) $L(A) = N(A) \subseteq L$
+Dokazujeme, že pokud $w \in L(A)$, pak $w$ má tvar $a^i b^j$, kde $0 \leq i \leq j$. Pro $w \in L(A)$ musí zásobníkový 
+automat $A$ skončit ve stavu $q_f$ s prázdným vstupním řetězcem i zásobníkem.
 
-$w \in L(A)$ % TODO: dodělat důkaz
-
+\begin{itemize}[leftmargin=*]
+    \item Přidávání $a$:
+    Každý symbol $a$ způsobí, že do zásobníku přidáme jeden symbol $X$. Zásobník tak obsahuje $i$ symbolů $X$ po 
+    zpracování $a^i$.
+    \item Zpracování $b$:
+    Každý symbol $b$ odstraní jeden symbol $X$ ze zásobníku, pokud je tam ještě přítomen. Pokud už jsou všechny $X$ 
+    odstraněny, symbol $b$ pouze projde automatem, aniž by zásobník změnil svůj stav.
+    \item Prázdný zásobník:
+    Stav $q_f$ je přístupný pouze tehdy, když je zásobník prázdný. To znamená, že každý přidaný $X$ odpovídá 
+    odstraněnému $X$, což nastane právě tehdy, když $i \leq j$.
+\end{itemize}
+Z toho plyne, že $w = a^i b^j$ s $0 \leq i \leq j$.
