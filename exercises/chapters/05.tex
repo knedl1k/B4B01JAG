@@ -3,15 +3,29 @@
 \subsection{Důkaz obecné vlastnosti dvou libovolných jazyků}
 Dokažte, že pro libovolné jazyky $L_1$ a $L_2$ nad stejnou abecedou platí $(L_1 \cup L_2)^\star = (L_1^\star L_2^\star)^\star$.
 
-% TODO: chybi reseni
+\textbf{a)} $(L_1 \cup L_2)^\star \subseteq (L_1^\star L_2^\star)^\star$
 
-a) $(L_1 \cup L_2)^\star \subseteq (L_1^\star L_2^\star)$
+Nechť $w \in (L_1 \cup L_2)^\star$. Tedy $w = x_1 x_2 \dots x_k, x_i \in (L_1 \cup L_2)$.
 
-$w = x_1 x_2 \dots x_i$, $x_i \in L_1 \cup L_2$
+Protože každý $x_i$ patří buď do $L_1$ nebo do $L_2$, můžeme každé takové $w$ chápat jako zřetězení slov, která střídavě
+patří do $L_1^\star$ nebo $L_2^\star$. Tedy slova z $(L_1 \cup L_2)$ lze seskupit do bloků tak, že tyto bloky patří buď do
+$L_1^\star$ nebo $L_2^\star$.
 
-$w \in (L_1 \cup L_2)^\star$ iff $x_i \in L_1 \land x_i \in L_2$
+Například: $w = u_1 v_1 u_2 v_2 \dots u_m v_m \text{, kde } u_i \in L_1^\star, v_i \in L_2^\star$.
 
-b) $(L_1^\star L_2^\star) \subseteq (L_1 \cup L_2)^\star$
+To znamená, že $w \in (L_1^\star \cup L_2^\star)$. Jelikož $w$ je libovolné slovo z $(L_1^\star L_2^\star)^\star$ platí
+$(L_1 \cup L_2)^\star \subseteq (L_1^\star L_2^\star)^\star$.
+
+\textbf{b)} $(L_1^\star L_2^\star)^\star \subseteq (L_1 \cup L_2)^\star$
+
+Nechť $w \in (L_1^\star L_2^\star)^\star$. Tedy $w = y_1 y_2 \dots y_k, y_i \in L_1^\star L_2^\star$.
+
+Každé $y_i \in L_1^\star L_2^\star$ lze dále rozepsat jako zřetězení slov $u_1 v_1 \dots u_m v_m \text{, kde } u_j \in 
+L_1^\star, v_j \in L_2^\star$.
+
+Tedy každé slovo $y_i$ je posloupnost slov z $L_1$ a $L_2$, což znamená, že všechny $y_i$ jsou tvořeny prvky z $L_1 \cup L_2$.
+Proto celé $w$ lze vyjádřit jako zřetězení slov z $L_1 \cup L_2$, což znamená, že $w \in (L_1 \cup L_2)^\star$. A tedy
+platí $(L_1^\star L_2^\star)^\star \subseteq (L_1 \cup L_2)^\star$.
 
 \subsection{Tvorba regulárního výrazu reprezentujícího jazyk}
 Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \{0,1\}$, jestliže výraz existuje.
@@ -53,7 +67,6 @@ Zdůvodnění:
     libovolným počtem $0$.
 \end{enumerate}
 
-\newpage % TODO: kontrola formatovani
 \subsection{Hledání slov splňující různé regulární výrazy}
 Jazyk $L_1$ je reprezentován regulárním výrazem $r_1 = 0^\star1^\star0^\star1^\star0^\star$ a jazyk $L_2$ je reprezentován
 regulárním výrazem $r_2 = (01 + 10)^\star$.
@@ -91,10 +104,10 @@ reprezentovaný tímto regulárním výrazem.\\
 najít NFA přímo a pak použitím konstrukcí z důkazů faktu, že třída regulárních jazyků je uzavřena na sjednocení, zřetězení
 a Kleeneho operátor.)
 
+\newpage
 \textbf{1. Obecný postup}
 
 \begin{multicols}{2}
-
     $(baa + bab) \equiv ba(a+b)$
 
     \begin{tikzpicture}
@@ -129,7 +142,6 @@ a Kleeneho operátor.)
         \hline
     \end{tabular}
 \end{multicols}
-\newpage
 Podmnožinová konstrukce:
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
@@ -205,7 +217,6 @@ III. krok\\
         ;
 \end{tikzpicture}
 
-\newpage
 IV. podmnožinová konstrukce DFA + redukce
 
 \begin{center}
@@ -259,8 +270,7 @@ grafu z přednášky).
 
 $\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}$
 
-\begin{multicols}{4}
-
+\begin{multicols}{2}
     $\mathcal{L}$ NFA:
 
     \begin{tikzpicture}
@@ -276,10 +286,8 @@ $\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}
             (2) edge[loop above] node{$0,1$} (2)
         ;
     \end{tikzpicture}
+\columnbreak
 
-\end{multicols}
-
-\begin{multicols}{4}
     $\mathcal{L}$ DFA:
 
     \begin{tikzpicture}
@@ -297,8 +305,7 @@ $\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}
     \end{tikzpicture}
 \end{multicols}
 
-\begin{multicols}{4}
-
+\begin{multicols}{2}
     L DFA:
     
     \begin{tikzpicture}
@@ -315,6 +322,131 @@ $\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}
         ;
     \end{tikzpicture}
 
+    1. zavedu stavy $S$, $F$:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, below of=0] (f) {$F$};
+        \node[state, below of=1] (c) {chyba};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[loop above] node {$0$} (0)
+        (0) edge[bend left] node{$1$} (1)
+        (0) edge[bend right] node{$\varepsilon$} (f)
+        (1) edge[bend left] node{$0$} (0)
+        (1) edge[bend left] node{$1$} (c)
+        (1) edge[bend left, above] node{$\varepsilon$} (f)
+        (c) edge[loop right] node{$0,1$} (c)
+        ;
+    \end{tikzpicture}
+
+    2. odstraňuji smyčky:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, below of=0] (f) {$F$};
+        \node[state, below of=1] (c) {chyba};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[bend left] node{$0^\star 1$} (1)
+        (0) edge[bend right] node{$\varepsilon$} (f)
+        (1) edge[bend left] node{$0$} (0)
+        (1) edge[bend left] node{$1$} (c)
+        (1) edge[bend left, above] node{$\varepsilon$} (f)
+        ;
+    \end{tikzpicture}
+
+\columnbreak
+
+    3. odstraňuji vrchol \textit{chyba}:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, below of=0] (f) {$F$};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[bend left] node{$0^\star 1$} (1)
+        (0) edge[bend right] node{$\varepsilon$} (f)
+        (1) edge[bend left] node{$0$} (0)
+        (1) edge[bend left, above] node{$\varepsilon$} (f)
+        ;
+    \end{tikzpicture}
+
+    4. odstraňuji vrchol $q_1$:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, accepting, right of=0] (f) {$F$};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[bend left] node{$0^\star 1$} (f)
+        (0) edge[bend right] node{$\varepsilon$} (f)
+        (0) edge[loop below] node{$0^\star 10$} (0)
+        ;
+    \end{tikzpicture}
+
+    5. odstraňuji smyčky:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, accepting, right of=0] (f) {$F$};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[bend left] node{$0^\star 1 0 0^\star 1$} (f)
+        (0) edge[bend right] node{$0^\star 10$} (f)
+        ;
+    \end{tikzpicture}
+
+    6. odstraňuji paralelní hrany:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (0) {$q_0$};
+        \node[state, accepting, right of=0] (f) {$F$};
+
+        \path[->]
+        (s) edge [bend left] node {$\varepsilon$} (0)
+        (0) edge[bend left] node{$0^\star 1 0 0^\star 1 + 0^\star 10$} (f)
+        ;
+    \end{tikzpicture}
+
+    7. odstraňuji vrchol $A$:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting, right of=s] (f) {$F$};
+
+        \path[->]
+        (s) edge[bend left] node{$0^\star 1 0 0^\star 1 + 0^\star 10$} (f)
+        ;
+    \end{tikzpicture}
 \end{multicols}
 
-% TODO: dodelat regularni vyraz
+Finální regulární výraz pro $L$: $r=0^\star 1 0 0^\star 1 + 0^\star 10$.
