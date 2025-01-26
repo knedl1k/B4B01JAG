@@ -108,7 +108,7 @@ a Kleeneho operátor.)
 \textbf{1. Obecný postup}
 
 \begin{multicols}{2}
-    $(baa + bab) \equiv ba(a+b)$
+    $(baa + bab)^\star \equiv (ba(a+b))^\star$
 
     \begin{tikzpicture}
         \node[state, initial, accepting] (0) {$0$};
@@ -248,12 +248,12 @@ IV. podmnožinová konstrukce DFA + redukce
         \draw
             (c) edge[bend left, above] node{$a$} (a)
             (c) edge[bend right, right] node{$b$} (d)
-            (a) edge[] node{$a$} (o)
+            (a) edge[] node[left]{$a$} (o)
             (a) edge[bend left, right] node{$b$} (e)
             (d) edge[] node[right]{$a$} (b)
             (d) edge[] node[below]{$b$} (o)
             (o) edge[loop below] node{$a,b$} (o)
-            (e) edge[loop below] node{$a$} (e)
+            (e) edge[bend left, above] node{$a$} (a)
             (e) edge[] node[below]{$b$} (o)
             (b) edge[bend left] node[right]{$a,b$} (k)
             (k) edge[bend left=60, below] node{$a$} (a)
