@@ -59,8 +59,6 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
     \end{tabular}
 \end{multicols}
 
-
-
 Podmnožinová konstrukce pro II.
 
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|}
@@ -99,7 +97,6 @@ Podmnožinová konstrukce pro II.
 % \end{tikzpicture}
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
-\noindent
 Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
 který přijímá jazyk reprezentovaný regulárním výrazem.
 
@@ -155,7 +152,6 @@ Protože každý řádek má svou třídu, automat je již redukovaný.
 \newpage
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
-\noindent
 Je dán regulární výraz \m{a(ab^{\star} + b)^{\star}ba}. K danému regulární výrazu sestrojte redukovaný DFA $M$,
 který přijímá jazyk reprezentovaný regulárním výrazem.
 
@@ -330,7 +326,6 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
         ;
     \end{tikzpicture}
 
-
     2. odstraňuji smyčky:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
@@ -354,7 +349,6 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
         (3) edge [bend right] node {$b$} (2)
         ;
     \end{tikzpicture}
-
 
     3. odstraňuji vrchol $4$:
 
@@ -483,7 +477,6 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
 
 \end{multicols}
 
-
 \newpage
 lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 
@@ -544,24 +537,23 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
         ;
     \end{tikzpicture}
 
-
     \bb{2. zbavím se nodu č. 4:}
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$};
-    \node[state] (1) [right of=S]{$1, 3$};
-    \node[state] (2) [right of=1] {$2$};
-    \node[state, accepting] (F) [below of=S] {$F$};
+        \node[state, initial] (S) {$S$};
+        \node[state] (1) [right of=S]{$1, 3$};
+        \node[state] (2) [right of=1] {$2$};
+        \node[state, accepting] (F) [below of=S] {$F$};
 
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [loop above] node {$a$} (a)
-    (1) edge [bend left] node {$b$} (2)
-    (2) edge [bend left] node {$a$} (1)
-    (1) edge [bend right] node {$\varepsilon$} (F)
-    ;
-\end{tikzpicture}
+        \path[->]
+        (S) edge [bend left] node {$\varepsilon$} (1)
+        (1) edge [loop above] node {$a$} (a)
+        (1) edge [bend left] node {$b$} (2)
+        (2) edge [bend left] node {$a$} (1)
+        (1) edge [bend right] node {$\varepsilon$} (F)
+        ;
+    \end{tikzpicture}
 
 \columnbreak
 
@@ -569,18 +561,18 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$};
-    \node[state] (1) [right of=S]{$1, 3$};
-    \node[state, accepting] (F) [right of=1] {$F$};
+        \node[state, initial] (S) {$S$};
+        \node[state] (1) [right of=S]{$1, 3$};
+        \node[state, accepting] (F) [right of=1] {$F$};
 
-    \path[->]
-    (S) edge [bend left] node {$\varepsilon$} (1)
-    (1) edge [loop above] node {$a$} (a)
-    (1) edge [loop below] node {$ba$} (1)
-    (1) edge [loop above] node {$a$} (1)
-    (1) edge [bend left] node {$\varepsilon$} (F)
-    ;
-\end{tikzpicture}
+        \path[->]
+        (S) edge [bend left] node {$\varepsilon$} (1)
+        (1) edge [loop above] node {$a$} (a)
+        (1) edge [loop below] node {$ba$} (1)
+        (1) edge [loop above] node {$a$} (1)
+        (1) edge [bend left] node {$\varepsilon$} (F)
+        ;
+    \end{tikzpicture}
 
 
 \bb{4.spojím obsah smyček, \\odstraním smyčku a node:}
@@ -588,12 +580,12 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 \vspace*{2mm}
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
-    \node[state, initial] (S) {$S$};
-    \node[state, accepting] (F) [right of=1] {$F$};
+        \node[state, initial] (S) {$S$};
+        \node[state, accepting] (F) [right of=1] {$F$};
 
-    \path[->]
-    (S) edge [above] node {$(a + ba)^{\star}$} (F)
-    ;
-\end{tikzpicture}
+        \path[->]
+        (S) edge [above] node {$(a + ba)^{\star}$} (F)
+        ;
+    \end{tikzpicture}
 
 \end{multicols}
