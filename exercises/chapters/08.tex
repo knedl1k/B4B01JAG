@@ -222,7 +222,7 @@ $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 \end{multicols}
 
 \subsection{Návrh bezkontextové gramatiky pro jazyk}
-Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^ij^i2^j; i, j \geq 0\}$. Zdůvodněte,
+Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i 1^i 2^j; i, j \geq 0\}$. Zdůvodněte,
 proč gramatika $\G$ jazyk $L$ generuje.
     \begin{align*}
         P\text{: } & S \rightarrow XY  \\
@@ -234,7 +234,7 @@ proč gramatika $\G$ jazyk $L$ generuje.
 
 $\quad S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 (i)}{\Longrightarrow} 0^iX1^iY
 \stackrel{Y \rightarrow 2Y(j)}{\Longrightarrow} 0^iX1^iY2^j \stackrel{X \rightarrow \varepsilon}{\Longrightarrow}
-0^i1^iY2^j\stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $
+0^i1^iY2^j\stackrel{Y \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $.
 
 2. $L(\G) \subseteq L$ (gramatika nevygeneruje nic navíc):
 
