@@ -171,8 +171,8 @@ Je dán derivační strom v bezkontextové gramatice:
 b)
 $\quad S \stackrel{S \rightarrow SA}{\Longrightarrow} SA \stackrel{S \rightarrow SB}{\Longrightarrow} SBA
 \stackrel{S \rightarrow \varepsilon}{\Longrightarrow} BA \stackrel{B \rightarrow BA}{\Longrightarrow} BAA
-\stackrel{B \rightarrow b}{\Longrightarrow} bAA \stackrel{A \rightarrow a}{\Longrightarrow} baAA
-\stackrel{A \rightarrow a}{\Longrightarrow} baaA\stackrel{A \rightarrow a}{\Longrightarrow} baaa$.
+\stackrel{B \rightarrow b}{\Longrightarrow} bAA \stackrel{A \rightarrow a}{\Longrightarrow} baA
+\stackrel{A \rightarrow AA}{\Longrightarrow} baAA\stackrel{A \rightarrow a}{\Longrightarrow}^{(2)} baaa$.
 
 \subsection{Tvorba derivačního stromu k bezkontextové gramatice} % 8.4
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$,
@@ -354,9 +354,7 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 Zdůvodnění:
 
-1.
-
-Dvě možnosti: $ i = j$, a $i < j$, kde $j = i + n$, $n > 0$.
+1. Dvě možnosti: $ i = j$, a $i < j$, kde $j = i + n$, $n > 0$.
 \[
     S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 (i)}{\Longrightarrow} 0^i X 1^i Y
     \Longrightarrow
