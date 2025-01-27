@@ -115,7 +115,7 @@ b)
     \draw 
         (q0) edge[bend left, above] node{$0$} (q1)
         (q0) edge[loop above] node{$1$} (q0)
-        (q1) edge[bend left, above] node{$0$} (q0)
+        (q1) edge[loop above] node{$0$} (q1)
         (q1) edge[bend left, above] node{$1$} (q2)
         (q2) edge[bend left, above] node{$0$} (q3)
         (q2) edge[bend left, below] node{$1$} (q0)
@@ -128,8 +128,8 @@ b)
 
 Důkaz pomocí invariantů: 
 \begin{itemize}[noitemsep]
-    \item $q_0$: $\varepsilon$, $1$, končí $11$, neobsahuje $0101$, \texttt{in}, 
-    \item $q_1$: končí $0$, neobsahuje $0101$,
+    \item $q_0$: $\varepsilon$, končí $1$, nekončí $01$, neobsahuje $010$, \texttt{in}, 
+    \item $q_1$: končí $0$, nekončí $010$, neobsahuje $0101$,
     \item $q_2$: končí $01$, neobsahuje $0101$,
     \item $q_3$: končí $010$, neobsahuje $0101$,
     \item $q_4$: obsahuje $0101$, \texttt{out}.
