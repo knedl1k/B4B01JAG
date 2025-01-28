@@ -3,7 +3,7 @@
 \setlength{\belowdisplayskip}{0pt}
 \setlength{\abovedisplayshortskip}{0pt}
 \setlength{\belowdisplayshortskip}{0pt}
-%%% 
+%%%
 
 \section{Třinácté cvičení}
 
@@ -21,7 +21,7 @@ Přímou metodou:
         \node[state, right of=0] (1) {$q_1$};
         \node[state, right of=1] (2) {$q_2$};
         \node[state, accepting, below of=1] (f) {$q_f$};
-    
+
         \draw
             (0) edge[loop above] node[align=center]{$0, A / AA$ \\ $0, Z_0 / A Z_0$} (0)
             (0) edge[bend left, above] node{$1, Z_0 / Z_0$} (1)
@@ -30,7 +30,7 @@ Přímou metodou:
             (1) edge[bend left, above] node{$0, Z_0 / Z_0$} (2)
             (1) edge[bend left, below] node{$0, A / A$} (2)
             (2) edge[loop above] node[align=center]{$0, A / \varepsilon$ \\ $0, Z_0 / Z_0$} (2)
-            (2) edge[bend left, left] node{$\varepsilon, Z_0 / \varepsilon$} (f) 
+            (2) edge[bend left, left] node{$\varepsilon, Z_0 / \varepsilon$} (f)
             ;
   \end{tikzpicture}
 
@@ -45,12 +45,12 @@ Přímou metodou:
     \end{flalign*}
     \begin{flalign*}
         (q_2, 0, Z_0) &\vdash (q_f, 0, Z_0) \xmark & \\
-        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark\\
+        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark
     \end{flalign*}
-    
+
     Práce nad slovem $w_2 = 001110$.
 
-    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash} \\ 
+    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash} \\
     (q_1, 110, AA Z_0) \vdash^{(2)} (q_1, 0, AA Z_0) \vdash (q_2, \varepsilon, AA Z_0) \xmark $
 
 \end{multicols}
@@ -58,17 +58,16 @@ Přímou metodou:
 Přes gramatiku:
 \begin{flalign*}
     \G : S &\rightarrow S0 \mid 0S0 \mid A0 & \\
-    A &\rightarrow 1A \mid 1 \\
+    A &\rightarrow 1A \mid 1
 \end{flalign*}
 
 Důkaz.
 
 1) $L \subseteq L(\G)$\\
-$S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRightarrow{A \rightarrow 1A}^{(j)} 
+$S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRightarrow{A \rightarrow 1A}^{(j)}
 0^i 1^j A 0^{k+1} \xRightarrow{A \rightarrow 1} 0^i 1^{j+1} 0^{k+1}$, $i \leq k, j > 0$. %? Is this in the right spot?
 
 2) $L(\G) \subseteq L$\\ % TODO: dodělat důkaz
-
 
 \subsection{Tvorba nevypouštěcí gramatiky}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}, \Sigma = \{0,1\}$ a $P$ je dáno
@@ -76,46 +75,54 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}
     S &\rightarrow SA \mid 0 \\
     A &\rightarrow BAB \mid 1 \\
     B &\rightarrow CB \mid \varepsilon \\
-    C &\rightarrow AS \mid 0 \mid \varepsilon \\
+    C &\rightarrow AS \mid 0 \mid \varepsilon
 \end{align*}
 Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$ odstraňte levou rekurzi.
 
-1. krok Vytvoření nevypouštěcí gramatiky $\G_1$.
-\begin{flalign*}
-    V &= \{x \mid x \Rightarrow^\star \varepsilon\} & \\
-    V_1 &= \{x \mid x \rightarrow \varepsilon \in P\} = \{B,C\} & \\
-    V_2 &= V_1 \cup \{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+\} = V_1 \cup \emptyset = V_1 = V.
-\end{flalign*}
+\textbf{1. krok} Vytvoření nevypouštěcí gramatiky $\G_1$.
+\begin{multicols}{2}
+    \begin{flalign*}
+        V &= \{x \mid x \Rightarrow^\star \varepsilon\} & \\
+        V_1 &= \{x \mid x \rightarrow \varepsilon \in P\} = \{B,C\} & \\
+        V_2 &= V_1 \cup \{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+\} = V_1 \cup \emptyset = V_1 = V.
+    \end{flalign*}
 
-% TODO: dopsat sem nevypousteci gramatiku 
+\columnbreak
 
-2. krok odstranění levé rekurze. (postup shora dolů)
+    \begin{flalign*}
+        P^{'} \text{: } S &\rightarrow SA \mid 0 & \\
+        A &\rightarrow BAB \mid AB \mid BA \mid A \mid 1 & \\
+        B &\rightarrow CB \mid C & \\
+        C &\rightarrow AS \mid 0
+    \end{flalign*}
+\end{multicols}
+\textbf{2. krok} odstranění levé rekurze. (postup shora dolů)
 \begin{flalign*}
     S^{\phantom{'}}    &\rightarrow 0 \mid 0S^{'} & \\
     S^{'}&\rightarrow A \mid AS^{'} & \\
     A^{\phantom{'}}    &\rightarrow BAB \mid BA \mid 1 \mid BABA^{'} \mid BAA^{'} \mid 1A^{'} & \\
     A^{'}&\rightarrow B \mid BA^{'} & \\
     B^{\phantom{'}}    &\rightarrow CB \mid C & \\
-    C^{\phantom{'}}    &\rightarrow AS \mid 0 &
+    C^{\phantom{'}}    &\rightarrow AS \mid 0
 \end{flalign*}
 
+\vspace*{-2mm}
 
 \subsection{Převod gramatiky do Greibachové normální formy}
-Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, E, F\},\\ 
-\Sigma = \{a, *, +, ), (\}$ a $P$ je dáno 
+Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, E, F\},\\
+\Sigma = \{a, *, +, ), (\}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow (E)\\
     E &\rightarrow F * F \mid F + F\\
     F &\rightarrow a \mid S
 \end{align*}
-\textbf{1. krok} oindexování neterminálů.
-
+\textbf{1. krok} oindexování neterminálů.\\
 $A_1 = S \\
 A_2 = E \\
 A_3 = F
 $
 
-\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším
 indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
     S &\rightarrow (E) & \\
@@ -123,7 +130,7 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
     F &\rightarrow a \mid (E)
 \end{flalign*}
 
-\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda
 nahoru)
 \begin{flalign*}
     S &\rightarrow (E) & \\
@@ -143,19 +150,18 @@ nahoru)
 
 \subsection{Převod gramatiky do Greibachové normální formy}
 Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\},\\
-\Sigma = \{a, b, c\}$ a $P$ je dáno 
+\Sigma = \{a, b, c\}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow Ab \mid B\\
     A &\rightarrow Aba \mid Bcc\\
     B &\rightarrow Sa \mid b
 \end{align*}
-\textbf{1. krok} oindexování neterminálů.
-
+\textbf{1. krok} oindexování neterminálů.\\
 $A_1 = S \\
 A_2 = A \\
 A_3 = B$
 
-\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším 
+\textbf{2. krok} odstranění levých rekurzí. Kontrola správného pořadí indexů (na pravé straně vždy neterminál s větším
 indexem), jinak sloučit pravidla. (postup shora dolů)
 \begin{flalign*}
     S^{\phantom{'}} &\rightarrow Ab \mid B & \\
@@ -164,22 +170,10 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
     B^{\phantom{'}} &\rightarrow Aba \mid Ba \mid b & \\
     B^{\phantom{'}} &\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
     B^{\phantom{'}} &\rightarrow b \mid bB^{'} & \\
-    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}& \\
+    B^{'} &\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}
 \end{flalign*}
-% \begin{table}[h]
-%     \raggedright % Aligns the table to the left of the page
-%     \begin{tabular}{l l l} % 'l' ensures left alignment within the columns
-%     $S$ &\rightarrow Ab \mid B & \\
-%     $A $&\rightarrow Ba \mid BaA^{'} & \\
-%     $A^{'}$ &\rightarrow ba \mid baA^{'} & \\
-%     $B $&\rightarrow Aba \mid Ba \mid b & \\
-%     $B $&\rightarrow Baba \mid BaA^{'}ba \mid Ba \mid b & \\
-%     $B $&\rightarrow b \mid bB^{'} & \\
-%     $B^{'}$ &$\rightarrow aba \mid aA^{'}ba \mid a \mid abaB^{'} \mid aA^{'}baB^{'} \mid aB^{'}$\\
-%     \end{tabular}
-%     \caption{Example Table Aligned to the Left}
-% \end{table}
-\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda 
+
+\textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda
 nahoru)
 \begin{flalign*}
     S^{\phantom{'}} &\rightarrow Bab \mid BaA^{'} \mid b \mid bB^{'} & \\
