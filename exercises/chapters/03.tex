@@ -3,7 +3,6 @@
 \subsection{Nerodova věta a Pumping lemma}
 Pomocí Nerodovy věty a pomocí Pumping lemmatu dokažte, že jazyk $L = \{0^n 1^m \mid n > m \geq 0\}$ není regulární.
 
-\noindent
 Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $T$ na $\Sigma^\star$ taková, že:
 \begin{enumerate}[1), noitemsep]
     \item $L$ je sjednocení některých tříd $T$
@@ -22,8 +21,7 @@ Protože platí 2), tak $0^i w T 0^j w$ pro $w \in \{0,1\}^\star$.
 Zvolme $w = 1^{i-1}$. Pak $\underbrace{0^i 1^{i-1}}_{\substack{i \geq i-1 \\ \in L}} T 
 \underbrace{0^j 1^{i-1}}_{\substack{i-1 \geq j  \\\not\in L }}$. Tedy $L$ není regulární. $\blacksquare$
 
-\noindent
-Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},\\
+Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},
 |u| > n$ je 
 možné rozložit na 3 slova $u = xwy$ splňující:
 \begin{enumerate}[1), noitemsep]
@@ -187,7 +185,6 @@ Redukovaný automat:
         ;
 \end{tikzpicture}
 
-
 \subsection{Srovnání dvou DFA automatů}
 Jsou dány dva automaty. Rozhodněte, zda jsou ekvivalentní, tj. zda přijímají stejný jazyk.
 \[
@@ -269,6 +266,8 @@ M_2:
 
 A teď zredukovat oba automaty.
 
+\newpage
+
 $M_1$:
 
 \begin{tikzpicture}
@@ -294,11 +293,9 @@ $M_1$:
         (7) edge[bend left=18] node{$b$} (0)
         ;
 \end{tikzpicture}
-
 $M_1$ je již redukovaný.
 
 $M_2$:
-
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
@@ -318,8 +315,6 @@ $M_2$:
 \]
 
 Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
-
-\newpage
 
 \begin{multicols}{2}
     $M_1$:\\

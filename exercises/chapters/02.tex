@@ -2,45 +2,43 @@
 
 \subsection{Návrh DFA dle jazyka}
 
-Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý}\}$ nad abecedou $\Sigma = \{a,b\}$. Navrhněte konečný 
-automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
+Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý}\}$ nad abecedou $\Sigma = \{a,b\}$. Navrhněte konečný
+automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá.
 
 \begin{multicols}{2}
     \begin{tikzpicture}
         \node[state, initial, accepting] (q0) {$q_0$};
         \node[state, right of=q0] (q1) {$q_1$};
-    
-        \draw 
-            (q0) edge[bend left, above] node{$a$} (q1)    
+
+        \draw
+            (q0) edge[bend left, above] node{$a$} (q1)
             (q0) edge[loop above] node{$b$} (q0)
             (q1) edge[bend left, below] node{$a$} (q0)
             (q1) edge[loop above] node{$b$} (q1)
             ;
     \end{tikzpicture}
-    
-    Důkaz pomocí invariantů: 
-    \begin{itemize}[noitemsep]
-        \item $q_0$: $|w|_a = 2k$, \texttt{in}, \texttt{out}, 
-        \item $q_1$: $|w|_a = 2k + 1$,  
-    \end{itemize}
-    pro $k \in \mathbb{Z}$.
 
+    Důkaz pomocí invariantů:
+    \begin{itemize}[noitemsep]
+        \item $q_0$: $|w|_a = 2k$, \texttt{in}, \texttt{out},
+        \item $q_1$: $|w|_a = 2k + 1$, $k \in \mathbb{Z}$.
+    \end{itemize}
 \end{multicols}
 
 \subsection{Návrh DFA dle jazyka}
-Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}\}$ nad abecedou 
-$\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá. 
+Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}\}$ nad abecedou
+$\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá.
 
 \begin{multicols}{2}
-    
+
     \begin{tikzpicture}
         \node[state, initial] (q0) {$q_0$};
         \node[state, right of=q0] (q1) {$q_1$};
         \node[state, accepting, below of=q0] (q2) {$q_2$};
         \node[state, right of=q2] (q3) {$q_3$};
-        
-        \draw 
-        (q0) edge[bend left, above] node{$a$} (q1)    
+
+        \draw
+        (q0) edge[bend left, above] node{$a$} (q1)
         (q0) edge[bend left, right] node{$b$} (q2)
         (q1) edge[bend left, below] node{$a$} (q0)
         (q1) edge[bend left, right] node{$b$} (q3)
@@ -51,16 +49,13 @@ $\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dok
         ;
     \end{tikzpicture}
 
-    Důkaz pomocí invariantů: 
+    Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
-        \item $q_0$: $|w|_a = 2k$, $|w|_b = 2k$, \texttt{in}, 
-        \item $q_1$: $|w|_a = 2k + 1$, $|w|_b = 2k$,  
-        \item $q_2$: $|w|_a = 2k$, $|w|_b = 2k + 1$, \texttt{out},  
-        \item $q_3$: $|w|_a = 2k + 1$ $|w|_b = 2k+ 1$,  
+        \item $q_0$: $|w|_a = 2k$, $|w|_b = 2k$, \texttt{in},
+        \item $q_1$: $|w|_a = 2k + 1$, $|w|_b = 2k$,
+        \item $q_2$: $|w|_a = 2k$, $|w|_b = 2k + 1$, \texttt{out},
+        \item $q_3$: $|w|_a = 2k + 1$ $|w|_b = 2k+ 1$, $k \in \mathbb{Z}$.
     \end{itemize}
-    pro $k \in \mathbb{Z}$.
-    
-
 \end{multicols}
 
 \subsection{Návrh DFA dle jazyka}
@@ -72,19 +67,16 @@ Pro daný jazyk $L$ navrhněte konečný automat, který tento jazyk přijímá.
     \item $\Sigma = \{0,1\}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
 \end{enumerate}
 
-\newpage 
-\noindent
-
 a)
 \begin{multicols}{2}
-    
+
     \begin{tikzpicture}
         \node[state, initial] (q0) {$q_0$};
         \node[state, right of=q0] (q1) {$q_1$};
         \node[state, accepting, above of=q1] (q2) {$q_2$};
         \node[state, right of=q1] (q3) {$q_3$};
 
-        \draw 
+        \draw
             (q0) edge[bend left, above] node{$a$} (q1)
             (q0) edge[bend left, above] node{$b$} (q2)
             (q1) edge[bend left, above] node{$a,b$} (q3)
@@ -93,16 +85,15 @@ a)
             ;
     \end{tikzpicture}
 
-    Důkaz pomocí invariantů: 
+    Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
-        \item $q_0$: končí $a,b$, $|w| = 3k$, \texttt{in}, 
-        \item $q_1$: končí $a$, $|w| = 3k+1$, 
-        \item $q_2$: končí $b$, $|w| = 3k+1$, \texttt{out}, 
+        \item $q_0$: končí $a,b$, $|w| = 3k$, \texttt{in},
+        \item $q_1$: končí $a$, $|w| = 3k+1$,
+        \item $q_2$: končí $b$, $|w| = 3k+1$, \texttt{out},
         \item $q_3$: končí $a,b$, $|w| = 3k+2$, $k \in \mathbb{Z}$.
     \end{itemize}
 \end{multicols}
 
-\noindent
 b)
 
 \begin{tikzpicture}
@@ -112,7 +103,7 @@ b)
     \node[state, right of=q2] (q3) {$q_3$};
     \node[state, accepting, right of=q3] (q4) {$q_4$};
 
-    \draw 
+    \draw
         (q0) edge[bend left, above] node{$0$} (q1)
         (q0) edge[loop above] node{$1$} (q0)
         (q1) edge[loop above] node{$0$} (q1)
@@ -125,21 +116,18 @@ b)
         ;
 \end{tikzpicture}
 
-
-Důkaz pomocí invariantů: 
+Důkaz pomocí invariantů:
 \begin{itemize}[noitemsep]
-    \item $q_0$: $\varepsilon$, končí $1$, nekončí $01$, neobsahuje $010$, \texttt{in}, 
+    \item $q_0$: $\varepsilon$, končí $1$, nekončí $01$, neobsahuje $010$, \texttt{in},
     \item $q_1$: končí $0$, nekončí $010$, neobsahuje $0101$,
     \item $q_2$: končí $01$, neobsahuje $0101$,
     \item $q_3$: končí $010$, neobsahuje $0101$,
     \item $q_4$: obsahuje $0101$, \texttt{out}.
 \end{itemize}
 
-
-\noindent
-c) řešíme doplňkem, tedy jazyk $\mathcal{L}$ obsahuje právě všechna slova, jejižch každé podslovo délky $3$ \textbf{neobsahuje} 
-znak $0$. Následně všechny stavy, které nebyly výstupní, se stanou výstupními a stavy, které byly výstupní, se stanou 
-nevýstupními. 
+c) řešíme doplňkem, tedy jazyk $\mathcal{L}$ obsahuje právě všechna slova, jejižch každé podslovo délky $3$ \textbf{neobsahuje}
+znak $0$. Následně všechny stavy, které nebyly výstupní, se stanou výstupními a stavy, které byly výstupní, se stanou
+nevýstupními.
 
 \begin{tikzpicture}
     \node[state, accepting, initial] (q0) {$q_0$};
@@ -147,7 +135,7 @@ nevýstupními.
     \node[state, accepting, right of=q1] (q2) {$q_2$};
     \node[state, right of=q2] (q3) {$q_3$};
 
-    \draw 
+    \draw
         (q0) edge[loop above] node{$0$} (q0)
         (q0) edge[bend left, above] node{$1$} (q1)
         (q1) edge[bend left, above] node{$0$} (q0)
@@ -158,13 +146,15 @@ nevýstupními.
         ;
 \end{tikzpicture}
 
-Důkaz pomocí invariantů: 
+Důkaz pomocí invariantů:
 \begin{itemize}[noitemsep]
     \item $q_0$: končí $0$, neobsahuje $111$, \texttt{in}, \texttt{out},
     \item $q_1$: končí $1$, neobsahuje $111$, \texttt{out},
     \item $q_2$: končí $11$, neobsahuje $111$, \texttt{out},
-    \item $q_3$: obsahuje $111$. 
+    \item $q_3$: obsahuje $111$.
 \end{itemize}
+
+\newpage
 
 \subsection{Nerodova věta a Pumping lemma}
 Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \{0^i 1^j 0^k \mid 0 \leq i < j <k\}$ není regulární.\\
@@ -199,13 +189,13 @@ Definice \textbf{Nerodovy věty.} $L$ je regulární iff existuje ekvivalence $T
 Důkaz sporem:
 Kdyby existovala $T$.
 
-$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost $0$ a $1$. 
+$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost $0$ a $1$.
 
 $T$ musí mít konečně mnoho tříd, proto musí existovat $i > j, i \not= j \land 1^i T 1^j$.
 
 Zvolíme $w = 0^{j + 1}$.
 
-Pak podle vlastnosti 2) $\underbrace{1^i 0^{j+1}}_{\substack{i \geq j+1 \\ \not\in L}} T 
+Pak podle vlastnosti 2) $\underbrace{1^i 0^{j+1}}_{\substack{i \geq j+1 \\ \not\in L}} T
 \underbrace{1^j 0^{j+1}}_{\substack{j < j+1 \\\in L }}$.
 
 Tedy $L$ není regulární. $\blacksquare$
