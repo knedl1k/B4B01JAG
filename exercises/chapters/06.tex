@@ -12,19 +12,17 @@ K danému NFA (není-li již DFA) sestrojte podmnožinovou konstrukcí DFA přij
 NFA:
 
 \begin{tikzpicture}
-
     \node[state, initial] (0) {$0$};
     \node[state] (1) [right of=0] {$1$};
     \node[state, accepting] (2) [right of=1] {$2$};
 
     \path[->]
     (0) edge node {$b$} (1)
-    (1) edge node {$a$} (2);
-
+    (1) edge node {$a$} (2)
+    ;
 \end{tikzpicture}
 
 \begin{tikzpicture}
-
     \node[state, initial] (3) {$3$};
     \node[state] (4) [right of=3] {$4$};
     \node[state] (5) [right of=4] {$5$};
@@ -36,11 +34,11 @@ NFA:
     (4) edge node {$a$} (5)
     (5) edge [loop below] node {$a, b$} ()
         edge node {$b$} (6)
-    (6) edge node {$a, b$} (7);
-
+    (6) edge node {$a, b$} (7)
+    ;
 \end{tikzpicture}
 
-Podmnožinová konstrukce: 
+Podmnožinová konstrukce:
 
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|c c||c|}
     \hline
@@ -52,15 +50,14 @@ Podmnožinová konstrukce:
     & $\emptyset$ & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
       $\gets$&$\{2,5\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
         & $\{5,6\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
-      $\gets$&$\{5,7\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\  
+      $\gets$&$\{5,7\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
 $\gets$&$\{5,6,7\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
     \hline
 \end{tabular}
 
-DFA: 
+DFA:
 
-\begin{tikzpicture} 
-
+\begin{tikzpicture}
     \node[state, initial] (D) {$D$};
     \node[state] (F) [right of=D] {$F$};
     \node[state] (A) [below of=D] {$A$};
@@ -87,20 +84,17 @@ DFA:
     (K) edge [loop right] node {$b$} ()
         edge [bend left] node {$a$} (B)
     ;
-
 \end{tikzpicture}
 
-
 \subsection{Návrh NFA a redukovaný DFA}
-Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto: 
-\[L = \{w \mid w = ubabv; u,v\in\{a,b\}^\star\}\text{,}\] 
-tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá 
+Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto:
+\[L = \{w \mid w = ubabv; u,v\in\{a,b\}^\star\}\text{,}\]
+tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá
 $L$. Podmnožinovou konstrukcí k $N$ zkonstruujte DFA a ten pak zredukujte.
 
-NFA: 
+NFA:
 
 \begin{tikzpicture}[node distance=25mm]
-
     \node[state, initial] (1) {$1$};
     \node[state] (2) [right of=1] {$2$};
     \node[state] (3) [right of=2] {$3$};
@@ -111,11 +105,11 @@ NFA:
     (1) edge [bend left] node {$b$} (2)
     (2) edge [bend left] node {$a$} (3)
     (3) edge [bend left] node {$b$} (4)
-    (4) edge [loop above] node {$a,b$} ();
-
+    (4) edge [loop above] node {$a,b$} ()
+    ;
 \end{tikzpicture}
 
-Podmnožinová konstrukce: 
+Podmnožinová konstrukce:
 
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|}
     \hline
@@ -123,16 +117,15 @@ Podmnožinová konstrukce:
               $\to$ & $\{1\}$ & $\{1\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ \\
                 & $\{1,2\}$ & $\{1,3\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $B$ & $A$ & $B$ & $B$ \\
                 & $\{1,3\}$ & $\{1\}$ & $\{1,2,4\}$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
-    $\gets$&$\{1,2,4\}$ & $\{1,3,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
-    $\gets$ & $\{1,3,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
-    $\gets$   & $\{1,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\ 
+    $\gets$&$\{1,2,4\}$ & $\{1,3,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$ & $\{1,3,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$   & $\{1,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
     \hline
 \end{tabular}
 
-DFA: 
+DFA:
 
 \begin{tikzpicture}[node distance=25mm]
-
     \node[state, initial] (O) {$O$};
     \node[state] (B) [right of=O] {$B$};
     \node[state] (A) [right of=B] {$A$};
@@ -145,21 +138,33 @@ DFA:
     (B) edge [loop above] node {$b$} (B)
     (A) edge [bend left] node {$b$} (K)
     (A) edge [bend left] node {$a$} (O)
-    (K) edge [loop above] node {$a,b$} ();
-
+    (K) edge [loop above] node {$a,b$} ()
+    ;
 \end{tikzpicture}
 
-
-% TODO: doplnit chybejici reseni
-
 \subsection{Důkaz minimálního počtu stavů DFA pro jazyk}
-Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou 
+Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou
 $\Sigma = \{0,1\}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \{0,1,2\}$?
+\newline
 
-\subsection{Pumping lemma pro doplněk}
+Jazyk $L$ obsahuje všechny slova nad abecedou $\Sigma$ takové, že slovo končí znakem $1$ a za ním následuje přesně $n-1$
+libovolných znaků z $\Sigma$. Automat tedy musí rozeznat, zda poslední symbol $1$ padne přesně $n$ pozic před koncem
+slova.
+
+Tedy potřebujeme stav pro každý možný počet znaků přečtených od posledního $1$, tj. od 0 do $n$. Pokud přečteme více než
+$n$ znaků od posledního $1$, můžeme tento stav sloučit do jednoho.
+
+Proto minimální počet stavů pro abecedu $\Sigma = \{0,1\}$ je $n+1$.
+
+Rozšíření abecedy nemění zásadní strukturu automatu. DFA nad větší abecedou musí stále sledovat jen vzdálenost od
+posledního výskytu symbolu $1$. Přítomnost dalších symbolů nemá vliv na logiku počítání.
+
+Takže minimální počet stavů pro abecedu $\Sigma = \{0,1,2\}$ je také $n+1$.
+
+\subsection{Pumping lemma pro doplněk} % TODO: doplnit chybejici reseni
 Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
 
-Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo 
+Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo
 $n$ s touto vlastností:
 
 Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozdělit na tři slova $u =xwy$, tak, že
@@ -170,28 +175,24 @@ Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozd
 \end{enumerate}
 
 \subsection{Návrh DFA dle jazyka}
-Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě 
+Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě
 všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
 
 \noindent
-O navrženém automatu ukažte, že opravdu přijímá daný jazyk. 
+O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
 
-\begin{multicols}{2} 
+\begin{multicols}{2}
 
-    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]        
-        
+    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]
         \def\radius{18mm}
-        \node[state, initial] (s) at (-5, 1.8) {$q_s$}; 
+        \node[state, initial] (s) at (-5, 1.8) {$q_s$};
         \node[state] (m) at (-3, 1.8) {$q_m$};
-        \node[state] (f) at (-4, -0.5) {$q_f$};  
-        \node[state] (1) at (90:\radius) {$q_1$}; 
-        \node[state] (2) at (18:\radius) {$q_2$}; 
+        \node[state] (f) at (-4, -0.5) {$q_f$};
+        \node[state] (1) at (90:\radius) {$q_1$};
+        \node[state] (2) at (18:\radius) {$q_2$};
         \node[state, accepting] (0) at (162:\radius) {$q_0$};
         \node[state] (3) at (306:\radius) {$q_3$};
-        \node[state] (4) at (234:\radius) {$q_4$}; 
-
-    
-
+        \node[state] (4) at (234:\radius) {$q_4$};
 
         \path[->]
         (s) edge [bend left=20] node {$b$} (m)
@@ -204,16 +205,15 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
         (2) edge [loop above] node {$b$} ()
             edge [bend left=20] node {$a$} (3)
         (3) edge [loop right] node {$b$} ()
-            edge [bend left=20] node {$a$} (4) 
-        (4) edge [loop left] node {$b$} () 
-            edge [bend left=20] node {$a$} (0) 
-        (0) edge [bend left=20] node {$a$} (1) 
+            edge [bend left=20] node {$a$} (4)
+        (4) edge [loop left] node {$b$} ()
+            edge [bend left=20] node {$a$} (0)
+        (0) edge [bend left=20] node {$a$} (1)
             edge [bend left=20] node {$b$} (m)
         ;
-
     \end{tikzpicture}
 
-    Důkaz pomocí invariantů: 
+    Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
         \item $q_s$: \texttt{in},
         \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$,
@@ -232,14 +232,13 @@ Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\
 \[L = \{w \mid |w|_0 \text{ je sudé a za každým symbolem } 1 \text{ je symbol } 0\}\text{.}\]
 Postupujte buď součinovou konstrukcí nebo přímo. V druhém případě řádně zdůvodněte, proč $M$ opravdu přijímá jazyk $L$.
 
-Postup součinovou konstrukcí: Vytvoříme dva automaty, jeden pro pravidlo $|w|_0$ je sudé, a druhý pro 
-"za každým symbolem $1$ je symbol $0$". 
+Postup součinovou konstrukcí: Vytvoříme dva automaty, jeden pro pravidlo $|w|_0$ je sudé, a druhý pro
+"za každým symbolem $1$ je symbol $0$".
 
-\begin{multicols}{2} 
-    1. 
+\begin{multicols}{2}
+    1.
 
     \begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]
-
         \node[state, initial, accepting] (s) {$s$};
         \node[state] (l) [right of=s] {$l$};
 
@@ -247,11 +246,11 @@ Postup součinovou konstrukcí: Vytvoříme dva automaty, jeden pro pravidlo $|w
         (s) edge [bend left] node {$0$} (l)
         (s) edge [loop above] node {$1$} ()
         (l) edge [bend left] node {$0$} (s)
-        (l) edge [loop above] node {$1$} ();  
-
+        (l) edge [loop above] node {$1$} ()
+        ;
     \end{tikzpicture}
 
-    2. 
+    2.
 
     \begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]
         \node[state, initial, accepting] (0) {$0$};
@@ -265,15 +264,13 @@ Postup součinovou konstrukcí: Vytvoříme dva automaty, jeden pro pravidlo $|w
         (1) edge [bend left] node {$0$} (0)
         (2) edge [loop above] node {$0,1$} ()
         ;
-
     \end{tikzpicture}
 
 \end{multicols}
 
-DFA sestavený součinovou konstrukcí dvou výše nakreslených automatů: 
+DFA sestavený součinovou konstrukcí dvou výše nakreslených automatů:
 
 \begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]
-
     \node[state, initial, accepting] (s0) {$s_0$};
     \node[state] (s1) [right of=s0] {$s_1$};
     \node[state] (s2) [right of=s1] {$s_2$};
@@ -293,8 +290,8 @@ DFA sestavený součinovou konstrukcí dvou výše nakreslených automatů:
     (l1) edge [bend right] node [above] {$1$} (l2)
     (l1) edge [bend right] node [below] {$0$} (s0)
     (l2) edge [loop right] node {$1$} ()
-    (l2) edge [bend right] node [below right] {$0$} (s2);
-
+    (l2) edge [bend right] node [below right] {$0$} (s2)
+    ;
 \end{tikzpicture}
 
 \subsection{Návrh DFA}
@@ -310,7 +307,7 @@ Zdůvodněte, proč $M$ přijímá jazyk $L$.
         \node[state, below of=0] (3) {$q_3$};
         \node[state, right of=3] (4) {$q_4$};
         \node[state, accepting, below of=4] (5) {$q_5$};
-    
+
         \draw
             (0) edge[bend left, above] node{$1$} (1)
             (0) edge[bend right, right] node{$0$} (3)
@@ -328,7 +325,7 @@ Zdůvodněte, proč $M$ přijímá jazyk $L$.
 
     \columnbreak
 
-    Důkaz pomocí invariantů: 
+    Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
         \item $q_0$: \texttt{in},
         \item $q_1$: začíná $1$,
@@ -339,7 +336,7 @@ Zdůvodněte, proč $M$ přijímá jazyk $L$.
     \end{itemize}
 \end{multicols}
 
-Podmnožinová konstrukce: 
+Podmnožinová konstrukce:
 
 \begin{center}
     \begin{tabular}{|r r|c c||c|c c||c|c c||c|}
