@@ -1,18 +1,9 @@
 \section{Desáté cvičení}
- 
-\subsection{Algoritmus CYK} % 10.1 
-Je dána gramatika $\G = (N, \Sigma, S, P)$, kde 
+
+\subsection{Algoritmus CYK} % 10.1
+Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
 $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
 \begin{multicols}{2}
-    \begin{align*}
-        P \text{: } & S \rightarrow AB \mid CS \mid AD \\
-           & A \rightarrow AC \mid AD \mid a \\
-           & B \rightarrow BC \mid b \\
-           & C \rightarrow DS \mid SC \mid a \\
-           & D \rightarrow BA \mid b
-    \end{align*}
-
-\columnbreak
 
     Přepis pravidel:
     \begin{align*}
@@ -25,32 +16,45 @@ $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
         DS & \leftarrow C \\
         SC & \leftarrow C
     \end{align*}
+
+\columnbreak
+
+    \begin{align*}
+        P \text{: } & S \rightarrow AB \mid CS \mid AD \\
+        & A \rightarrow AC \mid AD \mid a \\
+        & B \rightarrow BC \mid b \\
+        & C \rightarrow DS \mid SC \mid a \\
+        & D \rightarrow BA \mid b
+    \end{align*}
 \end{multicols}
-Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$.  
+Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde $w_1 = aaaba$ a $w_2 = abbaa$.
 Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou derivaci.
 
 slovo $w_1$:
 \begin{multicols}{2}
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-        $C,A, S$ &   &   &   &   \\ 
-        $S, A$ & $C, A, S$ &   &   &   \\ 
-        $A$ & $S,A$ & $S,A, C$ &   &   \\ 
-        $A$ & $A$ & $S,A$ & $D,B$ &   \\ 
-        $A,C$ & $A, C$ & $A,C$ & $B,D$ & $A,C$ \\ 
-        $a$ & $a$ & $a$ & $b$ & $a$
-    \end{NiceTabular} % TODO: upravit vzhled CYK tabulek - slovo mimo buňky
+        $C,A, S$ &   &   &   & \\
+        $S, A$ & $C, A, S$ &   &   & \\
+        $A$ & $S,A$ & $S,A, C$ &   & \\
+        $A$ & $A$ & $S,A$ & $D,B$ & \\
+        $A,C$ & $A, C$ & $A,C$ & $B,D$ & $A,C$
+    \end{NiceTabular}
+
+    \vspace*{-2mm}
+
+    \hspace*{5mm} $a$ \hspace*{12mm} $a$ \hspace*{12mm} $a$ \hspace*{10mm} $b$ \hspace*{8mm} $a$
 
     $
-    S \stackrel{S \rightarrow CS}{\Longrightarrow} CS \stackrel{C \rightarrow a}{\Longrightarrow} aS \stackrel{S 
+    S \stackrel{S \rightarrow CS}{\Longrightarrow} CS \stackrel{C \rightarrow a}{\Longrightarrow} aS \stackrel{S
     \rightarrow CS}{\Longrightarrow} aCS \stackrel{C \rightarrow a}{\Longrightarrow} aaS \stackrel{S \rightarrow AD}
-    {\Longrightarrow} aaAD \stackrel{A \rightarrow a}{\Longrightarrow} aaaD \stackrel{D \rightarrow BA}{\Longrightarrow} 
+    {\Longrightarrow} aaAD \stackrel{A \rightarrow a}{\Longrightarrow} aaaD \stackrel{D \rightarrow BA}{\Longrightarrow}
     aaaBA \stackrel{B \rightarrow b}{\Longrightarrow} aaabA \stackrel{A \rightarrow a}{\Longrightarrow} aaaba.
     $
 
 \columnbreak
 
     \begin{center}
-        
+
         \begin{forest}
             for tree={
                 grow=south,                 % Tree grows downward
@@ -80,32 +84,35 @@ slovo $w_1$:
                     ]
                 ]
             ]
-        \end{forest}    
+        \end{forest}
     \end{center}
 \end{multicols}
 
 \vspace*{-20mm}
-slovo $w_2$: 
+slovo $w_2$:
 \begin{multicols}{2}
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-        $C,A, S$ &   &   &   &   \\ 
-        $C, A, S$ & $ - $ &   &   &   \\ 
-        $S,A$ & $- $ & $D,B$ &   &   \\ 
-        $S,A$ & $- $ & $D,B$ & $A$ &   \\ 
-        $A,C$ & $B,D$ & $B,D$ & $A,C$ & $A,C$ \\ 
-        $a$ & $b$ & $b$ & $a$ & $a$
+        $C,A, S$ &   &   &   & \\
+        $C, A, S$ & $ - $ &   &   & \\
+        $S,A$ & $- $ & $D,B$ &   & \\
+        $S,A$ & $- $ & $D,B$ & $A$ & \\
+        $A,C$ & $B,D$ & $B,D$ & $A,C$ & $A,C$
     \end{NiceTabular}
 
+    \vspace*{-2mm}
+
+    \hspace*{6mm} $a$ \hspace*{10mm} $b$ \hspace*{8mm} $b$ \hspace*{8mm} $a$ \hspace*{8mm} $a$
+
     $
-    S \stackrel{S \rightarrow AD}{\Longrightarrow} AD \stackrel{A \rightarrow AD}{\Longrightarrow} ADD \stackrel{A 
+    S \stackrel{S \rightarrow AD}{\Longrightarrow} AD \stackrel{A \rightarrow AD}{\Longrightarrow} ADD \stackrel{A
     \rightarrow a}{\Longrightarrow} aDD \stackrel{D \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow BA}
-    {\Longrightarrow} abBA \stackrel{B \rightarrow b}{\Longrightarrow} abbA \stackrel{A \rightarrow AC}{\Longrightarrow} 
+    {\Longrightarrow} abBA \stackrel{B \rightarrow b}{\Longrightarrow} abbA \stackrel{A \rightarrow AC}{\Longrightarrow}
     abbAC \stackrel{A \rightarrow a}{\Longrightarrow} abbaC \stackrel{C \rightarrow a}{\Longrightarrow} abbaa.
     $
-    
+
 \columnbreak
 
-    \begin{center}   
+    \begin{center}
         \begin{forest}
             for tree={
                 grow=south,                 % Tree grows downward
@@ -135,14 +142,14 @@ slovo $w_2$:
                     ]
                 ]
             ]
-        \end{forest}    
+        \end{forest}
     \end{center}
 \end{multicols}
 
 % \includegraphics[width=1\textwidth]{CYK.jpg}
 
 \subsection{Algoritmus CYK} % 10.2
-Je dána gramatika $\G = (N, \Sigma, S, P)$, kde 
+Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
 $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
 \begin{align*}
     P: & S \rightarrow BD \mid CD \mid DA \\
@@ -151,25 +158,28 @@ $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
        & C \rightarrow AA \mid BC \mid DC \mid b \\
        & D \rightarrow AC \mid BB \mid CB \mid a
 \end{align*}
-Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom 
+Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom
 a napište levou derivaci.
 
-$w_1 = abaab$: 
+$w_1 = abaab$:
 \begin{multicols}{2}
     \begin{NiceTabular}{ccccc}[hvlines, corners=NE]
-        $D, C, B, S $&   &   &   &   \\
-        $D, C, A, S$ & $S, D, C, B$ &   &   &   \\
-        $A, S, C$ & $C$ & $D, B, C$ &   &   \\
-        $D, C$ & $S, A$ & $C, S$ & $D, C$ &   \\
+        $D, C, B, S $&   &   &   & \\
+        $D, C, A, S$ & $S, D, C, B$ &   &   & \\
+        $A, S, C$ & $C$ & $D, B, C$ &   & \\
+        $D, C$ & $S, A$ & $C, S$ & $D, C$ & \\
         $A, D$ & $B, C$ & $A, D$ & $A, D$ & $B, C$ \\
-        $a$ & $b$ & $a$ & $a$ & $b$
     \end{NiceTabular}
+
+    \vspace*{-2mm}
+
+    \hspace*{9mm} $a$ \hspace*{17mm} $b$ \hspace*{14mm} $a$ \hspace*{10mm} $a$ \hspace*{8mm} $b$
 
     $
     S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
     {D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
-    {\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow} 
-    abaAB \Longrightarrow \stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow} 
+    {\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow}
+    abaAB \Longrightarrow \stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow}
     abaab.
     $
 
@@ -215,35 +225,35 @@ $w_1 = abaab$:
 S využitím Pumping Lemmatu ukažte, že následující jazyk není bezkontextový, kde $$L = \{ww; w \in\{a,b\}^{\star}\}$$
 
 
-\textbf{Pumping Lemma.} Pro každý CF jazyk $L$ existuje přirozené číslo $m \geq 1$ takové, že každé slovo $z \in L$ 
+\textbf{Pumping Lemma.} Pro každý CF jazyk $L$ existuje přirozené číslo $m \geq 1$ takové, že každé slovo $z \in L$
 délky alespoň $m$ lze rozdělit na pět částí $z = uvwxy$ tak, že:
 
 \begin{itemize}[label=\textbullet]
     \item $\lvert vwx \rvert \leq m$, (tj. prostřední část není příliš dlouhá),
     \item $vx \neq \varepsilon$ (tj. alespoň jedno ze slov $v$, $x$ není prázdné),
-    \item pro všechna $i \geq 0$ platí $uv^i wx^i y \in L$, (tj. $v$ a $x$ se dají do slova „napumpovat“ a stále 
+    \item pro všechna $i \geq 0$ platí $uv^i wx^i y \in L$, (tj. $v$ a $x$ se dají do slova „napumpovat“ a stále
     dostaneme slovo z jazyka $L$).
 \end{itemize}
 
-spoiler alert: nedoděláno 
+spoiler alert: nedoděláno
 
-Zvolíme $z = a^m b^m a^m b^m \, \in L$, $|z| = 4m > m$. \\ 
+Zvolíme $z = a^m b^m a^m b^m \, \in L$, $|z| = 4m > m$. \\
 $\dots$\\
 $\dots$\\
 $\dots$\\
 
-Máme 7 možností: 
+Máme 7 možností:
 % \begin{center}
 %     \includegraphics[width=0.3\textwidth]{7moznosti.jpg}
 % \end{center}
-Takže to dělat nebudeme. 
+Takže to dělat nebudeme.
 
-% pumping lemma intuice: 
+% pumping lemma intuice:
 % \begin{center}
 %     \includegraphics[width=0.5\textwidth]{pl_intuice.png}
 % \end{center}
 
-\subsection{Důkaz generování slova matematickou indukcí} % 10.4 
+\subsection{Důkaz generování slova matematickou indukcí} % 10.4
 Je dána CF gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B, C\}$, $\Sigma = \{a, b\}$ a $P$ je:
 \begin{align*}
     P: & S \rightarrow SA \mid aSb \mid Cb \\
@@ -256,7 +266,7 @@ Pomocí matematické indukce dokažte, že:
 \[
 A \Rightarrow_{\G}^{\star} S^i A C^i
 \]
-pro všechna $i \geq 0$. Toho využijte k důkazu, že $(ab)^{i+1}(ab^3)^i$ jsou generována gramatikou $\G$ pro 
+pro všechna $i \geq 0$. Toho využijte k důkazu, že $(ab)^{i+1}(ab^3)^i$ jsou generována gramatikou $\G$ pro
 každé $i \geq 0$.
 
 1) Základní krok: $i = 0$
@@ -283,7 +293,7 @@ $A \stackrel{I.P.}{\Longrightarrow} S^n A C^n \stackrel{A \rightarrow SC}{\Longr
 {S \rightarrow SA}{\Longrightarrow} S^nSACC^n$.
 
 \newpage
-\subsection{Algoritmus CYK} % 10.5 
+\subsection{Algoritmus CYK} % 10.5
 Je dána gramatika $\G = (N, \Sigma, S, P )$, kde $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b, c\}$ a
 pravidla~$P$ jsou dána
 \begin{align*}
@@ -291,7 +301,7 @@ pravidla~$P$ jsou dána
     & A \rightarrow AC \mid a \\
     & B \rightarrow BD \mid b \\
     & C \rightarrow AD \mid a \\
-    & D \rightarrow BA \mid b \\ 
+    & D \rightarrow BA \mid b \\
 \end{align*}
 
 Algoritmem CYK rozhodněte, zda gramatika $\G$ generuje slova $w_1$ a $w_2$, kde $w_1 = baaba$ a $w_2 = abaaa$.
@@ -303,53 +313,57 @@ Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou de
         & AC \leftarrow S, A \\
         & AD \leftarrow C \\
         & BA \leftarrow D \\
-        & BD \leftarrow B \\ 
-        & CD \leftarrow S \\ 
+        & BD \leftarrow B \\
+        & CD \leftarrow S \\
     \end{align*}
-    
-    slovo $w_1 = baaba$: 
+
+    slovo $w_1 = baaba$:
 
     \vspace*{2mm}
 
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-        $D$ &  &   &   &   \\ 
-        $D$ & $S, A, C$ &  &   &   \\ 
-        $D$ & $S, C, A$ & $C, S$ &  &  \\ 
-        $D$ & $S, A$ & $S, C$ & $D$ &  \\ 
-        $B, D$ & $A,C$ & $A,C$ & $B, D$ & $A, C$ \\ 
+        $D$ &  &   &   &   \\
+        $D$ & $S, A, C$ &  &   &   \\
+        $D$ & $S, C, A$ & $C, S$ &  &  \\
+        $D$ & $S, A$ & $S, C$ & $D$ &  \\
+        $B, D$ & $A,C$ & $A,C$ & $B, D$ & $A, C$ \\
     \end{NiceTabular}
+
+    \vspace*{-2mm}
 
     \hspace*{5mm}$b$ \hspace*{10mm} $a$ \hspace*{10mm} $a$ \hspace*{9mm} $b$ \hspace*{8mm} $a$
-        
-    \vspace*{2mm}
-    Gramatika $\G$ negeneruje slovo $w_1$. 
 
-    slovo $w_2 = abaaa$: 
-        
+    \vspace*{2mm}
+    Gramatika $\G$ negeneruje slovo $w_1$.
+
+    slovo $w_2 = abaaa$:
+
     \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
-        $C,S$ &   &   &   &   \\ 
-        $C, S$ & $D$ &   &   &   \\ 
-        $C,S$ & $D$ & $S,A$ &   &   \\ 
-        $S,C$ & $D$ & $S,A$ & $S,A$ &   \\ 
-        $A,C$ & $B, D$ & $A,C$ & $A,C$ & $A,C$ \\ 
+        $C,S$ &   &   &   &   \\
+        $C, S$ & $D$ &   &   &   \\
+        $C,S$ & $D$ & $S,A$ &   &   \\
+        $S,C$ & $D$ & $S,A$ & $S,A$ &   \\
+        $A,C$ & $B, D$ & $A,C$ & $A,C$ & $A,C$ \\
     \end{NiceTabular}
-        
+
+    \vspace*{-2mm}
+
     \hspace*{5mm}$a$ \hspace*{8mm} $b$ \hspace*{8mm} $a$ \hspace*{8mm} $a$ \hspace*{8mm} $a$
 
     \vspace*{2mm}
-    Gramatika $\G$ generuje slovo $w_2$. 
-    
+    Gramatika $\G$ generuje slovo $w_2$.
+
 \columnbreak
-    Levá derivace: 
+    Levá derivace:
     \begin{align*}
-        & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD 
-        \stackrel{C \rightarrow a}{\Longrightarrow} aD 
-        \stackrel{D \rightarrow BA}{\Longrightarrow} aBA  
+        & S\stackrel{S \rightarrow CD}{\Longrightarrow} CD
+        \stackrel{C \rightarrow a}{\Longrightarrow} aD
+        \stackrel{D \rightarrow BA}{\Longrightarrow} aBA
         \stackrel{B \rightarrow b}{\Longrightarrow} abA \Longrightarrow\\
-        &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC 
-        \stackrel{A \rightarrow AC}{\Longrightarrow} abACC 
+        &\stackrel{A \rightarrow AC}{\Longrightarrow} abAC
+        \stackrel{A \rightarrow AC}{\Longrightarrow} abACC
         \stackrel{A \rightarrow a}{\Longrightarrow} abaCC \Longrightarrow\\
-        &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC 
+        &\stackrel{C \rightarrow a}{\Longrightarrow} abaaC
         \stackrel{C \rightarrow a}{\Longrightarrow} abaaa
     \end{align*}
 
@@ -361,7 +375,7 @@ Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou de
                 edge={->},                  % Draw edges as arrows
                 % draw,                       % Draw the nodes
                 % rounded corners,           % Rounded corners for nodes
-                align=center,                % Center the text inside nodes, 
+                align=center,                % Center the text inside nodes,
                 }
                 [$S$
                     [$C$

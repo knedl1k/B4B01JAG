@@ -1,7 +1,5 @@
 \section{Sedmé cvičení}
 
-% \section*{Regulární výrazy}
-
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
 Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
 který přijímá jazyk reprezentovaný regulárním výrazem.
@@ -31,7 +29,8 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \columnbreak
 
-    zjednodušení: výraz se dá přepsat jako \\ II. \m{(aa^{\star}a + bb^{\star}b)^{\star}}
+    zjednodušení: výraz se dá přepsat jako\\
+    II. \m{(aa^{\star}a + bb^{\star}b)^{\star}}
 
     \begin{tikzpicture}
         \node[state,initial, accepting] (1) {$q_0$};
@@ -72,29 +71,6 @@ Podmnožinová konstrukce pro II.
               $\gets$& $\{q_0, q_2\}$ & $q_1$          & $\{q_0, q_2\}$ & $K$ & $O$ & $K$ & $D$ & $B$ & $D$ & $D$ \\
     \hline
 \end{tabular}
-
-% \begin{tikzpicture} % TODO: dodělat diagram
-%     \node[state, initial] (0) {$q_0$};
-%     \node[state, right of=0] (1) {$q_1$};
-%     \node[state, accepting, right of=1] (2) {$q_2$};
-%     \node[state, below of=0] (3) {$q_3$};
-%     \node[state, right of=3] (4) {$q_4$};
-%     \node[state, accepting, below of=4] (5) {$q_5$};
-
-%     \draw
-%         (0) edge[bend left, above] node{$1$} (1)
-%         (0) edge[bend right, right] node{$0$} (3)
-%         (1) edge[bend left, above] node{$0$} (2)
-%         (1) edge[bend left, right] node{$1$} (4)
-%         (2) edge[loop below] node{$0, 1$} (2)
-%         (3) edge[loop left] node{$0$} (3)
-%         (3) edge[bend left] node{$1$} (5)
-%         (4) edge[bend right, above] node{$0$} (3)
-%         (4) edge[loop right] node{$1$} (4)
-%         (5) edge[bend left] node{$0$} (3)
-%         (5) edge[bend right, right] node{$1$} (4)
-%         ;
-% \end{tikzpicture}
 
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
 Je dán regulární výraz \m{(a + b(ab^{\star}a)^{\star}b)^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
