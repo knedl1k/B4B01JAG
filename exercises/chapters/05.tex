@@ -28,7 +28,7 @@ Proto celé $w$ lze vyjádřit jako zřetězení slov z $L_1 \cup L_2$, což zna
 platí $(L_1^\star L_2^\star)^\star \subseteq (L_1 \cup L_2)^\star$.
 
 \subsection{Tvorba regulárního výrazu reprezentujícího jazyk}
-Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \{0,1\}$, jestliže výraz existuje.
+Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \bc{0,1}$, jestliže výraz existuje.
 \begin{enumerate}[a), noitemsep]
     \item $L$ se skládá ze všech slov, které obsahují pouze $0$.
     \item $L$ se skládá ze všech slov, které obsahují přesně jednu $1$.
@@ -134,11 +134,11 @@ a Kleeneho operátor.)
         & $\varepsilon$ & $a$ & $b$ & $\varepsilon$ uzávěry\\
         \hline
         \hline
-        $1$ & $4$ & $\emptyset$ & $2$         & $\varepsilon$-uz(1) = $\{1,4\}$\\
-        $2$ & $\emptyset$ & $3$ & $\emptyset$ & $\varepsilon$-uz(2) = $\{2\}$\\
-        $3$ & $\emptyset$ & $1$ & $1$         & $\varepsilon$-uz(3) = $\{3\}$\\
-        $4$ & $\emptyset$ & $5$ & $\emptyset$ & $\varepsilon$-uz(4) = $\{4\}$\\
-        $5$ & $\emptyset$ & $\emptyset$ & $4$ & $\varepsilon$-uz(5) = $\{5\}$\\
+        $1$ & $4$ & $\emptyset$ & $2$         & $\varepsilon$-uz(1) = $\bc{1,4}$\\
+        $2$ & $\emptyset$ & $3$ & $\emptyset$ & $\varepsilon$-uz(2) = $\bc{2}$\\
+        $3$ & $\emptyset$ & $1$ & $1$         & $\varepsilon$-uz(3) = $\bc{3}$\\
+        $4$ & $\emptyset$ & $5$ & $\emptyset$ & $\varepsilon$-uz(4) = $\bc{4}$\\
+        $5$ & $\emptyset$ & $\emptyset$ & $4$ & $\varepsilon$-uz(5) = $\bc{5}$\\
         \hline
     \end{tabular}
 \end{multicols}
@@ -146,15 +146,13 @@ Podmnožinová konstrukce:
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
     \hline
-    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$\\
-    \hline
-    \hline
-    $\leftrightarrow$& $\{1,4\}$ &$5$         &$2$         &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$C$ &$D$\\
-    $$&             $5$          &$\emptyset$ &$4$         &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$\\
-    $$&             $2$          &$3$         &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
-    $\leftarrow $&  $4$          &$5$         &$\emptyset$ &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$\\
-    $$&             $3$          &$\{1,4\}$   &$\{1,4\}$   &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$\\
-    $$&             $\emptyset$  &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$\\
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
+    $\leftrightarrow$& $\bc{1,4}$&$5$         &$2$         &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$C$ &$D$ \\
+    $$&             $5$          &$\emptyset$ &$4$         &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ \\
+    $$&             $2$          &$3$         &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ \\
+    $\leftarrow $&  $4$          &$5$         &$\emptyset$ &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ \\
+    $$&             $3$          &$\bc{1,4}$  &$\bc{1,4}$  &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ \\
+    $$&             $\emptyset$  &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
     \hline
 \end{tabular}
 \]
@@ -266,11 +264,11 @@ IV. podmnožinová konstrukce DFA + redukce
 
 \newpage
 \subsection{Tvorba DFA a regulárního výrazu dle jazyka}
-Je dán jazyk $L$ nad $\Sigma = \{0,1\}$, kde $L = \{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}\}$. Navrhněte
+Je dán jazyk $L$ nad $\Sigma = \bc{0,1}$, kde $L = \bc{w \mid w \text{ neobsahuje } 11 \text{ jako podslovo}}$. Navrhněte
 redukovaný DFA $M$, který přijímá $L$. Pro jazyk $L$ najděte regulární výraz, který ho reprezentuje (použijte úpravy
 grafu z přednášky).
 
-$\mathcal{L} = \{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}\}\text{.}$
+$\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.}$
 
 \begin{multicols}{2}
     $\mathcal{L}$ NFA:

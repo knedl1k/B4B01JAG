@@ -2,8 +2,8 @@
 \subsection{Návrh bezkontextové gramatiky}
 Navrhněte bezkontextové gramatiky generující následující jazyky
 \begin{enumerate}[a), noitemsep]
-    \item $L_1 = \{0^{m+n} 1^n 0^m \mid 0 \leq n,m\}$.
-    \item $L_2 = \{0^i 1^j \mid 0 \leq i < j\}$.
+    \item $L_1 = \bc{0^{m+n} 1^n 0^m \mid 0 \leq n,m}$.
+    \item $L_2 = \bc{0^i 1^j \mid 0 \leq i < j}$.
 \end{enumerate}
 Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
@@ -32,15 +32,15 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 
 \subsection{Konstrukce nevypouštěcí gramatiky} % 9.2
 Ke gramatice $\G$ zkonstruujte nevypouštěcí gramatiku $\G_1$, pro kterou 
-$L(\G_1) = L(\G) - \{\varepsilon\}$. Gramatiku $\G_1$ zredukujte.
+$L(\G_1) = L(\G) - \bc{\varepsilon}$. Gramatiku $\G_1$ zredukujte.
 \begin{align*}
     P\text{: } & S \rightarrow AB \mid \varepsilon \\
     & A \rightarrow aAAb \mid bS \mid CA \\
     & B \rightarrow BbA \mid CaC \mid \varepsilon \\
     & C \rightarrow aBB \mid bS
 \end{align*}
-$V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{S, B\}$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \emptyset = \{S, B\}$
+$V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{S, B}$\\
+$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} = V_1 \cup \emptyset = \bc{S, B}$
     \begin{flalign*}
         \G_1\text{: } & S \rightarrow AB \mid A & \\
         & A \rightarrow aAAb \mid bS \mid b \mid CA & \\
@@ -51,11 +51,11 @@ Gramatika $\G_1$ už je redukovaná.
 
 \textbf{Obecný postup pro redukci}
 
-$V = \{A \mid A \in N, A \Rightarrow^{\star}_{\G} w, w \in \Sigma^{\star}\}$\\
-$V_1 = \{A \mid A \Rightarrow_{\star} w \in P, w \in \Sigma^{\star}\}$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^{\star}\}$\\
-$U = \{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ tak, že } S \Rightarrow^{\star}_{\G} 
-\alpha A \beta\}$
+$V = \bc{A \mid A \in N, A \Rightarrow^{\star}_{\G} w, w \in \Sigma^{\star}}$\\
+$V_1 = \bc{A \mid A \Rightarrow_{\star} w \in P, w \in \Sigma^{\star}}$\\
+$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_1)^{\star}}$\\
+$U = \bc{A \mid A \in V, \exists \alpha, \beta\in (V \cup \Sigma)^{\star} \text{ tak, že } S \Rightarrow^{\star}_{\G} 
+\alpha A \beta}$
 
 Jazyk není prázdný právě tehdy, kdy $S \in V$. 
 
@@ -72,13 +72,13 @@ Zredukujte gramatiku $\G$, která je dána pravidly
 redukce tldr:\\
 $V_1\dots$ to, co se promítne na $\varepsilon$ nebo na terminály \\ 
 $V_2\dots$ to, co se promítne na terminály a na to, co už je ve $V_1$ \\ 
-$U_0\dots$ $\{S\}$ \\
+$U_0\dots$ $\bc{S}$ \\
 $U_1\dots$ neterminály, do kterých se dostanu z $S$, pak z $U_1$ atd. 
 
-$V_1 = \{S\}$\\ 
-$V_2 = V_1 \cup \{A\} = \{S, A\}$\\ 
-$V_3 = V_2 \cup \{C\} = \{S, A, C\}$\\ 
-$V_4 = V_3 \cup \emptyset = \{S, A, C\}$ 
+$V_1 = \bc{S}$\\ 
+$V_2 = V_1 \cup \bc{A} = \bc{S, A}$\\ 
+$V_3 = V_2 \cup \bc{C} = \bc{S, A, C}$\\ 
+$V_4 = V_3 \cup \emptyset = \bc{S, A, C}$ 
 
 Zde nechám jenom neterminály z $V$ a z pravé strany vyškrtám pravidla obsahující neterminály $\not\in V$:
 \begin{flalign*}
@@ -88,11 +88,11 @@ Zde nechám jenom neterminály z $V$ a z pravé strany vyškrtám pravidla obsah
 \end{flalign*}
 Sem přidávám neterminály, do kterých se dostanu z počátečního stavu $S$, pak ze stavů v odpovídajícím~$U_i$: 
 
-$U_0 = \{S\}$\\ 
-$U_{i+1} = U_i \cup \{A \mid \text{existují } B \in U_i, \alpha, \beta \in (V \cup \Sigma)^\star \text{ tak, že } B 
-\rightarrow \alpha A \beta \in P^{'} \}$\\
-$U_1 = U_0 \cup \{A\} = \{S, A\}$ \\
-$U_2 = U_1 \cup \emptyset = \{S, A\}$ 
+$U_0 = \bc{S}$\\ 
+$U_{i+1} = U_i \cup \bc{A \mid \text{existují } B \in U_i, \alpha, \beta \in (V \cup \Sigma)^\star \text{ tak, že } B 
+\rightarrow \alpha A \beta \in P^{'}}$\\
+$U_1 = U_0 \cup \bc{A} = \bc{S, A}$ \\
+$U_2 = U_1 \cup \emptyset = \bc{S, A}$ 
 
 A ponechám jen pravidla, která nám zbyla v $U$: 
 \begin{flalign*}
@@ -110,9 +110,9 @@ Rozhodněte, zda gramatika $\G$ generuje alespoň jedno slovo, tj. zda $L(\G) \n
     & C \rightarrow BA \mid ASb \\
     & D \rightarrow ABCD \mid \varepsilon
 \end{align*}
-$V_1 = \{D\}$\\ 
-$V_2 = V_1 \cup \{A\} = \{D, A\}$\\ 
-$V_3 = V_2 \cup \emptyset = \{D, A\} = V$\\
+$V_1 = \bc{D}$\\ 
+$V_2 = V_1 \cup \bc{A} = \bc{D, A}$\\ 
+$V_3 = V_2 \cup \emptyset = \bc{D, A} = V$\\
 $S \notin V \quad \rightarrow \quad L(\G) = \emptyset$. Tedy gramatika $\G$ negeneruje ani jedno slovo.
 
 \textbf{Chomského normální tvar polopatě}
@@ -121,7 +121,7 @@ Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo pře
 
 \subsection{Převod gramatiky do Chomského normálního tvaru} % 9.5 
 
-Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\}$, $\Sigma = \{0, 1\}$ a P je 
+Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A, B}$, $\Sigma = \bc{0, 1}$ a P je 
 \begin{align*}
     P\text{: } & S \rightarrow A \mid 0SA \mid \varepsilon \\
     & A \rightarrow 1A \mid B1 \mid 1 \\
@@ -131,7 +131,7 @@ Převeďte $\G$ do Chomského normálního tvaru.
 
 \textbf{1. krok} Vytvořit nevypouštěcí gramatiku. 
 
-$V = \{S\}$
+$V = \bc{S}$
 \begin{flalign*}
     P\text{: } & S \rightarrow A \mid 0SA \mid 0A & \\
     & A \rightarrow 1A \mid B1 \mid 1 & \\

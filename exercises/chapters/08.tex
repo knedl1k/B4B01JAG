@@ -24,8 +24,8 @@ $M$: \hspace{2mm}
 
     \vspace*{5mm}
     $\G = (N, \Sigma, S, P)$ \\
-    $ N = \{S, A, B, C, D\}$\\
-    $\Sigma = \{a, b\}$
+    $ N = \bc{S, A, B, C, D}$\\
+    $\Sigma = \bc{a, b}$
 
 \columnbreak
     mám více vstupů $\rightarrow$ přidám si $S$
@@ -62,7 +62,7 @@ $M$: \hspace{2mm}
 
 \subsection{Tvorba DFA ke gramatice 3. typu}
 Ke gramatice $\G$ typu 3 zkonstruujte konečný automat, který přijímá jazyk $L(\G)$. Gramatika
-$\G = (N, \{a,b\}, S, P)$, kde $N = \{S, A, B\}$ a pravidla jsou
+$\G = (N, \bc{a,b}, S, P)$, kde $N = \bc{S, A, B}$ a pravidla jsou
 \begin{align*}
         P\text{: } & S \rightarrow abA \mid aB \\
         & A \rightarrow aA \mid aaA \mid a\\
@@ -175,7 +175,7 @@ $\quad S \stackrel{S \rightarrow SA}{\Longrightarrow} SA \stackrel{S \rightarrow
 \stackrel{A \rightarrow AA}{\Longrightarrow} baAA\stackrel{A \rightarrow a}{\Longrightarrow}^{(2)} baaa$.
 
 \subsection{Tvorba derivačního stromu k bezkontextové gramatice} % 8.4
-Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S\}$, $\Sigma = \{+, \star, -, x, y\}$,
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S}$, $\Sigma = \bc{+, \star, -, x, y}$,
 s pravidly
 $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 
@@ -186,23 +186,28 @@ $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 
 \begin{multicols}{2}
     1.
-    \[
-    \begin{tikzpicture}
-        \Tree [.$S$
-                $+$
-                [.$S$ $x$ ]
-                [.$S$
-                    $*$
-                    [.$S$
-                        $-$
-                        [.$S$ $y$ ]
-                        [.$S$ $x$ ]
+    \begin{center}
+        \begin{forest}
+            for tree={
+                grow=south,                 % Tree grows downward
+                edge={->},                  % Draw edges as arrows
+                align=center,               % Center the text inside nodes
+            }
+            [$S$
+                [$+$]
+                [$S$ [$x$]]
+                [$S$
+                    [$*$]
+                    [$S$
+                        [$-$]
+                        [$S$ [$y$]]
+                        [$S$ [$x$]]
                     ]
-                    [.$S$ $y$ ]
+                    [$S$ [$y$]]
                 ]
             ]
-    \end{tikzpicture}
-    \]
+        \end{forest}
+    \end{center}
 
 \columnbreak
     \vspace{-30mm}
@@ -222,7 +227,7 @@ $$S \rightarrow +SS \mid \star SS \mid -SS \mid x \mid y $$
 \end{multicols}
 
 \subsection{Návrh bezkontextové gramatiky pro jazyk}
-Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i 1^i 2^j; i, j \geq 0\}$. Zdůvodněte,
+Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \bc{0^i 1^i 2^j; i, j \geq 0}$. Zdůvodněte,
 proč gramatika $\G$ jazyk $L$ generuje.
     \begin{align*}
         P\text{: } & S \rightarrow XY  \\
@@ -246,7 +251,7 @@ $ S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 
 0^i1^iY2^j\stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $.
 
 \subsection{Tvorba nevypouštěcí gramatiky}
-Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \{\varepsilon\}$.
+Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \bc{\varepsilon}$.
     \begin{align*}
         P\text{: } & S \rightarrow aSbA \mid \varepsilon \\
            & A \rightarrow aBbA \mid bCB \mid CD \\
@@ -257,18 +262,18 @@ Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G
 
 obecný formální zápis u nevypouštěcích gramatik:
 
-$V = \{A \mid A \implies^{\star} \varepsilon \}$\\
-$V_1 = \{A \mid A \rightarrow \varepsilon \in P\}$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\}$\\
-$V_{i+1} = V_i \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_i^{\star}\}$\\
+$V = \bc{A \mid A \implies^{\star} \varepsilon}$\\
+$V_1 = \bc{A \mid A \rightarrow \varepsilon \in P}$\\
+$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}}$\\
+$V_{i+1} = V_i \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_i^{\star}}$\\
 
 \begin{multicols}{2}
     příklad:
 
-    $V = \{A \mid A \implies^{\star} \varepsilon \}$\\
-    $V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{S, C\}$\\
-    $V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \{D\} = \{S, C, D\}$\\
-    $V_3 = V_2 \cup \{A\} = \{S, A, C, D\}$
+    $V = \bc{A \mid A \implies^{\star} \varepsilon}$\\
+    $V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{S, C}$\\
+    $V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} = V_1 \cup \bc{D} = \bc{S, C, D}$\\
+    $V_3 = V_2 \cup \bc{A} = \bc{S, A, C, D}$
 
 \columnbreak
 
@@ -291,16 +296,16 @@ K automatu $M$ zkonstruujte gramatiku typu 3, která generuje jazyk $L(M)$, kde 
         \hline
         & & $a$ & $b$ \\
         \hline
-        $\rightarrow$&$ A $& $\{A,B\}$ & $\{C\}$ \\
-        &$ B$ & $\{B\}$ & $\{C\}$ \\
-        $\leftrightarrow$ &$ C$ & $\emptyset$ & $\{D\}$ \\
-        $\leftarrow$&$ D$ & $\{B\}$ & $\{D\}$ \\
+        $\rightarrow$&$ A $& $\bc{A,B}$ & $\bc{C}$ \\
+        &$ B$ & $\bc{B}$ & $\bc{C}$ \\
+        $\leftrightarrow$ &$ C$ & $\emptyset$ & $\bc{D}$ \\
+        $\leftarrow$&$ D$ & $\bc{B}$ & $\bc{D}$ \\
         \hline
     \end{tabular}
 
     $\G = (N, \Sigma, S, P)$\\
-    $N = \{S, A, B, C, D\}$\\
-    $\Sigma = \{a, b\}$
+    $N = \bc{S, A, B, C, D}$\\
+    $\Sigma = \bc{a, b}$
     \begin{flalign*}
         P: & S \rightarrow A \mid C & \\
         & A \rightarrow aA \mid aB \mid bC & \\
@@ -313,7 +318,6 @@ K automatu $M$ zkonstruujte gramatiku typu 3, která generuje jazyk $L(M)$, kde 
 
         \begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
             % \tikzstyle{every state}=[fill={rgb:black,1;white,10}, inner sep=1pt]
-
             \def\radius{22mm}
 
             \node[state] (A) at (90:\radius) {$A$}; % top center
@@ -339,12 +343,10 @@ K automatu $M$ zkonstruujte gramatiku typu 3, která generuje jazyk $L(M)$, kde 
             (D) edge [bend right=20] node {$a$} (B)
             ;
         \end{tikzpicture}
-
-
 \end{multicols}
 
 \subsection{Návrh bezkontextové gramatiky}
-Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \{0^i1^j ; 0 \leq i \leq j\}$.
+Navrhněte bezkontextovou gramatiku $\G$, která generuje jazyk $L = \bc{0^i1^j ; 0 \leq i \leq j}$.
 Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
 \begin{flalign*}
     &S \rightarrow XY& \\

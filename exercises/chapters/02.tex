@@ -2,7 +2,7 @@
 
 \subsection{Návrh DFA dle jazyka}
 
-Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý}\}$ nad abecedou $\Sigma = \{a,b\}$. Navrhněte konečný
+Je dán jazyk $L = \bc{w \mid \text{počet } |w|_a \text{ je sudý}}$ nad abecedou $\Sigma = \bc{a,b}$. Navrhněte konečný
 automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá.
 
 \begin{multicols}{2}
@@ -26,8 +26,8 @@ automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijí
 \end{multicols}
 
 \subsection{Návrh DFA dle jazyka}
-Je dán jazyk $L = \{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}\}$ nad abecedou
-$\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá.
+Je dán jazyk $L = \bc{w \mid \text{počet } |w|_a \text{ je sudý a počet } |w|_b \text{ je lichý}}$ nad abecedou
+$\Sigma = \bc{a,b}$. Navrhněte konečný automat přijímající jazyk $L$ a dokažte, že skutečně tento jazyk přijímá.
 
 \begin{multicols}{2}
 
@@ -62,9 +62,9 @@ $\Sigma = \{a,b\}$. Navrhněte konečný automat přijímající jazyk $L$ a dok
 Pro daný jazyk $L$ navrhněte konečný automat, který tento jazyk přijímá. O automatu ukažte, že opravdu přijímá daný jazyk.
 
 \begin{enumerate}[a), noitemsep]
-    \item $\Sigma = \{a,b\}$, jazyk $L$ obsahuje právě všechna slova, která končí $b$ a mají délku $3k+1$.
-    \item $\Sigma = \{0,1\}$, jazyk $L$ obsahuje právě všechna slova, která obsahují podslovo $0101$.
-    \item $\Sigma = \{0,1\}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
+    \item $\Sigma = \bc{a,b}$, jazyk $L$ obsahuje právě všechna slova, která končí $b$ a mají délku $3k+1$.
+    \item $\Sigma = \bc{0,1}$, jazyk $L$ obsahuje právě všechna slova, která obsahují podslovo $0101$.
+    \item $\Sigma = \bc{0,1}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
 \end{enumerate}
 
 a)
@@ -157,7 +157,7 @@ Důkaz pomocí invariantů:
 \newpage
 
 \subsection{Nerodova věta a Pumping lemma}
-Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \{0^i 1^j 0^k \mid 0 \leq i < j <k\}$ není regulární.\\
+Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \bc{0^i 1^j 0^k \mid 0 \leq i < j <k}$ není regulární.\\
 
 \noindent
 Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \geq 0$ takové, že každé ${u \in L}$,
@@ -189,7 +189,7 @@ Definice \textbf{Nerodovy věty.} $L$ je regulární iff existuje ekvivalence $T
 Důkaz sporem:
 Kdyby existovala $T$.
 
-$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost $0$ a $1$.
+$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \bc{1^j \mid j \geq 1}$ je nekonečná posloupnost $0$ a $1$.
 
 $T$ musí mít konečně mnoho tříd, proto musí existovat $i > j, i \not= j \land 1^i T 1^j$.
 

@@ -1,7 +1,7 @@
 \section{Třetí cvičení}
 
 \subsection{Nerodova věta a Pumping lemma}
-Pomocí Nerodovy věty a pomocí Pumping lemmatu dokažte, že jazyk $L = \{0^n 1^m \mid n > m \geq 0\}$ není regulární.
+Pomocí Nerodovy věty a pomocí Pumping lemmatu dokažte, že jazyk $L = \bc{0^n 1^m \mid n > m \geq 0}$ není regulární.
 
 Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $T$ na $\Sigma^\star$ taková, že:
 \begin{enumerate}[1), noitemsep]
@@ -10,13 +10,13 @@ Definice \textbf{Nerodovy věty.} $L$ je regulární iff existují ekvivalence $
     \item $T$ má konečný počet tříd
 \end{enumerate}
 Důkaz sporem:
-Kdyby existovala $T$ na $\{0,1\}^\star$.
+Kdyby existovala $T$ na $\bc{0,1}^\star$.
 
-$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \{1^j \mid j \geq 1\}$ je nekonečná posloupnost z $\{0,1\}$.
+$1, 1^2, 1^3, ..., 1^i, ..., 1^n, ... = \bc{1^j \mid j \geq 1}$ je nekonečná posloupnost z $\bc{0,1}$.
 
 $T$ má konečně mnoho tříd, tudíž $0^i T 0^j$ pro nějaké $i \not= j, i>j$.
 
-Protože platí 2), tak $0^i w T 0^j w$ pro $w \in \{0,1\}^\star$.
+Protože platí 2), tak $0^i w T 0^j w$ pro $w \in \bc{0,1}^\star$.
 
 Zvolme $w = 1^{i-1}$. Pak $\underbrace{0^i 1^{i-1}}_{\substack{i \geq i-1 \\ \in L}} T 
 \underbrace{0^j 1^{i-1}}_{\substack{i-1 \geq j  \\\not\in L }}$. Tedy $L$ není regulární. $\blacksquare$
@@ -78,7 +78,7 @@ $\delta(3,b) = 2, \delta(5, b) = 3$.
 b) $\delta(2,a) = 4, \delta(4,a) =2$. $\delta(2,b)=5, \delta(4,b)=5$. Tyto stavy nelze rozlišit.
 
 \subsection{Návrh a redukce DFA podle jazyka}
-Navrhněte DFA, který přijímá jazyk $L$ skládající se ze všech slov nad abecedou $\Sigma = \{0, 1\}$, která začínají 
+Navrhněte DFA, který přijímá jazyk $L$ skládající se ze všech slov nad abecedou $\Sigma = \bc{0, 1}$, která začínají 
 $1100$ a končí $000$. Navržený automat redukujte.
 
 \begin{tikzpicture}
@@ -375,7 +375,7 @@ Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepři
 
 \newpage
 \subsection{Návrh a redukce DFA podle jazyka}
-Navrhněte DFA, který přijímá $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
+Navrhněte DFA, který přijímá $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
     \item druhý znak slova $w$ je $a$,
     \item předposlední znak slova $w$ je $b$,

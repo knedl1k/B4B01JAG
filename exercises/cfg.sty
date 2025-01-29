@@ -1,20 +1,20 @@
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows, calc, tikzmark}
-\usepackage{tikz-qtree}
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 \usepackage{tabularray}
 \usepackage{bm}
 \usepackage{ragged2e} 
-\usepackage{booktabs, tabularx}
-\usepackage{makecell}
+\usepackage{tabularx}
 \usepackage{nicematrix}
 \usepackage{multicol}
 \usepackage[shortlabels]{enumitem}
-\usepackage{hyperref}
+\usepackage{utfsym} %for cross mark
 \usepackage{forest}
 \usepackage{soul}
 
-\usepackage{utfsym} %for cross mark
+\usepackage{hyperref}
+
+
 
 \tikzset{
 ->, % makes the edges directed
@@ -46,8 +46,5 @@ between/.style args={#1 and #2}{
 \setlength{\parskip}{1.4ex}
 
 \newcommand\setItemnumber[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
-
-\newenvironment{closealign}{\par\centering$\displaystyle\begin{aligned}}{\end{aligned}$\par}
-\newenvironment{closeflalign}{\par\centering$\displaystyle\begin{flalign}}{\end{flalign}$\par}
 
 \newcommand{\xmark}{\usym{2613}}

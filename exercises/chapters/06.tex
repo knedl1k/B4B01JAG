@@ -2,7 +2,7 @@
 \section{Šesté cvičení}
 
 \subsection{Návrh NFA a redukovaný DFA}
-Navrhněte NFA, který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
+Navrhněte NFA, který přijímá jazyk $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
     \item druhý znak slova $w$ je $a$,
     \item předposlední znak slova $w$ je b.
@@ -42,16 +42,16 @@ Podmnožinová konstrukce:
 
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|c c||c|}
     \hline
-    & & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\ \hline \hline
-      $\to$ & $\{0,3\}$ & $\{4\}$ & $\{1,4\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $D$ & $O$ & $A$ & $D$ & $F$ & $A$ & $D$ \\
-            & $\{4\}$ & $\{5\}$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $E$ & $O$ & $F$ & $E$ & $O$ & $F$ \\
-        & $\{1,4\}$ & $\{2,5\}$ & $\emptyset$ & $O$ & $K$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ \\
-              & $\{5\}$ & $\{5\}$ & $\{5,6\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $E$ & $E$ & $C$ & $E$ & $E$ & $C$ & $E$ \\
-    & $\emptyset$ & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
-      $\gets$&$\{2,5\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
-        & $\{5,6\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
-      $\gets$&$\{5,7\}$ & $\{5\}$ & $\{5,6\}$ & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
-$\gets$&$\{5,6,7\}$ & $\{5,7\}$ & $\{5,6,7\}$ & $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
+    & & $a$ & $b$ & $ \sim_0 $ & $a$   & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ \\ \hline \hline
+    $\to$  & $\bc{0,3}$  & $\bc{4}$   & $\bc{1,4}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $D$ & $O$ & $A$ & $D$ & $F$ & $A$ & $D$ \\
+           & $\bc{4}$    & $\bc{5}$   & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $E$ & $O$ & $F$ & $E$ & $O$ & $F$ \\
+           & $\bc{1,4}$  & $\bc{2,5}$ & $\emptyset$ & $O$ & $K$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ \\
+           & $\bc{5}$    & $\bc{5}$   & $\bc{5,6}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $E$ & $E$ & $C$ & $E$ & $E$ & $C$ & $E$ \\
+           & $\emptyset$ & $\emptyset$& $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+    $\gets$& $\bc{2,5}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
+           & $\bc{5,6}$  & $\bc{5,7}$ & $\bc{5,6,7}$& $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
+    $\gets$& $\bc{5,7}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
+    $\gets$& $\bc{5,6,7}$& $\bc{5,7}$ & $\bc{5,6,7}$& $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
     \hline
 \end{tabular}
 
@@ -87,8 +87,8 @@ DFA:
 \end{tikzpicture}
 
 \subsection{Návrh NFA a redukovaný DFA}
-Je dán jazyk $L$ nad abecedou $\{a,b\}$ takto:
-\[L = \{w \mid w = ubabv; u,v\in\{a,b\}^\star\}\text{,}\]
+Je dán jazyk $L$ nad abecedou $\bc{a,b}$ takto:
+\[L = \bc{w \mid w = ubabv; u,v\in\bc{a,b}^\star}\text{,}\]
 tj. $L$ se skládá ze všech slov, které obsahují slovo $bab$ jako podslovo. Zkonstruujte nejprve NFA $N$, který přijímá
 $L$. Podmnožinovou konstrukcí k $N$ zkonstruujte DFA a ten pak zredukujte.
 
@@ -114,12 +114,12 @@ Podmnožinová konstrukce:
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|}
     \hline
     & & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
-              $\to$ & $\{1\}$ & $\{1\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ \\
-                & $\{1,2\}$ & $\{1,3\}$ & $\{1,2\}$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $B$ & $A$ & $B$ & $B$ \\
-                & $\{1,3\}$ & $\{1\}$ & $\{1,2,4\}$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
-    $\gets$&$\{1,2,4\}$ & $\{1,3,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
-    $\gets$ & $\{1,3,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
-    $\gets$   & $\{1,4\}$ & $\{1,4\}$ & $\{1,2,4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\to$  & $\bc{1}$    & $\bc{1}$    & $\bc{1,2}$   & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $B$ & $O$ \\
+           & $\bc{1,2}$  & $\bc{1,3}$  & $\bc{1,2}$   & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $B$ & $A$ & $B$ & $B$ \\
+           & $\bc{1,3}$  & $\bc{1}$    & $\bc{1,2,4}$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
+    $\gets$& $\bc{1,2,4}$& $\bc{1,3,4}$& $\bc{1,2,4}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$& $\bc{1,3,4}$& $\bc{1,4}$  & $\bc{1,2,4}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$& $\bc{1,4}$  & $\bc{1,4}$  & $\bc{1,2,4}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
     \hline
 \end{tabular}
 
@@ -143,8 +143,8 @@ DFA:
 \end{tikzpicture}
 
 \subsection{Důkaz minimálního počtu stavů DFA pro jazyk}
-Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \{u1v \mid |v|=n-1\}$ nad abecedou
-$\Sigma = \{0,1\}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \{0,1,2\}$?
+Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \bc{u1v \mid |v|=n-1}$ nad abecedou
+$\Sigma = \bc{0,1}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \bc{0,1,2}$?
 \newline
 
 Jazyk $L$ obsahuje všechny slova nad abecedou $\Sigma$ takové, že slovo končí znakem $1$ a za ním následuje přesně $n-1$
@@ -154,12 +154,12 @@ slova.
 Tedy potřebujeme stav pro každý možný počet znaků přečtených od posledního $1$, tj. od 0 do $n$. Pokud přečteme více než
 $n$ znaků od posledního $1$, můžeme tento stav sloučit do jednoho.
 
-Proto minimální počet stavů pro abecedu $\Sigma = \{0,1\}$ je $n+1$.
+Proto minimální počet stavů pro abecedu $\Sigma = \bc{0,1}$ je $n+1$.
 
 Rozšíření abecedy nemění zásadní strukturu automatu. DFA nad větší abecedou musí stále sledovat jen vzdálenost od
 posledního výskytu symbolu $1$. Přítomnost dalších symbolů nemá vliv na logiku počítání.
 
-Takže minimální počet stavů pro abecedu $\Sigma = \{0,1,2\}$ je také $n+1$.
+Takže minimální počet stavů pro abecedu $\Sigma = \bc{0,1,2}$ je také $n+1$.
 
 \subsection{Pumping lemma pro doplněk} % TODO: doplnit chybejici reseni
 Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
@@ -175,7 +175,7 @@ Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozd
 \end{enumerate}
 
 \subsection{Návrh DFA dle jazyka}
-Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\{a,b\}$, kde $L$ obsahuje právě
+Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě
 všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
 
 \noindent
@@ -228,8 +228,8 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
 \end{multicols}
 
 \subsection{Návrh DFA součinovou konstrukcí}
-Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
-\[L = \{w \mid |w|_0 \text{ je sudé a za každým symbolem } 1 \text{ je symbol } 0\}\text{.}\]
+Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \bc{0,1}$, kde
+\[L = \bc{w \mid |w|_0 \text{ je sudé a za každým symbolem } 1 \text{ je symbol } 0}\text{.}\]
 Postupujte buď součinovou konstrukcí nebo přímo. V druhém případě řádně zdůvodněte, proč $M$ opravdu přijímá jazyk $L$.
 
 Postup součinovou konstrukcí: Vytvoříme dva automaty, jeden pro pravidlo $|w|_0$ je sudé, a druhý pro
@@ -295,8 +295,8 @@ DFA sestavený součinovou konstrukcí dvou výše nakreslených automatů:
 \end{tikzpicture}
 
 \subsection{Návrh DFA}
-Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \{0,1\}$, kde
-\[L = \{w \mid w \text{ začíná } 10 \text{ nebo končí } 01\}\text{.}\]
+Navrhněte redukovaný DFA $M$, který přijímá jazyk $L$ nad $\Sigma = \bc{0,1}$, kde
+\[L = \bc{w \mid w \text{ začíná } 10 \text{ nebo končí } 01}\text{.}\]
 Zdůvodněte, proč $M$ přijímá jazyk $L$.
 
 \begin{multicols}{2}

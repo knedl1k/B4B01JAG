@@ -1,8 +1,8 @@
 \section{Čtrnácté cvičení}
 
 \subsection{Převod gramatiky do Greibachové normální formy}
-Do Greibachové normální formy převeďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A\}$, 
-\\$\Sigma = \{0, 1\}$ a $P$ je dáno
+Do Greibachové normální formy převeďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A}$, 
+\\$\Sigma = \bc{0, 1}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow SA \mid 0 \\
     A &\rightarrow AS \mid 1
@@ -36,7 +36,7 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
 \textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály. $\checkmark$
 
 \subsection{Zkoušková ukázka práce na bezkontextové gramatice}
-Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}$, $\Sigma = \{a,b\}$ a $P$ je dáno
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C}$, $\Sigma = \bc{a,b}$ a $P$ je dáno
 
 \begin{align*}
     S &\rightarrow Sa \mid Sb \mid bC \\
@@ -57,10 +57,10 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}
 
 \textbf{1.} Nevypouštěcí gramatika $\G_1$. 
 
-$V = \{A \mid A \Rightarrow^\star \varepsilon \}$\\
-$V_1 = \{A \mid A \rightarrow \varepsilon \in P\} = \{B, C\}$\\
-$V_2 = V_1 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}\} = V_1 \cup \{A\} = \{A, B, C\}$\\
-$V_3 = V_2 \cup \{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}\} = V_2 \cup \varepsilon = V_2 = V$
+$V = \bc{A \mid A \Rightarrow^\star \varepsilon }$\\
+$V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{B, C}$\\
+$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} = V_1 \cup \bc{A} = \bc{A, B, C}$\\
+$V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} = V_2 \cup \varepsilon = V_2 = V$
 
 \begin{flalign*}
     \G_1: S &\rightarrow Sa \mid Sb \mid bC \mid b & \\

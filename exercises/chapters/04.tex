@@ -9,8 +9,8 @@ M_1:
     & $a$ & $b$ & $c$\\
     \hline
     \hline
-    $\leftrightarrow 1$& $\{1\}$ & $\{2\}$& $\{1\}$\\
-    $\leftarrow2$      & $\{1\}$ & $\{3\}$& $\{1\}$\\
+    $\leftrightarrow 1$& $\bc{1}$ & $\bc{2}$& $\bc{1}$\\
+    $\leftarrow2$      & $\bc{1}$ & $\bc{3}$& $\bc{1}$\\
     $\leftarrow3$      & $\emptyset$ & $\emptyset$& $\emptyset$\\
     \hline
 \end{tabular}
@@ -20,10 +20,10 @@ Všimněte si, že v automatu $M_1$ jsou všechny stavy koncové. Co z toho lze 
     \begin{tabular}{|r r|c c c||c|c c c||c|c c c||c|c c c||c|}
         \hline
         & $ $ & $ a $ & $ b $ & $ c $ & $ \sim_0 $ & $ a $ & $ b $ & $ c $ & $ \sim_1 $ & $ a $ & $ b $ & $ c $ & $ \sim_2 $ & $ a $ & $ b $ & $ c $ & $ \sim_3 $ \\ \hline \hline
-        $\leftrightarrow$ & $\{1\}  $ & $ \{1\} $ & $ \{2\} $ & $ \{1\} $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ B $ & $ K $ \\
-        $\leftarrow$     & $\{2\}  $ & $ \{1\} $ & $ \{3\}  $ & $ \{1\} $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ &$ A $ & $ K $ & $ B $ & $ K $ & $ A $ & $ K $ & $ B $ \\
-        $\leftarrow$     & $ \{3\} $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ K $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ \\
-                         & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
+        $\leftrightarrow$& $\bc{1}  $ & $ \bc{1}    $ & $ \bc{2}    $ & $ \bc{1}    $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ B $ & $ K $ \\
+        $\leftarrow$     & $\bc{2}  $ & $ \bc{1}    $ & $ \bc{3}    $ & $ \bc{1}    $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ K $ & $ A $ & $ K $ & $ B $ & $ K $ & $ A $ & $ K $ & $ B $ \\
+        $\leftarrow$     & $\bc{3}  $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ K $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ \\
+                         & $\emptyset$& $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
         \hline
 \end{tabular}\\
 \end{center}
@@ -65,10 +65,10 @@ M:
     & $0$ & $1$\\
     \hline
     \hline
-    $\rightarrow 1$& $\{1,2\}$ & $\{1\}$\\
-    $2$            & $\emptyset$ & $\{3\}$\\
-    $3$            & $\{4\}$ & $\{4\}$\\
-    $\leftarrow4$  & $\{4\}$ & $\{4\}$\\
+    $\rightarrow 1$& $\bc{1,2}$ & $\bc{1}$\\
+    $2$            & $\emptyset$ & $\bc{3}$\\
+    $3$            & $\bc{4}$ & $\bc{4}$\\
+    $\leftarrow4$  & $\bc{4}$ & $\bc{4}$\\
     \hline
 \end{tabular}
 \]
@@ -96,12 +96,12 @@ M:
     \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c|| c |}
         \hline
         & & $ 0 $ & $ 1 $ & $ \sim_0 $ & $ 0 $ & $ 1 $ & $ \sim_1 $ & $ 0 $ & $ 1 $ & $ \sim_2 $ & $ 0 $ & $ 1 $ & $\sim_3$ \\ \hline \hline
-        $\to$ & $\{1\}$ & $\{1,2\}$ & $\{1\}$ & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $O$\\
-        & $\{1,2\}$& $\{1, 2\}$ & $\{1, 3\}$ & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ \\
-        & $\{1,3\}$& $\{1, 2, 4\}$ & $\{1,4\}$ & $O$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ \\
-        $\gets$ & $\{1,2,4\}$& $\{1, 2, 4\}$ & $\{1, 3, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$\\
-        $\gets$ & $\{1,4\}$ & $\{1,2, 4\}$ & $\{1, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
-        $\gets$ & $\{1, 3, 4\}$& $\{1, 2, 4\}$ & $\{1, 4\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+        $\to$   & $\bc{1}$      & $\bc{1,2}$    & $\bc{1}$      & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $O$ \\
+                & $\bc{1,2}$    & $\bc{1, 2}$   & $\bc{1, 3}$   & $O$ & $O$ & $O$ & $O$ & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ \\
+                & $\bc{1,3}$    & $\bc{1, 2, 4}$& $\bc{1,4}$    & $O$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ & $K$ & $K$ & $A$ \\
+        $\gets$ & $\bc{1,2,4}$  & $\bc{1, 2, 4}$& $\bc{1, 3, 4}$& $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+        $\gets$ & $\bc{1,4}$    & $\bc{1,2, 4}$ & $\bc{1, 4}$   & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+        $\gets$ & $\bc{1, 3, 4}$& $\bc{1, 2, 4}$& $\bc{1, 4}$   & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
         \hline
     \end{tabular}
 
@@ -127,7 +127,7 @@ M:
 
 \subsection{Návrh NFA dle sjednocení jazyků a redukované DFA}
 Navrhněte NFA přijímající jazyk $L= L_1 \cup L_2$, kde $L_1 = L(M)$, kde $M$ je automat z \ref{4.2}, a
-${L_2 = \{u \mid u \text{ končí } 1\}}$. K tomuto NFA zkonstruujte DFA přijímající stejný jazyk. DFA redukujte.
+${L_2 = \bc{u \mid u \text{ končí } 1}}$. K tomuto NFA zkonstruujte DFA přijímající stejný jazyk. DFA redukujte.
 
 $L_1:$
 \begin{tikzpicture}[shorten >=1pt,node distance=30mm,on grid,auto]
@@ -165,12 +165,12 @@ Podmnožinová konstrukce:
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c|| c |}
     \hline
     & & $ 0 $ & $ 1 $ & $ \sim_0 $ & $ 0 $ & $ 1 $ & $ \sim_1 $ & $ 0 $ & $ 1 $ & $ \sim_2 $ & $ 0 $ & $ 1 $ & $\sim_3$ \\ \hline \hline
-    $\to$ & $\{O, C\}$ & $\{B, C\}$ & $\{O, C, D\}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $A$ & $O$ & $M$ & $A$ & $O$ \\
-     & $\{B, C\}$ & $\{B, C\}$ & $\{A, C, D\}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $K$ & $M$ & $M$ & $K$ & $M$ \\
-    $\gets$ & $\{O, C, D\}$ & $\{B, C\}$ & $\{O, C, D\}$ & $K$ & $O$ & $K$ & $A$ & $O$ & $A$ & $A$ & $M$ & $A$ & $A$ \\
-    $\gets$ & $\{A, C, D\}$ & $\{K, C\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
-    $\gets$ & $\{K, C\}$ & $\{K, C\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
-    $\gets$ & $\{K, C, D\}$ & $\{K, C\}$ & $\{K, C, D\}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\to$   & $\bc{O, C}$   & $\bc{B, C}$ & $\bc{O, C, D}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $A$ & $O$ & $M$ & $A$ & $O$ \\
+            & $\bc{B, C}$   & $\bc{B, C}$ & $\bc{A, C, D}$ & $O$ & $O$ & $K$ & $O$ & $O$ & $K$ & $M$ & $M$ & $K$ & $M$ \\
+    $\gets$ & $\bc{O, C, D}$& $\bc{B, C}$ & $\bc{O, C, D}$ & $K$ & $O$ & $K$ & $A$ & $O$ & $A$ & $A$ & $M$ & $A$ & $A$ \\
+    $\gets$ & $\bc{A, C, D}$& $\bc{K, C}$ & $\bc{K, C, D}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$ & $\bc{K, C}$   & $\bc{K, C}$ & $\bc{K, C, D}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
+    $\gets$ & $\bc{K, C, D}$& $\bc{K, C}$ & $\bc{K, C, D}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ & $K$ \\
     \hline
 \end{tabular}
 
@@ -201,24 +201,20 @@ DFA.
 M_1:
 \begin{tabular}{|r|c c c c|}
     \hline
-    & $\varepsilon$ &$a$ &$b$ &$c$\\
-    \hline
-    \hline
-    $\rightarrow p$& $\emptyset$& $\{p\}$ & $\{q\}$ & $\{r\}$\\
-    $q$            & $\{p\}$    & $\{q\}$ & $\{r\}$ & $\emptyset$\\
-    $\leftarrow r$ & $\{q\}$    & $\{r\}$ & $\emptyset$ & $\{p\}$\\
+    & $\varepsilon$ &$a$ &$b$ &$c$ \\ \hline \hline
+    $\rightarrow p$& $\emptyset$ & $\bc{p}$ & $\bc{q}$ & $\bc{r}$ \\
+    $q$            & $\bc{p}$    & $\bc{q}$ & $\bc{r}$ & $\emptyset$ \\
+    $\leftarrow r$ & $\bc{q}$    & $\bc{r}$ & $\emptyset$ & $\bc{p}$ \\
     \hline
 \end{tabular}
 \quad
 M_2:
 \begin{tabular}{|r|c c c c|}
     \hline
-    & $\varepsilon$ &$a$ &$b$ &$c$\\
-    \hline
-    \hline
-    $\rightarrow p$& $\{q,r\}$ & $\emptyset$ & $\{q\}$ & $\{r\}$\\
-    $q$            & $\emptyset$ & $\{p\}$ & $\{q\}$ & $\{p,q\}$\\
-    $\leftarrow r$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$\\
+    & $\varepsilon$ &$a$ &$b$ &$c$ \\ \hline \hline
+    $\rightarrow p$& $\bc{q,r}$ & $\emptyset$& $\bc{q}$   & $\bc{r}$ \\
+    $q$            & $\emptyset$& $\bc{p}$   & $\bc{q}$   & $\bc{p,q}$ \\
+    $\leftarrow r$ & $\emptyset$& $\emptyset$& $\emptyset$& $\emptyset$ \\
     \hline
 \end{tabular}
 \]
@@ -228,12 +224,10 @@ M_2:
 
     \begin{tabular}{|r|c c c c| c |}
         \hline
-        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry\\
-        \hline
-        \hline
-        $\rightarrow p$& $\emptyset$& $\{p\}$ & $\{q\}$ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p\}$\\
-        $q$            & $\{p\}$    & $\{q\}$ & $\{r\}$ & $\emptyset$ & $\varepsilon\text{-uz}(q) = \{p,q\}$\\
-        $\leftarrow r$ & $\{q\}$    & $\{r\}$ & $\emptyset$ & $\{p\}$& $\varepsilon\text{-uz}(r) = \{p,q,r\}$\\
+        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
+        $\rightarrow p$& $\emptyset$& $\bc{p}$ & $\bc{q}$   & $\bc{r}$   & $\varepsilon\text{-uz}(p) = \bc{p}$\\
+        $q$            & $\bc{p}$   & $\bc{q}$ & $\bc{r}$   & $\emptyset$& $\varepsilon\text{-uz}(q) = \bc{p,q}$\\
+        $\leftarrow r$ & $\bc{q}$   & $\bc{r}$ & $\emptyset$& $\bc{p}$   & $\varepsilon\text{-uz}(r) = \bc{p,q,r}$\\
         \hline
     \end{tabular}
 
@@ -285,9 +279,9 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
         \begin{tabular}{|r r|c c c|c|c c c|c|}
             \hline
             & $ $ & $ a $ & $ b $ & $ c $ & $\sim_0$ & $ a $ & $ b $ & $ c $ & $\sim_1$ \\ \hline \hline
-            $ \to $ & $\{p\}$ & $\{p\}$ & $\{p, q\}$ & $\{p, q, r\}$ & $O$ & $ O $ & $ O $ & $ K $ & $A$\\
-            & $\{p, q\}$ & $\{p, q\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $O$ & $ O $ & $ K $ & $ K $ & $O$\\
-            $\gets$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{p, q, r\}$ & $K$ & $ K $ & $ K $ & $ K $ & $K$\\
+            $ \to $& $\bc{p}$      & $\bc{p}$      & $\bc{p, q}$    & $\bc{p, q, r}$ & $O$ & $ O $ & $ O $ & $ K $ & $A$ \\
+                   & $\bc{p, q}$   & $\bc{p, q}$   & $\bc{p, q, r}$ & $\bc{p, q, r}$ & $O$ & $ O $ & $ K $ & $ K $ & $O$ \\
+            $\gets$& $\bc{p, q, r}$& $\bc{p, q, r}$& $\bc{p, q, r}$ & $\bc{p, q, r}$ & $K$ & $ K $ & $ K $ & $ K $ & $K$ \\
             \hline
         \end{tabular}
     \end{center}
@@ -298,12 +292,10 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
 
     \begin{tabular}{|r|c c c c| c |}
         \hline
-        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry\\
-        \hline
-        \hline
-        $\rightarrow p$& $\{q, r\}$& $\emptyset$ & $\{q\} $ & $\{r\}$ & $\varepsilon\text{-uz}(p) = \{p, q, r\}$\\
-        $q$            & $\emptyset$    & $\{p\}$ & $\{q\}$ & $\{p,q\}$ & $\varepsilon\text{-uz}(q) = \{q\}$\\
-        $\leftarrow r$ & $\emptyset$    & $\emptyset$ & $\emptyset$ & $\{p\}$& $\varepsilon\text{-uz}(r) = \{r\}$\\
+        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
+        $\rightarrow p$& $\bc{q, r}$& $\emptyset$& $\bc{q} $  & $\bc{r}$  & $\varepsilon\text{-uz}(p) = \bc{p, q, r}$ \\
+        $q$            & $\emptyset$& $\bc{p}$   & $\bc{q}$   & $\bc{p,q}$& $\varepsilon\text{-uz}(q) = \bc{q}$ \\
+        $\leftarrow r$ & $\emptyset$& $\emptyset$& $\emptyset$& $\bc{p}$  & $\varepsilon\text{-uz}(r) = \bc{r}$ \\
         \hline
     \end{tabular}
 
@@ -321,7 +313,6 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
             (q) edge [bend left=17, above] node {$a,c$} (p)
             (q) edge [loop right] node {$b,c$} ()
             (r) edge [bend left=17] node {$c$} (p)
-
             ;
         \end{tikzpicture}
     \end{center}
@@ -332,8 +323,8 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_2$:
         \begin{tabular}{|r r|c c c|c|}
             \hline
             & $ $ & $ a $ & $ b $ & $ c $ & $\sim_0$\\ \hline \hline
-            $ \leftrightarrow $ & $\{p, q, r\}$ & $\{p, q, r\}$ & $\{q\}$ & $\{p, q, r\}$ &$K$ \\
-            & $\{q\}$ & $\{p, q, r\}$ & $\{q\}$ & $\{p, q, r\}$ &$O$\\
+            $ \leftrightarrow $ & $\bc{p, q, r}$& $\bc{p, q, r}$ & $\bc{q}$ & $\bc{p, q, r}$ &$K$ \\
+                                & $\bc{q}$      & $\bc{p, q, r}$ & $\bc{q}$ & $\bc{p, q, r}$ &$O$ \\
             \hline
         \end{tabular}
     \end{center}
@@ -349,7 +340,6 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_2$:
         (p) edge [bend left] node {$b$} (r)
         (r) edge [loop below] node {$b$} ()
         (r) edge [bend left] node {$a, c$} (p)
-
         ;
     \end{tikzpicture}
 \end{multicols}
@@ -357,21 +347,18 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_2$:
 Z redukovaných DFA tabulek je očividné, že $M_1$ a $M_2$ nepřijímají stejný jazyk. $M_2$ například přijme slovo $w=a$,
 zatímco $M_1$ takové nepřijme.
 
-
 \subsection{Konstrukce DFA z \texorpdfstring{$\varepsilon$}{e}-NFA}
 Je dán $\varepsilon$-NFA. Zkonstruujte redukovaný DFA přijímající stejný jazyk jako M.
 \[
 M:
 \begin{tabular}{|r|c c c|}
     \hline
-    & $\varepsilon$ & $a$ & $b$\\
-    \hline
-    \hline
-    $\leftrightarrow 1$& $\emptyset$ & $\{2\}$& $\emptyset$\\
-    $2$                & $\emptyset$ & $\emptyset$& $\{3\}$\\
-    $3$                & $\{1,4\}$ & $\emptyset$& $\emptyset$\\
-    $\leftrightarrow 4$& $\emptyset$ & $\emptyset$& $\{5\}$\\
-    $5$                & $\{1,4\}$ & $\emptyset$& $\emptyset$\\
+    & $\varepsilon$ & $a$ & $b$ \\ \hline \hline
+    $\leftrightarrow 1$& $\emptyset$& $\bc{2}$   & $\emptyset$ \\
+    $2$                & $\emptyset$& $\emptyset$& $\bc{3}$ \\
+    $3$                & $\bc{1,4}$ & $\emptyset$& $\emptyset$ \\
+    $\leftrightarrow 4$& $\emptyset$& $\emptyset$& $\bc{5}$ \\
+    $5$                & $\bc{1,4}$ & $\emptyset$& $\emptyset$ \\
     \hline
 \end{tabular}
 \]
@@ -381,7 +368,6 @@ M:
     \begin{center}
 
         \begin{tikzpicture}[shorten >=1pt,node distance=35mm,on grid,auto]
-
             \def\radius{22mm}
 
             \node[state, initial, accepting] (1) at (90:\radius) {$1$};
@@ -398,7 +384,6 @@ M:
             (4) edge [bend left=20] node {$b$} (5)
             (5) edge [bend left=20] node {$\varepsilon$} (1)
             (5) edge [bend left=20] node {$\varepsilon$} (4)
-
             ;
         \end{tikzpicture}
     \end{center}
@@ -407,14 +392,12 @@ M:
     \[
         \begin{tabular}{|r|c c c| l |}
             \hline
-            & $\varepsilon$ & $a$ & $b$ & $\varepsilon$-uzávěry\\
-            \hline
-            \hline
-            $\leftrightarrow 1$& $\emptyset$ & $\{2\}$& $\emptyset$ & $\varepsilon\text{-uz}(1) = \{1\}$\\
-            $2$                & $\emptyset$ & $\emptyset$& $\{3\}$& $\varepsilon\text{-uz}(2) = \{2\}$\\
-            $3$                & $\{1,4\}$ & $\emptyset$& $\emptyset$ & $\varepsilon\text{-uz}(3) = \{1,3,4\}$\\
-            $\leftrightarrow 4$& $\emptyset$ & $\emptyset$& $\{5\}$ & $\varepsilon\text{-uz}(4) = \{4\}$\\
-            $5$                & $\{1,4\}$ & $\emptyset$& $\emptyset$ & $\varepsilon\text{-uz}(5) = \{1,4,5\}$\\
+            & $\varepsilon$ & $a$ & $b$ & $\varepsilon$-uzávěry \\ \hline \hline
+            $\leftrightarrow 1$& $\emptyset$& $\bc{2}$   & $\emptyset$& $\varepsilon\text{-uz}(1) = \bc{1}$ \\
+            $2$                & $\emptyset$& $\emptyset$& $\bc{3}$   & $\varepsilon\text{-uz}(2) = \bc{2}$ \\
+            $3$                & $\bc{1,4}$ & $\emptyset$& $\emptyset$& $\varepsilon\text{-uz}(3) = \bc{1,3,4}$ \\
+            $\leftrightarrow 4$& $\emptyset$& $\emptyset$& $\bc{5}$   & $\varepsilon\text{-uz}(4) = \bc{4}$ \\
+            $5$                & $\bc{1,4}$ & $\emptyset$& $\emptyset$& $\varepsilon\text{-uz}(5) = \bc{1,4,5}$ \\
             \hline
         \end{tabular}
     \]
@@ -425,11 +408,11 @@ Podmnožinová konstrukce:
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|}
     \hline
     & & $ a $ & $ b $ & $ \sim_0 $ & $ a $ & $ b $ & $ \sim_1 $ & $ a $ & $ b $ & $ \sim_2 $ & $ a $ & $ b $ & $\sim_3$ \\ \hline \hline
-    $\to$ & $\bc{1, 4} $ & $ \bc{2} $ & $ \bc{1,4,5} $ & $ O $ & $ O $ & $ K $ & $ A $ & $ A $ & $ K $ & $ A $ & $ B $ & $ K $ & $ A $ \\
-     & $\bc{2}$ & $ \emptyset  $ & $ \bc{1, 3, 4}$ & $ O $ & $ O $ & $ K $ & $ A $ & $ O $ & $ K $ & $ B $ & $ O $ & $ K $ & $ B $ \\
-    $\gets$ & $ \bc{1, 4, 5}$ & $ \bc{2} $ & $\bc{1, 4, 5}$ & $ K $ & $ O $ & $ K $ & $  K$ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
-     & $ \emptyset  $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
-    $\gets$ & $ \bc{1, 3, 4} $ & $ \bc{2} $ & $ \bc{1, 4, 5} $ & $ K $ & $ O $ & $ K $ & $ K $ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
+    $\to$  & $\bc{1, 4}$   & $\bc{2}$   & $\bc{1,4,5}$  & $ O $ & $ O $ & $ K $ & $ A $ & $ A $ & $ K $ & $ A $ & $ B $ & $ K $ & $ A $ \\
+           & $\bc{2}$      & $\emptyset$& $\bc{1, 3, 4}$& $ O $ & $ O $ & $ K $ & $ A $ & $ O $ & $ K $ & $ B $ & $ O $ & $ K $ & $ B $ \\
+    $\gets$& $\bc{1, 4, 5}$& $\bc{2}$   & $\bc{1, 4, 5}$& $ K $ & $ O $ & $ K $ & $  K$ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
+           & $\emptyset$   & $\emptyset$& $\emptyset$   & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
+    $\gets$& $\bc{1, 3, 4}$& $\bc{2}$   & $\bc{1, 4, 5}$& $ K $ & $ O $ & $ K $ & $ K $ & $ A $ & $ K $ & $ K $ & $ B $ & $ K $ & $ K $ \\
     \hline
 \end{tabular}
 

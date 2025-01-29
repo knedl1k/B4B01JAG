@@ -52,8 +52,8 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         \hline
         &  & $a$ & $b$ \\ \hline \hline
         $\leftrightarrow$& $q_0$ & $q_1$          & $q_2$ \\
-                        & $q_1$ & $\{q_0, q_1\}$ & $\emptyset$ \\
-                        & $q_2$ & $\emptyset$    & $\{q_0, q_2\}$ \\
+                        & $q_1$ & $\bc{q_0, q_1}$ & $\emptyset$ \\
+                        & $q_2$ & $\emptyset$    & $\bc{q_0, q_2}$ \\
         \hline
     \end{tabular}
 \end{multicols}
@@ -62,13 +62,13 @@ Podmnožinová konstrukce pro II.
 
 \begin{tabular}{|r r|c c||c|c c||c|c c||c|}
     \hline
-    &  & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$\\ \hline \hline
+    &  & $a$ & $b$ & $ \sim_0 $ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ \\ \hline \hline
     $\leftrightarrow$& $q_0$          & $q_1$          & $q_2$          & $K$ & $O$ & $O$ & $A$ & $B$ & $C$ & $A$ \\
-                     & $q_1$          & $\{q_0, q_1\}$ & $\emptyset$    & $O$ & $K$ & $O$ & $B$ & $K$ & $O$ & $B$ \\
-              $\gets$& $q_2$          & $\emptyset$    & $\{q_0, q_2\}$ & $O$ & $O$ & $K$ & $C$ & $O$ & $D$ & $C$ \\
-                     & $\{q_0, q_1\}$ & $\{q_0, q_1\}$ & $q_2$          & $K$ & $K$ & $O$ & $K$ & $K$ & $C$ & $K$ \\
+                     & $q_1$          & $\bc{q_0, q_1}$& $\emptyset$    & $O$ & $K$ & $O$ & $B$ & $K$ & $O$ & $B$ \\
+              $\gets$& $q_2$          & $\emptyset$    & $\bc{q_0, q_2}$& $O$ & $O$ & $K$ & $C$ & $O$ & $D$ & $C$ \\
+                     & $\bc{q_0, q_1}$& $\bc{q_0, q_1}$& $q_2$          & $K$ & $K$ & $O$ & $K$ & $K$ & $C$ & $K$ \\
                      & $\emptyset$    & $\emptyset$    & $\emptyset$    & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
-              $\gets$& $\{q_0, q_2\}$ & $q_1$          & $\{q_0, q_2\}$ & $K$ & $O$ & $K$ & $D$ & $B$ & $D$ & $D$ \\
+              $\gets$& $\bc{q_0, q_2}$& $q_1$          & $\bc{q_0, q_2}$& $K$ & $O$ & $K$ & $D$ & $B$ & $D$ & $D$ \\
     \hline
 \end{tabular}
 
@@ -194,16 +194,14 @@ Podmnožinová konstrukce.
 
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
-    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$\\
-    \hline
-    \hline
-    $\rightarrow$ &$\{ S\}$     &$\{ 1\}$    &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
-                  &$\{ 1\}$     &$\{ 2\}$    &$\{ 4,5 \}$  &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$\\
-                  &$\emptyset$  &$\emptyset$ &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$\\
-                  &$\{ 2\}$     &$\{ 2\}$    &$\{ 3,4,5\}$ &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$\\
-                  &$\{ 4,5 \}$  &$\{ 2,6 \}$ &$\{ 4,5 \}$  &$O$ &$K$ &$O$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$\\
-                  &$\{ 3,4,5\}$ &$\{ 2,6 \}$ &$\{ 3,4,5\}$ &$O$ &$K$ &$O$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$\\
-    $\leftarrow$  &$\{ 2,6 \}$  &$\{ 2\}$    &$\{ 3,4,5\}$ &$K$ &$O$ &$O$ &$K$ &$O$ &$A$ &$K$ &$B$ &$A$ &$K$ &$B$ &$A$ &$K$\\
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ \\ \hline \hline
+    $\rightarrow$ &$\bc{S}$    &$\bc{1}$    &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ \\
+                  &$\bc{1}$    &$\bc{2}$    &$\bc{4,5}$   &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$ \\
+                  &$\emptyset$ &$\emptyset$ &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+                  &$\bc{2}$    &$\bc{2}$    &$\bc{3,4,5}$ &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$ \\
+                  &$\bc{4,5}$  &$\bc{2,6}$  &$\bc{4,5}$   &$O$ &$K$ &$O$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ \\
+                  &$\bc{3,4,5}$&$\bc{2,6}$  &$\bc{3,4,5}$ &$O$ &$K$ &$O$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ \\
+    $\leftarrow$  &$\bc{2,6}$  &$\bc{2}$    &$\bc{3,4,5}$ &$K$ &$O$ &$O$ &$K$ &$O$ &$A$ &$K$ &$B$ &$A$ &$K$ &$B$ &$A$ &$K$ \\
     \hline
 \end{tabular}
 

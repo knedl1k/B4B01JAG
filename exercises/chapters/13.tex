@@ -8,9 +8,9 @@
 \section{Třinácté cvičení}
 
 \subsection{Tvorba a práce zásobníkového automatu podle jazyka}
-Je dán jazyk $L$ nad abecedou $\Sigma = \{0,1\}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
+Je dán jazyk $L$ nad abecedou $\Sigma = \bc{0,1}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$
 (tj. $A$ přijímá $L$ prázdným zásobníkem, $B$ přijímá $L$ koncovým stavem), kde
-\[L = \{0^i 1^j 0^k \mid 0 \leq i < k, j > 0\}\text{.}\]
+\[L = \bc{0^i 1^j 0^k \mid 0 \leq i < k, j > 0}\text{.}\]
 Ukažte práci jednoho ze zásobníkových automatů nad slovem $011000$ a nad slovem $001110$.
 
 Přímou metodou:
@@ -45,19 +45,19 @@ Přímou metodou:
     \end{flalign*}
     \begin{flalign*}
         (q_2, 0, Z_0) &\vdash (q_f, 0, Z_0) \xmark & \\
-        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark
-    \end{flalign*}
+        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark \text{ Konec, úspěch.}
+    \end{flalign*} 
 
     Práce nad slovem $w_2 = 001110$.
 
-    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash} \\
-    (q_1, 110, AA Z_0) \vdash^{(2)} (q_1, 0, AA Z_0) \vdash (q_2, \varepsilon, AA Z_0) \xmark $
+    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash (q_1, 110, AA Z_0)} \\
+    \vdash^{(2)} (q_1, 0, AA Z_0) \vdash (q_2, \varepsilon, AA Z_0) \xmark \text{ Konec, neúspěch.}$
 
 \end{multicols}
 
 Přes gramatiku:
 \begin{flalign*}
-    \G : S &\rightarrow S0 \mid 0S0 \mid A0 & \\
+    \G \text{: } S &\rightarrow S0 \mid 0S0 \mid A0 & \\
     A &\rightarrow 1A \mid 1
 \end{flalign*}
 
@@ -70,7 +70,7 @@ $S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRi
 2) $L(\G) \subseteq L$\\ % TODO: dodělat důkaz
 
 \subsection{Tvorba nevypouštěcí gramatiky}
-Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S,A,B,C\}, \Sigma = \{0,1\}$ a $P$ je dáno
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C}, \Sigma = \bc{0,1}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow SA \mid 0 \\
     A &\rightarrow BAB \mid 1 \\
@@ -82,19 +82,19 @@ Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$
 \textbf{1. krok} Vytvoření nevypouštěcí gramatiky $\G_1$.
 \begin{multicols}{2}
     \begin{flalign*}
-        V &= \{x \mid x \Rightarrow^\star \varepsilon\} & \\
-        V_1 &= \{x \mid x \rightarrow \varepsilon \in P\} = \{B,C\} & \\
-        V_2 &= V_1 \cup \{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+\} = V_1 \cup \emptyset = V_1 = V.
+        V &= \bc{x \mid x \Rightarrow^\star \varepsilon} & \\
+        V_1 &= \bc{x \mid x \rightarrow \varepsilon \in P} = \bc{B,C} & \\
+        V_2 &= V_1 \cup \bc{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+} = V_1 \cup \emptyset = V_1 = V.
     \end{flalign*}
 
 \columnbreak
 
-    \begin{flalign*}
-        P^{'} \text{: } S &\rightarrow SA \mid 0 & \\
-        A &\rightarrow BAB \mid AB \mid BA \mid A \mid 1 & \\
-        B &\rightarrow CB \mid C & \\
+    \begin{align*}
+        P^{'} \text{: } S &\rightarrow SA \mid 0 \\
+        A &\rightarrow BAB \mid AB \mid BA \mid A \mid 1 \\
+        B &\rightarrow CB \mid C \\
         C &\rightarrow AS \mid 0
-    \end{flalign*}
+    \end{align*}
 \end{multicols}
 \textbf{2. krok} odstranění levé rekurze. (postup shora dolů)
 \begin{flalign*}
@@ -107,8 +107,8 @@ Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$
 \end{flalign*}
 
 \subsection{Převod gramatiky do Greibachové normální formy}
-Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, E, F\},\\
-\Sigma = \{a, *, +, ), (\}$ a $P$ je dáno
+Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, E, F},\\
+\Sigma = \bc{a, *, +, ), (}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow (E)\\
     E &\rightarrow F * F \mid F + F\\
@@ -149,8 +149,8 @@ nahoru)
 \newpage
 
 \subsection{Převod gramatiky do Greibachové normální formy}
-Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B\},\\
-\Sigma = \{a, b, c\}$ a $P$ je dáno
+Do Greibachové normální formy převěďte gramatiku $\G$, kde $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A, B},\\
+\Sigma = \bc{a, b, c}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow Ab \mid B\\
     A &\rightarrow Aba \mid Bcc\\

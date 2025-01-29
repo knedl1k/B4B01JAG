@@ -2,7 +2,7 @@
 
 \subsection{Algoritmus CYK} % 10.1
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
-$N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
+$N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a pravidla $P$ jsou dána:
 \begin{multicols}{2}
 
     Přepis pravidel:
@@ -150,9 +150,9 @@ slovo $w_2$:
 
 \subsection{Algoritmus CYK} % 10.2
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
-$N = \{S, A, B, C, D\}$, $\Sigma = \{a, b\}$ a pravidla $P$ jsou dána:
+$N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a pravidla $P$ jsou dána:
 \begin{align*}
-    P: & S \rightarrow BD \mid CD \mid DA \\
+    P \text{: } & S \rightarrow BD \mid CD \mid DA \\
        & A \rightarrow CA \mid a \\
        & B \rightarrow CB \mid b \\
        & C \rightarrow AA \mid BC \mid DC \mid b \\
@@ -222,7 +222,7 @@ $w_1 = abaab$:
 \subsection{Bezkontextové Pumping lemma}
 \textbf{Tento důkaz se neobjeví u písemné ani ústní zkoušky}
 
-S využitím Pumping Lemmatu ukažte, že následující jazyk není bezkontextový, kde $$L = \{ww; w \in\{a,b\}^{\star}\}$$
+S využitím Pumping Lemmatu ukažte, že následující jazyk není bezkontextový, kde $$L = \bc{ww; w \in \bc{a,b}^{\star}}$$
 
 
 \textbf{Pumping Lemma.} Pro každý CF jazyk $L$ existuje přirozené číslo $m \geq 1$ takové, že každé slovo $z \in L$
@@ -254,9 +254,9 @@ Takže to dělat nebudeme.
 % \end{center}
 
 \subsection{Důkaz generování slova matematickou indukcí} % 10.4
-Je dána CF gramatika $\G = (N, \Sigma, S, P)$, kde $N = \{S, A, B, C\}$, $\Sigma = \{a, b\}$ a $P$ je:
+Je dána CF gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A, B, C}$, $\Sigma = \bc{a, b}$ a $P$ je:
 \begin{align*}
-    P: & S \rightarrow SA \mid aSb \mid Cb \\
+    P \text{: } & S \rightarrow SA \mid aSb \mid Cb \\
        & A \rightarrow SC \mid \varepsilon \\
        & B \rightarrow bAB \mid bS \mid AA \\
        & C \rightarrow CB \mid bA \mid a \\
@@ -294,10 +294,10 @@ $A \stackrel{I.P.}{\Longrightarrow} S^n A C^n \stackrel{A \rightarrow SC}{\Longr
 
 \newpage
 \subsection{Algoritmus CYK} % 10.5
-Je dána gramatika $\G = (N, \Sigma, S, P )$, kde $N = \{S, A, B, C, D\}$, $\Sigma = \{a, b, c\}$ a
+Je dána gramatika $\G = (N, \Sigma, S, P )$, kde $N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b, c}$ a
 pravidla~$P$ jsou dána
 \begin{align*}
-    P: & S \rightarrow AB \mid CD \mid AC\\
+    P \text{: } & S \rightarrow AB \mid CD \mid AC\\
     & A \rightarrow AC \mid a \\
     & B \rightarrow BD \mid b \\
     & C \rightarrow AD \mid a \\
