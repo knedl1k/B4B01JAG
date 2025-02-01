@@ -1,5 +1,38 @@
 \section{Třetí cvičení}
 
+\subsection{\href{https://youtu.be/sA8ZXlhjbIo?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=712}{Příklad z přednášky} - nalezení ekvivalencí pro DFA}
+
+Nalezněte ekvivalenci $\sim$ pro konečný automat $M$, který je dán tabulkou:
+
+\begin{multicols}{2}
+    \begin{tabular}{|r|c c|c|c c|c|c c|c|}
+        \hline
+        & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ \\ \hline \hline
+        $\rightarrow 1$& $2$ & $1$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $O$ \\
+        $2$            & $2$ & $3$ & $O$ & $O$ & $K$ & $A$ & $A$ & $K$ & $A$ \\
+        $\leftarrow 3$ & $4$ & $5$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
+        $4$            & $4$ & $3$ & $O$ & $O$ & $K$ & $A$ & $A$ & $K$ & $A$ \\
+        $5$            & $4$ & $5$ & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $O$ \\
+        \hline
+    \end{tabular}
+\columnbreak
+
+    \begin{tikzpicture}
+        \node[state, initial] (o) {$O$};
+        \node[state, right of=o] (a) {$A$};
+        \node[state, right of=a, accepting] (k) {$K$};
+
+        \draw
+            (o) edge[bend left, above] node{$a$} (a)
+            (o) edge[loop above] node{$b$} (o)
+            (a) edge[loop above] node{$a$} (a)
+            (a) edge[bend left] node{$b$} (k)
+            (k) edge[bend left, above] node{$a$} (a)
+            (k) edge[bend left] node{$b$} (o)
+            ;
+    \end{tikzpicture}
+\end{multicols}
+
 \subsection{Nerodova věta a Pumping lemma}
 Pomocí Nerodovy věty a pomocí Pumping lemmatu dokažte, že jazyk $L = \bc{0^n 1^m \mid n > m \geq 0}$ není regulární.
 
@@ -18,11 +51,11 @@ $T$ má konečně mnoho tříd, tudíž $0^i T 0^j$ pro nějaké $i \not= j, i>j
 
 Protože platí 2), tak $0^i w T 0^j w$ pro $w \in \bc{0,1}^\star$.
 
-Zvolme $w = 1^{i-1}$. Pak $\underbrace{0^i 1^{i-1}}_{\substack{i \geq i-1 \\ \in L}} T 
+Zvolme $w = 1^{i-1}$. Pak $\underbrace{0^i 1^{i-1}}_{\substack{i \geq i-1 \\ \in L}} T
 \underbrace{0^j 1^{i-1}}_{\substack{i-1 \geq j  \\\not\in L }}$. Tedy $L$ není regulární. $\blacksquare$
 
 Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \in L, n \geq 1$, takové, že každé ${u \in L},
-|u| > n$ je 
+|u| > n$ je
 možné rozložit na 3 slova $u = xwy$ splňující:
 \begin{enumerate}[1), noitemsep]
     \item $|xw| \leq n$
@@ -61,7 +94,7 @@ Najděte slovo nejkratší délky, jestliže existuje, které rozliší
     \item stavy 3 a 5.
     \item stavy 2 a 4.
 \end{enumerate}
-To, že slovo $u$ rozliší dva stavy znamená, že přechodová funkce při práci nad slovem $u$ převede jeden ze stavů do 
+To, že slovo $u$ rozliší dva stavy znamená, že přechodová funkce při práci nad slovem $u$ převede jeden ze stavů do
 koncového stavu a druhý do stavu, který není koncový.
 
 a) $\delta(3,a) = 0, \delta(5,a)=0 \implies \delta^\star(3, au) = \delta^\star (5, au)$.
@@ -78,7 +111,7 @@ $\delta(3,b) = 2, \delta(5, b) = 3$.
 b) $\delta(2,a) = 4, \delta(4,a) =2$. $\delta(2,b)=5, \delta(4,b)=5$. Tyto stavy nelze rozlišit.
 
 \subsection{Návrh a redukce DFA podle jazyka}
-Navrhněte DFA, který přijímá jazyk $L$ skládající se ze všech slov nad abecedou $\Sigma = \bc{0, 1}$, která začínají 
+Navrhněte DFA, který přijímá jazyk $L$ skládající se ze všech slov nad abecedou $\Sigma = \bc{0, 1}$, která začínají
 $1100$ a končí $000$. Navržený automat redukujte.
 
 \begin{tikzpicture}
@@ -116,27 +149,25 @@ $1100$ a končí $000$. Navržený automat redukujte.
         ;
 \end{tikzpicture}
 
-Invarianty: 
+Invarianty:
 \begin{itemize}[noitemsep]
-    \item $q_0$: \texttt{in}, 
-    \item $q_1$: začíná $1$, končí $1$,  
-    \item $q_2$: začíná $11$, končí $11$,  
-    \item $q_3$: začíná $110$, končí $110$,  
-    \item $q_4$: začíná $1100$, končí $1100$,  
-    \item $q_5$: začíná $1100$, končí $1$,  
-    \item $q_6$: začíná $1100$, končí $10$,  
-    \item $q_7$: začíná $1100$, končí $100$,  
-    \item $q_8$: začíná $1100$, končí $000$, \texttt{out},  
-    \item chyba: nezačíná $1100$.  
+    \item $q_0$: \texttt{in},
+    \item $q_1$: začíná $1$, končí $1$,
+    \item $q_2$: začíná $11$, končí $11$,
+    \item $q_3$: začíná $110$, končí $110$,
+    \item $q_4$: začíná $1100$, končí $1100$,
+    \item $q_5$: začíná $1100$, končí $1$,
+    \item $q_6$: začíná $1100$, končí $10$,
+    \item $q_7$: začíná $1100$, končí $100$,
+    \item $q_8$: začíná $1100$, končí $000$, \texttt{out},
+    \item chyba: nezačíná $1100$.
 \end{itemize}
 
-Redukce podmnožinovou konstrukcí: 
+Redukce podmnožinovou konstrukcí:
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|c c| c|}
     \hline
-    & & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ & $0$ & $1$ & $\sim_3$ & $0$ & $1$ & $\sim_4$ & $0$ & $1$ & $\sim_5$ & $0$ & $1$ & $\sim_6$\\
-    \hline
-    \hline
+    & & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ & $0$ & $1$ & $\sim_3$ & $0$ & $1$ & $\sim_4$ & $0$ & $1$ & $\sim_5$ & $0$ & $1$ & $\sim_6$ \\ \hline \hline
     $\rightarrow$ & $q_0$ & ch &$1$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$D$ &$G$ &$O$ &$D$ &$G$\\
               & $q_1$ & ch &$2$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$C$ &$D$ &$O$ &$C$ &$D$ &$O$ &$C$ &$D$\\
               & $q_2$ &$3$ & ch &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$\\
@@ -151,7 +182,7 @@ Redukce podmnožinovou konstrukcí:
 \end{tabular}
 \]
 
-Redukovaný automat: 
+Redukovaný automat:
 
 \begin{tikzpicture}
     \node[state, initial] (0) {$G$};
@@ -225,7 +256,7 @@ M_2:
 \end{tabular}
 \]
 
-Nejdříve odstraníme nedosažitelné vztahy a pak provedeme redukci. 
+Nejdříve odstraníme nedosažitelné vztahy a pak provedeme redukci.
 
 Odstranění nedosažitelných vztahů:
 \[
@@ -272,11 +303,11 @@ $M_1$:
 
 \begin{tikzpicture}
     \node[state] (7) at (0, 1) {$7$}; % 7
-    \node[state] (3) at (3.75, 1) {$3$}; % 3 
-    \node[state] (2) at (1.875, 0) {$2$}; % 2 
-    \node[state] (5) at (1.875, 4) {$5$}; % 5 
-    \node[state] (1) at (3.75, 3) {$1$}; % 1 
-    \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0 
+    \node[state] (3) at (3.75, 1) {$3$}; % 3
+    \node[state] (2) at (1.875, 0) {$2$}; % 2
+    \node[state] (5) at (1.875, 4) {$5$}; % 5
+    \node[state] (1) at (3.75, 3) {$1$}; % 1
+    \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0
 
     \draw
         (0) edge[loop above] node{$a$} (0)
@@ -320,11 +351,11 @@ Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
     $M_1$:\\
     \begin{tikzpicture}
         \node[state] (7) at (0, 1) {$7$}; % 7
-        \node[state] (3) at (3.75, 1) {$3$}; % 3 
-        \node[state] (2) at (1.875, 0) {$2$}; % 2 
-        \node[state] (5) at (1.875, 4) {$5$}; % 5 
-        \node[state] (1) at (3.75, 3) {$1$}; % 1 
-        \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0 
+        \node[state] (3) at (3.75, 1) {$3$}; % 3
+        \node[state] (2) at (1.875, 0) {$2$}; % 2
+        \node[state] (5) at (1.875, 4) {$5$}; % 5
+        \node[state] (1) at (3.75, 3) {$1$}; % 1
+        \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0
 
         \draw
             (0) edge[loop above] node{$a$} (0)
@@ -346,11 +377,11 @@ Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
 
     $M_2$:\\
     \begin{tikzpicture}
-        \node[state] (a) at (0, 1) {$A$}; % k 
-        \node[state] (c) at (3.75, 1) {$C$}; % c 
-        \node[state] (b) at (1.875, 0) {$B$}; % b 
+        \node[state] (a) at (0, 1) {$A$}; % k
+        \node[state] (c) at (3.75, 1) {$C$}; % c
+        \node[state] (b) at (1.875, 0) {$B$}; % b
         \node[state] (o) at (1.875, 4) {$O$}; % o
-        \node[state] (d) at (3.75, 3) {$D$}; % d  
+        \node[state] (d) at (3.75, 3) {$D$}; % d
         \node[state, initial, accepting] (k) at (0, 3) {$K$}; % k
 
         \draw
@@ -371,7 +402,7 @@ Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
 
 \end{multicols}
 
-Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme. 
+Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme.
 
 \newpage
 \subsection{Návrh a redukce DFA podle jazyka}
@@ -408,18 +439,18 @@ Výsledný DFA redukujte.
         ;
 \end{tikzpicture}
 
-Invarianty: 
+Invarianty:
 \begin{itemize}[noitemsep]
-    \item $q_0$: $|w| < 3$, \texttt{in}, 
-    \item chyba: druhý znak je $b$,  
-    \item $q_1$: $|w| < 3$, druhý znak je $\varepsilon$, předposlední znak je $\varepsilon$,   
-    \item $q_2$: $|w| < 3$, druhý znak je $a$, předposlední znak je $a,b$, 
-    \item $q_3$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $a$, 
-    \item $q_4$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $ba$, \texttt{out}, 
-    \item $q_5$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $bb$, \texttt{out}. 
+    \item $q_0$: $|w| < 3$, \texttt{in},
+    \item chyba: druhý znak je $b$,
+    \item $q_1$: $|w| < 3$, druhý znak je $\varepsilon$, předposlední znak je $\varepsilon$,
+    \item $q_2$: $|w| < 3$, druhý znak je $a$, předposlední znak je $a,b$,
+    \item $q_3$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $a$,
+    \item $q_4$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $ba$, \texttt{out},
+    \item $q_5$: $|w| \geq 3$, druhý znak je $a$, předposlední znak je $b$, končí $bb$, \texttt{out}.
 \end{itemize}
 
-Redukce podmnožinovou konstrukcí: 
+Redukce podmnožinovou konstrukcí:
 \[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
