@@ -1,6 +1,6 @@
 \section{Druhé cvičení}
 
-\subsection{Příklad z přednášky - Pumping Lemma, Nerodova věta}
+\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=778}{Příklad z přednášky} - Pumping Lemma, Nerodova věta}
 Úvod: Pumping lemma nelze použít, chceme-li dokázat, že jazyk je regulární. Nerodova věta dává nutnou a postačující 
 podmínku pro to, aby byl jazyk regulární. 
 
@@ -16,7 +16,7 @@ $|u| > n$, je možné rozložit na 3 slova $u = xwy$ splňující:
     \item $xw^i y \in L, \forall i = 0, 1, 2, ...$
 \end{enumerate}
 
-Důkaz sporem : 
+Důkaz sporem: 
 
 Vezmeme libovolné $n \in \mathbb{N}$, zvolíme $u = 0^n1^n \in L$.\\
 Kdyby $0^n1^n = xwy$ a $|xw| \leq n$, implikuje nám 
@@ -39,9 +39,8 @@ Protože $T$ má konečně mnoho tříd, tak existuje $i \neq j$, že $0^i \, T 
 Potom vezmeme $w = 1^i$; pak dle $(2)$ $0^i 1^i \, T \, 0^j 1^i$, a $0^i 1^i \in L$, ale $0^i 1^j \notin L$. \\
 Tedy neplatí $(1)$. 
 
-\subsection{Příklad z přednášky - Konstrukce DFA dle jazyka} 
+\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=4106}{Příklad z přednášky} - Konstrukce DFA dle jazyka} 
 Pro jazyk $L$, který se skládá ze všech binárních slov, která končí $010$, zkonstruujte DFA, který ho přijímá.\\
-
 
 \begin{minipage}{0.58\textwidth}
     $L = \bc{u \mid u = w010, w \in \bc{0,1}^{\star}}$\\
@@ -66,12 +65,12 @@ Pro jazyk $L$, který se skládá ze všech binárních slov, která končí $01
 \end{minipage}\begin{minipage}{0.42\textwidth}
     Důkaz pomocí invariantů (invarianty \\navzájem disjunktní):
 
-\begin{itemize}[noitemsep]
-    \item $\delta^\star (q_0, 1) = q_0$: $\varepsilon$, $1$, nebo končí $11$, 
-    \item $\delta^\star (q_0, u) = q_1$: končí $0$, nekončí $010$, 
-    \item $\delta^\star (q_0, u) = q_2$: končí $01$, 
-    \item $\delta^\star (q_0, u) = q_f$: končí $010$. 
-\end{itemize}    
+    \begin{itemize}[noitemsep]
+        \item $\delta^\star (q_0, 1) = q_0$: $\varepsilon$, $1$, nebo končí $11$, 
+        \item $\delta^\star (q_0, u) = q_1$: končí $0$, nekončí $010$, 
+        \item $\delta^\star (q_0, u) = q_2$: končí $01$, 
+        \item $\delta^\star (q_0, u) = q_f$: končí $010$. 
+    \end{itemize}    
 
 \end{minipage}
     
@@ -232,7 +231,7 @@ Důkaz pomocí invariantů:
 \newpage
 
 \subsection{Nerodova věta a Pumping lemma}
-Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \bc{0^i 1^j 0^k \mid 0 \leq i < j <k}$ není regulární.\\
+Pomocí Nerodovy věty a Pumping lemmatu dokažte, že jazyk $L = \bc{0^i 1^j 0^k \mid 0 \leq i < j <k}$ není regulární.
 
 Definice \textbf{Pumping lemmatu.} Když $L$ je regulární, tak existuje $n \geq 0$ takové, že každé ${u \in L}$,
 $|u| > n$, je možné rozložit na 3 slova $u = xwy$ splňující:
@@ -251,7 +250,7 @@ Pak 1) vlastnost říká, že $xw = 0^l, l \leq n$. Zároveň musí platit 2), t
 
 Když teď napumpujeme $xw^i y$, například $i=2$, dostaneme $xw^2 y = 0^{n+k} 1^{n+1} 0^{n+2} \not\in L$.
 
-Tedy $L$ není regulární. $\blacksquare$\\
+Tedy $L$ není regulární. $\blacksquare$
 
 Definice \textbf{Nerodovy věty.} $L$ je regulární iff existuje ekvivalence $T$ na $\Sigma^\star$ taková, že:
 \begin{enumerate}[1), noitemsep]
