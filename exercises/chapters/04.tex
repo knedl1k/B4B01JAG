@@ -1,5 +1,100 @@
 \section{Čtvrté cvičení}
 
+\subsection{\href{https://youtu.be/Hbi2ao1mFBc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1143}{Příklad z přednášky} - Sestrojení DFA z NFA}
+Je dán NFA tabulkou
+\[
+    \begin{tabular}{|r|c c|}
+        \hline
+        & $0$ & $1$ \\ \hline \hline
+        $\rightarrow p$& $\bc{p,q}$ & $\bc{p}$ \\
+        $q$            & $\bc{r,s}$ & $\bc{t}$ \\
+        $r$            & $\bc{p,r}$ & $\bc{t}$ \\
+        $\leftarrow s$ & $\emptyset$ & $\emptyset$ \\
+        $\leftarrow t$ & $\emptyset$ & $\emptyset$ \\
+        \hline
+    \end{tabular}
+\]
+Najděte DFA $M$, který přijímá stejný jazyk. Redukujte ho.
+
+Podmonižinová konstrukce a redukce
+\[
+    \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+        \hline
+        & $ $ & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ \\ \hline \hline
+        $\rightarrow$  &$\bc{p}$       & $\bc{p,q}$     & $\bc{p}$   & $O$ & $O$ & $O$ & $O$ & $A$ & $O$ & $O$ \\
+                       &$\bc{p,q}$     & $\bc{p,q,r,s}$ & $\bc{p,t}$ & $O$ & $K$ & $K$ & $A$ & $K$ & $B$ & $A$ \\
+        $\leftarrow$   &$\bc{p,q,r,s}$ & $\bc{p,q,r,s}$ & $\bc{p,t}$ & $K$ & $K$ & $K$ & $K$ & $K$ & $B$ & $K$ \\
+        $\leftarrow$   &$\bc{p,t}$     & $\bc{p,q}$     & $\bc{p}$   & $K$ & $O$ & $O$ & $B$ & $A$ & $O$ & $B$ \\
+        \hline
+    \end{tabular}
+\]
+
+\begin{tikzpicture}
+    \node[state,initial] (o) {$O$};
+    \node[state] (a) [right of=0] {$A$};
+    \node[state, accepting] (b) [below of=a] {$B$};
+    \node[state, accepting] (k) [right of=a] {$K$};
+
+    \path
+        (o) edge[loop above] node{$1$} (o)
+        (o) edge[bend left, above] node{$0$} (a)
+        (a) edge[bend left] node{$0$} (k)
+        (a) edge[] node{$1$} (b)
+
+        (b) edge[loop left] node{$0$} (a)
+        (b) edge[bend right] node{$1$} (o)
+        (k) edge[loop above] node{$0$} (k)
+        (k) edge[bend left] node{$1$} (b)
+    ;
+\end{tikzpicture}
+
+\subsection{\href{https://youtu.be/Hbi2ao1mFBc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1823}{Příklad z přednášky} Konstrukce DFA z \texorpdfstring{$\varepsilon$}{e}-NFA}
+Je dán $\varepsilon$-NFA tabulkou
+\[
+    \begin{tabular}{|r|c c c|l|}
+        \hline
+        & $\varepsilon$ & $0$ & $1$ & $\varepsilon$-uzávěry \\ \hline \hline
+        $\rightarrow p$& $\bc{q,s}$  & $\emptyset$ & $\emptyset$ & $\varepsilon\text{-uz}(p) = \bc{p,q,s}$ \\
+        $q$            & $\emptyset$ & $\bc{r}$    & $\emptyset$ & $\varepsilon\text{-uz}(q) = \bc{q}$ \\
+        $r$            & $\emptyset$ & $\emptyset$ & $\bc{s}$    & $\varepsilon\text{-uz}(r) = \bc{r}$ \\
+        $\leftarrow s$ & $\bc{q}$    & $\emptyset$ & $\emptyset$ & $\varepsilon\text{-uz}(s) = \bc{q,s}$\\
+        \hline
+    \end{tabular}
+\]
+Najděte DFA $M$, který přijímá stejný jazyk.
+
+\begin{multicols}{2}
+    Podmnožinová konstrukce a redukce
+    \[
+        \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+            \hline
+            & $ $ & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ \\ \hline \hline
+            $\leftrightarrow$ &$\bc{p,q,s}$ & $\bc{r}$& $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
+                          &$\bc{r}$     & $\emptyset$ & $\bc{q,s}$  & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
+            $\leftarrow$  &$\bc{q,s}$   & $\bc{r}$    & $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
+                          &$\emptyset$  & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+            \hline
+        \end{tabular}
+    \]
+
+\columnbreak
+
+    \hspace*{2cm}
+    \begin{tikzpicture}
+        \node[state,initial,accepting] (k) {$K$};
+        \node[state] (a) [right of=k] {$A$};
+        \node[state] (o) [below of=k] {$O$};
+
+        \path
+            (k) edge[bend left, above] node{$0$} (a)
+            (k) edge[] node{$1$} (o)
+            (a) edge[bend left] node{$0$} (o)
+            (a) edge[bend left] node{$1$} (k)
+            (o) edge[loop right] node{$0,1$} (o)
+        ;
+    \end{tikzpicture}
+\end{multicols}
+
 \subsection{Sestrojení DFA z NFA}
 Pro dané NFA sestrojte podmnožinovou konstrukcí DFA a výsledek redukujte.
 \[
@@ -25,7 +120,7 @@ Všimněte si, že v automatu $M_1$ jsou všechny stavy koncové. Co z toho lze 
         $\leftarrow$     & $\bc{3}  $ & $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ K $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ & $ O $ & $ O $ & $ O $ & $ A $ \\
                          & $\emptyset$& $ \emptyset $ & $ \emptyset $ & $ \emptyset $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ & $ O $ \\
         \hline
-\end{tabular}\\
+    \end{tabular}
 \end{center}
 
 Automat se redukcí nezmění.
@@ -62,13 +157,11 @@ stejný jazyk. $DFA$ zredukujte.
 M:
 \begin{tabular}{|r|c c|}
     \hline
-    & $0$ & $1$\\
-    \hline
-    \hline
-    $\rightarrow 1$& $\bc{1,2}$ & $\bc{1}$\\
-    $2$            & $\emptyset$ & $\bc{3}$\\
-    $3$            & $\bc{4}$ & $\bc{4}$\\
-    $\leftarrow4$  & $\bc{4}$ & $\bc{4}$\\
+    & $0$ & $1$ \\ \hline \hline
+    $\rightarrow 1$& $\bc{1,2}$ & $\bc{1}$ \\
+    $2$            & $\emptyset$ & $\bc{3}$ \\
+    $3$            & $\bc{4}$ & $\bc{4}$ \\
+    $\leftarrow4$  & $\bc{4}$ & $\bc{4}$ \\
     \hline
 \end{tabular}
 \]
@@ -193,6 +286,8 @@ Výsledný redukovaný DFA:
     ;
 \end{tikzpicture}
 
+\newpage
+
 \subsection{Srovnání dvou NFA automatů}
 Jsou dány dva $\varepsilon$-NFA. Rozhodněte, zda přijímají stejný jazyk. Pro oba $\varepsilon$-NFA sestrojte redukované
 DFA.
@@ -222,7 +317,7 @@ M_2:
 \begin{multicols}{2}
     $M_1$:
 
-    \begin{tabular}{|r|c c c c| c |}
+    \begin{tabular}{|r|c c c c| l |}
         \hline
         & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
         $\rightarrow p$& $\emptyset$& $\bc{p}$ & $\bc{q}$   & $\bc{r}$   & $\varepsilon\text{-uz}(p) = \bc{p}$\\
@@ -290,7 +385,7 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
 \begin{multicols}{2}
     $M_2$:
 
-    \begin{tabular}{|r|c c c c| c |}
+    \begin{tabular}{|r|c c c c| l |}
         \hline
         & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
         $\rightarrow p$& $\bc{q, r}$& $\emptyset$& $\bc{q} $  & $\bc{r}$  & $\varepsilon\text{-uz}(p) = \bc{p, q, r}$ \\
