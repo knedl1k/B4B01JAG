@@ -150,18 +150,25 @@ $1100$ a končí $000$. Navržený automat redukujte.
 \end{tikzpicture}
 
 Invarianty:
-\begin{itemize}[noitemsep]
-    \item $q_0$: \texttt{in},
-    \item $q_1$: začíná $1$, končí $1$,
-    \item $q_2$: začíná $11$, končí $11$,
-    \item $q_3$: začíná $110$, končí $110$,
-    \item $q_4$: začíná $1100$, končí $1100$,
-    \item $q_5$: začíná $1100$, končí $1$,
-    \item $q_6$: začíná $1100$, končí $10$,
-    \item $q_7$: začíná $1100$, končí $100$,
-    \item $q_8$: začíná $1100$, končí $000$, \texttt{out},
-    \item chyba: nezačíná $1100$.
-\end{itemize}
+
+\begin{multicols}{2}
+    \begin{itemize}[noitemsep]
+        \item $q_0$: \texttt{in},
+        \item $q_1$: začíná $1$, končí $1$,
+        \item $q_2$: začíná $11$, končí $11$,
+        \item $q_3$: začíná $110$, končí $110$,
+        \item $q_4$: začíná $1100$, končí $1100$,
+    \end{itemize}
+\columnbreak
+
+    \begin{itemize}[noitemsep]
+        \item $q_5$: začíná $1100$, končí $1$,
+        \item $q_6$: začíná $1100$, končí $10$,
+        \item $q_7$: začíná $1100$, končí $100$,
+        \item $q_8$: začíná $1100$, končí $000$, \texttt{out},
+        \item chyba: nezačíná $1100$.
+    \end{itemize}
+\end{multicols}
 
 Redukce podmnožinovou konstrukcí:
 \[
@@ -216,6 +223,7 @@ Redukovaný automat:
         ;
 \end{tikzpicture}
 
+% \newpage
 \subsection{Srovnání dvou DFA automatů}
 Jsou dány dva automaty. Rozhodněte, zda jsou ekvivalentní, tj. zda přijímají stejný jazyk.
 \[
@@ -297,42 +305,23 @@ M_2:
 
 A teď zredukovat oba automaty.
 
-\newpage
-
 $M_1$:
-
-\begin{tikzpicture}
-    \node[state] (7) at (0, 1) {$7$}; % 7
-    \node[state] (3) at (3.75, 1) {$3$}; % 3
-    \node[state] (2) at (1.875, 0) {$2$}; % 2
-    \node[state] (5) at (1.875, 4) {$5$}; % 5
-    \node[state] (1) at (3.75, 3) {$1$}; % 1
-    \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0
-
-    \draw
-        (0) edge[loop above] node{$a$} (0)
-        (0) edge[bend left=18] node{$b$} (5)
-        (5) edge[loop above] node{$a$} (5)
-        (5) edge[bend left=18] node{$b$} (1)
-        (1) edge[loop right] node{$a$} (1)
-        (1) edge[bend left=18] node{$b$} (3)
-        (3) edge[loop right] node{$a$} (3)
-        (3) edge[bend left=18] node[below]{$b$} (2)
-        (2) edge[loop above] node{$a$} (2)
-        (2) edge[bend left=18] node{$b$} (7)
-        (7) edge[loop below] node{$a$} (7)
-        (7) edge[bend left=18] node{$b$} (0)
-        ;
-\end{tikzpicture}
-$M_1$ je již redukovaný.
-
-$M_2$:
-\[
 \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
-    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ & $a$ & $b$ & $\sim_5$\\
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ & $a$ & $b$ & $\sim_5$ \\ \hline \hline
+    $\leftrightarrow$& $0$ &$0$ &$5$ &$K$ &$K$ &$O$ &$K$ &$K$ &$O$ &$K$ &$K$ &$O$ &$K$ &$K$ &$O$ &$K$ &$K$ &$E$ &$K$ \\
+                     & $5$ &$5$ &$1$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$E$ &$D$ &$E$ \\
+                     & $1$ &$1$ &$3$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$C$ &$D$ &$D$ &$C$ &$D$ \\
+                     & $3$ &$3$ &$2$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$B$ &$C$ &$C$ &$B$ &$C$ &$C$ &$B$ &$C$ \\
+                     & $2$ &$2$ &$7$ &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$ \\
+                     & $7$ &$7$ &$0$ &$O$ &$O$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ \\
     \hline
+\end{tabular}
+
+$M_2$:
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ & $a$ & $b$ & $\sim_5$ \\ \hline \hline
                      & $A$ &$H$ &$G$ &$O$ &$O$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$\\
                      & $B$ &$B$ &$A$ &$O$ &$O$ &$O$ &$O$ &$O$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$ &$B$ &$A$ &$B$\\
                      & $C$ &$E$ &$D$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$C$ &$O$ &$D$ &$C$ &$E$\\
@@ -343,38 +332,8 @@ $M_2$:
                      & $H$ &$A$ &$G$ &$O$ &$O$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$ &$A$ &$K$ &$A$\\
     \hline
 \end{tabular}
-\]
-
-Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
 
 \begin{multicols}{2}
-    $M_1$:\\
-    \begin{tikzpicture}
-        \node[state] (7) at (0, 1) {$7$}; % 7
-        \node[state] (3) at (3.75, 1) {$3$}; % 3
-        \node[state] (2) at (1.875, 0) {$2$}; % 2
-        \node[state] (5) at (1.875, 4) {$5$}; % 5
-        \node[state] (1) at (3.75, 3) {$1$}; % 1
-        \node[state, initial, accepting] (0) at (0, 3) {$0$}; % 0
-
-        \draw
-            (0) edge[loop above] node{$a$} (0)
-            (0) edge[bend left=18] node{$b$} (5)
-            (5) edge[loop above] node{$a$} (5)
-            (5) edge[bend left=18] node{$b$} (1)
-            (1) edge[loop right] node{$a$} (1)
-            (1) edge[bend left=18] node{$b$} (3)
-            (3) edge[loop right] node{$a$} (3)
-            (3) edge[bend left=18] node[below]{$b$} (2)
-            (2) edge[loop above] node{$a$} (2)
-            (2) edge[bend left=18] node{$b$} (7)
-            (7) edge[loop left] node{$a$} (7)
-            (7) edge[bend left=18] node{$b$} (0)
-            ;
-    \end{tikzpicture}
-
-\columnbreak
-
     $M_2$:\\
     \begin{tikzpicture}
         \node[state] (a) at (0, 1) {$A$}; % k
@@ -400,11 +359,14 @@ Protože má každý řádek svou vlastní třídu, $M_2$ je již redukovaný.
             ;
     \end{tikzpicture}
 
+\columnbreak
+
+    Nejsou ekvivalnetní. $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme.
+
 \end{multicols}
 
-Nejsou ekvivalnetní - $M_1$ přijme např. slovo $bbabbbb$, které $M_2$ nepřijme.
-
 \newpage
+
 \subsection{Návrh a redukce DFA podle jazyka}
 Navrhněte DFA, který přijímá $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě všechna slova $w$ taková, že
 \begin{itemize}[noitemsep]
