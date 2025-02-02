@@ -250,6 +250,28 @@ $ S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 
 \stackrel{Y \rightarrow 2Y(j)}{\Longrightarrow} 0^iX1^iY2^j \stackrel{X \rightarrow \varepsilon}{\Longrightarrow}
 0^i1^iY2^j\stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i1^i2^j $.
 
+\subsection{\href{https://youtu.be/CWVxhYEyG4I?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=811}{Příklad z přednášky} - Konstrukce nevypouštěcí gramatiky}
+Je dána gramatika $\G = (\bc{A,S}, \bc{a,b,c}, S, P)$ s pravidly $P$:
+\begin{align*}
+    & S \rightarrow aSc \mid A \\
+    & A \rightarrow bAc \mid \varepsilon
+\end{align*}
+Ke gramatice $\G$ najděte nevypouštěcí gramatiku $\G_1$, která generuje jazyk $L(\G) - \bc{\varepsilon}$.
+
+$V = \bc{A \mid A \Rightarrow^\star \varepsilon}$\\
+$V_1 = \bc{A \mid A \rightarrow \varepsilon \in P}$\\
+$V_{i+1} = V_i \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_i^\star}$
+
+Tedy konkrétně:\\
+$V_1 = \bc{A}$\\
+$V_2 = \bc{A} \cup \bc{S} = \bc{S,A} = N = V$
+
+$\G_1 = (\bc{A,S}, \bc{a,b,c}, S, P)$ s pravidly $P^{'}$:
+\begin{align*}
+    & S \rightarrow aSc \mid ac \mid A \\
+    & A \rightarrow bAc \mid bc
+\end{align*}
+
 \subsection{Tvorba nevypouštěcí gramatiky}
 Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G_1) = L(\G) - \bc{\varepsilon}$.
     \begin{align*}
@@ -260,16 +282,12 @@ Ke gramatice $\G$ zkostruujte nevypouštěcí gramatiku $\G_1$, pro kterou $L(\G
            & D \rightarrow SC \mid aABa
     \end{align*}
 
-obecný formální zápis u nevypouštěcích gramatik:
-
-$V = \bc{A \mid A \implies^{\star} \varepsilon}$\\
+$V = \bc{A \mid A \Rightarrow^\star \varepsilon}$\\
 $V_1 = \bc{A \mid A \rightarrow \varepsilon \in P}$\\
-$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}}$\\
-$V_{i+1} = V_i \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_i^{\star}}$\\
+$V_{i+1} = V_i \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_i^\star}$
 
 \begin{multicols}{2}
-    příklad:
-
+    Tedy konkrétně:\\
     $V = \bc{A \mid A \implies^{\star} \varepsilon}$\\
     $V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{S, C}$\\
     $V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} = V_1 \cup \bc{D} = \bc{S, C, D}$\\
@@ -377,13 +395,13 @@ Provedeme indukci podle počtu kroků derivace \( n \):
 S \Rightarrow^n 0^i S 1^j, \quad \text{kde } i \leq j.
 \]
 
-\paragraph{Základní krok (\(n = 1\)):}
+\textbf{Základní krok (\(n = 1\)):}
 Pro \(n = 1\):
 \[
 S \rightarrow 0 S 1 \quad \text{nebo} \quad S \rightarrow S 1, \quad \text{a tedy } 0^i S 1^j, \; \text{kde } i \leq j.
 \]
 
-\paragraph{Indukční krok:}
+\textbf{Indukční krok:}
 Předpokládejme, že každá derivace o \(n\) krocích generuje:
 \[
 S \Rightarrow^n 0^i S 1^j, \quad i \leq j.
@@ -397,5 +415,48 @@ Nebo:
 S \Rightarrow^n 0^i S 1^j \Rightarrow 0^i 1^j.
 \]
 
-\paragraph{Závěr:}
+\textbf{Závěr:}
 Z \(S\) je možné odvodit právě slova \(0^i 1^j\), kde \(0 \leq i \leq j\), a nic jiného.
+
+\subsection{\href{https://youtu.be/CWVxhYEyG4I?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=5106}{Příklad z přednášky} - Redukce gramatiky}
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C,D}$, $\Sigma = \bc{a,b}$ a $P$ je dáno
+\begin{align*}
+    & S \rightarrow SCA \mid a \\
+    & A \rightarrow aCb \mid \varepsilon \\
+    & B \rightarrow bC \mid BA \mid BD \\
+    & C \rightarrow AA \mid b \\
+    & D \rightarrow ABC \\
+\end{align*}
+Danou gramatiku redukujte.
+
+\textbf{1. krok}\\
+$V = \bc{A \mid A \Rightarrow^\star w, w \in \Sigma^\star}$\\
+$V_1 = \bc{A \mid A \rightarrow w, w \in \Sigma^\star}$\\
+$V_{i+1} = V_i \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in (\Sigma \cup V_i)^\star}$
+
+Tedy konkrétně:\\
+$V_1 = \bc{S,A,C}$\\
+$V_2 = \bc{S,A,C} \cup \bc{B} = \bc{S,A,B,C}$\\
+$V_3 = \bc{S,A,B,C} \cup \bc{D} = \bc{S,A,B,C,D} = N = V$. Tím pádem žádné pravidlo neubíráme.
+
+\textbf{2. krok}\\
+$U = \bc{A \mid A \in V : S \Rightarrow^\star \alpha A \beta, \alpha, \beta \in \Sigma^\star}$\\
+$U_0 = \bc{S}$\\
+$U_{i+1} = U_i \cup \bc{A \mid B \rightarrow \alpha A \beta, B \in U_i, \alpha, \beta \in \Sigma^\star}$
+
+\begin{multicols}{2}
+    Tedy konkrétně:\\
+    $U_0 = \bc{S}$\\
+    $U_1 = \bc{S} \cup \bc{A,C} = \bc{S,A,C}$\\
+    $U_2 = \bc{S,A,C} \cup \emptyset = \bc{S,A,C} = U$
+
+\columnbreak
+
+    Redukovaná gramatika má pravidla $P^{'}$:
+    \begin{align*}
+        & S \rightarrow SCA \mid a \\
+        & A \rightarrow aCb \mid \varepsilon \\
+        & C \rightarrow AA \mid b \\
+    \end{align*}
+\end{multicols}
+
