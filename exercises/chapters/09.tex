@@ -117,10 +117,54 @@ $S \notin V \quad \rightarrow \quad L(\G) = \emptyset$. Tedy gramatika $\G$ nege
 
 \textbf{Chomského normální tvar polopatě}
 
-Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál. 
+Všechna pravidla na pravé straně mají buď přesně 2 neterminály nebo přesně 1 terminál bez $\varepsilon$.
+
+\subsection{\href{https://youtu.be/jwrE-ez7S8I?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1846}{Příklad z přednášky} - Převod gramatiky do Chomského normálního tvaru}
+Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A, C}$, $\Sigma = \bc{a, b}$ a P je 
+\begin{align*}
+    & S \rightarrow SCA \mid a \\
+    & A \rightarrow aCb \mid \varepsilon \\
+    & C \rightarrow AA \mid bb
+\end{align*}
+Převeďte $\G$ do Chomského normálního tvaru. 
+
+\textbf{1. krok} Vytvořit nevypouštěcí gramatiku. 
+
+$V_1 = \bc{A}$\\
+$V_2 = \bc{A} \cup \bc{C} = \bc{A,C} = V$
+\begin{flalign*}
+    P^{'}\text{: } & S \rightarrow SCA \mid SA \mid SC \mid a & \\
+    & A \rightarrow aCb \mid ab & \\
+    & C \rightarrow AA \mid A \mid b &
+\end{flalign*}
+\textbf{2. krok} Nahrazení právě jednoho neterminálu pravých stran jeho pravidly. 
+\begin{flalign*}
+    & S \rightarrow SCA \mid SA \mid SC \mid a & \\
+    & A \rightarrow aCb \mid ab & \\
+    & C \rightarrow AA \mid aCb \mid ab \mid b &
+\end{flalign*}
+\textbf{3. krok} Vytvořit pomocná pravidla pro terminály, které "nezůstaly samy"
+\begin{flalign*}
+    & S \rightarrow SCA \mid SA \mid SC \mid a & \\
+    & A \rightarrow X_aCX_b \mid X_aX_b & \\
+    & C \rightarrow AA \mid X_aCX_b \mid X_aX_b \mid b & \\
+    & X_a \rightarrow a & \\
+    & X_b \rightarrow b &
+\end{flalign*}
+\textbf{4. krok} Rozbít dlouhá slova ($\geq 3$) (opět vytvořím pomocná pravidla).
+\begin{flalign*}
+    P^{''}\text{: } & S \rightarrow SB \mid SA \mid SC \mid a & \\
+    & B \rightarrow CA & \\
+    & A \rightarrow X_aD\mid X_aX_b & \\
+    & D \rightarrow CX_b & \\ 
+    & C \rightarrow AA \mid X_aD \mid X_aX_b \mid b & \\
+    & X_a \rightarrow a & \\
+    & X_b \rightarrow b &
+\end{flalign*}
+
+Gramatika $G_1 = (\bc{S,A,B,C,D,X_a,X_b}, \bc{a,b}, S, P^{''})$ je v Chomského normálním tvaru.
 
 \subsection{Převod gramatiky do Chomského normálního tvaru} % 9.5 
-
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S, A, B}$, $\Sigma = \bc{0, 1}$ a P je 
 \begin{align*}
     P\text{: } & S \rightarrow A \mid 0SA \mid \varepsilon \\
@@ -138,14 +182,12 @@ $V = \bc{S}$
     & B \rightarrow 0B \mid 0 &
 \end{flalign*}
 \textbf{2. krok} Nahrazení právě jednoho neterminálu pravých stran jeho pravidly. 
-
-zde: $S \rightarrow A$, máme zde $A \rightarrow 1A \mid B1 \mid 1$ 
 \begin{flalign*}
     P\text{: } & S \rightarrow 1A \mid B1 \mid 1 \mid 0SA \mid 0A & \\
     & A \rightarrow 1A \mid B1 \mid 1 & \\
     & B \rightarrow 0B \mid 0 &
 \end{flalign*}
-vytvořím pomocná pravidla pro terminály, které "nezůstaly samy" 
+\textbf{3. krok} Vytvořit pomocná pravidla pro terminály, které "nezůstaly samy" 
 \begin{flalign*}
     P\text{: } & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0SA \mid X_0A & \\
     & A \rightarrow X_1A \mid BX_1 \mid 1 & \\
@@ -153,7 +195,7 @@ vytvořím pomocná pravidla pro terminály, které "nezůstaly samy"
     & X_0 \rightarrow 0 & \\
     & X_1 \rightarrow 1 &
 \end{flalign*}
-\textbf{3. krok} Zbavím se dlouhých slov ($\geq 3$) (opět vytvořím pomocná pravidla). 
+\textbf{4. krok} Rozbít dlouhá slova ($\geq 3$) (opět vytvořím pomocná pravidla). 
 \begin{flalign*}
     P\text{: } & S \rightarrow X_1A \mid BX_1 \mid 1 \mid X_0Y \mid X_0A  & \\
     & Y \rightarrow SA & \\
@@ -305,3 +347,31 @@ Jak toho docílím: jdu odspoda stromu a najdu dva stejné neterminály (různě
 červeného $B$čka vlevo od něj).
 
 d) je víceznačná, přepisujeme $A \rightarrow AA$. 
+
+\subsection{\href{https://youtu.be/jwrE-ez7S8I?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=3207}{Příklad z přednášky} - Pumping lemma pro bezkontextové gramatiky}
+Ukážeme, že jazyk $L = \bc{0^n 1^n 2^n \mid n \geq 0}$ není bezkontextový.
+
+Kdyby $L$ byl CF, tak existuje $m \geq 1$ s vlastnostmi 1,2,3.
+
+Zvolme $z = 0^m 1^m 2^m \in L, |z| = 3m \geq m$.
+
+Kdyby $z = uvwxy$, že $|vwx| \leq m$. 
+\[
+\text{Tak $vwx$ je podslovo}
+\begin{cases}
+    0^m 1^m:\quad 
+      \begin{cases}
+        v = 0^i,\quad x = 0^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m+i+j}1^m2^m \not\in L, \\[1ex]
+        v = 0^i,\quad x = 1^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m+i}1^{m+j}2^m \not\in L, \\[1ex]
+        v = 1^i,\quad x = 1^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m}1^{m+i+j}2^m \not\in L.
+      \end{cases}
+    \\[2ex]
+    1^m 2^m:\quad 
+      \begin{cases}
+        v = 1^i,\quad x = 1^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m}1^{m+i+j}2^m \not\in L, \\[1ex]
+        v = 1^i,\quad x = 2^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m}1^{m+i}2^{m+j} \not\in L, \\[1ex]
+        v = 2^i,\quad x = 2^j,\quad i+j \leq 1, uv^2wx^2y \rightarrow 0^{m}1^{m}2^{m+i+j} \not\in L.
+      \end{cases}
+\end{cases}
+\]
+Tedy $L$ není bezkontextový.
