@@ -1,5 +1,156 @@
 \section{Sedmé cvičení}
 
+\subsection{\href{https://youtu.be/8tSYD1bX4M8?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=519}{Příklad z přednášky} - Tvorba regulárního výrazu z DFA }
+Vytvořte regulární výraz, který reprezentuje jazyk přijímaný DFA, jenž je daný tabulkou:
+\begin{center}
+    \begin{tabular}{|r r|c c|}
+        \hline
+        &  & $a$ & $b$ \\ \hline \hline
+        $\rightarrow$ & $1$ & $1$ & $2$ \\
+        $\leftarrow$  & $2$ & $3$ & $2$ \\
+        $\leftarrow$  & $3$ & $1$ & $3$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{multicols}{2}
+    0. DFA:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (1) {$1$};
+        \node[state, accepting] (2) [right of=1] {$2$};
+        \node[state, accepting] (3) [right of=2] {$3$};
+
+        \path[->]
+            (1) edge[loop above] node{$a$} (1)
+            (1) edge[bend left, above] node{$b$} (2)
+            (2) edge[loop above] node{$b$} (2)
+            (2) edge[bend left, above] node{$a$} (3)
+            (3) edge[loop above] node{$b$} (3)
+            (3) edge[bend left, below] node{$a$} (1)
+        ;
+    \end{tikzpicture}
+
+    1. zavedu stavy $S$, $F$:
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (1) {$1$};
+        \node[state, accepting] (2) [right of=1] {$2$};
+        \node[state, accepting] (3) [right of=2] {$3$};
+        \node[state, accepting] (f) [above of=3] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$\varepsilon$} (1)
+            (1) edge[loop above] node{$a$} (1)
+            (1) edge[bend left, above] node{$b$} (2)
+            (2) edge[loop above] node{$b$} (2)
+            (2) edge[bend left, above] node{$a$} (3)
+            (3) edge[loop right] node{$b$} (3)
+            (3) edge[bend left, below] node{$a$} (1)
+            (2) edge[bend left] node{$\varepsilon$} (f)
+            (3) edge[] node{$\varepsilon$} (f) 
+        ;
+    \end{tikzpicture}
+
+    2. odstranění smyček
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, right of=s] (1) {$1$};
+        \node[state, accepting] (2) [right of=1] {$2$};
+        \node[state, accepting] (3) [right of=2] {$3$};
+        \node[state, accepting] (f) [above of=3] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$\varepsilon$} (1)
+            (1) edge[bend left, above] node{$a^\star b$} (2)
+            (2) edge[bend left, above] node{$b^\star a$} (3)
+            (2) edge[bend left] node{$b^\star$} (f)
+            (3) edge[bend left, below] node{$b^\star a$} (1)
+            (3) edge[] node{$b^\star$} (f) 
+        ;
+    \end{tikzpicture}
+
+    3. odstranění vrcholu $1$
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting] (2) [right of=s] {$2$};
+        \node[state, accepting] (3) [right of=1] {$3$};
+        \node[state, accepting] (f) [right of=3] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$a^\star b$} (2)
+            (2) edge[] node{$b^\star a$} (3)
+            (2) edge[bend left] node{$b^\star$} (f)
+            (3) edge[bend left, below] node{$b^\star a a^\star b$} (2)
+            (3) edge[] node{$b^\star$} (f) 
+        ;
+    \end{tikzpicture}
+
+\columnbreak
+
+    4. odstranění vrcholu $3$
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting] (2) [right of=s] {$2$};
+        \node[state, accepting] (f) [right of=2] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$a^\star b$} (2)
+            (2) edge[loop below] node{$b^\star a b^\star a a^\star b$} (2)
+            (2) edge[bend left] node{$b^\star$} (f)
+            (2) edge[bend right, above] node{$b^\star a b^\star$} (f)
+        ;
+    \end{tikzpicture}
+
+    5. odstranění paralelních hran
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting] (2) [right of=s] {$2$};
+        \node[state, accepting] (f) [right of=2] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$a^\star b$} (2)
+            (2) edge[loop below] node{$b^\star a b^\star a a^\star b$} (2)
+            (2) edge[bend left, above] node{$b^\star + b^\star a b^\star$} (f)
+        ;
+    \end{tikzpicture}
+
+    6. odstranění smyček
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting] (2) [right of=s] {$2$};
+        \node[state, accepting] (f) [right of=2] {$F$};
+        \path[->]
+            (s) edge[bend right, below] node{$a^\star b$} (2)
+            (2) edge[bend left, above] node{$(b^\star a b^\star a a^\star b)^\star (b^\star + b^\star a b^\star)$} (f)
+        ;
+    \end{tikzpicture}
+
+    7. odstranění vrcholu $2$
+
+    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]
+        \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
+        \node[state, initial] (s) {$S$};
+        \node[state, accepting] (f) [right of=2] {$F$};
+        \path[->]
+            (s) edge[bend left, above] node{$a^\star b (b^\star a b^\star a a^\star b)^\star (b^\star + b^\star a b^\star)$} (f)
+        ;
+    \end{tikzpicture}
+
+    Výsledný regulární výraz reprezentující jazyk $L(M)$ je $r = a^\star b (b^\star a b^\star a a^\star b)^\star (b^\star + b^\star a b^\star)$.
+
+\end{multicols}
+
+\newpage
+
 \subsection{Konstrukce redukovaného DFA k regulárnímu výrazu}
 Je dán regulární výraz \m{(aaa^{\star} + bbb^{\star})^{\star}}. K danému výrazu sestrojte redukovaný DFA $M$,
 který přijímá jazyk reprezentovaný regulárním výrazem.
@@ -51,9 +202,9 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
     \begin{tabular}{|r r|c c|}
         \hline
         &  & $a$ & $b$ \\ \hline \hline
-        $\leftrightarrow$& $q_0$ & $q_1$          & $q_2$ \\
-                        & $q_1$ & $\bc{q_0, q_1}$ & $\emptyset$ \\
-                        & $q_2$ & $\emptyset$    & $\bc{q_0, q_2}$ \\
+        $\leftrightarrow$& $q_0$ & $q_1$           & $q_2$ \\
+                         & $q_1$ & $\bc{q_0, q_1}$ & $\emptyset$ \\
+                         & $q_2$ & $\emptyset$     & $\bc{q_0, q_2}$ \\
         \hline
     \end{tabular}
 \end{multicols}
