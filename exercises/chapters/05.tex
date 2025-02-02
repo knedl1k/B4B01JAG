@@ -27,6 +27,114 @@ Tedy každé slovo $y_i$ je posloupnost slov z $L_1$ a $L_2$, což znamená, že
 Proto celé $w$ lze vyjádřit jako zřetězení slov z $L_1 \cup L_2$, což znamená, že $w \in (L_1 \cup L_2)^\star$. A tedy
 platí $(L_1^\star L_2^\star)^\star \subseteq (L_1 \cup L_2)^\star$.
 
+\subsection{\href{https://youtu.be/k-56qYErqJY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=4688}{Příklad z přednášky} - Konstrukce DFA k regulárnímu výrazu}
+Pro regulární výraz $r = (aa + b)^\star (ba)^\star$. Sestrojte DFA, který přijímá jazyk reprezentovaný tímto regulárním
+výrazem.
+
+\textbf{1. postup Obecný postup}
+
+\begin{multicols}{2}
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$0$};
+        \node[state, above of=0] (1) {$1$};
+        \node[state, accepting, right of=0] (2) {$2$};
+        \node[state, above of=2] (3) {$3$};
+    
+        \draw
+            (0) edge[loop below] node{$b$} (0)
+            (0) edge[bend left, left] node{$a$} (1)
+            (0) edge[bend left, below] node{$\varepsilon$} (2)
+            (1) edge[bend left, left] node{$a$} (0)
+            (2) edge[bend left, left] node{$b$} (3)
+            (3) edge[bend left, left] node{$a$} (2)
+            ;
+    \end{tikzpicture}
+
+\columnbreak
+
+    \begin{tabular}{|r|c c c|l|}
+        \hline
+        & $\varepsilon$ & $a$ & $b$ & $\varepsilon$ uzávěry \\ \hline \hline
+        $0$ & $2$         & $1$         & $0$         & $\varepsilon$-uz(0) = $\bc{0,2}$ \\
+        $1$ & $\emptyset$ & $0$         & $\emptyset$ & $\varepsilon$-uz(1) = $\bc{1}$ \\
+        $2$ & $\emptyset$ & $\emptyset$ & $3$         & $\varepsilon$-uz(2) = $\bc{2}$ \\
+        $3$ & $\emptyset$ & $2$         & $\emptyset$ & $\varepsilon$-uz(3) = $\bc{3}$ \\
+        \hline
+    \end{tabular}
+\end{multicols}
+
+Podmnožinová konstrukce a redukce
+
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & & $a$ & $b$    & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
+    $\leftrightarrow$ &$\bc{0,2}$   &$\bc{1}$    &$\bc{0,2,3}$ &$K$ &$O$ &$K$ &$A$ &$B$ &$K$ &$A$ &$B$ &$K$ &$A$ \\
+    $$                &$\bc{1}$     &$\bc{0,2}$  &$\emptyset$  &$O$ &$K$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ \\
+    $\leftarrow$      &$\bc{0,2,3}$ &$\bc{1,2}$  &$\bc{0,2,3}$ &$K$ &$K$ &$K$ &$K$ &$C$ &$K$ &$K$ &$C$ &$K$ &$K$ \\
+    $$                &$\emptyset$  &$\emptyset$ &$\emptyset$  &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+    $\leftarrow$      &$\bc{1,2}$   &$\bc{0,2}$  &$\bc{3}$     &$K$ &$K$ &$O$ &$C$ &$A$ &$B$ &$C$ &$A$ &$E$ &$C$ \\
+    $$                &$\bc{3}$     &$\bc{2}$    &$\emptyset$  &$O$ &$K$ &$O$ &$B$ &$D$ &$O$ &$E$ &$D$ &$O$ &$E$ \\
+    $\leftarrow$      &$\bc{2}$     &$\emptyset$ &$\bc{3}$     &$K$ &$O$ &$O$ &$D$ &$O$ &$B$ &$D$ &$O$ &$E$ &$D$ \\
+    \hline
+\end{tabular}
+
+\textbf{2. postup Rozdělením na podvýrazy}
+
+I. krok očíslování\\
+$(a_1 a_2 + b_3)^star (b_4 a_5)^\star$
+
+II. krok\\
+Pro jazyk, který je přijímaný regulárním výrazem $r$ platí:
+
+výraz může začínat: $a_1, b_3, b_4$
+
+mohou po sobě následovat: $\bm{a_1} \text{: } a_2$; $\bm{a_2} \text{: } a_1, b_3, b_4$; $\bm{b_3} \text{: } a_1, b_3, b_4$; 
+$\bm{b_4} \text{: } a_5$; $\bm{a_5} \text{: } b_4$
+
+výraz může končit: $a_2, b_3, a_5$
+
+je $\varepsilon$ v $L$? Ano.
+
+\begin{tikzpicture}
+    \node[state, initial, accepting] (s) {$S$};
+    \node[state, right of=s] (1) {$1$};
+    \node[state, accepting, below of=1] (3) {$3$};
+    \node[state, accepting, right of=3] (2) {$2$};
+    \node[state, below of=s] (4) {$4$};
+    \node[state, accepting, left of=4] (5) {$5$};
+
+    \draw
+        (s) edge[bend left, above] node{$a$} (1)
+        (s) edge[] node{$b$} (3)
+        (s) edge[] node{$b$} (4)
+        (1) edge[bend left, above] node{$a$} (2)
+        (2) edge[] node[right]{$a$} (1)
+        (2) edge[] node{$b$} (3)
+        (2) edge[bend left] node{$b$} (4)
+        (3) edge[bend right, right] node{$a$} (1)
+        (3) edge[] node{$b$} (4)
+        (3) edge[loop above] node{$b$} (3)
+        (4) edge[bend right, above] node{$a$} (5)
+        (5) edge[bend right, below] node{$b$} (4)
+        ;
+\end{tikzpicture}
+
+Podmnožinová konstrukce a redukce
+
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+    \hline
+    & & $a$ & $b$    & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
+    $\leftrightarrow$ &$\bc{S}$    &$\bc{1}$    &$\bc{3,4}$  &$K$ &$O$ &$K$ &$A$ &$B$ &$K$ &$A$ &$B$ &$K$ &$A$ \\
+    $$                &$\bc{1}$    &$\bc{2}$    &$\emptyset$ &$O$ &$K$ &$O$ &$B$ &$A$ &$O$ &$B$ &$A$ &$O$ &$B$ \\
+    $\leftarrow$      &$\bc{3,4}$  &$\bc{1,5}$  &$\bc{3,4}$  &$K$ &$K$ &$K$ &$K$ &$C$ &$K$ &$K$ &$C$ &$K$ &$K$ \\
+    $\leftarrow$      &$\bc{2}$    &$\bc{1}$    &$\bc{3,4}$  &$K$ &$O$ &$K$ &$A$ &$B$ &$K$ &$A$ &$B$ &$K$ &$A$ \\
+    $$                &$\emptyset$ &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+    $\leftarrow$      &$\bc{1,5}$  &$\bc{2}$    &$\bc{4}$    &$K$ &$K$ &$O$ &$C$ &$A$ &$B$ &$C$ &$A$ &$E$ &$C$ \\
+    $$                &$\bc{4}$    &$\bc{5}$    &$\emptyset$ &$O$ &$K$ &$O$ &$B$ &$D$ &$O$ &$E$ &$D$ &$O$ &$E$ \\
+    $\leftarrow$      &$\bc{5}$    &$\emptyset$ &$\bc{4}$    &$K$ &$O$ &$O$ &$D$ &$O$ &$B$ &$D$ &$O$ &$E$ &$D$ \\
+    \hline
+\end{tabular}
+
 \subsection{Tvorba regulárního výrazu reprezentujícího jazyk}
 Napište regulární výraz, který reprezentuje jazyk $L$ nad abecedou $\Sigma = \bc{0,1}$, jestliže výraz existuje.
 \begin{enumerate}[a), noitemsep]
@@ -129,7 +237,7 @@ a Kleeneho operátor.)
 
 \columnbreak
 
-    \begin{tabular}{|r|c c c|c|}
+    \begin{tabular}{|r|c c c|l|}
         \hline
         & $\varepsilon$ & $a$ & $b$ & $\varepsilon$ uzávěry\\
         \hline
