@@ -1,5 +1,89 @@
 \section{Desáté cvičení}
 
+\subsection{\href{https://youtu.be/UfLaDffSpQU?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1317}{Příklad z přednášky} - Algoritmus CYK}
+Je dána gramatika $\G$ pravidly
+\begin{multicols}{2}
+
+    \begin{align*}
+        &S \rightarrow AB \mid BC \\
+        &A \rightarrow BA \mid a \\
+        &B \rightarrow CC \mid b \\
+        &C \rightarrow AB \mid a \\
+    \end{align*}
+
+\columnbreak
+
+    Přepis pravidel:
+    \begin{align*}
+        AB & \leftarrow S,A \\
+        BA & \leftarrow A \\
+        BC & \leftarrow S \\
+        CC & \leftarrow B \\
+    \end{align*}
+\end{multicols}
+Pomocí algoritmu CYK rozhodněte, zda slovo $aabab$ je generováno bezkontextovou gramatikou $\G$.
+
+\begin{multicols}{2}
+    \begin{NiceTabular}{ccccc}[hvlines, corners = NE] % NE = north east
+        $S,C$ &   &   &   & \\
+        $S,A,C$ & $B$ &   &   & \\
+        $B$ & $B$ & $S,C$ &   & \\
+        $B$ & $S,C$ & $S,A$ & $S,C$ & \\
+        $A,C$ & $A,C$ & $B$ & $A,C$ & $B$
+    \end{NiceTabular}
+    
+    \vspace*{-2mm}
+    
+    \hspace*{5mm} $a$ \hspace*{10mm} $a$ \hspace*{8mm} $b$ \hspace*{7mm} $a$ \hspace*{6mm} $b$
+
+    \vspace*{2mm}
+
+    Slovo $aabab$ je generováno gramatikou $\G$, protože pravidlo $S$ je v nejvyšším řádku CYKu.
+
+    $
+    S \stackrel{S \rightarrow BC}{\Longrightarrow} BC \stackrel{B \rightarrow CC}{\Longrightarrow} CCC
+    \stackrel{C \rightarrow a}{\Longrightarrow^{(2)}} aaC \stackrel{C \rightarrow AB}{\Longrightarrow}\\
+    aaAB \stackrel{A \rightarrow BA}{\Longrightarrow} aaBAB \stackrel{B \rightarrow b}{\Longrightarrow}
+    aabAB \stackrel{A \rightarrow a}{\Longrightarrow}
+    aabaB \\ \stackrel{B \rightarrow b}{\Longrightarrow} aabab.
+    $
+
+    (Zajímavost: našli jsme dva různé způsoby generování slova, gramatika je tedy víceznačná)
+\columnbreak
+
+    \begin{forest}
+        for tree={
+            grow=south,                 % Tree grows downward
+            edge={->},                  % Draw edges as arrows
+            align=center,               % Center the text inside nodes
+        }
+        [$S$
+            [$A$
+                [$a$]
+            ]
+            [$B$
+                [$C$
+                    [$a$]
+                ]
+                [$C$
+                    [$A$
+                        [$B$
+                            [$b$]
+                        ]
+                        [$A$
+                            [$a$]
+                        ]
+                    ]
+                    [$B$
+                        [$b$]
+                    ]
+                ]
+            ]
+        ]
+    \end{forest}
+
+\end{multicols}
+
 \subsection{Algoritmus CYK} % 10.1
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
 $N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a pravidla $P$ jsou dána:
@@ -238,10 +322,6 @@ délky alespoň $m$ lze rozdělit na pět částí $z = uvwxy$ tak, že:
 spoiler alert: nedoděláno
 
 Zvolíme $z = a^m b^m a^m b^m \, \in L$, $|z| = 4m > m$. \\
-$\dots$\\
-$\dots$\\
-$\dots$\\
-
 Máme 7 možností:
 % \begin{center}
 %     \includegraphics[width=0.3\textwidth]{7moznosti.jpg}
@@ -403,3 +483,58 @@ Pokud ano, nakreslete derivační strom a napište jemu odpovídající levou de
             \end{forest}
         \end{center}
 \end{multicols}
+
+\subsection{\href{https://youtu.be/UfLaDffSpQU?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=3519}{Příklad z přednášky} - Stavový diagram zásobníkového automatu, práce na automatu}
+Je dán zásobníkový automat $A = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$, kde jednotlivé části jsou 
+$Q = \bc{q_0, q_1, q_f}$, $\Sigma = \bc{0,1}$, $\Gamma =\bc{Z_0, X}$ a přechodová funkce je daná tabulkou
+\[
+\begin{tabular}{|r|c|c|c|c|c|c|}
+    \hline
+    & $(0, Z_0)$ & $(0, X)$ & $(1, Z_0)$ & $(1, X)$ & $(\varepsilon, Z_0)$ & $(\varepsilon, X)$ \\ \hline \hline
+    $\rightarrow q_0$& $(q_0, X Z_0)$ & $(q_0, XX)$ & $-$ & $(q_1, \varepsilon)$ & $(q_f, Z_0)$ & $-$ \\
+    $q_1$            & $-$            & $-$         & $-$ & $(q_1, \varepsilon)$ & $(q_f, \varepsilon)$ & $-$ \\
+    $\leftarrow q_f$ & $-$& $-$& $-$ & $-$ & $-$ & $-$\\
+    \hline
+\end{tabular}
+\]
+\begin{enumerate}[a), noitemsep]
+    \item Nakreslete stavový diagram zásobníkového automatu $A$.
+    \item Ukažte práci zásobníkového automatu nad slovem $0010$ a slovem $0011$.
+\end{enumerate}
+
+\begin{multicols}{2}
+    Stavový diagram automatu $A$.
+
+    \begin{tikzpicture}
+        \node[state, initial] (0) {$q_0$};
+        \node[state, right of=0] (1) {$q_1$};
+        \node[state, accepting, below of=1] (f) {$q_f$};
+
+        \draw
+            (0) edge[loop above] node[align=center] {$0,Z_0 / X Z_0$ \\ $0,X / XX$} (0)
+            (0) edge[bend right, below] node {$1, X / \varepsilon$} (1)
+            (0) edge[bend right, left] node{$\varepsilon, Z_0 / \varepsilon$} (f)
+            (1) edge[loop above] node[align=center] {$1,X / \varepsilon$} (1)
+            (1) edge[bend left, right] node{$\varepsilon, Z_0 / \varepsilon$} (f)
+            ;
+    \end{tikzpicture}
+
+\columnbreak
+
+    Práce nad slovem $w_1 = 0010$.
+    \begin{flalign*}
+        (q_0, 0010, Z_0) &\vdash (q_f, 0010, \varepsilon) \xmark & \\
+        &\vdash (q_0, 010, XZ_0) \vdash (q_0, 10, XXZ_0) \vdash &\\ 
+        &(q_1, 0, XZ_0) \vdash (q_f, 0, Z_0) \xmark. \text{ Konec, neúspěch.}
+    \end{flalign*}
+
+    Práce nad slovem $w_2 = 0011$.
+    \begin{flalign*}
+        (q_0, 0011, Z_0) &\vdash (q_f, 0011, \varepsilon) \xmark & \\
+        &\vdash (q_0, 011, XZ_0) \vdash (q_0, 11, XXZ_0) \vdash & \\ 
+        &(q_1, 1, XZ_0) \vdash (q_1, \varepsilon, Z_0) \vdash & \\
+        &(q_f, \varepsilon, \varepsilon) \checkmark. \text{ Konec, úspěch.}
+    \end{flalign*}
+
+\end{multicols}
+

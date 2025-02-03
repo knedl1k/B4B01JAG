@@ -67,10 +67,7 @@ Důkaz.
     i+k = j, k=j-i \geq 0$.
 \end{itemize}
 \textbf{b)} $L(A) = N(A) \subseteq L$
-
-Dokazujeme, že pokud $w \in L(A)$, pak $w$ má tvar $a^i b^j$, kde $0 \leq i \leq j$. Pro $w \in L(A)$ musí zásobníkový 
-automat $A$ skončit ve stavu $q_f$ s prázdným vstupním řetězcem i zásobníkem.
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=*,noitemsep]
     \item Přidávání $a$:
     Každý symbol $a$ způsobí, že do zásobníku přidáme jeden symbol $X$. Zásobník tak obsahuje $i$ symbolů $X$ po 
     zpracování $a^i$.
@@ -82,3 +79,11 @@ automat $A$ skončit ve stavu $q_f$ s prázdným vstupním řetězcem i zásobn�
     odstraněnému $X$, což nastane právě tehdy, když $i \leq j$.
 \end{itemize}
 Z toho plyne, že $w = a^i b^j$ s $0 \leq i \leq j$.
+
+\subsection{\href{https://youtu.be/9zpbNd1Yqnc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1621}{Příklad z přednášky} - Tvorba zásobníkového automatu podle gramatiky}
+Je dána bezkontextová gramatika $\G$ s pravidly:
+\begin{align*}
+    &S \rightarrow aSa \mid A \\
+    &A \rightarrow bA \mid \varepsilon
+\end{align*}
+Zkonstruujte zásobníkový automat přijímající jazyk $L(\G)$.
