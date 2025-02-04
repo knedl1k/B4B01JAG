@@ -199,9 +199,9 @@ Důkaz pomocí invariantů:
     \item $q_4$: obsahuje $0101$, \texttt{out}.
 \end{itemize}
 
-c) řešíme doplňkem, tedy jazyk $\mathcal{L}$ obsahuje právě všechna slova, jejižch každé podslovo délky $3$ \textbf{neobsahuje}
-znak $0$. Následně všechny stavy, které nebyly výstupní, se stanou výstupními a stavy, které byly výstupní, se stanou
-nevýstupními.
+c) řešíme doplňkem, tedy jazyk $\mathcal{L}$ obsahuje právě všechna slova, jejichž alespoň jedno podslovo délky $3$ 
+\textbf{neobsahuje} znak $0$. Následně všechny stavy, které nebyly výstupní, se stanou výstupními a stavy, které byly 
+výstupní, se stanou nevýstupními.
 
 \begin{tikzpicture}
     \node[state, accepting, initial] (q0) {$q_0$};
