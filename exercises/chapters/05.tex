@@ -413,7 +413,7 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
     \begin{tikzpicture}
         \node[state, initial, accepting] (0) {$q_0$};
         \node[state, accepting, right of=0] (1) {$q_1$};
-        \node[state, right of=1] (2) {chyba};
+        \node[state, right of=1] (2) {$q_2$};
 
         \draw
             (0) edge[loop above] node{$0$} (0)
@@ -433,11 +433,11 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, right of=s] (0) {$q_0$};
         \node[state, right of=0] (1) {$q_1$};
         \node[state, accepting, below of=0] (f) {$F$};
-        \node[state, below of=1] (c) {chyba};
+        \node[state, below of=1] (c) {$q_2$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
-        (0) edge[loop above] node {$0$} (0)
+        (s) edge[bend left] node{$\varepsilon$} (0)
+        (0) edge[loop above] node{$0$} (0)
         (0) edge[bend left] node{$1$} (1)
         (0) edge[bend right] node{$\varepsilon$} (f)
         (1) edge[bend left] node{$0$} (0)
@@ -456,10 +456,10 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, right of=s] (0) {$q_0$};
         \node[state, right of=0] (1) {$q_1$};
         \node[state, accepting, below of=0] (f) {$F$};
-        \node[state, below of=1] (c) {chyba};
+        \node[state, below of=1] (c) {$q_2$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
+        (s) edge[bend left] node{$\varepsilon$} (0)
         (0) edge[bend left] node{$0^\star 1$} (1)
         (0) edge[bend right] node{$\varepsilon$} (f)
         (1) edge[bend left] node{$0$} (0)
@@ -470,7 +470,7 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
 
 \columnbreak
 
-    3. odstraňuji vrchol \textit{chyba}:
+    3. odstraňuji vrchol $q_2$:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -481,7 +481,7 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, accepting, below of=0] (f) {$F$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
+        (s) edge[bend left] node{$\varepsilon$} (0)
         (0) edge[bend left] node{$0^\star 1$} (1)
         (0) edge[bend right] node{$\varepsilon$} (f)
         (1) edge[bend left] node{$0$} (0)
@@ -499,14 +499,14 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, accepting, right of=0] (f) {$F$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
+        (s) edge[bend left] node{$\varepsilon$} (0)
         (0) edge[bend left] node{$0^\star 1$} (f)
         (0) edge[bend right] node{$\varepsilon$} (f)
         (0) edge[loop below] node{$0^\star 10$} (0)
         ;
     \end{tikzpicture}
 
-    5. odstraňuji smyčky:
+    5. odstraňuji paralelní hrany:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -516,13 +516,13 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, accepting, right of=0] (f) {$F$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
-        (0) edge[bend left] node{$0^\star 1 0 0^\star 1$} (f)
-        (0) edge[bend right] node{$0^\star 10$} (f)
+        (s) edge[bend left] node{$\varepsilon$} (0)
+        (0) edge[loop below] node{$0^\star 10$} (0)
+        (0) edge[bend left, above] node{$\varepsilon + 0^\star 1$} (f)
         ;
     \end{tikzpicture}
 
-    6. odstraňuji paralelní hrany:
+    6. odstraňuji smyčky:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -532,12 +532,12 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, accepting, right of=0] (f) {$F$};
 
         \path[->]
-        (s) edge [bend left] node {$\varepsilon$} (0)
-        (0) edge[bend left] node{$0^\star 1 0 0^\star 1 + 0^\star 10$} (f)
+        (s) edge[bend left] node{$\varepsilon$} (0)
+        (0) edge[bend left, above] node{$(0^\star 10)^\star (\varepsilon + 0^\star 1)$} (f)
         ;
     \end{tikzpicture}
 
-    7. odstraňuji vrchol $A$:
+    7. odstraňuji vrchol $q_0$:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -546,9 +546,9 @@ $\mathcal{L} = \bc{w \mid w \textbf{ obsahuje } 11 \text{ jako podslovo}}\text{.
         \node[state, accepting, right of=s] (f) {$F$};
 
         \path[->]
-        (s) edge[bend left] node{$0^\star 1 0 0^\star 1 + 0^\star 10$} (f)
+        (s) edge[bend left] node{$(0^\star 10)^\star (\varepsilon + 0^\star 1)$} (f)
         ;
     \end{tikzpicture}
 \end{multicols}
 
-Finální regulární výraz pro $L$: $r=0^\star 1 0 0^\star 1 + 0^\star 10$.
+Finální regulární výraz pro $L$: $r=(0^\star 10)^\star (\varepsilon + 0^\star 1)$.
