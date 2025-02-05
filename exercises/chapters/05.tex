@@ -252,38 +252,37 @@ a Kleeneho operátor.)
 \end{multicols}
 Podmnožinová konstrukce:
 \[
-\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+\begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|c c|c|}
     \hline
-    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ \\ \hline \hline
-    $\leftrightarrow$& $\bc{1,4}$&$5$         &$2$         &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$C$ &$D$ \\
-    $$&             $5$          &$\emptyset$ &$4$         &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ \\
-    $$&             $2$          &$3$         &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ \\
-    $\leftarrow $&  $4$          &$5$         &$\emptyset$ &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ \\
-    $$&             $3$          &$\bc{1,4}$  &$\bc{1,4}$  &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ \\
-    $$&             $\emptyset$  &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+    & & $a$ & $b$ & $\sim_0$ & $a$ & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ \\ \hline \hline
+    $\leftrightarrow$& $\bc{1,4}$&$5$         &$2$         &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$C$ &$K$ &$A$ &$C$ &$K$ \\
+    $$&             $5$          &$\emptyset$ &$4$         &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$D$ &$A$ \\
+    $$&             $2$          &$3$         &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ &$B$ &$O$ &$C$ \\
+    $$&             $\emptyset$  &$\emptyset$ &$\emptyset$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ &$O$ \\
+    $\leftarrow $&  $4$          &$5$         &$\emptyset$ &$K$ &$O$ &$O$ &$K$ &$A$ &$O$ &$K$ &$A$ &$O$ &$D$ &$A$ &$O$ &$D$ \\
+    $$&             $3$          &$\bc{1,4}$  &$\bc{1,4}$  &$O$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ &$K$ &$K$ &$B$ \\
     \hline
 \end{tabular}
 \]
 \begin{tikzpicture}
-    \node[state, initial] (d) {$D$};
-    \node[state, right of=d] (a) {$A$};
-    \node[state, below of=d] (c) {$C$};
-    \node[state, accepting, right of=a] (k) {$K$};
-    \node[state, below of=a] (o) {$O$};
-    \node[state, below of=k] (b) {$B$};
+    \node[state] (b) {$B$};
+    \node[state, initial, accepting, right of=b] (k) {$K$};
+    \node[state, right of=k] (a) {$A$};
+    \node[state, accepting, right of=a] (d) {$D$};
+    \node[state, below of=k] (c) {$C$};
+    \node[state, right of=c] (o) {$O$};
 
     \draw
-        (d) edge[bend left, above] node{$a$} (a)
-        (d) edge[bend right, left] node{$b$} (c)
-        (a) edge[bend right, left] node{$a$} (o)
-        (a) edge[bend left, above] node{$b$} (k)
-        (c) edge[bend left, above] node{$b$} (o)
-        (c) edge[bend right, below] node{$a$} (b)
-        (k) edge[bend left, below] node{$a$} (a)
-        (k) edge[bend left, below] node{$b$} (o)
-        (b) edge[bend right, right] node{$a,b$} (k)
-        (o) edge[loop above] node{$a,b$} (o)
-
+        (b) edge[bend left, above] node{$a,b$} (k)
+        (k) edge[bend left, above] node{$a$} (a)
+        (k) edge[] node{$b$} (c)
+        (a) edge[] node{$a$} (o)
+        (a) edge[bend left, above] node{$b$} (d)
+        (d) edge[bend left, below] node{$a$} (a)
+        (d) edge[bend left] node{$b$} (o)
+        (c) edge[bend left] node{$a$} (b)
+        (c) edge[bend left] node{$b$} (o)
+        (o) edge[loop left] node{$a,b$} (o)
         ;
 \end{tikzpicture}
 
