@@ -175,7 +175,7 @@ Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozd
 \end{enumerate}
 
 \subsection{Návrh DFA dle jazyka}
-Navrhněte deterministický konečný automat (DFA), který přijímá jazyk $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě
+Navrhněte deterministický konečný automat DFA, který přijímá jazyk $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě
 všechna slova $w$ taková, že $|w|_a$ je dělitelné $5$, $w$ začíná $b$ a končí $a$.
 
 \noindent
@@ -216,7 +216,7 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
     Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
         \item $q_s$: \texttt{in},
-        \item $q_m$: $|w|_a = 5k, k \in \mathbb{Z}$, začíná $b$, končí $b$,
+        \item $q_m$: $|w|_a = 5k, k \in \mathbb{N}_0$, začíná $b$, končí $b$,
         \item $q_1$: $|w|_a = 5k + 1$, začíná $b$,
         \item $q_2$: $|w|_a = 5k + 2$, začíná $b$,
         \item $q_3$: $|w|_a = 5k + 3$, začíná $b$,
@@ -328,10 +328,10 @@ Zdůvodněte, proč $M$ přijímá jazyk $L$.
     Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]
         \item $q_0$: \texttt{in},
-        \item $q_1$: začíná $1$,
+        \item $q_1$: nezačíná $10$, začíná $1$, 
         \item $q_2$: začíná $10$, \texttt{out},
-        \item $q_3$: nezačíná $10$, končí $0$,
-        \item $q_4$: nezačíná $10$, končí $1$,
+        \item $q_3$: nezačíná $10$, končí $0$, 
+        \item $q_4$: nezačíná $10$, končí $1$, nekončí $01$,
         \item $q_5$: nezačíná $10$, končí $01$, \texttt{out}.
     \end{itemize}
 \end{multicols}
