@@ -69,7 +69,7 @@ $S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRi
 
 2) $L(\G) \subseteq L$\\ % TODO: dodělat důkaz
 
-\subsection{Tvorba nevypouštěcí gramatiky}
+\subsection{Tvorba nevypouštěcí gramatiky a odstranění levé redukce}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C}, \Sigma = \bc{0,1}$ a $P$ je dáno
 \begin{align*}
     S &\rightarrow SA \mid 0 \\
@@ -91,7 +91,7 @@ Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$
 
     \begin{align*}
         P^{'} \text{: } S &\rightarrow SA \mid 0 \\
-        A &\rightarrow BAB \mid AB \mid BA \mid A \mid 1 \\
+        A &\rightarrow BAB \mid AB \mid BA \mid 1 \\
         B &\rightarrow CB \mid C \\
         C &\rightarrow AS \mid 0
     \end{align*}

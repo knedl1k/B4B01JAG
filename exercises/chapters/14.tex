@@ -71,7 +71,7 @@ $V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} =
 
 \textbf{2.} Chomského normální tvar gramatiky $\G_1$.
 
-\textbf{1. krok} nahrazení samostatných terminálů pravidly. (pokud nastane např. $A \rightarrow A$, tak vynechat.)
+\textbf{I. krok} nahrazení samostatných terminálů pravidly. (pokud nastane např. $A \rightarrow A$, tak vynechat.)
 \begin{flalign*}
     S &\rightarrow Sa \mid Sb \mid bC \mid b & \\
     A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid \underbrace{aB \mid a}_B \mid \underbrace{AA \mid bBb \mid bb}_C \mid b & \\
@@ -79,7 +79,7 @@ $V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} =
     C &\rightarrow AA \mid \underbrace{CBA \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid b}_A \mid bBb \mid bb &
 \end{flalign*}
 
-\textbf{2. krok} nahrazení terminálů neterminály pokud nejsou samotné.
+\textbf{II. krok} nahrazení terminálů neterminály pokud nejsou samotné.
 \begin{flalign*}
     S &\rightarrow SX_1 \mid SX_2 \mid X_2C \mid b & \\
     A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid X_1B \mid X_1 \mid AA \mid X_2BX_2 \mid X_2X_2 \mid X_2 & \\
@@ -89,7 +89,7 @@ $V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} =
     X_2 &\rightarrow b & \\
 \end{flalign*}
 
-\textbf{3. krok} nahrazení pravých stran, která mají délku $\geq 3$.
+\textbf{III. krok} nahrazení pravých stran, která mají délku $\geq 3$.
 \begin{flalign*}
     S &\rightarrow SX_1 \mid SX_2 \mid X_2C \mid b & \\
     A &\rightarrow Y \mid CA \mid CB \mid BA \mid BC \mid X_1B \mid X_1 \mid AA \mid Z \mid X_2X_2 \mid X_2 & \\
