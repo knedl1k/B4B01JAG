@@ -161,18 +161,18 @@ posledního výskytu symbolu $1$. Přítomnost dalších symbolů nemá vliv na 
 
 Takže minimální počet stavů pro abecedu $\Sigma = \bc{0,1,2}$ je také $n+1$.
 
-\subsection{Pumping lemma pro doplněk} % TODO: doplnit chybejici reseni
-Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
+% \subsection{Pumping lemma pro doplněk} % TODO: vyřešit, jestli to tu vůbec má být
+% Dokažte nebo vyvraťte toto tvrzení (Pumping lemma pro doplněk):
 
-Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo
-$n$ s touto vlastností:
+% Pro každý regulární jazyk $L$ nad abecedou $\Sigma$ (tj. jazyk, který je přijímán nějakým DFA) existuje přirozené číslo
+% $n$ s touto vlastností:
 
-Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozdělit na tři slova $u =xwy$, tak, že
-\begin{enumerate}[noitemsep]
-    \item $|xw| \leq n,$
-    \item $w \not= \varepsilon$,
-    \item pro každé přirozené $i = 0, 1, ...$ platí $xw^iy \not\in L$.
-\end{enumerate}
+% Každé slovo $u \not\in L$, které je delší než $n$ (tj. $|u| > n$) lze rozdělit na tři slova $u =xwy$, tak, že
+% \begin{enumerate}[noitemsep]
+%     \item $|xw| \leq n,$
+%     \item $w \not= \varepsilon$,
+%     \item pro každé přirozené $i = 0, 1, ...$ platí $xw^iy \not\in L$.
+% \end{enumerate}
 
 \subsection{Návrh DFA dle jazyka}
 Navrhněte deterministický konečný automat DFA, který přijímá jazyk $L$ nad abecedou $\bc{a,b}$, kde $L$ obsahuje právě
