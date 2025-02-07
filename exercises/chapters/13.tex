@@ -260,6 +260,21 @@ Levá derivace:
 
 Levý rozbor: $1, 2, 4, 1, 2, 4, 2, 4$. 
 
+Slovo $ababababba$ potom budeme generovat: 
+
+\[
+\begin{array}{c c r|l c r|l c r|l c r|l}
+    S & \stackrel{1.}{\Longrightarrow} & a & SbS & \stackrel{2.}{\Longrightarrow} & ab & AbS & \stackrel{4.}{\Longrightarrow} & abab & S & \stackrel{1.}{\Longrightarrow} & ababa & SbS \\ 
+    & & a & babababba & & ab & abababba & & abab & ababba & & ababa & babba \\
+\end{array}
+\]
+
+\[
+\begin{array}{c r|l c r|l c r|l c r|}
+    \stackrel{2.}{\Longrightarrow} & ababab & AbS & \stackrel{4.}{\Longrightarrow} &  abababab & S & \stackrel{2.}{\Longrightarrow} & ababababb & A & \stackrel{4.}{\Longrightarrow} & ababababba\\
+    & ababab & abba & & abababab & ba & & ababababb & a & & ababababba \\
+\end{array}
+\]
 
 
-
+     
