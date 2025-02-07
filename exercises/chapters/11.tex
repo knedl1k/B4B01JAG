@@ -80,10 +80,56 @@ Důkaz.
 \end{itemize}
 Z toho plyne, že $w = a^i b^j$ s $0 \leq i \leq j$.
 
-\subsection{\href{https://youtu.be/9zpbNd1Yqnc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1621}{Příklad z přednášky} - Tvorba zásobníkového automatu podle gramatiky} % TODO: dodělat
+\subsection{\href{https://youtu.be/9zpbNd1Yqnc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1621}{Příklad z přednášky} - Tvorba zásobníkového automatu podle gramatiky} 
 Je dána bezkontextová gramatika $\G$ s pravidly:
 \begin{align*}
     &S \rightarrow aSa \mid A \\
     &A \rightarrow bA \mid \varepsilon
 \end{align*}
 Zkonstruujte zásobníkový automat přijímající jazyk $L(\G)$.
+
+Automat je definován následující přechodovou funkcí: 
+
+\[
+\begin{array}{l l}
+    & \delta(q, \varepsilon, S) = \bc{(q, aSa), (q, A)} \\
+    & \delta(q, \varepsilon, A) = \bc{(q, bA), (q, \varepsilon)} \\
+    & \delta(q, a, a) = \bc{(q, \varepsilon)} \\
+    & \delta(q, b, b) = \bc{(q, \varepsilon)} \\ 
+\end{array}
+\]
+
+a) $L(\G) \subseteq N(A)$:\\ 
+Co gramatika vygeneruje, to automat přijme. Ukázka na slovu $w = ab^2 a \in L$. 
+
+Vygenerujeme ho: 
+$
+S \stackrel{S \rightarrow SA}{\Longrightarrow} aSa \stackrel{A \rightarrow bA (2)}{\Longrightarrow} abbAa 
+\stackrel{A \rightarrow \varepsilon}{\Longrightarrow} ab^2a
+$
+
+Jak ho automat přijme: 
+$
+{(q, abba, S) \vdash (q, abba, aSa) \vdash (q, bba, Sa) \vdash (q, bba, Aa) \vdash (q, bbA, bAa) \vdash }\\
+{(q, ba, Aa) \vdash (q, ba, bAa) \vdash (q, a, Aa) \vdash (q, a, a) \vdash (q, \varepsilon, \varepsilon)}
+$.\\
+
+b) $N(A) \subseteq L(\G)$:\\
+Co zásobník přijme, to gramatika vygeneruje. 
+
+$w \in N(A)$. 
+
+$(q, w, S) \vdash^{\star} (q, \varepsilon, \varepsilon) $
+
+$(q, w, S) \vdash (q, w, \alpha) = (q, w, u_1 X \alpha_1) \vdash^{\star} (q, w_1, X \alpha_1) \vdash 
+(q, w_1, u_2 X_2 \alpha_2) \vdash^{\star} (q, u_2, X_2 \alpha_2) \vdash \dots \vdash $\\ 
+\hspace*{23mm}$\alpha = u_1 X \alpha_1$, $w = u_1 w_1$ \hspace*{7mm}$X \to u_2 X_2 \beta_2$, $\alpha_1 
+\beta_2 = \alpha_2$, $w = u_1 u_2 w_2$ \hspace*{8mm}\dots 
+
+\hspace*{3mm}$\vdash (q, w_k, u_{k+1} u_{k+2}) \vdash^{\star} (q, \varepsilon, \varepsilon)$ \\ 
+\hspace*{8mm}$X_k \to u_{k+1}$, $w_k = u_{k+1} u_{k+2}$ 
+
+
+$S \Longrightarrow u_1 X_1 \alpha_1 \Longrightarrow u_1 u_2 X_2 \alpha_2 \cdots \Longrightarrow u_1 u_2 \dots 
+u_k X_k u_{k+2} \Longrightarrow \underbrace{u_1 \dots u_k u_{k+1} u_{k+2}}_w$.
+
