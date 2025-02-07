@@ -236,7 +236,7 @@ nahoru)
     B^{\phantom{'}} &\rightarrow b \mid bB^{'} & \\
     B^{'} &\rightarrow aXY \mid aA^{'}YX \mid a \mid aYXB^{'} \mid aA^{'}YXB^{'} \mid aB^{'} & \\
     X^{\phantom{'}} &\rightarrow a & \\
-    Y^{\phantom{'}} &\rightarrow b
+    Y^{\phantom{'}} &\rightarrow b  
 \end{flalign*})
 
 \newpage
@@ -248,3 +248,35 @@ Je dána CF gramatika $\G$ se dvěma neterminály $S, A$, $\Sigma = \bc{a,b}$ a 
     1. \, S \rightarrow aSbS, \quad 2. \, S \rightarrow bA, \quad 3. \, A \rightarrow bA, \quad 4. \, A \rightarrow a.
 \]
 Určete levý rozbor pro slovo $ababababba \in L(\G)$.
+
+Levá derivace: 
+
+\begin{flalign*}
+    & S\stackrel{1.}{\Longrightarrow} aSbS \stackrel{2.}{\Longrightarrow} abAbS \stackrel{4.}{\Longrightarrow} ababS
+    \stackrel{1.}{\Longrightarrow} ababaSbS \stackrel{2.}{\Longrightarrow} abababAbS \stackrel{4.}{\Longrightarrow} 
+    ababababS \stackrel{2.}{\Longrightarrow} ababababbA \Longrightarrow\\
+    &\stackrel{4.}{\Longrightarrow} ababababba
+\end{flalign*}
+
+Levý rozbor: $1, 2, 4, 1, 2, 4, 2, 4$. 
+
+
+\begin{tabular}{l|l}
+    hello  & jifaje \\
+    feajef & fajoijfe
+\end{tabular}
+
+
+\[
+\begin{array}{c|c}
+    S \Rightarrow & a \\
+                  & \vdots \\
+                  & S b S \\
+    \Rightarrow & a b | A b S \\
+    \Rightarrow & a b a b | S \\
+    \Rightarrow & a b a b a | S b S \\
+\end{array}
+\]
+
+
+
