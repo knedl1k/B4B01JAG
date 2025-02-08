@@ -220,3 +220,78 @@ Nechť $w \in L(\G)$, kde $w = 0^n 1^m$. Sledujeme pravidla gramatiky $\G$:
     tohoto pravidla se počet $0$ zvýší o jeden a počet $1$ o dva, tedy stále platí $n \leq m \leq 2n$.
 \end{itemize}
 
+\newpage
+\subsection{Tvorba zásobníkového automatu - \ii{Z}}
+
+Je dán jazyk $L = \bc{(01)^j 1^i 0^{i+j}; 0 \leq i, 0 < j}$ nad abecedou $\Sigma = \bc{0,1}$. 
+
+\begin{enumerate}[label=\alph*), noitemsep]
+    \item Sestrojte zásobníkový automat $A_1$, který přijímá jazyk $L$ prázdným zásobníkem. Zdůvodněte.  
+    \item Sestrojte zásobníkový automat $A_2$, který přijímá jazyk $L$ koncovým stavem. Zdůvodněte. 
+    \item Ukažte práci zásobníkového automatu $A_2$ nad slovem $011100$ a nad slovem $010100$. 
+\end{enumerate}
+
+a), b) 
+
+\begin{tikzpicture}[node distance=35mm]
+    \node[state, initial] (0) {$q_0$};
+    \node[state, below of=0] (1) {$q_1$};
+    \node[state, right of=0] (2) {$q_2$};
+    \node[state, right of=2] (3) {$q_3$};
+    \node[state, accepting, right of=3] (f) {$q_f$};
+    
+    \draw
+        (0) edge[bend right, left] node[align=center]{$0, Z_0 / Z_0$\\ $0, X / X$} (1)
+        (1) edge[bend right, right] node[align=center]{$1, Z_0 / XZ_0$\\ $1, X / XX$} (0)
+        (0) edge[bend left, above] node[align=center]{$\eps, X / X $} (2)
+        (2) edge[loop below, below] node[align=center]{$1, X / XX $} (2)
+        (2) edge[bend left, above] node[align=center]{$0, X / \eps $} (3)
+        (3) edge[loop below, below] node[align=center]{$0, X / \eps $} (3)
+        (3) edge[bend left, above] node[align=center]{$\eps, Z_0 / \eps $} (f)
+        ;
+\end{tikzpicture}
+
+Zdůvodnění: 
+\begin{enumerate}[noitemsep]
+    \item Chceme přečíst $(01)^j, j > 0$. Se zásobníkem na $Z_0$ musíme tedy přečíst alespoň jednu smyčku $(01)$. 
+    Každý průchod smyčkou započítáme přidáním $X$ na zásobník. Po prvním průchodu smyčkou ji můžeme projít kolikrát chceme. 
+    \item Chceme načítat $1^i$. Nechceme to ale už střídat s načítáním smyčky $(01)$, posuneme se tedy do dalšího 
+    stavu pomocí $\eps$. 
+    \item Načítáme $1^i, i \geq 0$, tedy nemusíme přečíst znak $1$ vůbec a můžeme ho přečíst libovolně-krát. Udržujeme 
+    si pojem o počtu načtení pomocí přidávání $X$ na zásobník. V budoucnu nás zajímá pouze součet $i+j$, nemusíme tedy 
+    zavádět nový zásobníkový znak. 
+    \item Načítáme $0$. Počet nul je $0^{i+j}$, kde $j > 0$, tedy alespoň jednu $0$ načíst musíme. Chceme načíst 
+    $(i+j)$ nul, což nám udržují $X$ na zásobníku, a tedy umazáváme jedno $X$. 
+    \item Čteme $(i + j - 1)$-krát znak $0$. Až dojdou $X$ ze zásobníku, máme jich načtených právě $(i+j)$. 
+    \item Se $Z_0$ na vrcholu zásobníku víme, že jsme již přečetli vše, co jsme potřebovali, a můžeme se přesunout do 
+    koncového stavu. Slovo je přijato jak koncovým stavem, tak prázdným zásobníkem. 
+\end{enumerate}
+
+c) 
+
+\begin{multicols}{2} 
+
+    Práce nad slovem $011100$: 
+
+    $
+    {(q_0, 011100, Z_0) \vdash (q_1, 11100, Z_0) \vdash }\\
+    {\vdash (q_0, 1100, XZ_0) \vdash (q_2, 1100, XZ_0) \vdash }\\
+    {\vdash (q_2, 100, XXZ_0) \vdash (q_2, 00, XXXZ_0) \vdash }\\ 
+    {\vdash (q_3, 0, XXZ_0) \vdash (q_3, \eps, XZ_0) }\\
+    \to $
+    nepřijato. 
+
+    Práce nad slovem $010100$: 
+
+    $
+    {(q_0, 010100, Z_0) \vdash (q_1, 10100, Z_0) \vdash }\\
+    {\vdash (q_0, 0100, XZ_0) \vdash (q_1, 100, XZ_0) \vdash }\\
+    {\vdash (q_0, 00, XXZ_0) \vdash (q_2, 00, XXZ_0) \vdash }\\
+    {\vdash (q_3, 0, XZ_0) \vdash (q_3, \eps, Z_0) \vdash }\\
+    {\vdash (q_f, \eps, \eps)}
+    $. Přijato. 
+
+\end{multicols}
+
+
+
