@@ -221,8 +221,7 @@ Nechť $w \in L(\G)$, kde $w = 0^n 1^m$. Sledujeme pravidla gramatiky $\G$:
 \end{itemize}
 
 \newpage
-\subsection{Tvorba zásobníkového automatu - \ii{Z}}
-
+\subsection{Tvorba zásobníkového automatu podle jazyka - \ii{Z}}
 Je dán jazyk $L = \bc{(01)^j 1^i 0^{i+j}; 0 \leq i, 0 < j}$ nad abecedou $\Sigma = \bc{0,1}$. 
 
 \begin{enumerate}[label=\alph*), noitemsep]
@@ -293,5 +292,63 @@ c)
 
 \end{multicols}
 
+\subsection{Tvorba zásobníkového automatu podle jazyka - \ii{Z}}
+Je dán jazyk $L = \bc{w \mid |w|_0 = |w|_1 + 2 \text{ a } w \text{ začíná a končí } 0}$ nad abecedou $\Sigma = \bc{0,1}$.
 
+\begin{enumerate}[a), noitemsep]
+    \item Sestrojte zásobníkový automat $A_1$, který přijímá jazyk $L$ prázdným zásobníkem. Zdůvodněte.  
+    \item Sestrojte zásobníkový automat $A_2$, který přijímá jazyk $L$ koncovým stavem. Zdůvodněte. 
+    \item Ukažte práci zásobníkového automatu $A_2$ nad slovem $011001$ a nad slovem $011000$. 
+    \item Je jazyk $L$ přijímán deterministickým zásobníkovým automatem prázdným zásobníkem? DZA definujte.
+\end{enumerate}
 
+a), b)
+
+\begin{tikzpicture}[node distance=35mm]
+    \node[state, initial] (0) {$q_0$};
+    \node[state, right of=0] (1) {$q_1$};
+    \node[state, right of=1] (2) {$q_2$};
+    \node[state, accepting, right of=2] (f) {$q_f$};
+    
+    \draw
+        (0) edge[bend left, above] node{$0, Z_0 / 0 Z_0$} (1)
+        (1) edge[loop below] node[align=center]{$0, Z_0 / 0 Z_0$ \\ $1, Z_0 / 1 Z_0$ \\ $0,0 / 00$ \\ $1,1 / 11$ \\ $0,1/\eps$ \\ $1,0/\eps$} (1)
+        (1) edge[bend left, above] node{$0,0/\eps$} (2)
+        (2) edge[bend left, above] node{$\eps, Z_0 / \eps$} (f)
+        ;
+\end{tikzpicture}
+
+Zdůvodnění: 
+\begin{enumerate}[noitemsep]
+    \item Prvním přechodem zařídíme, že slovo nutně začíná $0$. Přidáme si informaci o přijetí na zásobník, tu následně 
+    využijeme v 3. přechodu, abychom zajistili, že slovo bude mít přesně o dvě $0$ víc než $1$.
+    \item Počítáme rozdíl mezi počty $0$ a $1$. Protože slovo musí mít o dvě $0$ víc a zároveň začínat a končit $0$, tak
+    zbytek slova musí mít stejný počet $0$ a $1$.
+    \item Jako poslední znak bude $0$, zároveň ji zkrátíme s $0$, kterou jsme si poznamenali na zásobník z 1. přechodu. 
+    Což by také měl být poslední znak před $Z_0$ na zásobníku.
+    \item Pokud ná zásobníku skutečně nic krom $Z_0$ nezbylo, tak vymažeme $Z_0$ a skončíme s prázdným zásobníkem a 
+    přijatým slovem. Zásobník tedy přijímá prázdným zásobníkem i koncovým stavem.
+\end{enumerate}
+
+c) 
+
+\begin{multicols}{2} 
+
+    Práce nad slovem $011001$: 
+
+    $
+    {(q_0, 011001, Z_0) \vdash (q_1, 11001, 0Z_0) \vdash^{(2)} }\\
+    {(q_1, 001, 110Z_0) \vdash^{(2)} (q_1, 1, 0Z_0)} \xmark\\
+    $Konec, neúspěch.
+
+    Práce nad slovem $011000$: 
+
+    $
+    {(q_0, 011000, Z_0) \vdash (q_1, 11000, 0Z_0) \vdash^{(2)}}\\
+    {(q_1, 000, 110Z_0) \vdash^{(2)} (q_1, 0, 0Z_0) \vdash}\\
+    {(q_2, \eps, Z_0) \vdash (q_f, \eps, \eps)} \checkmark\\
+    $Konec, úspěch.
+
+\end{multicols}
+
+d) % TODO: dodělat, co je DZA?

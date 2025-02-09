@@ -45,7 +45,7 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C
     C &\rightarrow AA \mid bBb \mid \varepsilon
 \end{align*}
 
-\begin{enumerate}[noitemsep]
+\begin{enumerate}[(a),noitemsep]
     \item Ke gramatice $\G$ najděte nevypouštěcí gramatiku $\G_1$. Kroky převodu popište.
     \item Ke gramatice $\G_1$ najděte gramatiku $\G_2$ v Chomského normálním tvaru, která generuje stejný jazyk jako 
     gramatika $\G_1$. Jednotlivé kroky popište, gramatiku v Chomského normálním tvaru definujte.
@@ -55,7 +55,7 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C
     \item V gramatice $\G_1$ odstraňte levou rekurzi u symbolu $S$. Postup popište.
 \end{enumerate}
 
-\textbf{1.} Nevypouštěcí gramatika $\G_1$. 
+\textbf{(a)} Nevypouštěcí gramatika $\G_1$. 
 
 $V = \bc{A \mid A \Rightarrow^\star \varepsilon }$\\
 $V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{B, C}$\\
@@ -63,13 +63,13 @@ $V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} =
 $V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} = V_2 \cup \varepsilon = V_2 = V$
 
 \begin{flalign*}
-    \G_1: S &\rightarrow Sa \mid Sb \mid bC \mid b & \\
+    \G_1 \text{: } S &\rightarrow Sa \mid Sb \mid bC \mid b & \\
     A &\rightarrow CBA \mid CA \mid CB \mid BA \mid BC \mid B \mid C \mid b & \\
     B &\rightarrow aB \mid a & \\
     C &\rightarrow AA \mid A \mid bBb \mid bb &
 \end{flalign*}
 
-\textbf{2.} Chomského normální tvar gramatiky $\G_1$.
+\textbf{(b)} Chomského normální tvar gramatiky $\G_1$.
 
 \textbf{I. krok} nahrazení samostatných terminálů pravidly. (pokud nastane např. $A \rightarrow A$, tak vynechat.)
 \begin{flalign*}
@@ -101,7 +101,7 @@ $V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} =
     X_2 &\rightarrow b & \\
 \end{flalign*}
 
-\textbf{3.} Důkaz.
+\textbf{(c)} Důkaz.
 
 $A \Rightarrow_\G^\star A^i C (BA)^{i+1}$
 
@@ -119,7 +119,7 @@ $S \xRightarrow{S \rightarrow bC} bC \xRightarrow{C \rightarrow AA} bAA \xRighta
 \xRightarrow{C \rightarrow \varepsilon} b^{i+2} (BA)^{i+1} \xRightarrow{B \rightarrow aB} b^{i+2} (aBA)^{i+1} 
 \xRightarrow{B \rightarrow \varepsilon} b^{i+2} (aA)^{i+1} \xRightarrow{A \rightarrow b} b^{i+2} (ab)^{i+1}$. $\checkmark$
 
-\textbf{4.} Je gramatika $\G$ víceznačná?
+\textbf{(d)} Je gramatika $\G$ víceznačná?
 
 Víceznačnost = existují alespoň 2 derivační stromy / 2 levé derivace pro jedno libovolné slovo z $\G$.
 
@@ -133,7 +133,7 @@ Druhý způsob vygenerování slova $w$: $S \xRightarrow{S \rightarrow bC} bC \x
 
 A tedy gramatika $\G$ je víceznačná.
 
-\textbf{5.} Odstranění levých rekurzí.
+\textbf{(e)} Odstranění levých rekurzí.
 
 Levá rekurze se vyskytuje pouze v pravidlu $S \rightarrow Sa \mid Sb \mid bC \mid b$.
 
@@ -141,4 +141,129 @@ Je potřeba přidat pouze jeden neterminál. Pokud by se jich přidalo více, no
 \begin{flalign*}
     S^{\phantom{'}} &\rightarrow bC \mid bCS^{'} \mid b \mid S^{'} & \\
     S^{'} &\rightarrow a \mid aS^{'} \mid b \mid bS^{'} &
+\end{flalign*}
+
+\subsection{Zkoušková ukázka práce na bezkontextové gramatice}
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C,D}$, $\Sigma = \bc{a,b,c}$ a $P$ je dáno
+
+\begin{align*}
+    S &\rightarrow BSA \mid b \\
+    A &\rightarrow CB \mid Aa \mid c \\
+    B &\rightarrow bA \mid bB \mid \varepsilon \\
+    C &\rightarrow cA \mid \varepsilon \\
+    D &\rightarrow SA \mid a
+\end{align*}
+
+\begin{enumerate}[(a), noitemsep]
+    \item Ke gramatice $\G$ najděte nevypouštěcí gramatiku $\G_1$. Kroky převodu popište.
+    \item Ke gramatice $\G_1$ najděte redukovanou gramatiku $\G_2$ . Kroky převodu popište.
+    \item Ke gramatice $\G_2$ najděte gramatiku $\G_3$ v Chomského normálním tvaru, která generuje stejný jazyk jako 
+    gramatika $\G_2$. Jednotlivé kroky popište, gramatiku v Chomského normálním tvaru definujte.
+    \item Pomocí matematické indukce dokažte, že platí $A \Rightarrow_\G^\star (cb)^i A$ pro každé $i \geq 0$.
+    Toho využijte k důkazu, že $b(cb)^i a$ je generováno gramatikou $\G$ pro každé $i \geq 0$.
+    \item Je gramatika $\G$ víceznačná? Víceznačnou gramatiku definujte.
+    \item V gramatice $\G_2$ odstraňte (přímou) levou rekurzi. Postup popište.
+\end{enumerate}
+
+\textbf{(a)} Nevypouštěcí gramatika $\G_1$.
+
+$V = \bc{A \mid A \Rightarrow^\star \varepsilon }$\\
+$V_1 = \bc{A \mid A \rightarrow \varepsilon \in P} = \bc{B, C}$\\
+$V_2 = V_1 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_1^{\star}} = V_1 \cup \bc{A} = \bc{A, B, C}$\\
+$V_3 = V_2 \cup \bc{A \mid A \rightarrow \alpha \in P, \alpha \in V_2^{\star}} = V_2 \cup \varepsilon = V_2 = V$
+
+\begin{flalign*}
+    \G_1 \text{: } S &\rightarrow BSA \mid BS \mid SA \mid b & \\
+    A &\rightarrow CB \mid C \mid B \mid Aa \mid a \mid c & \\
+    B &\rightarrow bA \mid b \mid bB & \\
+    C &\rightarrow cA \mid c & \\
+    D &\rightarrow SA \mid S \mid a &
+\end{flalign*}
+
+\textbf{(b)} Redukce gramatiky $\G_1$.
+
+\textbf{I. krok}\\
+$V = \bc{A \mid A \Rightarrow^\star \alpha, \alpha^\star} = \bc{S,A,B,C,D} = N$\\
+$V_{i+1} = V_i \cup \bc{A \mid A \Rightarrow w, w \in (V_i \cup \Sigma)^\star}$
+
+\textbf{II. krok}\\
+$U = \bc{A \mid A \Rightarrow^\star \alpha A \beta}$\\
+$U_0 = \bc{S}$\\
+$U_{i+1} = U_i \cup \bc{A \mid B \in U_i, \alpha, \beta \in (U_i \cup \Sigma)^\star : B \rightarrow \alpha A \beta}$\\
+$U_1 = \bc{S,A,B}$\\
+$U_2 = \bc{S,A,B,C}$
+
+\begin{flalign*}
+    \G_2 \text{: } S &\rightarrow BSA \mid BS \mid SA \mid b & \\
+    A &\rightarrow CB \mid C \mid B \mid Aa \mid a \mid c & \\
+    B &\rightarrow bA \mid b \mid bB & \\
+    C &\rightarrow cA \mid c & \\
+\end{flalign*}
+
+\textbf{(c)} Chomského normální tvar k $\G_2$.
+
+\textbf{1. krok} nevypouštěcí $\checkmark$\\
+\textbf{2. krok} nahradit samotné neterminály jejich pravidly
+\begin{flalign*}
+    S &\rightarrow BSA \mid BS \mid SA \mid b & \\
+    A &\rightarrow CB \mid CA \mid c \mid bA \mid b \mid bB \mid Aa \mid a & \\
+    B &\rightarrow bA \mid b \mid bB & \\
+    C &\rightarrow cA \mid c &
+\end{flalign*}
+\textbf{3. krok} nahradit nesamotné terminály neterminály
+\begin{flalign*}
+    S &\rightarrow BSA \mid BS \mid SA \mid b & \\
+    A &\rightarrow CB \mid X_cA \mid c \mid X_bA \mid b \mid X_bB \mid AX_a \mid a & \\
+    B &\rightarrow X_bA \mid b \mid X_bB & \\
+    C &\rightarrow X_cA \mid c & \\
+    X_a &\rightarrow a & \\
+    X_b &\rightarrow b & \\
+    X_c &\rightarrow c &
+\end{flalign*}
+\textbf{4. krok} rozbít dlouhá ($\geq 3$) slova
+\begin{flalign*}
+    S_{\phantom{a}} &\rightarrow BK \mid BS \mid SA \mid b & \\
+    K_{\phantom{a}} &\rightarrow SA & \\
+    A_{\phantom{a}} &\rightarrow CB \mid X_cA \mid c \mid X_bA \mid b \mid X_bB \mid AX_a \mid a & \\
+    B_{\phantom{a}} &\rightarrow X_bA \mid b \mid X_bB & \\
+    C_{\phantom{a}} &\rightarrow X_cA \mid c & \\
+    X_a &\rightarrow a & \\
+    X_b &\rightarrow b & \\
+    X_c &\rightarrow c &
+\end{flalign*}
+
+\textbf{(d)} indukce
+
+1) základní krok: $i=0$: $A \Rightarrow^\star A$, což odpovídá $(cb)^0 A = A \checkmark$.
+
+2) indukční krok: $i \geq 0$: Indukční předpoklad $A \Rightarrow^\star (cb)^n A$.
+
+Pak $A \xRightarrow{IP} (cb)^n A \xRightarrow{A \rightarrow CB} (cb)^n CB \xRightarrow{C \rightarrow c} (cb)^n c B
+\xRightarrow{B \rightarrow bA} (cb)^n cb A \equiv (cb)^{n+1} A \checkmark$.
+
+A tedy $b(cb)^n a \in L$?
+
+$S \xRightarrow{S \rightarrow SA} SA \xRightarrow{S \rightarrow b} bA \Rightarrow^\star |\text{dle důkazu výše}| 
+\Rightarrow b (cb)^n A \xRightarrow{A \rightarrow a} b (cb)^n a \checkmark$. Slovo je generováno pravidly gramatiky, je
+tedy v jazyce L. 
+
+\textbf{(e)} Gramatika je víceznačná pokud umožňuje vygenerovat alespoň jedno slovo alespoň dvěma různými způsoby.
+
+Podle oka asi ne, je potřeba formálně ověřit % TODO: dodělat
+
+\textbf{(f)} odstranění přímé levé rekuze z $\G_2$
+\begin{flalign*}
+    \G_2 \text{: } S &\rightarrow BSA \mid BS \mid SA \mid b & \\
+    A &\rightarrow CB \mid C \mid B \mid Aa \mid a \mid c & \\
+    B &\rightarrow bA \mid b \mid bB & \\
+    C &\rightarrow cA \mid c &
+\end{flalign*}
+
+\begin{flalign*}
+    S^{\phantom{'}} &\rightarrow BSA \mid BS \mid b \mid BSAS^{'} \mid BSS^{'} \mid bS^{'} & \\
+    S^{'} &\rightarrow A \mid AS^{'}  & \\
+    A^{\phantom{'}} &\rightarrow CB \mid C \mid B \mid a \mid c \mid CBA^{'} \mid CA^{'} \mid BA^{'} \mid aA^{'} \mid cA^{'} & \\
+    A^{'} &\rightarrow a \mid aA^{'}  & \\
+    B^{\phantom{'}} &\rightarrow bA \mid b \mid bB & \\
+    C^{\phantom{'}} &\rightarrow cA \mid c & 
 \end{flalign*}
