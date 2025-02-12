@@ -391,23 +391,25 @@ Tedy $L$ není bezkontextový.
 \newpage
 \subsection{Převod do Chomského normálního tvaru - \ii{Z}}
 
-Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N - \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a $P$ je dáno: 
+Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N - \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a $P$ je 
+dáno:
 
 \begin{align*}
     & S \to ADA \mid CB\\
     & A \to ACD \mid BaD \mid aD \\
     & B \to CAB \mid DB \\ 
     & C \to CS \mid b \mid \eps \\ 
-    & D \to aA \mid bB \mid CC \\ 
+    & D \to aA \mid bB \mid CC
 \end{align*}
-
 \begin{enumerate}[label=\alph*), noitemsep]
     \item Ke gramatice $\G$ najděte nevypouštěcí redukovanou gramatiku $\G_1$. Kroky redukce popiště. 
-    \item Ke gramatice $\G_\infty$ najděte gramatiku $\G_2$ v Chomského normálním tvaru, která generuje stejný jazyk jako gramatika $\G_\infty$. Jendotlivé kroky popište, gramatiku v Chomského normálním tvaru definujte. 
-    \item Pomocí matematické indukce dokažte, že v gramatice $\G$ platí $A \rightarrow^\star_\G \, (aba)^iA$ pro každé $i /geq 0$. Toho využijte k důkazu, že slovo $(aba)^i ab (aba)^j a$ je generováno gramatikou $\G$ pro každé slovo $i, j \geq 0$. (V odvozeních vždy uveďte pravidlo gramatiky, které jste využili.) 
+    \item Ke gramatice $\G_1$ najděte gramatiku $\G_2$ v Chomského normálním tvaru, která generuje stejný jazyk 
+    jako gramatika $\G_1$. Jendotlivé kroky popište, gramatiku v Chomského normálním tvaru definujte. 
+    \item Pomocí matematické indukce dokažte, že v gramatice $\G$ platí $A \Rightarrow^\star_\G \, (aba)^iA$ pro každé 
+    $i \geq 0$. Toho využijte k důkazu, že slovo $(aba)^i ab (aba)^j a$ je generováno gramatikou $\G$ pro každé slovo 
+    $i, j \geq 0$. (V odvozeních vždy uveďte pravidlo gramatiky, které jste využili.) 
     \item V gramatice $\G$ odstraňte (přímou) levou rekursi. Postup popište.  
 \end{enumerate}
-
 a) 
 
 Nevypouštěcí gramatika: 
@@ -492,9 +494,14 @@ b) Převod do Chomského normálného tvaru.
     & X_a \to a & 
 \end{flalign*}
 
-Gramatika je v Chomského normálním tvaru. \\
+Gramatika je v Chomského normálním tvaru.
 
-c) % TODO: dodelat dukazy 
+c) 
+
+1. Základní krok $i=0$: $A \Rightarrow A$, což přesně chceme $A \Rightarrow (aba)^0 A \equiv A \quad \checkmark$.
+
+2. Indukční krok $i \geq 0$: IP: $A \Rightarrow (aba)^i A$.\\
+Po tom: $A \xRightarrow{IP}(aba)^i A $
 
 d) Odstranění levé rekurze z gramatiky $\G$. 
 
