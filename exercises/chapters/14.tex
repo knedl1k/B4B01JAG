@@ -247,9 +247,18 @@ $S \xRightarrow{S \rightarrow SA} SA \xRightarrow{S \rightarrow b} bA \Rightarro
 \Rightarrow b (cb)^n A \xRightarrow{A \rightarrow a} b (cb)^n a \checkmark$. Slovo je generováno pravidly gramatiky, je
 tedy v jazyce L. 
 
-\textbf{(e)} Gramatika je víceznačná pokud umožňuje vygenerovat alespoň jedno slovo alespoň dvěma různými způsoby.
+\textbf{(e)} Gramatika je víceznačná pokud umožňuje vygenerovat alespoň jedno slovo alespoň dvěma různými způsoby. Tedy
+existuje alespoň jedno slovo z jazyka, pro které existuje více než jeden derivační strom.
 
-Podle oka asi ne, je potřeba formálně ověřit % TODO: dodělat
+Mějme slovo $w=b \in L$.
+
+Pak
+\begin{enumerate}[(1)]
+    \item $S \Rightarrow b$.
+    \item $S \Rightarrow BSA \xRightarrow{B \rightarrow \eps} SA \xRightarrow{S \rightarrow b} bA \xRightarrow{A \rightarrow CB}
+    bCB \xRightarrow{C \rightarrow \eps} bB \xRightarrow{B  \rightarrow \eps} b$.
+\end{enumerate}
+Nalezli jsme dva způsoby generování slova $b$, gramatika $\G$ je tedy víceznačná.
 
 \textbf{(f)} odstranění přímé levé rekuze z $\G_2$
 \begin{flalign*}
