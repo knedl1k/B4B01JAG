@@ -67,7 +67,17 @@ Důkaz.
 $S \Rightarrow^\star 0^i S 0^k \xRightarrow{S \rightarrow A0} 0^i A 0^{k+1} \xRightarrow{A \rightarrow 1A}^{(j)}
 0^i 1^j A 0^{k+1} \xRightarrow{A \rightarrow 1} 0^i 1^{j+1} 0^{k+1}$, $i \leq k, j > 0$. %? Is this in the right spot?
 
-2) $L(\G) \subseteq L$\\ % TODO: dodělat důkaz
+2) $L(\G) \subseteq L$
+\begin{enumerate}[(a), noitemsep]
+    \item ve stavu $q_0$ se počítá počet $0$ na začátku slova, jejich počet je reprezentovaný počtem $A$ na vrcholu zásobníku.
+    \item přechodem do $q_1$ zaručíme, že po sérii nul následuje alespoň jedna $1$. Protože nás jejich počet jinak nezajímá, 
+    odkrokujeme všechny jedničky a neměníme obsah zásobníku.
+    \item přechodem do $q_2$ vynutíme, že po sérii úvodních $0$ následovaných alespoň jednou $1$ následují opět $A$.
+    \item ve stavu $q_2$ musíme zaručit, že počet $0$ je na začátku a konci slova stejný. To uděláme tak, že za každou
+    načtenou $0$ odečteme jedno $A$ ze zásobníku, které jsme si na začátku ukládali za každou přečtenou $0$.
+    \item pokud se počet $0$ na začátku a konci slova shoduje, do $q_f$ přejdeme s přečteným slovem a prázným zásobníkem.
+\end{enumerate}
+Zásobníkový automat tedy přijímá slovo koncovým stavem i prázdným zásobníkem.
 
 \subsection{Tvorba nevypouštěcí gramatiky a odstranění levé redukce}
 Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C}, \Sigma = \bc{0,1}$ a $P$ je dáno
