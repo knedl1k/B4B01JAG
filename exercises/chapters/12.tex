@@ -78,10 +78,17 @@ $S \xRightarrow{S \rightarrow AB} AB \xRightarrow{A \rightarrow abAb}^{(i-1)} (a
 (ab)^i b^i B \xRightarrow{B \rightarrow bBa}^{(k-1)} (ab)^i b^i b^{k-1} B a^{k-1} \xRightarrow{B \rightarrow ba} (ab)^i b^i b^k a^k$.
 
 \noindent
-2. $L(G) \subseteq L$\\ % TODO: dodělat důkaz
-$S \rightarrow^\star w$\\
-$S \rightarrow AB$\\
-$A \xRightarrow{A \rightarrow abAb}^j (ab)^j A b^j \xRightarrow{A \rightarrow abb} (ab)^j a b b^j$
+2. $L(G) \subseteq L$\\
+Nechť $w$ je libovolné slovo, které lze odvodit ze startovacího symbolu $S$. Pak postup derivace je vždy:
+\begin{itemize}
+    \item Musíme použít pravidlo $S \rightarrow AB$
+    \item Nechť derivace z $A$ má právě $i > 0$ aplikací pravidla $A \rightarrow abAb$ (s konečným použitím pravidla 
+    $A \rightarrow abb$). Tedy: $A \Rightarrow (ab)^i b^i$.
+    \item Nechť derivace z $B$ má právě $k > 0$ aplikací pravidla $B \rightarrow bBa$ (s konečným použitím pravidla
+    $B \rightarrow ba$). Tedy: $B \Rightarrow b^k a^k$.
+\end{itemize}
+Spojením (protože jsme museli použít pravidlo $S \rightarrow AB$) dostáváme $S \Rightarrow (ab)^i b^i b^k a^k \equiv 
+(ab)^i b^{i+k} a^k$, $i > 0, k > 0 \implies 0 < i < i+k$. Což přesně odpovídá definici jazyka $L$, tedy $L(G) \subseteq L$.
 
 \subsection{Tvorba zásobníkového automatu podle jazyka}
 Je dán jazyk $L$ nad abecedou $\Sigma = \bc{a,b}$. Sestrojte zásobníkové automaty $A,B$ tak, že $L = N(A)$ a $L = L(B)$ 
@@ -351,4 +358,13 @@ c)
 
 \end{multicols}
 
-d) % TODO: dodělat, co je DZA?
+d) Automat je deterministický, pokud pro každou kombinaci $(q, a, X)$ (se stavem $q$, vstupním symbolem $a$ (nebo $\eps$)
+a vrcholem zásobníku $X$) existuje nejvýše jeden možný přechod. Konkrétně, pokud je v konfiguraci definován přechod na 
+čtený symbol, nesmí být definován žádný $\eps$-přechod, a naopak. Tato vlastnost zaručuje, že výpočet je 
+jednoznačný=deterministický.
+
+Jazyk $L$ \textbf{není} přijímán žádným deterministickým zásobníkovým automatem (DZA) pracujícím na principu prázdného zásobníku, 
+jelikož by to implikovalo, že i jazyk $L$ je deterministický, což není pravda. Pro $L$ totiž při zpracování vstupu nelze 
+jednoznačně určit, kdy by měl automat přestat „pushovat“ symboly (typicky 0) a začít je „popovat“ (typicky při čtení 1). 
+Neexistuje žádný deterministický způsob, jak tuto hranici přesně určit, protože vstupní řetězec může mít 0 a 1 v 
+libovolném uspořádání.
