@@ -14,6 +14,7 @@ CTU FEE Subject Languages, Automats and Gramatics
 
 - moodle: <https://moodle.fel.cvut.cz/course/view.php?id=8880>
 - website: <https://math.fel.cvut.cz/en/people/demlova/jag/>
+- lectures: <https://www.youtube.com/playlist?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS>
 
 ## License
 CC-BY-SA-4.0 license\
