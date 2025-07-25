@@ -154,10 +154,10 @@ Je dán konečný automat $M$ tabulkou
 
 \columnbreak
 
-\begin{enumerate} %it's better with spacing between items
+\begin{enumerate}
     \setItemnumber{2}
     \item $\rightarrow5-4-4-7-7-7-4 \rightarrow$
-    \item ${\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b) =} \delta(\delta(\delta(2,b),a),b)$.
+    \item $\delta^\star(2, bab) = \delta(\delta^\star (2, ba), b)$ \\ $= \delta(\delta(\delta(2,b),a),b)$.
 \end{enumerate}
 
 \end{multicols}
@@ -267,9 +267,9 @@ $w \in L$ iff $|w|_0$ není dělitelný 3.
 Invarianty:
 \begin{itemize}[noitemsep]
     \setlength{\itemindent}{-1em}
-    \item $q_0$: \texttt{in}, $|w|_0 = 3k$,
+    \item $q_0$: \texttt{in}, $|w|_0 = 3k, k \in \mathbb{Z}$,
     \item $q_1$: \texttt{out}, ${|w|_0 = 3k + 1}$,
-    \item $q_2$: \texttt{out}, ${|w|_0 = 3k + 2\text{, } k \in \mathbb{Z} \text{.}}$
+    \item $q_2$: \texttt{out}, ${|w|_0 = 3k + 2}$.
 \end{itemize}
 
 \columnbreak

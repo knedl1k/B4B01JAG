@@ -39,21 +39,23 @@ NFA:
 \end{tikzpicture}
 
 Podmnožinová konstrukce:
+\begin{table}[H]
+    \begin{tabular}{|r@{\hskip -0.75pt} r|c c||c|c c||c|c c||c|c c||c|c c||c|}
+        \hline
+        & & $a$ & $b$ & $ \sim_0 $ & $a$   & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ \\ \hline \hline
+        $\to$  & $\bc{0,3}$  & $\bc{4}$   & $\bc{1,4}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $D$ & $O$ & $A$ & $D$ & $F$ & $A$ & $D$ \\
+            & $\bc{4}$    & $\bc{5}$   & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $E$ & $O$ & $F$ & $E$ & $O$ & $F$ \\
+            & $\bc{1,4}$  & $\bc{2,5}$ & $\emptyset$ & $O$ & $K$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ \\
+            & $\bc{5}$    & $\bc{5}$   & $\bc{5,6}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $E$ & $E$ & $C$ & $E$ & $E$ & $C$ & $E$ \\
+            & $\emptyset$ & $\emptyset$& $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+        $\gets$& $\bc{2,5}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
+            & $\bc{5,6}$  & $\bc{5,7}$ & $\bc{5,6,7}$& $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
+        $\gets$& $\bc{5,7}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
+        $\gets$& $\bc{5,6,7}$& $\bc{5,7}$ & $\bc{5,6,7}$& $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\begin{tabular}{|r r|c c||c|c c||c|c c||c|c c||c|c c||c|}
-    \hline
-    & & $a$ & $b$ & $ \sim_0 $ & $a$   & $b$ & $\sim_1$ & $a$ & $b$ & $\sim_2$ & $a$ & $b$ & $\sim_3$ & $a$ & $b$ & $\sim_4$ \\ \hline \hline
-    $\to$  & $\bc{0,3}$  & $\bc{4}$   & $\bc{1,4}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $A$ & $D$ & $O$ & $A$ & $D$ & $F$ & $A$ & $D$ \\
-           & $\bc{4}$    & $\bc{5}$   & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $E$ & $O$ & $F$ & $E$ & $O$ & $F$ \\
-           & $\bc{1,4}$  & $\bc{2,5}$ & $\emptyset$ & $O$ & $K$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ & $B$ & $O$ & $A$ \\
-           & $\bc{5}$    & $\bc{5}$   & $\bc{5,6}$  & $O$ & $O$ & $O$ & $O$ & $O$ & $C$ & $E$ & $E$ & $C$ & $E$ & $E$ & $C$ & $E$ \\
-           & $\emptyset$ & $\emptyset$& $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
-    $\gets$& $\bc{2,5}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
-           & $\bc{5,6}$  & $\bc{5,7}$ & $\bc{5,6,7}$& $O$ & $K$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ & $B$ & $K$ & $C$ \\
-    $\gets$& $\bc{5,7}$  & $\bc{5}$   & $\bc{5,6}$  & $K$ & $O$ & $O$ & $B$ & $O$ & $C$ & $B$ & $E$ & $C$ & $B$ & $E$ & $C$ & $B$ \\
-    $\gets$& $\bc{5,6,7}$& $\bc{5,7}$ & $\bc{5,6,7}$& $K$ & $K$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ & $B$ & $K$ & $K$ \\
-    \hline
-\end{tabular}
 
 DFA:
 
@@ -145,7 +147,6 @@ DFA:
 \subsection{Důkaz minimálního počtu stavů DFA pro jazyk}
 Zjistěte, jaký je minimální počet stavů DFA, který přijímá jazyk $L_n = \bc{u1v \mid |v|=n-1}$ nad abecedou
 $\Sigma = \bc{0,1}$. Zdůvodněte. Jak by se změnil výsledek, kdyby bylo $\Sigma = \bc{0,1,2}$?
-\newline
 
 Jazyk $L$ obsahuje všechny slova nad abecedou $\Sigma$ takové, že slovo končí znakem $1$ a za ním následuje přesně $n-1$
 libovolných znaků z $\Sigma$. Automat tedy musí rozeznat, zda poslední symbol $1$ padne přesně $n$ pozic před koncem
@@ -170,35 +171,37 @@ O navrženém automatu ukažte, že opravdu přijímá daný jazyk.
 
 \begin{multicols}{2}
 
-    \begin{tikzpicture}[shorten >=1pt,node distance=25mm,on grid,auto]
-        \def\radius{18mm}
-        \node[state, initial] (s) at (-5, 1.8) {$q_s$};
-        \node[state] (m) at (-3, 1.8) {$q_m$};
-        \node[state] (f) at (-4, -0.5) {$q_f$};
-        \node[state] (1) at (90:\radius) {$q_1$};
-        \node[state] (2) at (18:\radius) {$q_2$};
-        \node[state, accepting] (0) at (162:\radius) {$q_0$};
-        \node[state] (3) at (306:\radius) {$q_3$};
-        \node[state] (4) at (234:\radius) {$q_4$};
+    \begin{figure}[H]
+        \begin{tikzpicture}[shorten >=1pt,node distance=2Omm,on grid,auto, scale=0.9]
+            \def\radius{18mm}
+            \node[state, initial] (s) at (-5, 1.8) {$q_s$};
+            \node[state] (m) at (-3, 1.8) {$q_m$};
+            \node[state] (f) at (-4, -0.5) {$q_f$};
+            \node[state] (1) at (90:\radius) {$q_1$};
+            \node[state] (2) at (18:\radius) {$q_2$};
+            \node[state, accepting] (0) at (162:\radius) {$q_0$};
+            \node[state] (3) at (306:\radius) {$q_3$};
+            \node[state] (4) at (234:\radius) {$q_4$};
 
-        \path[->]
-        (s) edge [bend left=20] node {$b$} (m)
-            edge [bend right=20] node [below left] {$a$} (f)
-        (f) edge [loop below] node {$a,b$} ()
-        (m) edge [loop above] node {$b$} ()
-            edge [bend left=20] node {$a$} (1)
-        (1) edge [loop above] node {$b$} ()
-            edge [bend left=20] node {$a$} (2)
-        (2) edge [loop above] node {$b$} ()
-            edge [bend left=20] node {$a$} (3)
-        (3) edge [loop right] node {$b$} ()
-            edge [bend left=20] node {$a$} (4)
-        (4) edge [loop left] node {$b$} ()
-            edge [bend left=20] node {$a$} (0)
-        (0) edge [bend left=20] node {$a$} (1)
-            edge [bend left=20] node {$b$} (m)
-        ;
-    \end{tikzpicture}
+            \path[->]
+            (s) edge [bend left=20] node {$b$} (m)
+                edge [bend right=20] node [below left] {$a$} (f)
+            (f) edge [loop below] node {$a,b$} ()
+            (m) edge [loop above] node {$b$} ()
+                edge [bend left=20] node {$a$} (1)
+            (1) edge [loop above] node {$b$} ()
+                edge [bend left=20] node[below] {$a$} (2)
+            (2) edge [loop above] node {$b$} ()
+                edge [bend left=20] node {$a$} (3)
+            (3) edge [loop right] node {$b$} ()
+                edge [bend left=20] node {$a$} (4)
+            (4) edge [loop left] node {$b$} ()
+                edge [bend left=20] node {$a$} (0)
+            (0) edge [bend left=20] node {$a$} (1)
+                edge [bend left=20] node {$b$} (m)
+            ;
+        \end{tikzpicture}
+    \end{figure}
 
     Důkaz pomocí invariantů:
     \begin{itemize}[noitemsep]

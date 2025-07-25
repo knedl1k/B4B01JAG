@@ -45,8 +45,8 @@ $Q = \bc{q_0, q_1, q_2, q_f}$, $\Sigma = \bc{a, b}$, $\Gamma =\bc{Z_0, X}$ a př
 
     Práce nad slovem $w_1 = aabba$.
 
-    ${(q_0, aabba, Z_0) \vdash (q_0, abba, X Z_0) \vdash (q_0, bba, XXZ_0)} \vdash (q_1, ba, X Z_0) \vdash (q_1, a, Z_0)$. 
-    Konec, neúspěch.
+    $(q_0, aabba, Z_0) \vdash (q_0, abba, X Z_0) \vdash$ \\ $(q_0, bba, XXZ_0) \vdash (q_1, ba, X Z_0) 
+    \vdash (q_1, a, Z_0)$. \\ Konec, neúspěch.
 
     Práce nad slovem $w_2 = abbbb$.
 
@@ -62,8 +62,8 @@ Důkaz.
     \item $i=j=0 \text{: } (q_0, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon)$
     \item $0=i < j \text{: } (q_0, b^j, Z_0) \vdash (q_1, b^{j-1}, Z_0) \vdash^{(j-1)} (q_1, \varepsilon, Z_0) 
     \vdash (q_f, \varepsilon, \varepsilon)$
-    \item ${0<i \leq j \text{: } (q_0, a^i b^j, Z_0) \vdash^i (q_0, b^{i+k}, X^i Z_0) \vdash (q_0, b^{i+k-1}, X^{i-1} Z_0)
-    \vdash^{(i-1)} (q_1, b^k, Z_0) \vdash^k (q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon),}\\
+    \item $0<i \leq j \text{: } (q_0, a^i b^j, Z_0) \vdash^i (q_0, b^{i+k}, X^i Z_0) \vdash (q_0, b^{i+k-1}, X^{i-1} Z_0)
+    \vdash^{(i-1)} (q_1, b^k, Z_0) \vdash^k$ \\ $(q_1, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon),
     i+k = j, k=j-i \geq 0$.
 \end{itemize}
 \textbf{b)} $L(A) = N(A) \subseteq L$
@@ -108,11 +108,12 @@ S \stackrel{S \rightarrow SA}{\Longrightarrow} aSa \stackrel{A \rightarrow bA (2
 \stackrel{A \rightarrow \varepsilon}{\Longrightarrow} ab^2a
 $
 
-Jak ho automat přijme: 
+Jak ho automat přijme:
+
 $
-{(q, abba, S) \vdash (q, abba, aSa) \vdash (q, bba, Sa) \vdash (q, bba, Aa) \vdash (q, bbA, bAa) \vdash }\\
-{(q, ba, Aa) \vdash (q, ba, bAa) \vdash (q, a, Aa) \vdash (q, a, a) \vdash (q, \varepsilon, \varepsilon)}
-$.\\
+(q, abba, S) \vdash (q, abba, aSa) \vdash (q, bba, Sa) \vdash (q, bba, Aa) \vdash (q, bbA, bAa) \vdash (q, ba, Aa) 
+\vdash (q, ba, bAa) \vdash (q, a, Aa) \vdash (q, a, a) \vdash (q, \varepsilon, \varepsilon)
+$.
 
 b) $N(A) \subseteq L(\G)$:\\
 Co zásobník přijme, to gramatika vygeneruje. 

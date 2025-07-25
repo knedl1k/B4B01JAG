@@ -232,7 +232,7 @@ slovo $w_2$:
 
 % \includegraphics[width=1\textwidth]{CYK.jpg}
 
-\subsection{Algoritmus CYK} % 10.2
+\subsection{Algoritmus CYK} % 10.3
 Je dána gramatika $\G = (N, \Sigma, S, P)$, kde
 $N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a pravidla $P$ jsou dána:
 \begin{align*}
@@ -245,31 +245,32 @@ $N = \bc{S, A, B, C, D}$, $\Sigma = \bc{a, b}$ a pravidla $P$ jsou dána:
 Algoritmem CYK rozhodněte, zda slovo $w_1 = abaab$ je touto gramatikou generováno. Pokud ano, nakreslete derivační strom
 a napište levou derivaci.
 
-$w_1 = abaab$:
-\begin{multicols}{2}
-    \begin{NiceTabular}{ccccc}[hvlines, corners=NE]
-        $D, C, B, S $&   &   &   & \\
-        $D, C, A, S$ & $S, D, C, B$ &   &   & \\
-        $A, S, C$ & $C$ & $D, B, C$ &   & \\
-        $D, C$ & $S, A$ & $C, S$ & $D, C$ & \\
-        $A, D$ & $B, C$ & $A, D$ & $A, D$ & $B, C$ \\
-    \end{NiceTabular}
+\begin{figure}[H]
+    \centering
 
-    \vspace*{-2mm}
+    \begin{minipage}[c]{0.6\textwidth}
+        \begin{NiceTabular}{ccccc}[hvlines, corners=NE]
+            $D, C, B, S $&   &   &   & \\
+            $D, C, A, S$ & $S, D, C, B$ &   &   & \\
+            $A, S, C$ & $C$ & $D, B, C$ &   & \\
+            $D, C$ & $S, A$ & $C, S$ & $D, C$ & \\
+            $A, D$ & $B, C$ & $A, D$ & $A, D$ & $B, C$ \\
+        \end{NiceTabular}
 
-    \hspace*{9mm} $a$ \hspace*{17mm} $b$ \hspace*{14mm} $a$ \hspace*{10mm} $a$ \hspace*{8mm} $b$
+        \hspace*{9mm} $a$ \hspace*{17mm} $b$ \hspace*{14mm} $a$ \hspace*{10mm} $a$ \hspace*{8mm} $b$
 
-    $
-    S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
-    {D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
-    {\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow}
-    abaAB \Longrightarrow \stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow}
-    abaab.
-    $
+        \vspace{2mm}
 
-\columnbreak
-
-    \begin{center}
+        $
+        S \stackrel{S \rightarrow CD}{\Longrightarrow} CD \stackrel{C \rightarrow DC}{\Longrightarrow} DCD \stackrel
+        {D \rightarrow a}{\Longrightarrow} aCD \stackrel{C \rightarrow b}{\Longrightarrow} abD \stackrel{D \rightarrow CB}
+        {\Longrightarrow} abCB \stackrel{C \rightarrow AA}{\Longrightarrow} abAAB \stackrel{A \rightarrow a}{\Longrightarrow}
+        abaAB \Longrightarrow \stackrel{A \rightarrow a}{\Longrightarrow} abaaB \stackrel{B \rightarrow b}{\Longrightarrow}
+        abaab.
+        $
+    \end{minipage}%
+    \hspace{0.05\textwidth}
+    \begin{minipage}[c]{0.3\textwidth}
         \begin{forest}
             for tree={
                 grow=south,                 % Tree grows downward
@@ -300,8 +301,8 @@ $w_1 = abaab$:
                 ]
             ]
         \end{forest}
-    \end{center}
-\end{multicols}
+    \end{minipage}
+\end{figure}
 
 \subsection{Bezkontextové Pumping lemma}
 \textbf{Tento důkaz se neobjeví u písemné ani ústní zkoušky}
@@ -505,9 +506,9 @@ $Q = \bc{q_0, q_1, q_f}$, $\Sigma = \bc{0,1}$, $\Gamma =\bc{Z_0, X}$ a přechodo
     \item Ukažte práci zásobníkového automatu nad slovem $0010$ a slovem $0011$.
 \end{enumerate}
 
-\begin{multicols}{2}
-    Stavový diagram automatu $A$.
-
+Stavový diagram automatu $A$.
+\begin{figure}[H]
+    \centering
     \begin{tikzpicture}
         \node[state, initial] (0) {$q_0$};
         \node[state, right of=0] (1) {$q_1$};
@@ -521,23 +522,19 @@ $Q = \bc{q_0, q_1, q_f}$, $\Sigma = \bc{0,1}$, $\Gamma =\bc{Z_0, X}$ a přechodo
             (1) edge[bend left, right] node{$\varepsilon, Z_0 / \varepsilon$} (f)
             ;
     \end{tikzpicture}
+\end{figure}
 
-\columnbreak
+Práce nad slovem $w_1 = 0010$.
+\begin{align*}
+    (q_0, 0010, Z_0) &\vdash (q_f, 0010, \varepsilon) \xmark \\
+    &\vdash (q_0, 010, XZ_0) \vdash (q_0, 10, XXZ_0) \vdash \\ 
+    &(q_1, 0, XZ_0) \vdash (q_f, 0, Z_0) \xmark. \text{ Konec, neúspěch.} 
+\end{align*}
 
-    Práce nad slovem $w_1 = 0010$.
-    \begin{flalign*}
-        (q_0, 0010, Z_0) &\vdash (q_f, 0010, \varepsilon) \xmark & \\
-        &\vdash (q_0, 010, XZ_0) \vdash (q_0, 10, XXZ_0) \vdash &\\ 
-        &(q_1, 0, XZ_0) \vdash (q_f, 0, Z_0) \xmark. \text{ Konec, neúspěch.}
-    \end{flalign*}
-
-    Práce nad slovem $w_2 = 0011$.
-    \begin{flalign*}
-        (q_0, 0011, Z_0) &\vdash (q_f, 0011, \varepsilon) \xmark & \\
-        &\vdash (q_0, 011, XZ_0) \vdash (q_0, 11, XXZ_0) \vdash & \\ 
-        &(q_1, 1, XZ_0) \vdash (q_1, \varepsilon, Z_0) \vdash & \\
-        &(q_f, \varepsilon, \varepsilon) \checkmark. \text{ Konec, úspěch.}
-    \end{flalign*}
-
-\end{multicols}
-
+Práce nad slovem $w_2 = 0011$.
+\begin{align*}
+    (q_0, 0011, Z_0) &\vdash (q_f, 0011, \varepsilon) \xmark \\
+    &\vdash (q_0, 011, XZ_0) \vdash (q_0, 11, XXZ_0) \vdash \\ 
+    &(q_1, 1, XZ_0) \vdash (q_1, \varepsilon, Z_0) \vdash
+    (q_f, \varepsilon, \varepsilon) \checkmark. \text{ Konec, úspěch.}
+\end{align*}

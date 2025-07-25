@@ -377,16 +377,16 @@ Zdůvodnění:
 1. Dvě možnosti: $ i = j$, a $i < j$, kde $j = i + n$, $n > 0$.
 \[
     S \stackrel{S \rightarrow XY}{\Longrightarrow} XY \stackrel{X \rightarrow 0X1 (i)}{\Longrightarrow} 0^i X 1^i Y
-    \Longrightarrow
-\begin{cases}
-    \ i < j:  & 0^i X 1^i Y \stackrel {Y \rightarrow Y1 (n)}{\Longrightarrow} 0^i X 1^i Y 1^n \stackrel{X \rightarrow
-    \varepsilon}{\Longrightarrow}0^i 1^i Y 1^n \stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i 1^{i+n = j} \\
-    \ i = j: & 0^i X 1^i Y \stackrel{Y \rightarrow \varepsilon}{\Longrightarrow} 0^i X 1^i \stackrel{X \rightarrow
-    \varepsilon}{\Longrightarrow} 0^i 1^i
-\end{cases}
+    \Rightarrow
+    \begin{cases}
+        \ i < j:  0^i X 1^i Y \stackrel {Y \rightarrow Y1 (n)}{\Longrightarrow} 0^i X 1^i Y 1^n \stackrel{X \rightarrow
+        \varepsilon}{\Longrightarrow}0^i 1^i Y 1^n \stackrel{X \rightarrow \varepsilon}{\Longrightarrow} 0^i 1^{j} \\
+        \ i = j: 0^i X 1^i Y \stackrel{Y \rightarrow \varepsilon}{\Longrightarrow} 0^i X 1^i \stackrel{X \rightarrow
+        \varepsilon}{\Longrightarrow} 0^i 1^i
+    \end{cases}
 \]
 
-2. (fancy důkaz, doslova převzato z autorského řešení paní doc. Demlové)
+2. (fancy důkaz, doslova převzato z autorského řešení prof. Demlové)
 
 Uvažujme derivaci \( S \Rightarrow^* w \). Poslední pravidlo musí být \( S \rightarrow \varepsilon \).
 

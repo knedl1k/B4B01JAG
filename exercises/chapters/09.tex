@@ -21,10 +21,10 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
             & A \rightarrow 0A1 \mid \varepsilon &
         \end{flalign*}
         \begin{enumerate}[noitemsep]
-            \item $\quad S \stackrel{S \rightarrow 0S0 }{\Longrightarrow}^{(m)} 0^m S 0^m \stackrel{S \rightarrow A}
+            \item \hspace*{-1em}$\quad S \stackrel{S \rightarrow 0S0 }{\Longrightarrow}^{(m)} 0^m S 0^m \stackrel{S \rightarrow A}
             {\Longrightarrow} 0^m A 0^m \stackrel{A \rightarrow 0A1}{\Longrightarrow}^{(n)} 0^m 0^n A 1^n 0^m \stackrel
             {A \rightarrow \varepsilon}{\Longrightarrow} 0^m 1^m 0^n 1^n 0^m = 0^{m+n}1^n0^m$.
-            \item $\quad S \Rightarrow^\star w, \, S \Rightarrow 0^i S 0^i, \, S \Rightarrow A, \, A \Rightarrow^\star 0^j 
+            \item \hspace*{-1em}$\quad S \Rightarrow^\star w, \, S \Rightarrow 0^i S 0^i, \, S \Rightarrow A, \, A \Rightarrow^\star 0^j 
             1^j$. $0^i 0^j 1^j 0^i \in L(\G)$.
         \end{enumerate}
 
@@ -33,9 +33,9 @@ Zdůvodněte, proč gramatika $\G$ jazyk $L$ generuje.
             P\text{: } & S \rightarrow 0S1 \mid S1 \mid 1 &
         \end{flalign*}
         \begin{enumerate}[noitemsep]
-            \item $\quad S \stackrel{S \rightarrow S1 }{\Longrightarrow}^{(j-i-1)} S 0^{j-i} \stackrel{S \rightarrow 0S1}
+            \item \hspace*{-1em}$\quad S \stackrel{S \rightarrow S1 }{\Longrightarrow}^{(j-i-1)} S 0^{j-i} \stackrel{S \rightarrow 0S1}
             {\Longrightarrow}^{(i)} 0^i S 1^{(j-i+i-1)} \stackrel{S \rightarrow 1}{\Longrightarrow} 0^i S 1^j$.
-            \item $\quad S \Rightarrow^\star w, S \stackrel{S \rightarrow 0S1 }{\Longrightarrow}^{(m)} 0^m S 1^m , \, 
+            \item \hspace*{-1em}$\quad S \Rightarrow^\star w, S \stackrel{S \rightarrow 0S1 }{\Longrightarrow}^{(m)} 0^m S 1^m , \, 
             S \stackrel{S \rightarrow S1 }{\Longrightarrow}^{(n)} S1^n , \, 
             S \stackrel{S \rightarrow 1}{\Longrightarrow} 1$. $0^m  1^{m+1} \text{ nebo } 0^m 1^{m+n+1}$. \\
             Obě $\in L(\G)$.

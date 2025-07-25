@@ -1,6 +1,7 @@
 \section{Čtvrté cvičení}
 
-\subsection{\href{https://youtu.be/Hbi2ao1mFBc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1143}{Příklad z přednášky} - Sestrojení DFA z NFA}
+\subsection{\href{https://youtu.be/Hbi2ao1mFBc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1143}{Příklad z přednášky} 
+- Sestrojení DFA z NFA}
 Je dán NFA tabulkou
 \[
     \begin{tabular}{|r|c c|}
@@ -28,25 +29,27 @@ Podmonižinová konstrukce a redukce
         \hline
     \end{tabular}
 \]
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \node[state,initial] (o) {$O$};
+        \node[state] (a) [right of=0] {$A$};
+        \node[state, accepting] (b) [below of=a] {$B$};
+        \node[state, accepting] (k) [right of=a] {$K$};
 
-\begin{tikzpicture}
-    \node[state,initial] (o) {$O$};
-    \node[state] (a) [right of=0] {$A$};
-    \node[state, accepting] (b) [below of=a] {$B$};
-    \node[state, accepting] (k) [right of=a] {$K$};
+        \path
+            (o) edge[loop below] node{$1$} (o)
+            (o) edge[bend left, above] node{$0$} (a)
+            (a) edge[bend left] node{$0$} (k)
+            (a) edge[] node{$1$} (b)
 
-    \path
-        (o) edge[loop above] node{$1$} (o)
-        (o) edge[bend left, above] node{$0$} (a)
-        (a) edge[bend left] node{$0$} (k)
-        (a) edge[] node{$1$} (b)
-
-        (b) edge[loop left] node{$0$} (a)
-        (b) edge[bend right] node{$1$} (o)
-        (k) edge[loop above] node{$0$} (k)
-        (k) edge[bend left] node{$1$} (b)
-    ;
-\end{tikzpicture}
+            (b) edge[loop left] node{$0$} (a)
+            (b) edge[bend right] node{$1$} (o)
+            (k) edge[loop right] node{$0$} (k)
+            (k) edge[bend left] node{$1$} (b)
+        ;
+    \end{tikzpicture}
+\end{figure}
 
 \subsection{\href{https://youtu.be/Hbi2ao1mFBc?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=1823}{Příklad z přednášky} - Konstrukce DFA z \texorpdfstring{$\varepsilon$}{e}-NFA}
 Je dán $\varepsilon$-NFA tabulkou
@@ -62,25 +65,23 @@ Je dán $\varepsilon$-NFA tabulkou
     \end{tabular}
 \]
 Najděte DFA $M$, který přijímá stejný jazyk.
-
-\begin{multicols}{2}
-    Podmnožinová konstrukce a redukce
-    \[
-        \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
-            \hline
-            & $ $ & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ \\ \hline \hline
-            $\leftrightarrow$ &$\bc{p,q,s}$ & $\bc{r}$& $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
-                          &$\bc{r}$     & $\emptyset$ & $\bc{q,s}$  & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
-            $\leftarrow$  &$\bc{q,s}$   & $\bc{r}$    & $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
-                          &$\emptyset$  & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
-            \hline
-        \end{tabular}
-    \]
-
-\columnbreak
-
-    \hspace*{2cm}
-    \begin{tikzpicture}
+\begin{figure}[H]
+    \begin{minipage}[c]{0.7\textwidth}
+        Podmnožinová konstrukce a redukce
+        \[
+            \begin{tabular}{|r r|c c|c|c c|c|c c|c|c c|c|}
+                \hline
+                & $ $ & $0$ & $1$ & $\sim_0$ & $0$ & $1$ & $\sim_1$ & $0$ & $1$ & $\sim_2$ \\ \hline \hline
+                $\leftrightarrow$ &$\bc{p,q,s}$ & $\bc{r}$& $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
+                            &$\bc{r}$     & $\emptyset$ & $\bc{q,s}$  & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ & $A$ \\
+                $\leftarrow$  &$\bc{q,s}$   & $\bc{r}$    & $\emptyset$ & $K$ & $O$ & $O$ & $K$ & $A$ & $O$ & $K$ \\
+                            &$\emptyset$  & $\emptyset$ & $\emptyset$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ & $O$ \\
+                \hline
+            \end{tabular}
+        \]
+    \end{minipage}%
+    \begin{minipage}[c]{0.3\textwidth}
+        \begin{tikzpicture}
         \node[state,initial,accepting] (k) {$K$};
         \node[state] (a) [right of=k] {$A$};
         \node[state] (o) [below of=k] {$O$};
@@ -93,7 +94,8 @@ Najděte DFA $M$, který přijímá stejný jazyk.
             (o) edge[loop right] node{$0,1$} (o)
         ;
     \end{tikzpicture}
-\end{multicols}
+    \end{minipage}
+\end{figure}
 
 \subsection{Sestrojení DFA z NFA}
 Pro dané NFA sestrojte podmnožinovou konstrukcí DFA a výsledek redukujte.
@@ -314,21 +316,20 @@ M_2:
 \end{tabular}
 \]
 
-\begin{multicols}{2}
-    $M_1$:
+\begin{figure}[H]
+    \begin{minipage}[c]{0.6\textwidth}
+        $M_1$:
 
-    \begin{tabular}{|r|c c c c| l |}
-        \hline
-        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
-        $\rightarrow p$& $\emptyset$& $\bc{p}$ & $\bc{q}$   & $\bc{r}$   & $\varepsilon\text{-uz}(p) = \bc{p}$\\
-        $q$            & $\bc{p}$   & $\bc{q}$ & $\bc{r}$   & $\emptyset$& $\varepsilon\text{-uz}(q) = \bc{p,q}$\\
-        $\leftarrow r$ & $\bc{q}$   & $\bc{r}$ & $\emptyset$& $\bc{p}$   & $\varepsilon\text{-uz}(r) = \bc{p,q,r}$\\
-        \hline
-    \end{tabular}
-
-\columnbreak
-
-    \begin{center}
+        \begin{tabular}{|r|c c c c| l |}
+            \hline
+            & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
+            $\rightarrow p$& $\emptyset$& $\bc{p}$ & $\bc{q}$   & $\bc{r}$   & $\varepsilon\text{-uz}(p) = \bc{p}$\\
+            $q$            & $\bc{p}$   & $\bc{q}$ & $\bc{r}$   & $\emptyset$& $\varepsilon\text{-uz}(q) = \bc{p,q}$\\
+            $\leftarrow r$ & $\bc{q}$   & $\bc{r}$ & $\emptyset$& $\bc{p}$   & $\varepsilon\text{-uz}(r) = \bc{p,q,r}$\\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}[c]{0.4\textwidth}
         \begin{tikzpicture}[shorten >=1pt, node distance=20mm, on grid, auto]
             \node[state, initial] (p) at (0,0) {$p$};
             \node[state] (q) at (3.5, 0) {$q$};
@@ -346,56 +347,55 @@ M_2:
             (r) edge [loop right] node {$a$} ()
             ;
         \end{tikzpicture}
-    \end{center}
-\end{multicols}
+    \end{minipage}
+\end{figure}
 
 Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
-\begin{multicols}{3}
-    \begin{tikzpicture}[shorten >=1pt, node distance=25mm, on grid, auto]
-        \node[state, initial] (p) at (0,0) {$A$};
-        \node[state] (q) at (2.5, 0) {$O$};
-        \node[state, accepting] (r) at (1.25, -1.7) {$K$};
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.3\textwidth}
+        \begin{tikzpicture}[shorten >=1pt, node distance=25mm, on grid, auto]
+            \node[state, initial] (p) at (0,0) {$A$};
+            \node[state] (q) at (2.5, 0) {$O$};
+            \node[state, accepting] (r) at (1.25, -1.7) {$K$};
 
-        \path[->]
-        (p) edge [loop below] node {$a$} ()
-        (p) edge node {$b$} (q)
-        (p) edge node {$c$} (r)
-        (q) edge [loop right] node {$a$} ()
-        (q) edge node {$b,c$} (r)
-        (r) edge [loop right] node {$a, b, c$} ()
+            \path[->]
+            (p) edge [loop above] node {$a$} ()
+            (p) edge node {$b$} (q)
+            (p) edge node {$c$} (r)
+            (q) edge [loop above] node {$a$} ()
+            (q) edge node {$b,c$} (r)
+            (r) edge [loop below] node {$a, b, c$} ()
 
-        ;
-    \end{tikzpicture}
-
-\columnbreak
-
-    \begin{center}
-        \begin{tabular}{|r r|c c c|c|c c c|c|}
+            ;
+        \end{tikzpicture}
+    \end{minipage}%
+    \begin{minipage}[c]{0.7\textwidth}
+        \begin{tabular}{|l|c c c|c|c c c|c|}
             \hline
-            & $ $ & $ a $ & $ b $ & $ c $ & $\sim_0$ & $ a $ & $ b $ & $ c $ & $\sim_1$ \\ \hline \hline
-            $ \to $& $\bc{p}$      & $\bc{p}$      & $\bc{p, q}$    & $\bc{p, q, r}$ & $O$ & $ O $ & $ O $ & $ K $ & $A$ \\
-                   & $\bc{p, q}$   & $\bc{p, q}$   & $\bc{p, q, r}$ & $\bc{p, q, r}$ & $O$ & $ O $ & $ K $ & $ K $ & $O$ \\
-            $\gets$& $\bc{p, q, r}$& $\bc{p, q, r}$& $\bc{p, q, r}$ & $\bc{p, q, r}$ & $K$ & $ K $ & $ K $ & $ K $ & $K$ \\
+            & $ a $ & $ b $ & $ c $ & $\sim_0$ & $ a $ & $ b $ & $ c $ & $\sim_1$ \\ \hline \hline
+            $\to \bc{p}$      & $\bc{p}$      & $\bc{p, q}$    & $\bc{p, q, r}$ & $O$ & $ O $ & $ O $ & $ K $ & $A$ \\
+            $\phantom{\to}\bc{p, q}$   & $\bc{p, q}$   & $\bc{p, q, r}$ & $\bc{p, q, r}$ & $O$ & $ O $ & $ K $ & $ K $ & $O$ \\
+            $\gets \bc{p, q, r}$& $\bc{p, q, r}$& $\bc{p, q, r}$ & $\bc{p, q, r}$ & $K$ & $ K $ & $ K $ & $ K $ & $K$ \\
             \hline
         \end{tabular}
-    \end{center}
-\end{multicols}
+    \end{minipage}
+\end{figure}
 
-\begin{multicols}{2}
-    $M_2$:
+\begin{figure}[H]
+    \begin{minipage}[c]{0.6\textwidth}
+        $M_2$:
 
-    \begin{tabular}{|r|c c c c| l |}
-        \hline
-        & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
-        $\rightarrow p$& $\bc{q, r}$& $\emptyset$& $\bc{q} $  & $\bc{r}$  & $\varepsilon\text{-uz}(p) = \bc{p, q, r}$ \\
-        $q$            & $\emptyset$& $\bc{p}$   & $\bc{q}$   & $\bc{p,q}$& $\varepsilon\text{-uz}(q) = \bc{q}$ \\
-        $\leftarrow r$ & $\emptyset$& $\emptyset$& $\emptyset$& $\bc{p}$  & $\varepsilon\text{-uz}(r) = \bc{r}$ \\
-        \hline
-    \end{tabular}
-
-    \columnbreak
-
-    \begin{center}
+        \begin{tabular}{|r|c c c c| l |}
+            \hline
+            & $\varepsilon$ &$a$ &$b$ &$c$ & $\varepsilon$-uzávěry \\ \hline \hline
+            $\rightarrow p$& $\bc{q, r}$& $\emptyset$& $\bc{q} $  & $\bc{r}$  & $\varepsilon\text{-uz}(p) = \bc{p, q, r}$ \\
+            $q$            & $\emptyset$& $\bc{p}$   & $\bc{q}$   & $\bc{p,q}$& $\varepsilon\text{-uz}(q) = \bc{q}$ \\
+            $\leftarrow r$ & $\emptyset$& $\emptyset$& $\emptyset$& $\bc{p}$  & $\varepsilon\text{-uz}(r) = \bc{r}$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}[c]{0.4\textwidth}
         \begin{tikzpicture}[shorten >=1pt, node distance=30cm, on grid, auto]
             \node[state, initial] (p) at (0,0) {$p$};
             \node[state] (q) at (3.5, 0) {$q$};
@@ -405,12 +405,13 @@ Redukovaný DFA a podmnožinová konstrukce pro $M_1$:
             (p) edge [bend left=17] node {$\varepsilon, b$} (q)
             (p) edge [bend left=17, right] node {$\varepsilon, c$} (r)
             (q) edge [bend left=17, above] node {$a,c$} (p)
-            (q) edge [loop right] node {$b,c$} ()
+            (q) edge [loop below] node {$b,c$} ()
             (r) edge [bend left=17] node {$c$} (p)
             ;
         \end{tikzpicture}
-    \end{center}
-\end{multicols}
+    \end{minipage}
+\end{figure}
+
 Redukovaný DFA a podmnožinová konstrukce pro $M_2$:
 \begin{multicols}{2}
     \begin{center}

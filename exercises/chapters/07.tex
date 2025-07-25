@@ -47,7 +47,7 @@ Vytvořte regulární výraz, který reprezentuje jazyk přijímaný DFA, jenž 
             (1) edge[bend left, above] node{$b$} (2)
             (2) edge[loop above] node{$b$} (2)
             (2) edge[bend left, above] node{$a$} (3)
-            (3) edge[loop right] node{$b$} (3)
+            (3) edge[loop below] node{$b$} (3)
             (3) edge[bend left, below] node{$a$} (1)
             (2) edge[bend left] node{$\varepsilon$} (f)
             (3) edge[] node{$\varepsilon$} (f) 
@@ -256,7 +256,7 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
         \path[->]
         (1) edge [bend left] node {$b$} (2)
         (2) edge [bend left] node {$a$} (3)
-        (3) edge [loop right] node {$b$} ()
+        (3) edge [loop below] node {$b$} ()
         (3) edge [bend left] node {$a$} (2)
         (2) edge [bend left] node {$b$} (1)
         (1) edge [loop below] node {$a$} ()
@@ -285,61 +285,62 @@ který přijímá jazyk reprezentovaný regulárním výrazem.
 
 \m{a(ab^{\star} + b)^{\star}ba}: \\$a_1(a_2 b_3^{\star} + b_4)^{\star} b_5 a_6$
 
-\begin{multicols}{3}
+\begin{figure}[H] % htbp
+    \centering
+    \begin{minipage}[c]{0.25\textwidth}
+        \centering
+        \begin{tabular}{|c c|c c|}
+            \hline
+            NFA& & $a$ & $b$ \\ \hline \hline
+            $\rightarrow$ & $S$ & $1$& $-$\\
+            &$ 1$ & $2$ & $4,5$ \\
+            &$ 2$ & $2$ & $3,4,5$ \\
+            $$ &$ 3$ & $2$ & $3,4,5$ \\
+            &$ 4$ & $2$ & $4,5$ \\
+            & 5& 6 & $-$ \\
+            $\leftarrow$& 6& $-$ &$-$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \hspace{0.01\textwidth}
+    \begin{minipage}[c]{0.7\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.8]
+            \node[state, initial] (S) {$S$};
+            \node[state] (1) [right of=S] {$1$};
+            \node[state] (2) [right of=1] {$2$};
+            \node[state] (3) [right of=2] {$3$};
+            \node[state] (5) [below of=1] {$5$};
+            \node[state] (4) at ($(1)!0.5!(5)!0.5!(2)$) {$4$};
+            \node[state, accepting] (6) [left of=5] {$6$};
 
-    \begin{tabular}{|c c|c c|}
-        \hline
-        NFA& & $a$ & $b$ \\
-        \hline
-        \hline
-        $\rightarrow$ & $S$ & $1$& $-$\\
-        &$ 1$ & $2$ & $4,5$ \\
-        &$ 2$ & $2$ & $3,4,5$ \\
-        $$ &$ 3$ & $2$ & $3,4,5$ \\
-        &$ 4$ & $2$ & $4,5$ \\
-        & 5& 6 & $-$ \\
-        $\leftarrow$& 6& $-$ &$-$ \\
-        \hline
-    \end{tabular}
+            \path[->]
+                (S) edge [bend left] node {$a$} (1)
 
-\columnbreak
+                (1) edge [bend left] node {$a$} (2)
+                (1) edge [bend left] node {$b$} (4)
+                (1) edge [bend right] node {$b$} (5)
 
-    \begin{tikzpicture}
-        \node[state, initial] (S) {$S$};
-        \node[state] (1) [right of=S] {$1$};
-        \node[state] (2) [right of=1] {$2$};
-        \node[state] (3) [right of=2] {$3$};
-        \node[state] (5) [below of=1] {$5$};
-        \node[state] (4) at ($(1)!0.5!(5)!0.5!(2)$) {$4$};
-        \node[state, accepting] (6) [left of=5] {$6$};
+                (2) edge [loop above] node {$a$} ()
+                (2) edge [bend left] node {$b$} (3)
+                (2) edge [bend left] node[above] {$b$} (4)
+                (2) edge [bend left] node {$b$} (5)
 
-        \path[->]
-            (S) edge [bend left] node {$a$} (1)
+                (3) edge [bend left] node[above] {$a$} (2)
+                (3) edge [loop above] node {$b$} (3)
+                (3) edge [bend left] node {$b$} (4)
+                (3) edge [bend left] node {$b$} (5)
 
-            (1) edge [bend left] node {$a$} (2)
-            (1) edge [bend left] node {$b$} (4)
-            (1) edge [bend right] node {$b$} (5)
+                (4) edge [bend left] node {$a$} (2)
+                (4) edge [loop left] node {$b$} ()
+                (4) edge [bend left] node[left] {$b$} (5)
 
-            (2) edge [loop above] node {$a$} ()
-            (2) edge [bend left] node {$b$} (3)
-            (2) edge [bend left] node {$b$} (4)
-            (2) edge [bend left] node {$b$} (5)
+                (5) edge [bend left] node {$a$} (6)
 
-            (3) edge [bend left] node {$a$} (2)
-            (3) edge [loop above] node {$b$} (3)
-            (3) edge [bend left] node {$b$} (4)
-            (3) edge [bend left] node {$b$} (5)
-
-            (4) edge [bend left] node {$a$} (2)
-            (4) edge [loop left] node {$b$} ()
-            (4) edge [bend left] node {$b$} (5)
-
-            (5) edge [bend left] node {$a$} (6)
-
-            ;
-    \end{tikzpicture}
-
-\end{multicols}
+                ;
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
 
 Podmnožinová konstrukce.
 
@@ -583,7 +584,7 @@ Pro daný DFA $M$ vytvořte regulární výraz, který reprezentuje jazyk $L(M)$
 
         \path[->]
         (S) edge [bend left] node {$\varepsilon$} (1)
-        (1) edge [bend left] node {\hspace*{21mm}$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
+        (1) edge [bend right] node[below] {$(a^{\star}ba(ba)^{\star}a)^{\star}(a^{\star}+(a^{\star}ba(ba)^{\star}))$}
         (F)
         ;
     \end{tikzpicture}
@@ -642,14 +643,14 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 
 \begin{multicols}{2}
 
-    \bb{1. přidám $S$, $F$:}
+    1. přidám $S$, $F$:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
         \node[state, initial] (S) {$S$};
         \node[state] (1) [right of=S]{$1, 3$};
         \node[state] (2) [right of=1] {$2$};
-        \node[state] (4) [right of=2] {$4$};
+        \node[state] (4) [below of=2] {$4$};
         \node[state, accepting] (F) [below of=S] {$F$};
 
         \path[->]
@@ -663,7 +664,7 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
         ;
     \end{tikzpicture}
 
-    \bb{2. zbavím se nodu č. 4:}
+    2. zbavím se nodu č. 4:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -683,7 +684,7 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
 
 \columnbreak
 
-\bb{3. odstraním node č. 2:}
+3. odstraním node č. 2:
 
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]
         \tikzstyle{every state}=[fill={rgb:black,1;white,10}, minimum size=18pt, inner sep=1pt]
@@ -701,7 +702,7 @@ lifehack: dá se redukovat (stavy $1$ a $3$ jsou ekvivalentní):
     \end{tikzpicture}
 
 
-\bb{4.spojím obsah smyček, \\odstraním smyčku a node:}
+4. spojím obsah smyček, \\odstraním smyčku a node:
 
 \vspace*{2mm}
     \begin{tikzpicture}[shorten >=1pt,node distance=20mm,on grid,auto]

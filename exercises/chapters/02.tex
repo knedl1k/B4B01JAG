@@ -1,10 +1,11 @@
 \section{Druhé cvičení}
 
-\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=778}{Příklad z přednášky} - Pumping lemma, Nerodova věta}
+\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=778}{Příklad z přednášky} 
+- Pumping lemma, Nerodova věta}
 Úvod: Pumping lemma nelze použít, chceme-li dokázat, že jazyk je regulární. Nerodova věta dává nutnou a postačující 
 podmínku pro to, aby byl jazyk regulární. 
 
-Dokažte že, jazyk $L = \bc{0^n 1^n \mid n \geq 0}$ není regulární.\\ 
+Dokažte že, jazyk $L = \bc{0^n 1^n \mid n \geq 0}$ není regulární.
 
 \bb{Pumping lemma:}
 Když $L$ je regulární, tak existuje $n \geq 0$ takové, že každé ${u \in L}$,
@@ -18,17 +19,18 @@ $|u| > n$, je možné rozložit na 3 slova $u = xwy$ splňující:
 
 Důkaz sporem: 
 
-Vezmeme libovolné $n \in \mathbb{N}$, zvolíme $u = 0^n1^n \in L$.\\
-Kdyby $0^n1^n = xwy$ a $|xw| \leq n$, implikuje nám 
-to $xw=0^k, k \leq n$, $w \neq \varepsilon$, tj. $w = 0^l, l \geq 1, l \leq k$, a $xw^2y = 0^{n+l} 1^n$, a $n+l > n$, 
-takže $n \notin L$.\\
-$L$ není regulární.\\
+Vezmeme libovolné $n \in \mathbb{N}$, zvolíme $u = 0^n1^n \in L$.
+
+Kdyby $0^n1^n = xwy$ a $|xw| \leq n$, implikuje nám to $xw=0^k, k \leq n$, $w \neq \varepsilon$, tj.
+$w = 0^l, l \geq 1, l \leq k$, a $xw^2y = 0^{n+l} 1^n$, a $n+l > n$, takže $n \notin L$.
+$L$ není regulární.
 
 \bb{Nerodova věta:} Jazyk $L$ nad abecedou $\Sigma$ je regulární právě tehdy, když existuje ekvivalence $T$ na množině 
 všech slov $\Sigma^{\star}$ taková, že 
 \begin{enumerate}[1), noitemsep]
     \item $L$ je sjednocení některých tříd ekvivalence $T$. 
-    \item Jestliže pro nějeké $u, v \in \Sigma^{\star}$ platí $u \, T \, v$, pak pro každé slovo $w \in \Sigma^{\star}$ platí také $uw\, T\, vw$. 
+    \item Jestliže pro nějeké $u, v \in \Sigma^{\star}$ platí $u \, T \, v$, pak pro každé slovo 
+    $w \in \Sigma^{\star}$ platí také $uw\, T\, vw$. 
     \item $T$ má pouze konečně mnoho tříd ekvivalence. 
 \end{enumerate}
 
@@ -36,14 +38,15 @@ Důkaz sporem:
 
 Zvolíme $0, 0^2, 0^3, \dots, 0^n, \dots, 0^i$, $i > 0$. \\ 
 Protože $T$ má konečně mnoho tříd, tak existuje $i \neq j$, že $0^i \, T \, 0^j$. \\
-Potom vezmeme $w = 1^i$; pak dle $(2)$ $0^i 1^i \, T \, 0^j 1^i$, a $0^i 1^i \in L$, ale $0^i 1^j \notin L$. \\
+Potom vezmeme $w = 1^i$; pak dle $(2)$ $0^i 1^i \, T \, 0^j 1^i$, a $0^i 1^i \in L$, ale $0^i 1^j \notin L$. 
 Tedy neplatí $(1)$. 
 
-\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=4106}{Příklad z přednášky} - Konstrukce DFA dle jazyka} 
-Pro jazyk $L$, který se skládá ze všech binárních slov, která končí $010$, zkonstruujte DFA, který ho přijímá.\\
+\subsection{\href{https://youtu.be/agNAMdc8zYY?list=PLQL6z4JeTTQkLuzI78OTnfYBclE1g0UjS&t=4106}{Příklad z přednášky} 
+- Konstrukce DFA dle jazyka} 
+Pro jazyk $L$, který se skládá ze všech binárních slov, která končí $010$, zkonstruujte DFA, který ho přijímá.
 
 \begin{minipage}{0.58\textwidth}
-    $L = \bc{u \mid u = w010, w \in \bc{0,1}^{\star}}$\\
+    $L = \bc{u \mid u = w010, w \in \bc{0,1}^{\star}}$
 
     \begin{tikzpicture}[node distance=24mm]
         \node[state, initial] (q0) {$q_0$};
@@ -133,12 +136,14 @@ $\Sigma = \bc{a,b}$. Navrhněte konečný automat přijímající jazyk $L$ a do
 \end{multicols}
 
 \subsection{Návrh DFA dle jazyka}
-Pro daný jazyk $L$ navrhněte konečný automat, který tento jazyk přijímá. O automatu ukažte, že opravdu přijímá daný jazyk.
+Pro daný jazyk $L$ navrhněte konečný automat, který tento jazyk přijímá. O automatu ukažte, že opravdu přijímá daný 
+jazyk.
 
 \begin{enumerate}[a), noitemsep]
     \item $\Sigma = \bc{a,b}$, jazyk $L$ obsahuje právě všechna slova, která končí $b$ a mají délku $3k+1$.
     \item $\Sigma = \bc{0,1}$, jazyk $L$ obsahuje právě všechna slova, která obsahují podslovo $0101$.
-    \item $\Sigma = \bc{0,1}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak $0$.
+    \item $\Sigma = \bc{0,1}$, jazyk $L$ obsahuje právě všechna slova, jejichž každé podslovo délky $3$ obsahuje znak 
+    $0$.
 \end{enumerate}
 
 a)

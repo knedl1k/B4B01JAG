@@ -34,24 +34,27 @@ Přímou metodou:
             ;
   \end{tikzpicture}
 
-    \columnbreak\
+    \columnbreak
 
     Práce nad slovem $w_1 = 011000$.
 
-    ${(q_0, 011000, Z_0) \vdash (q_0, 11000, A Z_0) \vdash (q_1, 1000, A Z_0)}$
+    ${(q_0, 011000, Z_0) \vdash (q_0, 11000, A Z_0) \vdash} \\ 
+    (q_1, 1000, A Z_0) \vdash (q_1, 000, A Z_0)$
     \begin{flalign*}
-        \vdash (q_1, 000, A Z_0) \vdash (q_2, 00, A Z_0) &\vdash (q_f, 0, A Z_0) \xmark & \\
-        &\vdash (q_2, 0, Z_0)
+        \vdash (q_2, 00, A Z_0) &\vdash (q_f, 0, A Z_0) \xmark & \\
+        &\vdash (q_2, 0, Z_0) \rightarrow
     \end{flalign*}
     \begin{flalign*}
-        (q_2, 0, Z_0) &\vdash (q_f, 0, Z_0) \xmark & \\
-        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark \text{ Konec, úspěch.}
+        \rightarrow(q_2, 0, Z_0) &\vdash (q_f, 0, Z_0) \xmark & \\
+        &\vdash (q_2, \varepsilon, Z_0) \vdash (q_f, \varepsilon, \varepsilon) \checkmark & \\
+        &\text{ Konec, úspěch.}
     \end{flalign*} 
 
     Práce nad slovem $w_2 = 001110$.
 
-    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash (q_1, 110, AA Z_0)} \\
-    \vdash^{(2)} (q_1, 0, AA Z_0) \vdash (q_2, \varepsilon, AA Z_0) \xmark \text{ Konec, neúspěch.}$
+    ${(q_0, 001110, Z_0) \vdash^{(2)} (q_0, 1110, AA Z_0) \vdash} \\ 
+    {(q_1, 110, AA Z_0) \vdash^{(2)} (q_1, 0, AA Z_0) \vdash} \\ (q_2, \varepsilon, AA Z_0) \xmark$
+    Konec, neúspěch.
 
 \end{multicols}
 
@@ -89,23 +92,26 @@ Je dána bezkontextová gramatika $\G = (N, \Sigma, S, P)$, kde $N = \bc{S,A,B,C
 \end{align*}
 Ke gramatice $\G$ vytvořte nevypouštěcí gramatiku $\G_1$. V gramatice $\G_1$ odstraňte levou rekurzi.
 
-\textbf{1. krok} Vytvoření nevypouštěcí gramatiky $\G_1$.
-\begin{multicols}{2}
-    \begin{flalign*}
-        V &= \bc{x \mid x \Rightarrow^\star \varepsilon} & \\
-        V_1 &= \bc{x \mid x \rightarrow \varepsilon \in P} = \bc{B,C} & \\
-        V_2 &= V_1 \cup \bc{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+} = V_1 \cup \emptyset = V_1 = V.
-    \end{flalign*}
+\begin{figure}[H]
+    \begin{minipage}[c]{0.6\textwidth}
+        \textbf{1. krok} Vytvoření nevypouštěcí gramatiky $\G_1$.
+        \begin{flalign*}
+            V &= \bc{x \mid x \Rightarrow^\star \varepsilon} & \\
+            V_1 &= \bc{x \mid x \rightarrow \varepsilon \in P} = \bc{B,C} & \\
+            V_2 &= V_1 \cup \bc{x \mid x \rightarrow \alpha \in P, \alpha \in V_1^+} = V_1 \cup \emptyset = V_1 = V.
+        \end{flalign*}
+    \end{minipage}%
+    \hspace{0.05\textwidth}
+    \begin{minipage}[c]{0.3\textwidth}
+        \begin{align*}
+            P^{'} \text{: } S &\rightarrow SA \mid 0 \\
+            A &\rightarrow BAB \mid AB \mid BA \mid 1 \\
+            B &\rightarrow CB \mid C \\
+            C &\rightarrow AS \mid 0
+        \end{align*}
+    \end{minipage}
+\end{figure}
 
-\columnbreak
-
-    \begin{align*}
-        P^{'} \text{: } S &\rightarrow SA \mid 0 \\
-        A &\rightarrow BAB \mid AB \mid BA \mid 1 \\
-        B &\rightarrow CB \mid C \\
-        C &\rightarrow AS \mid 0
-    \end{align*}
-\end{multicols}
 \textbf{2. krok} odstranění levé rekurze. (postup shora dolů)
 \begin{flalign*}
     S^{\phantom{'}}    &\rightarrow 0 \mid 0S^{'} & \\
@@ -140,7 +146,7 @@ indexem), jinak sloučit pravidla. (postup shora dolů)
     T^{'} &\rightarrow \star F \mid \star F T^{'} & \\
     F^{\phantom{'}} &\rightarrow (E) \mid a &
 \end{flalign*}
-
+\newpage
 \textbf{3. krok} nahrazení prvních neterminálů pravých stran, které neterminálem začínají, pravidly. (postup zespoda
 nahoru)
 \begin{flalign*}
@@ -153,7 +159,7 @@ nahoru)
 
 \textbf{4. krok} za prvním terminálem pravé strany vždy následují pouze neterminály.
 \begin{flalign*}
-    E^{\phantom{'}} &\rightarrow (EX \mid a \mid (EX T^{'} \mid a T^{'} \mid (EX E^{'} \mid a E^{'} \mid (EX T^{'} E^{'} \mid a T^{'} E^{'} & \\`'
+    E^{\phantom{'}} &\rightarrow (EX \mid a \mid (EX T^{'} \mid a T^{'} \mid (EX E^{'} \mid a E^{'} \mid (EX T^{'} E^{'} \mid a T^{'} E^{'} & \\
     E^{'} &\rightarrow + T \mid + T E^{'} & \\
     T^{\phantom{'}} &\rightarrow (EX \mid a \mid (EX T^{'} \mid a T^{'} & \\
     T^{'} &\rightarrow \star F \mid \star F T^{'} & \\
@@ -260,12 +266,11 @@ Je dána CF gramatika $\G$ se dvěma neterminály $S, A$, $\Sigma = \bc{a,b}$ a 
 Určete levý rozbor pro slovo $ababababba \in L(\G)$.
 
 Levá derivace: 
-
 \begin{flalign*}
     & S\stackrel{1.}{\Longrightarrow} aSbS \stackrel{2.}{\Longrightarrow} abAbS \stackrel{4.}{\Longrightarrow} ababS
     \stackrel{1.}{\Longrightarrow} ababaSbS \stackrel{2.}{\Longrightarrow} abababAbS \stackrel{4.}{\Longrightarrow} 
-    ababababS \stackrel{2.}{\Longrightarrow} ababababbA \Longrightarrow\\
-    &\stackrel{4.}{\Longrightarrow} ababababba
+    ababababS \stackrel{2.}{\Longrightarrow} & \\ 
+    & ababababbA \stackrel{4.}{\Longrightarrow} ababababba
 \end{flalign*}
 
 Levý rozbor: $1, 2, 4, 1, 2, 4, 2, 4$. 
@@ -285,6 +290,3 @@ Slovo $ababababba$ potom budeme generovat:
     & ababab & abba & & abababab & ba & & ababababb & a & & ababababba \\
 \end{array}
 \]
-
-
-     
