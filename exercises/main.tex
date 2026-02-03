@@ -2,14 +2,25 @@
 \usepackage[czech]{babel}
 \usepackage[margin=0.85in]{geometry}
 
-\usepackage{cfg}
+\makeatletter
+\def\input@path{{../configs/}{./}} 
+\makeatother
 
+\usepackage{logics}
+
+\tikzset{
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    auto,
+    node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+    between/.style args={#1 and #2}{
+        at = ($(#1)!0.5!(#2)$)
+    },
+}
 \begin{document}
  
-% --------------------------------------------------------------
-%                         Start here
-% --------------------------------------------------------------
-
 \begin{titlepage}
     \centering
     \vspace*{2cm}
@@ -53,8 +64,4 @@
 
 \input{chapters.tex}
 
-% --------------------------------------------------------------
-%     You don't have to mess with anything below this line.
-% --------------------------------------------------------------
- 
 \end{document}
